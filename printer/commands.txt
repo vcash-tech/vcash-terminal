@@ -1,0 +1,26 @@
+pacman -S --needed base-devel mingw-w64-x86_64-toolchain
+
+Add Compiler to PATH: This is crucial so you can use the compiler from VS Code's terminal or a regular Command Prompt.
+Find the MinGW-w64 bin directory. If you installed MSYS2 to C:\msys64, this will likely be C:\msys64\mingw64\bin.
+Add this directory to your Windows Environment Variables PATH:
+Search for "Environment Variables" in the Windows search bar and select "Edit the system environment variables".
+Click the "Environment Variables..." button.
+Under "System variables" (or "User variables" if you only want it for your user), find the Path variable, select it, and click "Edit...".
+Click "New" and paste the path (e.g., C:\msys64\mingw64\bin).
+Click OK on all the dialogs.
+You might need to close and reopen VS Code or any open terminals for the PATH change to take effect.
+Verify Installation: Open a new Command Prompt or VS Code terminal and type:
+gcc --version
+
+
+make sure these files are present:
+
+ConsumerPrnDevDLL.dll
+FontCfg.ini
+GRGDTATM_CommCfg.ini
+
+
+gcc main.c -o printer_test.exe
+
+
+
