@@ -1,0 +1,6 @@
+{
+    "watch": ["electron/main.ts", "electron/preload.ts"],
+    "ext": "ts",
+    "exec": "npx tsc electron/main.ts --outDir dist-electron --esModuleInterop && npx tsc electron/preload.ts --outDir dist-electron --esModuleInterop && electron dist-electron/main.js"
+  }
+  
