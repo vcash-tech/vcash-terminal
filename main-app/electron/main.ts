@@ -1,5 +1,6 @@
 import { app, BrowserWindow, ipcMain } from "electron";
 import * as path from "path";
+import { execFile } from "child_process";
 
 function createWindow() {
   const win = new BrowserWindow({
@@ -15,6 +16,20 @@ function createWindow() {
 
 app.whenReady().then(createWindow);
 
-ipcMain.handle("print", () => {
-  return "Printing voucher from main process";
+ipcMain.handle("print", (_event, voucherCode) => {
+  const exePath = path.join(__dirname, "printVoucher.exe"); // adjust path to your .exe
+
+  return voucherCode;
+
+  return new Promise((resolve, reject) => {
+    execFile(exePath, [voucherCode], (error, stdout, stderr) => {
+      if (error) {
+        console.error("Execution failed:", error);
+        reject(stderr);
+        return;
+      }
+      console.log("Output:", stdout);
+      resolve(stdout);
+    });
+  });
 });

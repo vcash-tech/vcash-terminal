@@ -1,5 +1,5 @@
 import { contextBridge, ipcRenderer } from "electron";
 
 contextBridge.exposeInMainWorld("api", {
-  print: () => ipcRenderer.invoke("print"),
+  print: (voucherCode: string) => ipcRenderer.invoke("print", voucherCode),
 });

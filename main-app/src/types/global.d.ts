@@ -3,7 +3,7 @@ export {};
 declare global {
   interface Window {
     api: {
-      print: () => Promise<string>;
+      print: (voucherCode: string) => Promise<string>;
     };
   }
 }
