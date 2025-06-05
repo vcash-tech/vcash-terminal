@@ -15,17 +15,7 @@ export interface AgentPOSInfo {
     municipality: string;
     address: string;
   };
-  cashiers: [
-    {
-      cashierId: string;
-      statusCode: string;
-      userName: string;
-      firstName: string;
-      lastName: string;
-      email: string;
-      fixedPin?: string;
-    }
-  ];
+  cashiers: Cashier[];
 }
 
 export interface Cashier {

@@ -1,7 +1,7 @@
 import { Auth } from "../types/common/httpRequest";
 
 export class AuthService {
-  static async GetToken(auth: Auth): Promise<string | null> {
+  static GetToken(auth: Auth): string | null {
     const token = localStorage.getItem(`${auth}_token`);
     if (!token) {
       return null;

@@ -1,10 +1,13 @@
 import { useNavigate } from "react-router-dom";
+import { AuthService } from "../services/authService";
+import { Auth } from "../types/common/httpRequest";
 
 const Header = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    localStorage.removeItem("pos_token");
+    AuthService.DeleteToken(Auth.POS);
+    AuthService.DeleteToken(Auth.Cashier);
     navigate("/register");
   };
 
