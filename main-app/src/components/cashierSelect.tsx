@@ -3,6 +3,7 @@ import { POSService } from "../services/posService";
 import { Cashier } from "../types/pos/cashier";
 import { Auth } from "../types/common/httpRequest";
 import { AuthService } from "../services/authService";
+import { CircularProgress } from "@mui/material";
 
 interface Props {
   setHasCashierToken: (hasToken: boolean) => void;
@@ -12,15 +13,18 @@ export default function CashierSelect({ setHasCashierToken }: Props) {
   const [cashiers, setCashiers] = useState<Cashier[]>([]);
   const [PIN, setPIN] = useState<number>(0);
   const [selectedCashier, setSelectedCashier] = useState<number>(0);
+  const [loader, setLoader] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchCashiers = async () => {
+      setLoader(true);
       try {
         const cashiersResponse = await POSService.getCashiersPOS();
         setCashiers(cashiersResponse.cashiers);
       } catch (error) {
         console.error("Error fetching cashiers:", error);
       }
+      setLoader(false);
     };
     fetchCashiers();
   }, []);
@@ -43,6 +47,7 @@ export default function CashierSelect({ setHasCashierToken }: Props) {
 
   return (
     <div>
+      {loader && <CircularProgress />}
       {cashiers.map((cashier: Cashier, idx: number) => (
         <div
           style={{

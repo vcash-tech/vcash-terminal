@@ -12,7 +12,16 @@ const Header = () => {
   };
 
   return (
-    <header style={{ padding: "1rem", backgroundColor: "#f5f5f5" }}>
+    <header
+      style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        right: 0,
+        zIndex: 1000,
+        padding: "1rem",
+      }}
+    >
       <button onClick={handleLogout}>Logout</button>
     </header>
   );
