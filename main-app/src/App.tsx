@@ -6,7 +6,7 @@ import {
 } from "react-router-dom";
 import HomePage from "./pages/homePage";
 import RegisterPage from "./pages/registerPage";
-import Header from "./components/header";
+import Header from "./components/atoms/header/header";
 
 function Layout() {
   const location = useLocation();

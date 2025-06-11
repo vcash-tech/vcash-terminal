@@ -15,6 +15,7 @@ html {
         width: 100%;
         min-height: 100vh;
         font-family: fonts.$font-main;
+        box-sizing: border-box;
 
         input {
             font-family: fonts.$font-main;
@@ -130,4 +131,8 @@ html {
     .form-control {
         font-size: 16px;
     }
+}
+
+.storybook-root{
+    padding: 0!important;
 }

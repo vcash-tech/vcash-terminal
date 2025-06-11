@@ -31,25 +31,25 @@ importers:
         specifier: ^9.25.0
         version: 9.28.0
       '@storybook/addon-essentials':
-        specifier: ^8.6.12
+        specifier: ^8.6.14
         version: 8.6.14(@types/react@19.1.7)(storybook@8.6.14)
       '@storybook/addon-interactions':
-        specifier: ^8.6.12
+        specifier: ^8.6.14
         version: 8.6.14(storybook@8.6.14)
       '@storybook/addon-onboarding':
-        specifier: ^8.6.12
+        specifier: ^8.6.14
         version: 8.6.14(storybook@8.6.14)
       '@storybook/blocks':
-        specifier: ^8.6.12
+        specifier: ^8.6.14
         version: 8.6.14(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(storybook@8.6.14)
       '@storybook/react':
-        specifier: ^8.6.12
+        specifier: ^8.6.14
         version: 8.6.14(@storybook/test@8.6.14(storybook@8.6.14))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(storybook@8.6.14)(typescript@5.8.3)
       '@storybook/react-vite':
-        specifier: ^8.6.12
+        specifier: ^8.6.14
         version: 8.6.14(@storybook/test@8.6.14(storybook@8.6.14))(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(rollup@4.43.0)(storybook@8.6.14)(typescript@5.8.3)(vite@6.3.5(@types/node@24.0.0)(sass@1.89.2))
       '@storybook/test':
-        specifier: ^8.6.12
+        specifier: ^8.6.14
         version: 8.6.14(storybook@8.6.14)
       '@types/react':
         specifier: ^19.1.2
