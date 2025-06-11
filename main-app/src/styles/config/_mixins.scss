@@ -2,7 +2,7 @@
 @use 'colors';
 
 @mixin background-color($theme: 'dark') {
-    background-color: colors.$dark-background;
+    // background-color: colors.$dark-background;
 
     @if ($theme == 'light') {
         background-color: colors.$light-background;
@@ -22,7 +22,7 @@
 }
 
 @mixin dark-transparent-background($opacity: 0.5) {
-    background-color: rgba(colors.$dark-background, $opacity);
+    // background-color: rgba(colors.$dark-background, $opacity);
 }
 
 @mixin placeholder-color($color) {
@@ -86,7 +86,7 @@
 @mixin modal-background() {
     width: 100vw;
     height: 100vh;
-    background: rgba(colors.$dark-background, 0.8);
+    // background: rgba(colors.$dark-background, 0.8);
     backdrop-filter: blur(5px);
     display: flex;
     justify-content: center;

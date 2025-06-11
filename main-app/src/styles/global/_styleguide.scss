@@ -11,7 +11,7 @@ html {
 
     body {
         font-size: 1.5rem;
-        background: colors.$dark-background;
+        // background: colors.$dark-background;
         width: 100%;
         min-height: 100vh;
         font-family: fonts.$font-main;
@@ -22,7 +22,7 @@ html {
 
         a {
             text-decoration: none;
-            color: colors.$link-color;
+            // color: colors.$link-color;
 
             &:hover {
                 color: colors.$brand-primary-color;
@@ -75,7 +75,7 @@ html {
 }
 
 .warning-message {
-    background: colors.$warning-color;
+    // background: colors.$warning-color;
     padding: 1rem 1.5rem;
     border-radius: 1rem;
     margin: 1rem;
