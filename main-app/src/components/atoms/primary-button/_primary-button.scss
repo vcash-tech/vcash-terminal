@@ -16,4 +16,9 @@
   text-align: center;
   text-transform: capitalize;
   color: colors.$white-color;
+
+  &.inverted {
+    background: colors.$white-color;
+    color: colors.$brand-primary-color;
+  }
 }
