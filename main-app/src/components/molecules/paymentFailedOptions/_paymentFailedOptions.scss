@@ -1,0 +1,24 @@
+@use '../../../styles/config/colors';
+@use '../../../styles/config/media-queries';
+
+.payment-failed-options {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    
+
+    div {
+        width: 100%;
+        height: 100px;
+        background-color: colors.$white-color;
+        border:solid 1px red;
+    }
+}
+
+@include media-queries.media('<tablet') {
+    .payment-failed-options {
+        flex-direction: column;
+    }
+}
