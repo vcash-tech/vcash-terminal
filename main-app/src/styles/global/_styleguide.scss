@@ -1,0 +1,138 @@
+@use '../config/colors';
+@use '../config/fonts';
+@use '../config/media-queries';
+
+html {
+    /*
+        The 62.5% value is used to make 1rem equal to 10px, which makes it easier to convert px to rem
+    */
+    font-size: 62.5%;
+    font-family: fonts.$body-font;
+
+    body {
+        font-size: 1.5rem;
+        // background: colors.$dark-background;
+        width: 100%;
+        min-height: 100vh;
+        font-family: fonts.$font-main;
+        box-sizing: border-box;
+
+        input {
+            font-family: fonts.$font-main;
+        }
+
+        a {
+            text-decoration: none;
+            // color: colors.$link-color;
+
+            &:hover {
+                color: colors.$brand-primary-color;
+            }
+        }
+    }
+
+    box-sizing: border-box;
+
+    button {
+        cursor: pointer;
+        border: none;
+        background: transparent;
+    }
+}
+
+.admin-wrapper * {
+    box-sizing: border-box;
+}
+
+.sections {
+    max-width: 144rem;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+
+    .section {
+        max-width: 50%;
+        flex: 1;
+        justify-content: center;
+        display: flex;
+        flex-direction: column;
+        padding: 1rem;
+        text-align: left;
+        box-sizing: border-box;
+
+        img {
+            object-fit: contain;
+        }
+    }
+}
+
+// Modifiers
+.align-center {
+    text-align: center;
+}
+
+.centered-child {
+    align-self: center;
+}
+
+.warning-message {
+    // background: colors.$warning-color;
+    padding: 1rem 1.5rem;
+    border-radius: 1rem;
+    margin: 1rem;
+    display: inline-block;
+}
+
+.no-padding {
+    padding: 0;
+}
+
+.no-top-padding {
+    padding-top: 0 !important;
+}
+
+.pad1 {
+    padding: 1rem;
+}
+
+.pad2 {
+    padding: 2rem;
+}
+
+.pad-b-0 {
+    padding-bottom: 0;
+}
+
+.body-no-scroll {
+    overflow: hidden;
+}
+
+@include media-queries.media('>=phone', '<tablet') {
+    .sections {
+        flex-direction: column;
+        height: auto;
+
+        .section {
+            max-width: 100%;
+        }
+    }
+}
+
+@media screen and (prefers-reduced-motion: reduce) {
+    * {
+        /* Very short durations means JavaScript that relies on events still works */
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+    }
+}
+
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+    .form-control {
+        font-size: 16px;
+    }
+}
+
+.storybook-root{
+    padding: 0!important;
+}
