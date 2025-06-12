@@ -1,0 +1,29 @@
+@use "../../../styles/config/colors";
+@use "../../../styles/config/fonts";
+
+.language-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 25px;
+  gap: 12px;
+  background: colors.$brand-primary-color;
+  border: 1px solid rgba(255,255,255,0.5);
+  border-radius: 99px;
+  width: 129px;
+  height: 54px;
+  font-family: fonts.$body-font;
+  font-weight: 500;
+  font-size: 2rem;
+  text-align: center;
+  text-transform: capitalize;
+  color: colors.$white-color;
+  cursor: pointer;
+
+
+  &:hover {
+    border: 1px solid rgba(255,255,255,0.29);
+    background: rgba(255,255,255,0.19);
+  }
+}
