@@ -1,11 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { BrowserRouter } from 'react-router-dom';
-import Header from './header';
-import React from 'react';
+import Footer from './footer';
 
 const meta = {
-  title: '3. Organisms/Header',
-  component: Header,
+  title: '3. Organisms/Footer',
+  component: Footer,
   parameters: {
     layout: 'centered',
   },
@@ -17,21 +16,19 @@ const meta = {
       </BrowserRouter>
     ),
   ],
-} satisfies Meta<typeof Header>;
+} satisfies Meta<typeof Footer>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
-
-export const WithCustomBackground: Story = {
+export const Default: Story = {
+  args: {},
   parameters: {
     backgrounds: {
       default: 'dark',
       values: [
-        { name: 'light', value: '#ffffff' },
-        { name: 'dark', value: '#333333' },
+        { name: 'dark', value: '#fff' },
       ],
     },
   },
-}; 
+};

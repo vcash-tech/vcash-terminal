@@ -1,0 +1,29 @@
+@use "../../../styles/config/colors";
+@use "../../../styles/config/fonts";
+
+.header {
+  max-height: 86px;
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 40px;
+  background-color: colors.$brand-primary-color;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+
+  .header-left {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 24px;
+  }
+  
+  .header-right {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 24px;
+  }
+
+}
