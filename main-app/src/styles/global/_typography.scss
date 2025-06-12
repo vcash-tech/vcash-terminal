@@ -1,0 +1,92 @@
+@use '../config/colors';
+@use '../config/fonts';
+@use '../config/media-queries';
+@use '../config/mixins';
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: fonts.$title-font;
+}
+
+h1 {
+    font-weight: 600;
+    font-size: 4.2rem;   
+}
+
+h2 {
+    font-family: fonts.$title-font;
+    font-weight: 700;
+    font-size: 3rem;
+    line-height: 1.4;
+    align-items: center;
+    margin: 0;
+}
+
+h3 {
+    font-size: 2rem;
+    line-height: 3rem;
+}
+
+p {
+    font-size: 1.4rem;
+    line-height: 1.6;
+    color: colors.$white-color;
+}
+
+.subtitle {
+    font-family: fonts.$body-font;
+    font-weight: 700;
+    font-size: 1.5rem;
+    line-height: 1.8;
+    letter-spacing: 0.15em;
+
+    background: linear-gradient(34.51deg, #878bfc -9.05%, #ba87fc 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+
+    transform: rotate(0.04deg);
+}
+
+%secondary-text,
+.secondary-text {
+    @include mixins.white-transparent-color(0.5);
+}
+
+.light-theme {
+    color: colors.$brand-primary-color;
+}
+
+.dark-theme {
+    color: colors.$white-color;
+}
+
+.section-title {
+    text-transform: uppercase;
+    font-size: 1rem;
+    font-weight: 800;
+    @include mixins.white-transparent-color(0.25);
+    margin: 1rem 0 0.5rem;
+    padding: 0;
+}
+
+@include media-queries.media('<tablet') {
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    h2 {
+        font-size: 2.8rem;
+        line-height: 1.2;
+    }
+
+    .subtitle {
+        text-align: center;
+        font-size: 1.2rem;
+    }
+}
