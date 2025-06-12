@@ -1,0 +1,28 @@
+@use "../../../styles/config/colors";
+@use "../../../styles/config/fonts";
+
+.footer {
+  max-height: 86px;
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 10px;
+  align-items: center;
+  padding: 16px 40px;
+  background-color: colors.$brand-primary-color;
+  color: colors.$white-color;
+  font-family: fonts.$body-font;
+  font-weight: 500;
+  font-size: 2rem;
+
+  a {
+    color: colors.$white-color;
+    text-decoration: none;
+    font-weight: 800;
+  }
+  a:hover {
+    color: colors.$white-color;
+    text-decoration: underline;
+  }
+}

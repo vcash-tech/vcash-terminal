@@ -1,0 +1,277 @@
+@use 'sass:color';
+@use 'colors';
+
+@mixin background-color($theme: 'dark') {
+    // background-color: colors.$dark-background;
+
+    @if ($theme == 'light') {
+        background-color: colors.$light-background;
+    }
+}
+
+@mixin white-transparent-color($opacity: 0.8) {
+    color: rgba(255, 255, 255, $opacity);
+}
+
+@mixin white-transparent-border($opacity) {
+    border-color: rgba(255, 255, 255, $opacity) !important;
+}
+
+@mixin white-transparent-background($opacity) {
+    background-color: rgba(255, 255, 255, $opacity) !important;
+}
+
+@mixin dark-transparent-background($opacity: 0.5) {
+    // background-color: rgba(colors.$dark-background, $opacity);
+}
+
+@mixin placeholder-color($color) {
+    &::placeholder {
+        color: $color;
+        opacity: 1;
+    }
+
+    &::-webkit-input-placeholder {
+        color: $color;
+        opacity: 1;
+    }
+
+    &:-moz-placeholder {
+        color: $color;
+        opacity: 1;
+    }
+
+    &::-moz-placeholder {
+        color: $color;
+        opacity: 1;
+    }
+
+    &:-ms-input-placeholder {
+        color: $color;
+        opacity: 1;
+    }
+}
+
+@mixin input-selection-color($color: color.adjust(colors.$input-background-color, $lightness: 3%)) {
+    &::selection {
+        background: $color;
+    }
+
+    &::-moz-selection {
+        background: $color;
+    }
+}
+
+@mixin hide-scroll-bar() {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+
+    &::-webkit-scrollbar-track {
+        display: none;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        display: none;
+    }
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+@mixin no-scrollbar() {
+    @include hide-scroll-bar;
+}
+
+@mixin modal-background() {
+    width: 100vw;
+    height: 100vh;
+    // background: rgba(colors.$dark-background, 0.8);
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+}
+
+@mixin close-modal-button() {
+    background: transparent;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    cursor: default;
+    z-index: -1;
+    left: 0;
+    top: 0;
+}
+
+@mixin expiring-time() {
+    @include white-transparent-color(0.5);
+    margin: 0 0.5rem;
+    font-weight: 700;
+    font-size: 1.3rem;
+    line-height: 1.6rem;
+    @include white-transparent-color(0.5);
+    display: flex;
+    padding-bottom: 0.7rem;
+    align-items: center;
+
+    .clock-icon {
+        margin-right: 0.5rem;
+    }
+}
+
+@mixin action-button {
+    display: flex;
+    padding: 1rem 2rem;
+    height: auto;
+    gap: 0.7rem;
+    background: linear-gradient(180deg, #dcdcdc 0%, #efefef 100%);
+    box-shadow:
+        inset 0 2px 2px 1px colors.$white-color,
+        inset 0 -2px 2px 1px rgba(0, 0, 0, 0.5);
+    border-radius: 1rem;
+    font-weight: 700;
+    font-size: 1.5rem;
+    line-height: 1.8rem;
+    color: colors.$black-color;
+    min-width: 11.5rem;
+
+    &:hover {
+        background: colors.$brand-purple-color;
+        box-shadow: none;
+        color: colors.$white-color;
+    }
+}
+
+@mixin scroll-thin-container {
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #555 transparent;
+
+    &::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: #555;
+        border-radius: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        background-color: #777;
+    }
+}
+
+@mixin fortnite-btn {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px;
+    gap: 9px;
+    background: #1f1f23;
+    box-shadow:
+        inset 0px 1px 2px 0.5px rgba(255, 255, 255, 0.25),
+        inset 0px -1px 2px 0.5px rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 17px;
+    @include white-transparent-color(0.75);
+    min-height: 3rem;
+
+    &:hover {
+        background: color.adjust(rgb(47, 47, 53), $lightness: 10%);
+    }
+
+    &:active {
+        background: color.adjust(#1f1f23, $lightness: -10%);
+    }
+}
+
+@mixin firstLetterUppercase() {
+    &::first-letter {
+        text-transform: uppercase;
+    }
+}
+
+@mixin zero-spacing() {
+    padding: 0;
+    margin: 0;
+}
+
+@mixin create-title($font-size: 1.6rem) {
+    font-size: $font-size;
+    font-weight: 600;
+    @include zero-spacing;
+}
+
+@mixin create-text($font-size: 1.2rem) {
+    @include white-transparent-color(0.25);
+    font-size: 1.2rem;
+    font-weight: 500;
+    @include zero-spacing;
+}
+
+@mixin bottom-modal-header {
+    display: flex;
+    box-sizing: border-box;
+    gap: 1rem;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    border-bottom: solid 1px #222225;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+
+    h2 {
+        font-size: 1.4rem;
+        font-weight: 600;
+    }
+
+    button {
+        padding: 1rem 2rem;
+        @include white-transparent-color(0.5);
+        padding-left: 0;
+
+        &.confirm-btn {
+            color: colors.$brand-primary-color;
+            padding-right: 0;
+            padding-left: 2rem;
+        }
+    }
+}
+
+@mixin drop-down-option-content {
+    width: 100%;
+    gap: 0.5rem;
+    flex-direction: column;
+    overflow-y: auto;
+    max-height: 24rem;
+    @include no-scrollbar;
+
+    button {
+        border-radius: 5px;
+        width: 100%;
+        padding: 1rem 2rem;
+        text-align: center;
+        @include white-transparent-color(0.25);
+        font-size: 1.4rem;
+        font-weight: 500;
+        height: 5.8rem;
+
+        &.active,
+        &:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: colors.$white-color;
+        }
+    }
+}

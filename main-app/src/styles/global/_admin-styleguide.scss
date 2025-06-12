@@ -1,0 +1,105 @@
+// @use 'sass:color';
+// @use '../config/colors';
+// @use '../config/mixins';
+// @use '../global/typography';
+
+// .admin-layout {
+//     background: colors.$card-background-color;
+
+//     h1 {
+//         font-size: 2.6rem;
+//         font-weight: 600;
+//     }
+
+//     .w-full {
+//         justify-content: flex-start;
+//         display: flex;
+//         width: 100%;
+//     }
+
+//     .w-one-half {
+//         width: 50%;
+//     }
+
+//     .w-one-third {
+//         width: 33%;
+//     }
+
+//     .w-two-third {
+//         width: 66%;
+//     }
+
+//     .admin-wrapper {
+//         gap: 3rem;
+//         display: flex;
+//         max-width: 90vw;
+//         margin: auto;
+
+//         .admin-menu {
+//             gap: 1rem;
+//             flex-direction: column;
+//             display: flex;
+//             max-width: 30%;
+//             justify-content: flex-start;
+
+//             a {
+//                 padding: 1.8rem 2.4rem;
+//                 border-radius: 0.5rem;
+//                 background: colors.$card-background-color;
+
+//                 &:hover {
+//                     background: color.adjust(colors.$card-background-color, $lightness: 5%);
+//                     color: colors.$white-color;
+//                 }
+
+//                 &.logo {
+//                     background: none;
+//                     padding: 0 0 3rem 0;
+//                 }
+//             }
+//         }
+
+//         .admin-footer {
+//             padding-top: 2rem;
+//             display: flex;
+//             justify-content: flex-start;
+//             gap: 1rem;
+
+//             button {
+//                 padding: 1rem 3rem;
+//                 border-radius: 0.5rem;
+
+//                 &:hover {
+//                     cursor: pointer;
+//                 }
+//             }
+//         }
+
+//         .admin-content {
+//             display: flex;
+//             flex-direction: column;
+//             flex: 1;
+//             max-width: 100%;
+//             min-width: 60vw;
+//         }
+//     }
+
+//     .flex-container {
+//         display: flex;
+//         padding: 0;
+//         gap: 1rem;
+//         justify-content: flex-start;
+//     }
+
+//     .loading-status-text {
+//         @extend %secondary-text;
+//         font-size: 1.1rem;
+//         font-weight: 400;
+//         position: relative;
+//         top: 1rem;
+//         @include mixins.zero-spacing;
+//         padding: 1rem 0 0 2rem;
+//         text-align: right;
+//         width: 100%;
+//     }
+// }
