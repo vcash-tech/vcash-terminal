@@ -1,0 +1,31 @@
+@use "../../../styles/config/colors";
+@use "../../../styles/config/fonts";
+
+.peek-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 30.3474px 26.012px;
+  gap: 42.27px;
+  background: #FFFFFF;
+
+  &.peek-right {
+    border-top-left-radius: 8.67068px;
+    border-bottom-left-radius: 8.67068px;
+  }
+
+  &.peek-left {
+    border-top-right-radius: 8.67068px;
+    border-bottom-right-radius: 8.67068px;
+  }
+
+  .peek-button-content {
+    font-family: fonts.$body-font;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 2.4rem;
+    line-height: 3.6rem;
+    color: colors.$brand-primary-color;
+  }
+}

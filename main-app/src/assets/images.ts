@@ -1,3 +1,4 @@
-import insertCash from "./images/insertCash.svg"
+import insertCash from "./images/insertCash.svg";
+import welcomeBackground from "./images/welcomeBackground.svg";
 
-export { insertCash };
+export { insertCash, welcomeBackground };
