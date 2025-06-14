@@ -1,14 +1,14 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import PaymentSuccessfulTemplate from "./paymentSuccessfulTemplate";
+import AgeDisclaimerTemplate from "./ageDisclaimerTemplate";
 
 const meta = {
-  title: "4. Templates/Payment Successful",
-  component: PaymentSuccessfulTemplate,
+  title: "4. Templates/Age Disclaimer",
+  component: AgeDisclaimerTemplate,
   parameters: {
     layout: "centered",
   },
   tags: ["autodocs"],
-} satisfies Meta<typeof PaymentSuccessfulTemplate>;
+} satisfies Meta<typeof AgeDisclaimerTemplate>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
