@@ -13,11 +13,27 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  args: {
+    text: "Default Button",
+    callback: () => console.log("Button clicked"),
+  },
+  parameters: {
+    backgrounds: {
+      default: "light",
+      values: [
+        { name: "light", value: "#ffffff" },
+        { name: "dark", value: "#333333" },
+      ],
+    },
+  },
+};
 
 export const Inverted: Story = {
   args: {
     inverted: true,
+    text: "Inverted Button",
+    callback: () => console.log("Button clicked"),
   },
   parameters: {
     backgrounds: {
