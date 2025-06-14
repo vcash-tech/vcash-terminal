@@ -1,0 +1,41 @@
+@use "../../../styles/config/colors";
+@use "../../../styles/config/fonts";
+
+.payment-successful {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8.5rem 0 2.4rem;
+  background:  colors.$main-background-color url("../assets/images/paymentSuccessfulBackground.svg") no-repeat right bottom;
+
+  .progress-bar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4.2rem;
+    width: 100%;
+    padding-bottom: 44rem;
+
+  }
+
+  h1 {
+    font-family: fonts.$body-font;
+    font-weight: 600;
+    font-size: 4.2rem;
+    line-height: 100%;
+    color: colors.$black-color;
+    text-align: center;
+    margin: 0 0 0.8rem;
+  }
+
+  h2 {
+    font-family: fonts.$body-font;
+    font-weight: 400;
+    font-size: 2.4rem;
+    line-height: 150%;
+    color: colors.$dark-text-color;
+    text-align: center;
+    margin: 0 0 5.6rem;
+  }
+
+}

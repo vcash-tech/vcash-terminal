@@ -3,8 +3,8 @@
 
 .footer {
   max-height: 86px;
-  width: 100vw;
   display: flex;
+  flex: 1;
   flex-direction: row;
   justify-content: center;
   gap: 10px;
@@ -16,13 +16,9 @@
   font-weight: 500;
   font-size: 2rem;
 
-  a {
+  span {
     color: colors.$white-color;
     text-decoration: none;
     font-weight: 800;
-  }
-  a:hover {
-    color: colors.$white-color;
-    text-decoration: underline;
   }
 }

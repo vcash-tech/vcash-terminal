@@ -21,4 +21,9 @@
     background: colors.$white-color;
     color: colors.$brand-primary-color;
   }
+
+  &:hover, &:active {
+    background: colors.$hover-blue-color;
+    color: colors.$brand-primary-color;
+  }
 }

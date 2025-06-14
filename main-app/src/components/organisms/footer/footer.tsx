@@ -2,7 +2,7 @@
 
 const Footer = () => {
   return (
-    <footer className="footer">Support contact : <a href="tel:0800123456">0800 123 456</a></footer>
+    <footer className="footer">Support contact : <span>0800 123 456</span></footer>
   );
 };
 

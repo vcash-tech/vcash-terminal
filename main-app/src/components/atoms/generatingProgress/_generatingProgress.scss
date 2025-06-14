@@ -1,0 +1,35 @@
+@use "../../../styles/config/colors";
+@use "../../../styles/config/fonts";
+
+.generating-progress {
+  padding: 32px;
+  text-align: center;
+  display: inline-block;
+}
+
+.circular-progress {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 6.2rem;
+  width: 24.7rem;
+  height: 24.7rem;
+
+  .progress-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 6.6rem;
+    font-weight: 600;
+    font-family: fonts.$progress-circle-font;
+    color: colors.$brand-primary-color;
+  }
+}
+
+h2 {
+  font-family: fonts.$body-font;
+  font-size: 4.2rem;
+  font-weight: 500;
+  line-height: 150%;
+  color: colors.$dark-grey;
+}

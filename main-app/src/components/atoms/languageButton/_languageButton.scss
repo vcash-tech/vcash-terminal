@@ -22,7 +22,7 @@
   cursor: pointer;
 
 
-  &:hover {
+  &:hover, &:active {
     border: 1px solid rgba(255,255,255,0.29);
     background: rgba(255,255,255,0.19);
   }
