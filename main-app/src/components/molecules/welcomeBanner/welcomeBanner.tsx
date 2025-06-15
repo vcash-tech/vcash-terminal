@@ -1,8 +1,8 @@
 import { welcomeGift } from "../../../assets/icons";
 
-type WelcomeBannerProps = {};
+// type WelcomeBannerProps = {};
 
-export default function WelcomeBanner({}: WelcomeBannerProps) {
+export default function WelcomeBanner() {
   return (
     <div className="welcome-banner">
       <img className="welcome-banner-icon" alt="gift-icon" src={welcomeGift} />

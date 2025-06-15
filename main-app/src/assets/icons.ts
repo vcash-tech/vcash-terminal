@@ -1,4 +1,4 @@
-import angleLeft from "./icons/angleLeft.svg";
+import _angleLeft from "./icons/angleLeft.svg";
 import flagRS from "./icons/flagRS.svg";
 import flagEN from "./icons/flagEN.svg";
 import welcomeGift from "./icons/welcomeGift.svg";
@@ -8,7 +8,7 @@ import ageDisclaimer from "./icons/ageDisclaimer.svg";
 
 export { 
   ageDisclaimer,
-  arrowLeft,
+  _angleLeft,
   flagRS, 
   flagEN,
   infoCircle, 

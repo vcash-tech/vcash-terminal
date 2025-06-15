@@ -72,7 +72,7 @@ export class HttpService {
 
       try {
         jsonError = JSON.parse(textError);
-      } catch (error: any) {
+      } catch (error: unknown) {
         console.log("error parsing json from bad api response", error);
       }
 

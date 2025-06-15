@@ -62,6 +62,7 @@ export default function CashierSelect({ setHasCashierToken }: Props) {
       <input
         type="number"
         value={PIN}
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         onChange={(e: any) => setPIN(e.target.value)}
       ></input>
 

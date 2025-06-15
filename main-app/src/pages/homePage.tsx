@@ -1,4 +1,4 @@
-import { useState, useEffect, use } from "react";
+import { useState, useEffect } from "react";
 import { TransactionService } from "../services/transactionService";
 import { AuthService } from "../services/authService";
 import { useNavigate } from "react-router-dom";
@@ -19,12 +19,12 @@ function HomePage() {
     if (!token) {
       navigate("/register");
     }
-  }, []);
+  }, [navigate]);
 
   useEffect(() => {
     const token = AuthService.GetToken(Auth.Cashier);
     setHasCashierToken(!!token);
-  }, []);
+  }, [navigate]);
 
   const handleBuy = async () => {
     if (amount === null) return;
