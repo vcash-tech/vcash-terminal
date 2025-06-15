@@ -5,7 +5,7 @@ import { ageDisclaimer } from "../../../assets/icons";
 import PrimaryButton from "../../atoms/primaryButton/primaryButton";
 
 export default function AgeDisclaimerTemplate() {
-  return <Container>
+  return <Container isFullHeight={true}>
     <Header navigateBackUrl="#" navigationBackText="Back to Services" />
     <div className="age-disclaimer">
       <img src={ageDisclaimer} alt="Age Disclaimer" className="age-disclaimer-icon" />

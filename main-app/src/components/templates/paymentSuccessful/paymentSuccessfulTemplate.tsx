@@ -14,7 +14,7 @@ export default function PaymentSuccessfulTemplate() {
     return () => clearInterval(timer);
   }, []);
 
-  return <Container>
+  return <Container isFullHeight={true}>
     <Header />
     <div className="payment-successful">
       <h1>Payment Successful</h1>

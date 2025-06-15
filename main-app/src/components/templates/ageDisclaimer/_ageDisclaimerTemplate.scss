@@ -1,5 +1,6 @@
 @use "../../../styles/config/colors";
 @use "../../../styles/config/fonts";
+@use "../../../styles/config/media-queries";
 
 .age-disclaimer {
   display: flex;
@@ -38,4 +39,23 @@
     margin: 0 0 10rem;
   }
 
+}
+
+@include media-queries.media('<=desktop') {
+  .age-disclaimer {
+    padding: 0 5rem 5rem;
+    flex: 1;
+    height: 100%;
+    justify-content: center;
+    
+    h1 {
+      font-size: 3.6rem;
+      margin-bottom: 2.4rem;
+    }
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 6.4rem;
+    }
+  }
 }
