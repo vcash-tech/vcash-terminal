@@ -1,0 +1,36 @@
+@use "../../../styles/config/colors";
+@use "../../../styles/config/fonts";
+
+.welcome-banner {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px;
+    gap: 33.6px;
+
+    .welcome-banner-icon {
+        width: 50%;
+        height: 50%;
+    }
+
+    .welcome-banner-text-big {
+        font-family: fonts.$body-font;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 3.75rem;
+        line-height: 3.6rem;
+        color: colors.$white-color;
+        text-align: center;
+    }
+
+    .welcome-banner-text-small {
+        font-family: fonts.$body-font;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 1.75rem;
+        line-height: 3.6rem;
+        color: colors.$white-color;
+        text-align: center;
+    }
+}

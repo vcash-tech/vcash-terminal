@@ -22,7 +22,7 @@ function RegisterPage() {
   );
   const stepperRef = useRef<DeviceTokenSteps>(stepper);
 
-  const [loader, setLoader] = useState<boolean>(false);
+  const [_loader, setLoader] = useState<boolean>(false);
 
   const navigate = useNavigate();
 
@@ -37,8 +37,8 @@ function RegisterPage() {
 
       setStepper(DeviceTokenSteps.gotToken);
       AuthService.SetToken(Auth.POS, deviceTokenResponse.token);
-    } catch (err: any) {
-      const { code, description } = getErrorInfo(err);
+    } catch (err: unknown) {
+      const { code, description: _description } = getErrorInfo(err); // TODO: remove _ in _description once we start using it
 
       if (
         code === "DEVICE_NOT_AUTHORIZED" &&
@@ -69,9 +69,11 @@ function RegisterPage() {
       });
       setStepper(DeviceTokenSteps.gettingToken);
       getDeviceToken(deviceCodeResponse.agentId, deviceCodeResponse.deviceCode);
-    } catch (err: any) {
-      const {} = getErrorInfo(err);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      const { code, description } = getErrorInfo(error);
 
+      console.log(code, description);
       // enqueueSnackbar(
       //     `Greška pri kreiranju koda za uređaj. ${description} `,
       //     { variant: "error" },

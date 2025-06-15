@@ -1,7 +1,7 @@
 import { ErrorObj, ErrorObject } from "../types/common/error";
 
 export function getErrorInfo(
-  err: any,
+  err: unknown,
   defaultCode = "",
   defaultDescription = "Došlo je do greške."
 ): ErrorObject {
