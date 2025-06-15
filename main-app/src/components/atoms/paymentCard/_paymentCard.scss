@@ -1,0 +1,55 @@
+@use "../../../styles/config/colors";
+@use "../../../styles/config/fonts";
+
+
+.payment-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: self-end;
+  background-color: #fff; 
+  background-image:  url('../assets/images/paymentCardBackground.svg');
+  background-repeat: no-repeat;
+  background-position: right;
+  border: 0;
+  border-radius: 12px;
+  box-shadow: -3px 4px 14.4px 0px #0F20432B;
+  flex-direction: row;
+  gap: 24px;
+  padding: 0 0 0 42px;
+  max-width: 739px;
+  width: 100%;
+  overflow: hidden;
+
+  .card-text {
+    flex: 1;
+    z-index: 1;
+
+    font-family: fonts.$body-font;
+    font-weight: 600;
+    font-size: 3.6rem;
+    line-height: 150%;
+    letter-spacing: -1.5px;
+    color: colors.$dark-text-color;
+    padding: 0 0 42px;
+    
+  }
+
+  .card-image {
+    flex-shrink: 0;
+    margin-left: 40px;
+
+    img {
+      height: auto;
+      object-fit: contain;
+      display: block;
+    }
+  }
+
+  &:hover, &:active {
+    background-color: colors.$hover-blue-color;
+
+    .card-text {
+      color: colors.$brand-primary-color;
+    }
+  }
+}
