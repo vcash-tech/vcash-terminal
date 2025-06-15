@@ -6,7 +6,7 @@ import Footer from "../../organisms/footer/footer";
 import PrimaryButton from "../../atoms/primaryButton/primaryButton";
 
 export default function PaymentMethodTerminalTemplate() {
-  return <Container>
+  return <Container fullHeight={true}>
     <Header />
     <div className="insert-cash">
       <h1>Insert cash</h1>

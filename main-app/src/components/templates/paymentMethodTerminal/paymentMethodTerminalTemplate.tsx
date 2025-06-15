@@ -5,7 +5,7 @@ import Header from "../../organisms/header/header";
 import Footer from "../../organisms/footer/footer";
 
 export default function PaymentMethodTerminalTemplate() {
-  return <Container>
+  return <Container fullHeight={true}>
     <Header navigateBackUrl="#" navigationBackText="Back to Services" />
     <div className="payment-method-terminal">
       <h1>Select your Payment Method</h1>

@@ -1,3 +1,3 @@
-export default function Container({ children }: { children: React.ReactNode }) {
-  return <div className="container">{children}</div>;
+export default function Container({ children, isFullHeight }: { children: React.ReactNode, isFullHeight?: boolean }) {
+  return <div className={`container ${isFullHeight ? 'full-height' : ''}`}>{children}</div>;
 }

@@ -47,9 +47,14 @@
 
   &:hover, &:active {
     background-color: colors.$hover-blue-color;
+    box-shadow: -3px 4px 14.4px 0px #0F20432B;
 
     .card-text {
       color: colors.$brand-primary-color;
     }
+  }
+
+  &:active {
+    box-shadow: 4px 4px 14.4px 0px inset rgba(15, 32, 67, 0.075);
   }
 }
