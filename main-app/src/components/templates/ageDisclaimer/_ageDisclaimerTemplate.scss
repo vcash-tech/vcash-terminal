@@ -1,0 +1,41 @@
+@use "../../../styles/config/colors";
+@use "../../../styles/config/fonts";
+
+.age-disclaimer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 17.8rem 0 44rem;
+  background-color:  colors.$main-background-color; 
+  background-image: url("../assets/images/ageDisclaimerBackground.svg"); 
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  background-size: cover;
+
+  .age-disclaimer-icon {
+    width: 14rem;
+    height: 14rem;
+    margin-bottom: 3.6rem;
+  }
+
+  h1 {
+    font-family: fonts.$body-font;
+    font-weight: 600;
+    font-size: 4.2rem;
+    line-height: 100%;
+    color: colors.$black-color;
+    text-align: center;
+    margin: 0 0 3.6rem;
+  }
+
+  h2 {
+    font-family: fonts.$body-font;
+    font-weight: 400;
+    font-size: 2.4rem;
+    line-height: 150%;
+    color: colors.$dark-text-color;
+    text-align: center;
+    margin: 0 0 10rem;
+  }
+
+}
