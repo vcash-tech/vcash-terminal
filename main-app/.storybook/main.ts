@@ -1,28 +1,26 @@
 import type { StorybookConfig } from '@storybook/react-vite'
-import { dirname, join } from 'path'
-import { fileURLToPath } from 'url'
 
 /**
- * This function is used to resolve the absolute path of a package.
+ * This function was used to resolve the absolute path of a package.
  * It is needed in projects that use Yarn PnP or are set up within a monorepo.
+ * NOTE: Currently commented out as it was causing path resolution issues.
  */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-function getAbsolutePath(value: string): any {
-    // For ES modules, we need to use import.meta.resolve instead of require.resolve
-    // But since import.meta.resolve is not available in all environments, we'll use a workaround
-    const moduleUrl = new URL(join(value, 'package.json'), import.meta.url)
-    return dirname(fileURLToPath(moduleUrl))
-}
+// function getAbsolutePath(value: string): string {
+//     // For ES modules, we need to use import.meta.resolve instead of require.resolve
+//     // But since import.meta.resolve is not available in all environments, we'll use a workaround
+//     const moduleUrl = new URL(join(value, 'package.json'), import.meta.url)
+//     return dirname(fileURLToPath(moduleUrl))
+// }
 
 const config: StorybookConfig = {
     stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
     addons: [
-        getAbsolutePath('@storybook/addon-essentials'),
-        getAbsolutePath('@storybook/addon-onboarding'),
-        getAbsolutePath('@storybook/addon-interactions')
+        '@storybook/addon-essentials',
+        '@storybook/addon-onboarding',
+        '@storybook/addon-interactions'
     ],
     framework: {
-        name: getAbsolutePath('@storybook/react-vite'),
+        name: '@storybook/react-vite',
         options: {}
     },
     docs: {
