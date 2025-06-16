@@ -1,5 +1,6 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import WelcomeScreen from "./welcomeScreen";
+import type { Meta, StoryObj } from "@storybook/react"
+
+import WelcomeScreen from "./welcomeScreen"
 
 const meta = {
   title: "3. Organisms/Welcome Screen",
@@ -8,9 +9,9 @@ const meta = {
     layout: "centered",
   },
   tags: ["autodocs"],
-} satisfies Meta<typeof WelcomeScreen>;
+} satisfies Meta<typeof WelcomeScreen>
 
-export default meta;
+export default meta
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
@@ -21,4 +22,4 @@ export const Default: Story = {
       values: [{ name: "dark", value: "#000" }],
     },
   },
-};
+}

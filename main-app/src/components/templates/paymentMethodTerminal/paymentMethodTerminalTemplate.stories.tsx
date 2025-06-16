@@ -1,5 +1,6 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import PaymentMethodTerminalTemplate from "./paymentMethodTerminalTemplate";
+import type { Meta, StoryObj } from "@storybook/react"
+
+import PaymentMethodTerminalTemplate from "./paymentMethodTerminalTemplate"
 
 const meta = {
   title: "4. Templates/Payment Method Terminal",
@@ -8,9 +9,9 @@ const meta = {
     layout: "centered",
   },
   tags: ["autodocs"],
-} satisfies Meta<typeof PaymentMethodTerminalTemplate>;
+} satisfies Meta<typeof PaymentMethodTerminalTemplate>
 
-export default meta;
+export default meta
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
@@ -23,5 +24,5 @@ export const Default: Story = {
       ],
     },
   },
-};
+}
 

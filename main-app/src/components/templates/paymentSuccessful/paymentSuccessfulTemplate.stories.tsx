@@ -1,5 +1,6 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import PaymentSuccessfulTemplate from "./paymentSuccessfulTemplate";
+import type { Meta, StoryObj } from "@storybook/react"
+
+import PaymentSuccessfulTemplate from "./paymentSuccessfulTemplate"
 
 const meta = {
   title: "4. Templates/Payment Successful",
@@ -8,9 +9,9 @@ const meta = {
     layout: "centered",
   },
   tags: ["autodocs"],
-} satisfies Meta<typeof PaymentSuccessfulTemplate>;
+} satisfies Meta<typeof PaymentSuccessfulTemplate>
 
-export default meta;
+export default meta
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
@@ -23,5 +24,5 @@ export const Default: Story = {
       ],
     },
   },
-};
+}
 

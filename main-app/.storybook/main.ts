@@ -1,5 +1,6 @@
 import type { StorybookConfig } from '@storybook/react-vite'
-import { join, dirname } from 'path'
+import { dirname, join } from 'path'
+import { fileURLToPath } from 'url'
 
 /**
  * This function is used to resolve the absolute path of a package.
@@ -7,7 +8,10 @@ import { join, dirname } from 'path'
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function getAbsolutePath(value: string): any {
-    return dirname(require.resolve(join(value, 'package.json')))
+    // For ES modules, we need to use import.meta.resolve instead of require.resolve
+    // But since import.meta.resolve is not available in all environments, we'll use a workaround
+    const moduleUrl = new URL(join(value, 'package.json'), import.meta.url)
+    return dirname(fileURLToPath(moduleUrl))
 }
 
 const config: StorybookConfig = {

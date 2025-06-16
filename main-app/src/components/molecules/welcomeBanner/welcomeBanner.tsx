@@ -1,4 +1,4 @@
-import { welcomeGift } from "../../../assets/icons";
+import { welcomeGift } from "../../../assets/icons"
 
 // type WelcomeBannerProps = {};
 
@@ -11,5 +11,5 @@ export default function WelcomeBanner() {
         Buy vouchers, pay bills, or top up digital services in a few taps.
       </span>
     </div>
-  );
+  )
 }

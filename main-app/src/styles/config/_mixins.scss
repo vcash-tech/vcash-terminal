@@ -52,7 +52,9 @@
     }
 }
 
-@mixin input-selection-color($color: color.adjust(colors.$input-background-color, $lightness: 3%)) {
+@mixin input-selection-color(
+    $color: color.adjust(colors.$input-background-color, $lightness: 3%)
+) {
     &::selection {
         background: $color;
     }
@@ -274,4 +276,12 @@
             color: colors.$white-color;
         }
     }
+}
+
+@mixin item-shadow() {
+    box-shadow: -3px 4px 14.4px 0px #0f20432b;
+}
+
+@mixin item-active-shadow() {
+    box-shadow: 4px 4px 14.4px 0px inset rgba(15, 32, 67, 0.075);
 }

@@ -1,0 +1,16 @@
+@use "../../../styles/config/mixins";
+
+.digital-services {
+  display: flex;
+  flex-direction: column;
+  width: 90vw;
+  max-width: 90%;
+  align-self: center;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100%;
+  overflow: auto;
+  padding: 5rem 0;
+  gap: 5rem;
+  @include mixins.no-scrollbar;
+}

@@ -1,6 +1,7 @@
-import LinkBackButton from "../../atoms/linkBackButton/linkBackButton";
-import LanguageButton from "../../atoms/languageButton/languageButton"; 
-import { flagEN, flagRS } from "../../../assets/icons";
+import LanguageButton from "@/components/atoms/languageButton/languageButton" 
+import LinkBackButton from "@/components/atoms/linkBackButton/linkBackButton"
+
+import { flagEN, flagRS } from "../../../assets/icons"
 
 type HeaderProps = {
   navigationBackText?: string;
@@ -31,7 +32,7 @@ const Header = ({ navigationBackText, navigateBackUrl }: HeaderProps) => {
         />
       </div>
     </header>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header

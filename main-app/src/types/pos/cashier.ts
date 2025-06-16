@@ -1,4 +1,4 @@
-import { ErrorObj } from "../common/error";
+import { ErrorObj } from "../common/error"
 
 export interface AgentPOSInfo {
   message: string;

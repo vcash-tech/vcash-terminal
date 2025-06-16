@@ -1,5 +1,6 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import WelcomeBanner from "./welcomeBanner";
+import type { Meta, StoryObj } from "@storybook/react"
+
+import WelcomeBanner from "./welcomeBanner"
 
 const meta = {
   title: "2.Molecules/Welcome Banner",
@@ -8,12 +9,12 @@ const meta = {
     layout: "centered",
   },
   tags: ["autodocs"],
-} satisfies Meta<typeof WelcomeBanner>;
+} satisfies Meta<typeof WelcomeBanner>
 
-export default meta;
+export default meta
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = {}
 
 export const Inverted: Story = {
   args: {},
@@ -26,4 +27,4 @@ export const Inverted: Story = {
       ],
     },
   },
-};
+}
