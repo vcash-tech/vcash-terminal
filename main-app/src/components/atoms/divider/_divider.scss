@@ -1,0 +1,10 @@
+@use '../../../styles/config/colors';
+
+.divider {
+    border-bottom: solid 1px colors.$border-color;
+    width: 100%;
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+    display: block;
+    // height: 1rem;
+}

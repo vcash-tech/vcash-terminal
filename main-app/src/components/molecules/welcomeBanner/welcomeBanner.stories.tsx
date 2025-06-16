@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react"
 import WelcomeBanner from "./welcomeBanner"
 
 const meta = {
-  title: "2.Molecules/Welcome Banner",
+  title: "2. Molecules/Welcome Banner",
   component: WelcomeBanner,
   parameters: {
     layout: "centered",
