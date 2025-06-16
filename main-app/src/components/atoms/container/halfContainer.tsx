@@ -1,5 +1,15 @@
-import React from "react"
+import React from 'react'
 
-export default function HalfContainer({ children }: { children: React.ReactNode }) {
-    return <div className="half-container">{children}</div>
+export default function HalfContainer({
+    children,
+    style
+}: {
+    children: React.ReactNode
+    style?: React.CSSProperties
+}) {
+    return (
+        <div className="half-container" style={style}>
+            {children}
+        </div>
+    )
 }

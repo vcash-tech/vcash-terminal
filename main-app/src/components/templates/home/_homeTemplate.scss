@@ -1,0 +1,9 @@
+.home {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    justify-content: flex-start;
+    gap: 2rem;
+    max-width: 80vw;
+    margin: auto;
+}
