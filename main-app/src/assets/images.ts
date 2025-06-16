@@ -13,6 +13,7 @@ import insertCash from './images/insertCash.svg'
 import paymentCardBackground from './images/paymentCardBackground.svg'
 import paymentMethodBackground from './images/paymentMethodBackground.png'
 import ps from './images/ps.png'
+import qrCode from './images/qrCode.svg'
 import steam from './images/steam.png'
 import welcomeBackground from './images/welcomeBackground.svg'
 
@@ -32,6 +33,7 @@ export {
     paymentCardBackground,
     paymentMethodBackground,
     ps,
+    qrCode,
     steam,
     welcomeBackground
 }
