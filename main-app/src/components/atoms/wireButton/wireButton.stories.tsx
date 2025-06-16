@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import WireButton from './wireButton'
 
 const meta = {
-    title: '3. Atoms/Wire Button',
+    title: '1. Atoms/Wire Button',
     component: WireButton,
     parameters: {
         layout: 'centered'

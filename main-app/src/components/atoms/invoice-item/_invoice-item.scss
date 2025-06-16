@@ -1,0 +1,41 @@
+@use '../../../styles/config/colors';
+
+.invoice-item {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+
+    p {
+        display: inline-block;
+        margin: 0;
+        padding: 0;
+
+        font-weight: 500;
+        font-size: 2rem;
+        line-height: 1.2;
+        color: colors.$value-text-color;
+        text-align: right;
+
+        &.label {
+            color: colors.$label-text-color;
+            text-align: left;
+        }
+    }
+
+    &.qr-code {
+        align-items: flex-start;
+    }
+
+    &.align-left {
+        justify-content: flex-start;
+    }
+
+    &.align-right {
+        justify-content: flex-end;
+    }
+    &.align-justify {
+        justify-content: space-between;
+    }
+}

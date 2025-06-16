@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react"
 import PaymentFailedOptions from "./paymentFailedOptions"
 
 const meta = {
-  title: "2.Molecules/Payment Failed Options",
+  title: "2. Molecules/Payment Failed Options",
   component: PaymentFailedOptions,
   parameters: {
     layout: "centered",
