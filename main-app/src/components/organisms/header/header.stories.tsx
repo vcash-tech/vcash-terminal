@@ -3,7 +3,7 @@ import { BrowserRouter } from 'react-router-dom'
 
 import Header from './header'
 
-const meta = {
+const meta: Meta<typeof Header> = {
   title: '3. Organisms/Header',
   component: Header,
   parameters: {
@@ -17,7 +17,7 @@ const meta = {
       </BrowserRouter>
     ),
   ],
-} satisfies Meta<typeof Header>
+}
 
 export default meta
 type Story = StoryObj<typeof meta>;

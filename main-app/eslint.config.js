@@ -15,7 +15,17 @@ export default tseslint.config(
         files: ['**/*.{ts,tsx}'],
         languageOptions: {
             ecmaVersion: 2020,
-            globals: globals.browser
+            globals: globals.browser,
+            parserOptions: {
+                ecmaFeatures: {
+                    jsx: true
+                }
+            }
+        },
+        settings: {
+            react: {
+                version: 'detect' // Automatically detect React version
+            }
         },
         plugins: {
             'check-file': checkFile,

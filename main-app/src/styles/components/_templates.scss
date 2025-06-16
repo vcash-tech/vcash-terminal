@@ -1,6 +1,7 @@
-@use "../../components/templates/welcome/welcome";
-@use "../../components/templates/paymentMethodTerminal/paymentMethodTerminalTemplate";
-@use "../../components/templates/insertCash/insertCashTemplate";
-@use "../../components/templates/paymentSuccessful/paymentSuccessfulTemplate";
-@use "../../components/templates/ageDisclaimer/ageDisclaimerTemplate";
-@use "../../components/templates/digitalServices/digitalServicesTemplate";
+@use '../../components/templates/welcome/welcome';
+@use '../../components/templates/paymentMethodTerminal/paymentMethodTerminalTemplate';
+@use '../../components/templates/insertCash/insertCashTemplate';
+@use '../../components/templates/paymentSuccessful/paymentSuccessfulTemplate';
+@use '../../components/templates/ageDisclaimer/ageDisclaimerTemplate';
+@use '../../components/templates/digitalServices/digitalServicesTemplate';
+@use '../../components/templates/home/homeTemplate';

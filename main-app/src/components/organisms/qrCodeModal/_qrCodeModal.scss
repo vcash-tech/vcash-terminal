@@ -1,0 +1,63 @@
+@use '../../../styles/config/colors';
+
+.qr-code-modal {
+    // position: fixed;
+    // top: 0;
+    // left: 0;
+
+    // left: 10vw;
+    // top: 10vw;
+    // background: rgba(0, 0, 0, 0.5);
+    // z-index: 999;
+
+    // flex-direction: column;
+    // justify-content: space-between;
+    // align-items: center;
+    // padding: 4rem;
+    // gap: 1rem;
+
+    // align-self: center;
+    // justify-self: center;
+    // width: 80vw;
+    // margin: auto;
+
+    background: rgba(0, 0, 0, 0.3);
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 998;
+    backdrop-filter: blur(5px);
+
+    .modal-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4rem;
+        flex: 1;
+        justify-content: space-evenly;
+        margin: 15vw 7vw;
+        background: colors.$main-background-color;
+        border-radius: 12px;
+        width: 86vw;
+        height: 100vw;
+
+        p {
+            font-weight: 500;
+            font-size: 3.2rem;
+            line-height: 5.1rem;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            max-width: 80%;
+            color: colors.$dark-text-color;
+        }
+
+        .qr-code {
+            max-width: 34rem;
+            width: auto;
+            object-fit: contain;
+        }
+    }
+}
