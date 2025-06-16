@@ -15,7 +15,8 @@
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "audit-stories": "ts-node scripts/audit-stories.ts"
+    "audit-stories": "ts-node scripts/audit-stories.ts",
+    "chromatic": "npx chromatic --project-token=chpt_5f30063a050e32c"
   },
   "dependencies": {
     "@emotion/styled": "^11.14.0",
