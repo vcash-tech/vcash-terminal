@@ -5,19 +5,21 @@ export default function Container({
     isFullHeight,
     isHorizontal,
     maxWidth,
-    style
+    style,
+    className
 }: {
     children: React.ReactNode
     isFullHeight?: boolean
     isHorizontal?: boolean
     maxWidth?: string
     style?: React.CSSProperties
+    className?: string
 }) {
     return (
         <div
             className={`container ${isHorizontal ? 'horizontal' : ''} ${
                 isFullHeight ? 'full-height' : ''
-            }`}
+            } ${className ?? ''}`}
             style={{ ...(style ?? {}), maxWidth }}>
             {children}
         </div>

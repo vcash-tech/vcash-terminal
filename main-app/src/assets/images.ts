@@ -7,6 +7,7 @@ import disney from './images/disney.png'
 import eaPlay from './images/eaPlay.png'
 import gPay from './images/googlePay.png'
 import hbo from './images/hbo.png'
+import homeBackground from './images/homeBackground.png'
 import hulu from './images/hulu.png'
 import insertCash from './images/insertCash.svg'
 import paymentCardBackground from './images/paymentCardBackground.svg'
@@ -25,6 +26,7 @@ export {
     eaPlay,
     gPay,
     hbo,
+    homeBackground,
     hulu,
     insertCash,
     paymentCardBackground,
