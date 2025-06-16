@@ -1,8 +1,9 @@
-import Container from "../../atoms/container/container";
-import Header from "../../organisms/header/header";
-import Footer from "../../organisms/footer/footer";
-import { ageDisclaimer } from "../../../assets/icons";
-import PrimaryButton from "../../atoms/primaryButton/primaryButton";
+import Container from "@/components/atoms/container/container"
+import PrimaryButton from "@/components/atoms/primaryButton/primaryButton"
+import Footer from "@/components/organisms/footer/footer"
+import Header from "@/components/organisms/header/header"
+
+import { ageDisclaimer } from "../../../assets/icons"
 
 export default function AgeDisclaimerTemplate() {
   return <Container isFullHeight={true}>
@@ -14,5 +15,5 @@ export default function AgeDisclaimerTemplate() {
       <PrimaryButton text="Continue to Purchase" callback={() => console.log("Age confirmed")} />
     </div>
     <Footer />
-  </Container>;
+  </Container>
 }

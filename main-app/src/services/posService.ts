@@ -1,17 +1,17 @@
-import { Auth } from "../types/common/httpRequest";
+import { Auth } from "../types/common/httpRequest"
 import {
   AgentPOSInfo,
   CashierTokenRequest,
   CashierTokenResponse,
-} from "../types/pos/cashier";
+} from "../types/pos/cashier"
 import {
   DeviceCodeEmailRequest,
   DeviceCodeResponse,
   DeviceCodeUsernameRequest,
   DeviceTokenRequest,
   DeviceTokenResponse,
-} from "../types/pos/deviceAuth";
-import { HttpService } from "./httpService";
+} from "../types/pos/deviceAuth"
+import { HttpService } from "./httpService"
 
 const api = {
   generateDeviceCodeEmail: "/auth/device/code/email",
@@ -19,7 +19,7 @@ const api = {
   generateDeviceToken: "/auth/device/token",
   getCashiersPOS: "/auth/cashier/all",
   unlockDevice: "/auth/cashier/token",
-};
+}
 
 export class POSService {
   // Device Registration
@@ -29,8 +29,8 @@ export class POSService {
     const response = await HttpService.Post<DeviceCodeResponse>(
       api.generateDeviceCodeEmail,
       dto
-    );
-    return response;
+    )
+    return response
   }
   static async generateDeviceCodeUsername(
     dto: DeviceCodeUsernameRequest
@@ -38,8 +38,8 @@ export class POSService {
     const response = await HttpService.Post<DeviceCodeResponse>(
       api.generateDeviceCodeUsername,
       dto
-    );
-    return response;
+    )
+    return response
   }
 
   static async generateDeviceToken(
@@ -48,8 +48,8 @@ export class POSService {
     const response = await HttpService.Post<DeviceTokenResponse>(
       api.generateDeviceToken,
       dto
-    );
-    return response;
+    )
+    return response
   }
 
   // Cashier Locked Screen
@@ -57,8 +57,8 @@ export class POSService {
     const response = await HttpService.Get<AgentPOSInfo>(
       api.getCashiersPOS,
       Auth.POS
-    );
-    return response;
+    )
+    return response
   }
 
   static async unlockDevice(
@@ -68,7 +68,7 @@ export class POSService {
       api.unlockDevice,
       dto,
       Auth.POS
-    );
-    return response;
+    )
+    return response
   }
 }

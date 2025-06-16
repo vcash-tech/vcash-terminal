@@ -4,5 +4,5 @@ export default function LanguageButton({ flag, language, callback }: { flag: str
           <img className="language-ico" alt={language} src={flag} />
           <span className="language-text">{language}</span>
         </button>
-    );
+    )
 }

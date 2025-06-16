@@ -1,50 +1,51 @@
-import { useState, useEffect } from "react";
-import { TransactionService } from "../services/transactionService";
-import { AuthService } from "../services/authService";
-import { useNavigate } from "react-router-dom";
-import { Auth } from "../types/common/httpRequest";
-import CashierSelect from "../components/cashierSelect";
-import { CircularProgress } from "@mui/material";
+import { CircularProgress } from "@mui/material"
+import { useEffect,useState } from "react"
+import { useNavigate } from "react-router-dom"
+
+import CashierSelect from "../components/cashierSelect"
+import { AuthService } from "../services/authService"
+import { TransactionService } from "../services/transactionService"
+import { Auth } from "../types/common/httpRequest"
 
 function HomePage() {
-  const [amount, setAmount] = useState<number | null>(null);
-  const [printResult, setPrintResult] = useState("");
-  const [hasCashierToken, setHasCashierToken] = useState<boolean>(false);
-  const [loader, setLoader] = useState<boolean>(false);
+  const [amount, setAmount] = useState<number | null>(null)
+  const [printResult, setPrintResult] = useState("")
+  const [hasCashierToken, setHasCashierToken] = useState<boolean>(false)
+  const [loader, setLoader] = useState<boolean>(false)
 
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   useEffect(() => {
-    const token = AuthService.GetToken(Auth.POS);
+    const token = AuthService.GetToken(Auth.POS)
     if (!token) {
-      navigate("/register");
+      navigate("/register")
     }
-  }, [navigate]);
+  }, [navigate])
 
   useEffect(() => {
-    const token = AuthService.GetToken(Auth.Cashier);
-    setHasCashierToken(!!token);
-  }, [navigate]);
+    const token = AuthService.GetToken(Auth.Cashier)
+    setHasCashierToken(!!token)
+  }, [navigate])
 
   const handleBuy = async () => {
-    if (amount === null) return;
+    if (amount === null) return
 
-    setLoader(true);
+    setLoader(true)
     try {
       const voucherData = await TransactionService.CreateVoucher({
         amount: amount,
-      });
-      const voucherCodeDefault = "123-456-789"; // Replace with actual logic
+      })
+      const voucherCodeDefault = "123-456-789" // Replace with actual logic
       const result = await window.api.print(
         voucherData.moneyTransfer.voucherCode || voucherCodeDefault
-      );
-      setPrintResult(result);
+      )
+      setPrintResult(result)
     } catch (err) {
-      setPrintResult("Print failed");
-      console.error(err);
+      setPrintResult("Print failed")
+      console.error(err)
     }
-    setLoader(false);
-  };
+    setLoader(false)
+  }
 
   return (
     <div className="card">
@@ -70,7 +71,7 @@ function HomePage() {
         <CashierSelect setHasCashierToken={setHasCashierToken} />
       )}
     </div>
-  );
+  )
 }
 
-export default HomePage;
+export default HomePage

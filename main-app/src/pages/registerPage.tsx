@@ -1,10 +1,11 @@
-import { useState, useRef } from "react";
-import { POSService } from "../services/posService";
-import { AuthService } from "../services/authService";
-import { Auth } from "../types/common/httpRequest";
-import { getErrorInfo } from "../helpers/getErrorInfo";
-import { LinearProgress } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { LinearProgress } from "@mui/material"
+import { useRef,useState } from "react"
+import { useNavigate } from "react-router-dom"
+
+import { getErrorInfo } from "../helpers/getErrorInfo"
+import { AuthService } from "../services/authService"
+import { POSService } from "../services/posService"
+import { Auth } from "../types/common/httpRequest"
 
 enum DeviceTokenSteps {
   getCode,
@@ -12,40 +13,40 @@ enum DeviceTokenSteps {
   gotToken,
 }
 
-const BRAND_NAME = import.meta.env.VITE_BRAND_NAME;
+const BRAND_NAME = import.meta.env.VITE_BRAND_NAME
 
 function RegisterPage() {
-  const [agentEmail, setAgentEmail] = useState("");
-  const [deviceName, setDeviceName] = useState("");
+  const [agentEmail, setAgentEmail] = useState("")
+  const [deviceName, setDeviceName] = useState("")
   const [stepper, setStepper] = useState<DeviceTokenSteps>(
     DeviceTokenSteps.getCode
-  );
-  const stepperRef = useRef<DeviceTokenSteps>(stepper);
+  )
+  const stepperRef = useRef<DeviceTokenSteps>(stepper)
 
-  const [_loader, setLoader] = useState<boolean>(false);
+  const [_loader, setLoader] = useState<boolean>(false)
 
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
-  stepperRef.current = stepper;
+  stepperRef.current = stepper
 
   async function getDeviceToken(agentId: string, deviceCode: string) {
     try {
       const deviceTokenResponse = await POSService.generateDeviceToken({
         agentId: agentId,
         deviceCode: deviceCode,
-      });
+      })
 
-      setStepper(DeviceTokenSteps.gotToken);
-      AuthService.SetToken(Auth.POS, deviceTokenResponse.token);
+      setStepper(DeviceTokenSteps.gotToken)
+      AuthService.SetToken(Auth.POS, deviceTokenResponse.token)
     } catch (err: unknown) {
-      const { code, description: _description } = getErrorInfo(err); // TODO: remove _ in _description once we start using it
+      const { code, description: _description } = getErrorInfo(err) // TODO: remove _ in _description once we start using it
 
       if (
         code === "DEVICE_NOT_AUTHORIZED" &&
         stepperRef.current === DeviceTokenSteps.gettingToken
       ) {
-        setTimeout(() => getDeviceToken(agentId, deviceCode), 10000);
-        return;
+        setTimeout(() => getDeviceToken(agentId, deviceCode), 10000)
+        return
       }
       if (stepperRef.current !== DeviceTokenSteps.getCode) {
         // enqueueSnackbar(
@@ -53,35 +54,35 @@ function RegisterPage() {
         //     { variant: "error" },
         // );
       }
-      setStepper(DeviceTokenSteps.getCode);
+      setStepper(DeviceTokenSteps.getCode)
     } finally {
-      setLoader(false);
+      setLoader(false)
     }
   }
 
   const handleRegisterDevice = async () => {
-    setLoader(true);
+    setLoader(true)
     try {
       const deviceCodeResponse = await POSService.generateDeviceCodeEmail({
         agentEmail,
         deviceName,
         deviceTypeId: 20,
-      });
-      setStepper(DeviceTokenSteps.gettingToken);
-      getDeviceToken(deviceCodeResponse.agentId, deviceCodeResponse.deviceCode);
+      })
+      setStepper(DeviceTokenSteps.gettingToken)
+      getDeviceToken(deviceCodeResponse.agentId, deviceCodeResponse.deviceCode)
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
-      const { code, description } = getErrorInfo(error);
+      const { code, description } = getErrorInfo(error)
 
-      console.log(code, description);
+      console.log(code, description)
       // enqueueSnackbar(
       //     `Greška pri kreiranju koda za uređaj. ${description} `,
       //     { variant: "error" },
       // );
     } finally {
-      setLoader(false);
+      setLoader(false)
     }
-  };
+  }
 
   return (
     <div className="card">
@@ -225,7 +226,7 @@ function RegisterPage() {
         )}
       </div>
     </div>
-  );
+  )
 }
 
-export default RegisterPage;
+export default RegisterPage

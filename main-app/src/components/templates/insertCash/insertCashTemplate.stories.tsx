@@ -1,5 +1,6 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import InsertCashTemplate from "./insertCashTemplate";
+import type { Meta, StoryObj } from "@storybook/react"
+
+import InsertCashTemplate from "./insertCashTemplate"
 
 const meta = {
   title: "4. Templates/Insert Cash",
@@ -8,11 +9,11 @@ const meta = {
     layout: "centered",
   },
   tags: ["autodocs"],
-} satisfies Meta<typeof InsertCashTemplate>;
+} satisfies Meta<typeof InsertCashTemplate>
 
-export default meta;
+export default meta
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = {}
 
 

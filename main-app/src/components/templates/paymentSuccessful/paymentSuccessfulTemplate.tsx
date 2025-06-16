@@ -1,18 +1,19 @@
-import { useState, useEffect } from 'react';
-import Container from "../../atoms/container/container";
-import Header from "../../organisms/header/header";
-import Footer from "../../organisms/footer/footer";
-import GeneratingProgress from  "../../atoms/generatingProgress/generatingProgress";
+import { useEffect,useState } from 'react'
+
+import Container from "@/components/atoms/container/container"
+import GeneratingProgress from  "@/components/atoms/generatingProgress/generatingProgress"
+import Footer from "@/components/organisms/footer/footer"
+import Header from "@/components/organisms/header/header"
 
 export default function PaymentSuccessfulTemplate() {
-  const [progress, setProgress] = useState(0);
+  const [progress, setProgress] = useState(0)
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setProgress((prev) => (prev >= 100 ? 100 : prev + 1));
-    }, 100);
-    return () => clearInterval(timer);
-  }, []);
+      setProgress((prev) => (prev >= 100 ? 100 : prev + 1))
+    }, 100)
+    return () => clearInterval(timer)
+  }, [])
 
   return <Container isFullHeight={true}>
     <Header />
@@ -24,5 +25,5 @@ export default function PaymentSuccessfulTemplate() {
       </div>
     </div>
     <Footer />
-  </Container>;
+  </Container>
 }

@@ -1,3 +1,5 @@
+import React from "react"
+
 type PeekButtonProps = {
   buttonContent: React.ReactNode;
   handleClick: () => void;
@@ -16,5 +18,5 @@ export default function PeekButton({
     >
       <div className="peek-button-content">{buttonContent}</div>
     </button>
-  );
+  )
 }

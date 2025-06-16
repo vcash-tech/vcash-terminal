@@ -1,5 +1,6 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import PrimaryButton from "./primaryButton";
+import type { Meta, StoryObj } from "@storybook/react"
+
+import PrimaryButton from "./primaryButton"
 
 const meta = {
   title: "1. Atoms/Primary Button",
@@ -8,9 +9,9 @@ const meta = {
     layout: "centered",
   },
   tags: ["autodocs"],
-} satisfies Meta<typeof PrimaryButton>;
+} satisfies Meta<typeof PrimaryButton>
 
-export default meta;
+export default meta
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
@@ -27,7 +28,7 @@ export const Default: Story = {
       ],
     },
   },
-};
+}
 
 export const Inverted: Story = {
   args: {
@@ -44,4 +45,4 @@ export const Inverted: Story = {
       ],
     },
   },
-};
+}

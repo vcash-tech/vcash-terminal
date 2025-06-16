@@ -1,5 +1,6 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import GeneratingProgress from "./generatingProgress";
+import type { Meta, StoryObj } from "@storybook/react"
+
+import GeneratingProgress from "./generatingProgress"
 
 const meta = {
   title: "1. Atoms/Generating Progress",
@@ -8,9 +9,9 @@ const meta = {
     layout: "centered",
   },
   tags: ["autodocs"],
-} satisfies Meta<typeof GeneratingProgress>;
+} satisfies Meta<typeof GeneratingProgress>
 
-export default meta;
+export default meta
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
@@ -26,4 +27,4 @@ export const Default: Story = {
       ],
     },
   }
-};
+}
