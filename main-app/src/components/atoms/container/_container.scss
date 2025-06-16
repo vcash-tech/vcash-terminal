@@ -1,13 +1,19 @@
-@use '../../../styles/config/colors';
+@use "../../../styles/config/colors";
 
 .container {
-    background-color: colors.$main-background-color;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    width: 100vw;
+  background-color: colors.$main-background-color;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  gap: 1.6rem;
 
-    &.full-height {
-        height: 100vh;
-    }
+  &.full-height {
+    height: 100vh;
+    display: flex;
+  }
+
+  &.horizontal {
+    flex-direction: row;
+  }
 }

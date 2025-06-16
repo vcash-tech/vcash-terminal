@@ -1,18 +1,19 @@
 import {
   BrowserRouter as Router,
-  Routes,
   Route,
+  Routes,
   useLocation,
-} from "react-router-dom";
-import HomePage from "./pages/homePage";
-import RegisterPage from "./pages/registerPage";
-import Header from "./components/atoms/header/header";
+} from "react-router-dom"
+
+import Header from "./components/atoms/header/header"
+import HomePage from "./pages/homePage"
+import RegisterPage from "./pages/registerPage"
 
 function Layout() {
-  const location = useLocation();
-  const hideHeaderOn = ["/register"];
+  const location = useLocation()
+  const hideHeaderOn = ["/register"]
 
-  const shouldHideHeader = hideHeaderOn.includes(location.pathname);
+  const shouldHideHeader = hideHeaderOn.includes(location.pathname)
 
   return (
     <>
@@ -22,7 +23,7 @@ function Layout() {
         <Route path="/register" element={<RegisterPage />} />
       </Routes>
     </>
-  );
+  )
 }
 
 function App() {
@@ -30,7 +31,7 @@ function App() {
     <Router>
       <Layout />
     </Router>
-  );
+  )
 }
 
-export default App;
+export default App

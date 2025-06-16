@@ -1,6 +1,7 @@
-import type { Preview } from '@storybook/react'
 import '../src/styles/app.scss'
 import '../src/styles/storybook.scss'
+
+import type { Preview } from '@storybook/react'
 
 const preview: Preview = {
   parameters: {
@@ -12,6 +13,6 @@ const preview: Preview = {
     },
   },
   tags: ['autodocs'],
-};
+}
 
-export default preview;
+export default preview

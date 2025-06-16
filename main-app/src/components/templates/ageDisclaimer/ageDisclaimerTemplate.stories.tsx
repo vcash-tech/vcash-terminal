@@ -1,5 +1,6 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import AgeDisclaimerTemplate from "./ageDisclaimerTemplate";
+import type { Meta, StoryObj } from "@storybook/react"
+
+import AgeDisclaimerTemplate from "./ageDisclaimerTemplate"
 
 const meta = {
   title: "4. Templates/Age Disclaimer",
@@ -8,9 +9,9 @@ const meta = {
     layout: "centered",
   },
   tags: ["autodocs"],
-} satisfies Meta<typeof AgeDisclaimerTemplate>;
+} satisfies Meta<typeof AgeDisclaimerTemplate>
 
-export default meta;
+export default meta
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
@@ -23,5 +24,5 @@ export const Default: Story = {
       ],
     },
   },
-};
+}
 

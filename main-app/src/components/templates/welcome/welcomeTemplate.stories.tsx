@@ -1,5 +1,6 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import Welcome from "./welcome";
+import type { Meta, StoryObj } from "@storybook/react"
+
+import Welcome from "./welcomeTemplate"
 
 const meta = {
   title: "4. Templates/Welcome",
@@ -8,12 +9,12 @@ const meta = {
     layout: "centered",
   },
   tags: ["autodocs"],
-} satisfies Meta<typeof Welcome>;
+} satisfies Meta<typeof Welcome>
 
-export default meta;
+export default meta
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = {}
 
 export const Inverted: Story = {
   parameters: {
@@ -21,4 +22,4 @@ export const Inverted: Story = {
       default: "dark",
     },
   },
-};
+}

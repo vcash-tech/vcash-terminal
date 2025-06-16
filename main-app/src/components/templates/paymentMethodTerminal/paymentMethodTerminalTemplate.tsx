@@ -1,11 +1,12 @@
-import Container from "../../atoms/container/container";
-import PaymentCard from "../../atoms/paymentCard/paymentCard";
-import { cashPayment, creditCardPayment } from "../../../assets/images";
-import Header from "../../organisms/header/header";
-import Footer from "../../organisms/footer/footer";
+import Container from "@/components/atoms/container/container"
+import PaymentCard from "@/components/atoms/paymentCard/paymentCard"
+import Footer from "@/components/organisms/footer/footer"
+import Header from "@/components/organisms/header/header"
+
+import { cashPayment, creditCardPayment } from "../../../assets/images"
 
 export default function PaymentMethodTerminalTemplate() {
-  return <Container fullHeight={true}>
+  return <Container isFullHeight={true}>
     <Header navigateBackUrl="#" navigationBackText="Back to Services" />
     <div className="payment-method-terminal">
       <h1>Select your Payment Method</h1>
@@ -24,5 +25,5 @@ export default function PaymentMethodTerminalTemplate() {
       </div>
     </div>
     <Footer />
-  </Container>;
+  </Container>
 }

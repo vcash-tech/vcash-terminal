@@ -1,5 +1,6 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import LinkBackButton from "./linkBackButton";
+import type { Meta, StoryObj } from "@storybook/react"
+
+import LinkBackButton from "./linkBackButton"
 
 const meta = {
   title: "1. Atoms/Link Back Button",
@@ -8,9 +9,9 @@ const meta = {
     layout: "centered",
   },
   tags: ["autodocs"],
-} satisfies Meta<typeof LinkBackButton>;
+} satisfies Meta<typeof LinkBackButton>
 
-export default meta;
+export default meta
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
@@ -26,4 +27,4 @@ export const Default: Story = {
       ],
     },
   }
-};
+}

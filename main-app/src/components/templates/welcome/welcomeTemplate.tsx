@@ -1,5 +1,6 @@
-import { welcomeBackground } from "../../../assets/images";
-import WelcomeScreen from "../../organisms/welcomeScreen/welcomeScreen";
+import WelcomeScreen from "@/components/organisms/welcomeScreen/welcomeScreen"
+
+import { welcomeBackground } from "../../../assets/images"
 
 export default function Welcome() {
   return (
@@ -7,5 +8,5 @@ export default function Welcome() {
       <WelcomeScreen />
       <img src={welcomeBackground} />
     </div>
-  );
+  )
 }

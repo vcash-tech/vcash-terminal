@@ -1,6 +1,7 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import PaymentCard from "./paymentCard";
-import { cashPayment, creditCardPayment } from "../../../assets/images";
+import type { Meta, StoryObj } from "@storybook/react"
+
+import { cashPayment, creditCardPayment } from "../../../assets/images"
+import PaymentCard from "./paymentCard"
 
 const meta = {
   title: "1. Atoms/Payment Card",
@@ -9,9 +10,9 @@ const meta = {
     layout: "centered",
   },
   tags: ["autodocs"],
-} satisfies Meta<typeof PaymentCard>;
+} satisfies Meta<typeof PaymentCard>
 
-export default meta;
+export default meta
 type Story = StoryObj<typeof meta>;
 
 export const CardPayment: Story = {
@@ -28,7 +29,7 @@ export const CardPayment: Story = {
       ],
     },
   }
-};
+}
 
 export const CashPayment: Story = {
   args: {
@@ -44,4 +45,4 @@ export const CashPayment: Story = {
       ],
     },
   }
-};
+}

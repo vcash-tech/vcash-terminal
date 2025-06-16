@@ -1,4 +1,4 @@
-import { MoneyTransfer } from "../agent/transaction";
+import { MoneyTransfer } from "../agent/transaction"
 
 export interface DepositRequest {
   toUserIdentifier: string;

@@ -4,5 +4,5 @@ export default function PaymentFailedOptions() {
     <div><p>Test</p></div>
     <div><p>Test</p></div>
     <div><p>Test</p></div>
-  </div>;
+  </div>
 }

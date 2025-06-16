@@ -1,5 +1,6 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import PeekButton from "./peekButton";
+import type { Meta, StoryObj } from "@storybook/react"
+
+import PeekButton from "./peekButton"
 
 const meta = {
   title: "1. Atoms/Peek Button",
@@ -8,9 +9,9 @@ const meta = {
     layout: "centered",
   },
   tags: ["autodocs"],
-} satisfies Meta<typeof PeekButton>;
+} satisfies Meta<typeof PeekButton>
 
-export default meta;
+export default meta
 type Story = StoryObj<typeof meta>;
 
 export const Right: Story = {
@@ -32,7 +33,7 @@ export const Right: Story = {
       ],
     },
   },
-};
+}
 
 export const Left: Story = {
   args: {
@@ -53,4 +54,4 @@ export const Left: Story = {
       ],
     },
   },
-};
+}
