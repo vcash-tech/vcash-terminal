@@ -1,4 +1,4 @@
-import CircularProgress from '@mui/material/CircularProgress';
+import CircularProgress from '@mui/material/CircularProgress'
 
 export default function GeneratingProgress({ progress, text }: { progress: number; text: string; }) {
 
@@ -16,5 +16,5 @@ export default function GeneratingProgress({ progress, text }: { progress: numbe
         </div>
         <h2>{text}</h2>
       </div>
-    );
+    )
 }

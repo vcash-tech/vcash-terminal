@@ -4,5 +4,5 @@ export default function PaymentCard({ image, text, callback }: { image: string; 
           <div className="card-text">{text}</div>
           <div className="card-image"><img src={image} alt={text} /></div>
       </button>
-  );
+  )
 }

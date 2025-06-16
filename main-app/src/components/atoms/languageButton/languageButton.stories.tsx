@@ -1,6 +1,7 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import LanguageButton from "./languageButton";
-import { flagEN, flagRS } from "../../../assets/icons";
+import type { Meta, StoryObj } from "@storybook/react"
+
+import { flagEN, flagRS } from "../../../assets/icons"
+import LanguageButton from "./languageButton"
 
 const meta = {
   title: "1. Atoms/Language Button",
@@ -9,9 +10,9 @@ const meta = {
     layout: "centered",
   },
   tags: ["autodocs"],
-} satisfies Meta<typeof LanguageButton>;
+} satisfies Meta<typeof LanguageButton>
 
-export default meta;
+export default meta
 type Story = StoryObj<typeof meta>;
 
 export const RS: Story = {
@@ -28,7 +29,7 @@ export const RS: Story = {
       ],
     },
   }
-};
+}
 
 export const EN: Story = {
   args: {
@@ -44,4 +45,4 @@ export const EN: Story = {
       ],
     },
   }
-};
+}

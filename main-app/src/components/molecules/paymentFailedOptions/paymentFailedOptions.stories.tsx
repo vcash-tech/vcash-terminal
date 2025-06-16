@@ -1,5 +1,6 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import PaymentFailedOptions from "./paymentFailedOptions";
+import type { Meta, StoryObj } from "@storybook/react"
+
+import PaymentFailedOptions from "./paymentFailedOptions"
 
 const meta = {
   title: "2.Molecules/Payment Failed Options",
@@ -8,12 +9,12 @@ const meta = {
     layout: "centered",
   },
   tags: ["autodocs"],
-} satisfies Meta<typeof PaymentFailedOptions>;
+} satisfies Meta<typeof PaymentFailedOptions>
 
-export default meta;
+export default meta
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = {}
 
 export const Inverted: Story = {
   args: {
@@ -28,4 +29,4 @@ export const Inverted: Story = {
       ],
     },
   },
-};
+}

@@ -3,5 +3,5 @@ export default function PrimaryButton({ text, callback, inverted }: { text: stri
         <button className={`primary-button ${inverted ? 'inverted' : ''}`}  onClick={callback}>
             <span>{text}</span>
         </button>
-    );
+    )
 }

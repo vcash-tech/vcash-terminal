@@ -1,6 +1,7 @@
-import PeekButton from "../../atoms/peekButton/peekButton";
-import WelcomeBanner from "../../molecules/welcomeBanner/welcomeBanner";
-import { arrowRight } from "../../../assets/icons";
+import PeekButton from "@/components/atoms/peekButton/peekButton"
+
+import { arrowRight } from "../../../assets/icons"
+import WelcomeBanner from "../../molecules/welcomeBanner/welcomeBanner"
 
 // type WelcomeScreenProps = {};
 
@@ -20,5 +21,5 @@ export default function WelcomeScreen() {
         />
       </div>
     </div>
-  );
+  )
 }

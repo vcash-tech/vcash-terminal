@@ -1,9 +1,10 @@
-import Container from "../../atoms/container/container";
-import { insertCash } from "../../../assets/images";
-import { infoCircle } from "../../../assets/icons";
-import Header from "../../organisms/header/header";
-import Footer from "../../organisms/footer/footer";
-import PrimaryButton from "../../atoms/primaryButton/primaryButton";
+import Container from "@/components/atoms/container/container"
+import PrimaryButton from "@/components/atoms/primaryButton/primaryButton"
+import Footer from "@/components/organisms/footer/footer"
+import Header from "@/components/organisms/header/header"
+
+import { infoCircle } from "../../../assets/icons"
+import { insertCash } from "../../../assets/images"
 
 export default function PaymentMethodTerminalTemplate() {
   return <Container fullHeight={true}>
@@ -17,5 +18,5 @@ export default function PaymentMethodTerminalTemplate() {
       <PrimaryButton text="Confirm Payment" callback={() => console.log("Payment confirmed")} />
     </div>
     <Footer />
-  </Container>;
+  </Container>
 }

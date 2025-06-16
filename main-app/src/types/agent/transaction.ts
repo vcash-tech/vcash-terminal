@@ -1,4 +1,4 @@
-import { PaginationInfo } from "../common/pagination";
+import { PaginationInfo } from "../common/pagination"
 
 export interface MoneyTransferSummary {
   timestamp: number;
@@ -84,7 +84,7 @@ export const TransactionTypes: TransactionType[] = [
   TransactionType.DIRECT_TRANSFER,
   TransactionType.VOUCHER,
   TransactionType.MANUAL_TRANSFER,
-];
+]
 export const WalletTransactionTypes = [
   "REFUND_AGENT_WITHDRAWAL",
   "REFUND_MANUAL_AGENT_DEPOSIT",
@@ -94,7 +94,7 @@ export const WalletTransactionTypes = [
   "MANUAL_AGENT_DEPOSIT",
   "AGENT_DEPOSIT",
   "MANUAL_AGENT_WITHDRAWAL",
-] as const;
+] as const
 
 export interface Transaction {
   transactionId: number;
@@ -156,7 +156,7 @@ export const TransactionStatuses: StatusCode[] = [
   StatusCode.refunded,
   StatusCode.rejected,
   StatusCode.error,
-];
+]
 
 export enum DateSpan {
   today = "Danas",
@@ -174,7 +174,7 @@ export const DateSpans: DateSpan[] = [
   DateSpan.last7Days,
   DateSpan.thisMonth,
   DateSpan.betweenDates,
-];
+]
 
 export enum TransactionDirection {
   "DEPOSIT",

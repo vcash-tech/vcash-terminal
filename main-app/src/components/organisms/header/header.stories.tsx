@@ -1,6 +1,7 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { BrowserRouter } from 'react-router-dom';
-import Header from './header';
+import type { Meta, StoryObj } from '@storybook/react'
+import { BrowserRouter } from 'react-router-dom'
+
+import Header from './header'
 
 const meta = {
   title: '3. Organisms/Header',
@@ -16,9 +17,9 @@ const meta = {
       </BrowserRouter>
     ),
   ],
-} satisfies Meta<typeof Header>;
+} satisfies Meta<typeof Header>
 
-export default meta;
+export default meta
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
@@ -31,7 +32,7 @@ export const Default: Story = {
       ],
     },
   },
-};
+}
 
 export const WithNavigaitonBack: Story = {
   args: {
@@ -46,4 +47,4 @@ export const WithNavigaitonBack: Story = {
       ],
     },
   },
-};
+}
