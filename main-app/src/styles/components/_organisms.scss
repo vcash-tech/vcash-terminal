@@ -3,4 +3,6 @@
 @use '../../components/organisms/welcomeScreen/welcomeScreen';
 @use '../../components/organisms/horizontalList/horizontalList';
 @use '../../components/organisms/qrCodeModal/qrCodeModal';
-@use '../../components/organisms/cashboxFull/cashboxFullModal'
+@use '../../components/organisms/cashboxFullModal/cashboxFullModal';
+@use '../../components/organisms/printerUnavailableModal/printerUnavailableModal';
+@use '../../components/organisms/sessionTimeoutModal/sessionTimeout';

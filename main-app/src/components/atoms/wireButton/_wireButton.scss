@@ -13,4 +13,15 @@
     letter-spacing: 0.01em;
 
     color: colors.$brand-primary-color;
+
+    &:disabled {
+        cursor: default;
+        border-color: #ccc;
+        color: #ccc;
+    }
+
+    &:hover, &:active {
+        color: colors.$white-color;
+        background: colors.$brand-primary-color;
+    }
 }
