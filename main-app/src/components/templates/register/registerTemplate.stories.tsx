@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
+import { BrowserRouter } from 'react-router-dom'
 
 import RegisterTemplate from '@/components/templates/register/registerTemplate'
 import { DeviceTokenSteps } from '@/data/enums/deviceTokenSteps'
@@ -9,7 +10,14 @@ const meta = {
     parameters: {
         layout: 'centered'
     },
-    tags: ['autodocs']
+    tags: ['autodocs'],
+    decorators: [
+        (Story) => (
+            <BrowserRouter>
+                <Story />
+            </BrowserRouter>
+        ),
+    ],
 } satisfies Meta<typeof RegisterTemplate>
 
 export default meta

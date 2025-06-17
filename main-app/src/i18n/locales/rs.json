@@ -1,0 +1,39 @@
+{
+  "header": {
+    "back": "Nazad",
+    "language": "Jezik"
+  },
+  "common": {
+    "next": "Dalje",
+    "cancel": "Otkaži",
+    "confirm": "Potvrdi",
+    "submit": "Pošalji",
+    "info": "Info"
+  },
+  "insertCash": {
+    "title": "Ubacite novac",
+    "acceptedNotes": "Prihvaćene novčanice: 500 RSD i više",
+    "altText": "Ubacite novac",
+    "insertedAmount": "Ubačeni iznos",
+    "noChangeWarning": "Aparat ne vraća kusur. Povraćaj novca nije moguć.",
+    "confirmPayment": "Potvrdi plaćanje"
+  },
+  "register": {
+    "title": "Registracija uređaja",
+    "emailPlaceholder": "Email",
+    "deviceNamePlaceholder": "Ime uređaja",
+    "registerDevice": "Registruj uređaj",
+    "waitingForApproval": "Čeka se odobrenje",
+    "approvalPending": "Odobrenje uređaja je trenutno na čekanju, dok se ne odobri od strane Agenta iz {{brandName}} mreže.",
+    "successfulRegistration": "Uspešna registracija",
+    "welcomeMessage": "Uređaj je uspešno registrovan. Dobro došli u {{brandName}} mrežu.",
+    "continue": "Nastavi",
+    "tryAgain": "Pokušaj ponovo"
+  },
+  "emailInput": {
+    "title": "Pošalji vaučer putem e-pošte",
+    "description": "Poslaćemo vaš vaučer - samo unesite vašu e-adresu ispod",
+    "emailPlaceholder": "E-mail adresa",
+    "sendButton": "Pošalji e-mail"
+  }
+}

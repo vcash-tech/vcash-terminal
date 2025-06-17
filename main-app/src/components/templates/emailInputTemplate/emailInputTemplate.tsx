@@ -2,28 +2,30 @@ import { useState } from 'react'
 
 import Container from '@/components/atoms/container/container'
 import PrimaryButton from '@/components/atoms/primaryButton/primaryButton'
+import FormContainer from '@/components/molecules/formContainer/formContainer'
 import InputField from '@/components/molecules/inputField/inputField'
 import Footer from '@/components/organisms/footer/footer'
 import Header from '@/components/organisms/header/header'
+import { useTranslate } from '@/i18n/useTranslate'
 
 export default function EmailInputTemplate() {
     const [emailAddress, setEmailAddress] = useState('')
+    const { t } = useTranslate()
 
     return (
         <>
             <Container isFullHeight={true}>
                 <Header />
-                <div className={'email-input'}>
+                <FormContainer className="email-input">
                     <div className={'title-section'}>
-                        <h1>Send voucher via email</h1>
+                        <h1>{t('emailInput.title')}</h1>
                         <p>
-                            We'll email your voucher - just drop your address
-                            below
+                            {t('emailInput.description')}
                         </p>
                     </div>
 
                     <InputField
-                        placeholder="Email Address"
+                        placeholder={t('emailInput.emailPlaceholder')}
                         onChange={(_id, value) => {
                             setEmailAddress(value)
                         }}
@@ -31,8 +33,8 @@ export default function EmailInputTemplate() {
                         value={emailAddress}
                         disableAutofill={true}
                     />
-                    <PrimaryButton text={'Send Email'} />
-                </div>
+                    <PrimaryButton text={t('emailInput.sendButton')} />
+                </FormContainer>
                 <Footer />
             </Container>
         </>

@@ -1,0 +1,39 @@
+{
+  "header": {
+    "back": "Back",
+    "language": "Language"
+  },
+  "common": {
+    "next": "Next",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "submit": "Submit",
+    "info": "Info"
+  },
+  "insertCash": {
+    "title": "Insert cash",
+    "acceptedNotes": "Accepted notes: 500 RSD and above",
+    "altText": "Insert cash",
+    "insertedAmount": "Inserted Amount",
+    "noChangeWarning": "The machine does not return change. Refunds are not available.",
+    "confirmPayment": "Confirm Payment"
+  },
+  "register": {
+    "title": "Device Registration",
+    "emailPlaceholder": "Email",
+    "deviceNamePlaceholder": "Device Name",
+    "registerDevice": "Register Device",
+    "waitingForApproval": "Waiting for Approval",
+    "approvalPending": "Device approval is pending until approved by an Agent from the {{brandName}} network.",
+    "successfulRegistration": "Registration Successful",
+    "welcomeMessage": "The device has been successfully registered. Welcome to the {{brandName}} network.",
+    "continue": "Continue",
+    "tryAgain": "Try Again"
+  },
+  "emailInput": {
+    "title": "Send voucher via email",
+    "description": "We'll email your voucher - just drop your address below",
+    "emailPlaceholder": "Email Address",
+    "sendButton": "Send Email"
+  }
+}
