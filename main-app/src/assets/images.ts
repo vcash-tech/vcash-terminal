@@ -5,6 +5,7 @@ import creditCardPayment from './images/creditCardPayment.svg'
 import digitalServices from './images/digitalServices.png'
 import disney from './images/disney.png'
 import eaPlay from './images/eaPlay.png'
+import emailCompleted from './images/emailCompleted.svg'
 import emailInputBackground from './images/emailInputBackground.svg'
 import gPay from './images/googlePay.png'
 import hbo from './images/hbo.png'
@@ -26,6 +27,7 @@ export {
     digitalServices,
     disney,
     eaPlay,
+    emailCompleted,
     emailInputBackground,
     gPay,
     hbo,
@@ -37,5 +39,4 @@ export {
     ps,
     qrCode,
     steam,
-    welcomeBackground
-}
+    welcomeBackground}
