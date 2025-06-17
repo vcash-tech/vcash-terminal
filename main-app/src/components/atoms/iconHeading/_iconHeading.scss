@@ -1,0 +1,22 @@
+@use '../../../styles/config/colors';
+@use '../../../styles/config/fonts';
+
+.icon-heading {
+  font-family: fonts.$body-font;
+  font-weight: 600;
+  font-size: 1.6rem;
+  line-height: 2.4rem;
+  color: colors.$light-black;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 2.4rem;
+  font-size: 4.2rem;
+  margin: 0;
+  
+  .icon {
+    width: 6.4rem;
+    height: 6.4rem;
+    display: inline-block;
+  }
+}
