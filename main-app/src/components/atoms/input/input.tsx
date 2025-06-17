@@ -24,7 +24,6 @@ export default function Input({
     ...props
 }: InputProps) {
     const [isFocused, setIsFocused] = useState(false)
-console.log('value', value)
 
     return (
         <div className={'input-field-container'}>

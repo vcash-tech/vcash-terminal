@@ -27,7 +27,7 @@ export default function PaymentMethodTerminalTemplate() {
     }
 
     return (
-        <Container fullHeight={true}>
+        <Container isFullHeight={true}>
             <Header />
             <div className="insert-cash">
                 <h1>Insert cash</h1>
