@@ -2,9 +2,10 @@ import Container from '@/components/atoms/container/container'
 import PrimaryButton from '@/components/atoms/primaryButton/primaryButton'
 import Footer from '@/components/organisms/footer/footer'
 import Header from '@/components/organisms/header/header'
+import { TransactionService } from '@/services/transactionService'
+
 import { infoCircle } from '../../../assets/icons'
 import { insertCash } from '../../../assets/images'
-import { TransactionService } from '@/services/transactionService'
 
 export default function PaymentMethodTerminalTemplate() {
     const handleBuy = async () => {
