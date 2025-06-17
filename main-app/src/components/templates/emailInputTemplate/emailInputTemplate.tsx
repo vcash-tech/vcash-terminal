@@ -14,10 +14,13 @@ export default function EmailInputTemplate() {
             <Container isFullHeight={true}>
                 <Header />
                 <div className={'email-input'}>
-                    <h1>Send voucher via email</h1>
-                    <p>
-                        We'll email your voucher - just drop your address below
-                    </p>
+                    <div className={'title-section'}>
+                        <h1>Send voucher via email</h1>
+                        <p>
+                            We'll email your voucher - just drop your address
+                            below
+                        </p>
+                    </div>
 
                     <InputField
                         placeholder="Email Address"

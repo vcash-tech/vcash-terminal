@@ -11,9 +11,9 @@ function Layout() {
         <>
             {/*{!shouldHideHeader && <Header />}*/}
             <Routes>
-                <Route path="/" element={<HomePage />} />
-                <Route path="/register" element={<RegisterPage />} />
                 <Route path="/welcome" element={<WelcomePage />} />
+                <Route path="/register" element={<RegisterPage />} />
+                <Route path="/" element={<HomePage />} />
             </Routes>
         </>
     )
