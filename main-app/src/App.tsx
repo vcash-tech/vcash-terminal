@@ -2,6 +2,8 @@ import './styles/app.scss'
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
+import { KeyboardProvider } from './context/KeyboardContext'
+import { TranslationProvider } from './i18n/TranslationProvider'
 import HomePage from './pages/homePage'
 import RegisterPage from './pages/registerPage'
 import WelcomePage from './pages/welcomePage/welcomePage'
@@ -21,9 +23,13 @@ function Layout() {
 
 function App() {
     return (
-        <Router>
-            <Layout />
-        </Router>
+        <TranslationProvider>
+            <KeyboardProvider>
+                <Router>
+                    <Layout />
+                </Router>
+            </KeyboardProvider>
+        </TranslationProvider>
     )
 }
 

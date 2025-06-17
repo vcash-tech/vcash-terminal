@@ -6,7 +6,9 @@ import { deviceIcon, userIcon } from '@/assets/icons'
 import Container from '@/components/atoms/container/container'
 import Input from '@/components/atoms/input/input'
 import PrimaryButton from '@/components/atoms/primaryButton/primaryButton'
+import Footer from '@/components/organisms/footer/footer'
 import { DeviceTokenSteps } from '@/data/enums/deviceTokenSteps'
+import { useTranslate } from '@/i18n/useTranslate'
 
 const BRAND_NAME = import.meta.env.VITE_BRAND_NAME
 
@@ -24,6 +26,7 @@ export type RegisterTemplateProps = {
     onChangeDeviceName: (name: string) => void
     onChangeAgentEmail: (email: string) => void
 }
+
 export default function RegisterTemplate({
     navigate,
     onChangeDeviceName,
@@ -33,17 +36,20 @@ export default function RegisterTemplate({
     agentEmail: email,
     deviceName: device
 }: RegisterTemplateProps) {
+    const { t } = useTranslate()
     const stepperRef = useRef<DeviceTokenSteps>(stepper)
     const [agentEmail, setAgentEmail] = useState(email)
     const [deviceName, setDeviceName] = useState(device)
+    const [isFocused, setIsFocused] = useState(false)
 
     return (
         <Container isFullHeight={true}>
-            <div className={'register-container'}>
+            <div
+                className={`register-container ${isFocused ? 'active-keyboard' : ''}`}>
                 <div className="card">
                     <div className="flex flex-col h-full last:pb-[8rem]">
                         <div className="flex justify-center desktop:justify-start w-full pt-12 pb-6">
-                            <h1>Registracija uređaja</h1>
+                            <h1>{t('register.title')}</h1>
                         </div>
 
                         {/* Form and Button container */}
@@ -64,7 +70,12 @@ export default function RegisterTemplate({
                                             }}
                                             icon={userIcon}
                                             autoCorrect={false}
-                                            placeholder="Email"
+                                            placeholder={t(
+                                                'register.emailPlaceholder'
+                                            )}
+                                            onFocus={(isFocused) => {
+                                                setIsFocused(isFocused)
+                                            }}
                                         />
                                     </div>
 
@@ -79,13 +90,18 @@ export default function RegisterTemplate({
                                             }}
                                             icon={deviceIcon}
                                             autoCorrect={false}
-                                            placeholder="Ime uređaja"
+                                            placeholder={t(
+                                                'register.deviceNamePlaceholder'
+                                            )}
+                                            onFocus={(isFocused) => {
+                                                setIsFocused(isFocused)
+                                            }}
                                         />
                                     </div>
                                 </div>
 
                                 <PrimaryButton
-                                    text={'Register Device'}
+                                    text={t('register.registerDevice')}
                                     callback={onRegister}
                                 />
                             </div>
@@ -97,13 +113,13 @@ export default function RegisterTemplate({
                                 className={`flex flex-col h-full gap-y-12 justify-center realtive`}>
                                 <div className="flex flex-col justify-center px-8">
                                     <div className="text-4xl text-primary w-full text-center">
-                                        Čeka se odobrenje
+                                        {t('register.waitingForApproval')}
                                     </div>
 
                                     <div className="w-full text-center text-secondary-text text-xl mt-12">
-                                        Odobrenje uređaja je trenutno na
-                                        čekanju, dok se ne odobri od strane
-                                        Agenta iz {BRAND_NAME} mreže.
+                                        {t('register.approvalPending', {
+                                            brandName: BRAND_NAME
+                                        })}
                                     </div>
 
                                     {/* <div className="flex justify-center mt-16">
@@ -113,7 +129,7 @@ export default function RegisterTemplate({
                                   setStepper(DeviceTokenSteps.getCode)
                               }
                           >
-                              Pokušaj ponovo
+                              {t('register.tryAgain')}
                           </span>
                       </div> */}
                                 </div>
@@ -131,23 +147,27 @@ export default function RegisterTemplate({
                                 className={`flex flex-col h-full pt-8 gap-y-24 justify-center px-8`}>
                                 <div className="flex flex-col justify-center gap-y-8">
                                     <div className="text-4xl text-success w-full text-center">
-                                        Uspešna registracija
+                                        {t('register.successfulRegistration')}
                                     </div>
 
                                     <div className="w-full text-center text-secondary-text text-xl">
-                                        Uređaj je uspešno registrovan. Dobro
-                                        došli u {BRAND_NAME} mrežu.
+                                        {t('register.welcomeMessage', {
+                                            brandName: BRAND_NAME
+                                        })}
                                     </div>
                                 </div>
 
                                 <PrimaryButton
-                                    text={'Nastavi'}
+                                    text={t('register.continue')}
                                     callback={() => navigate('/')}
                                 />
                             </div>
                         )}
                     </div>
                 </div>
+            </div>
+            <div className={`keyboard-container ${isFocused ? 'active-keyboard' : ''}`}>
+                <Footer />
             </div>
         </Container>
     )
