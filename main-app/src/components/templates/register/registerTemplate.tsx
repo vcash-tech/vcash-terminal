@@ -37,7 +37,6 @@ export default function RegisterTemplate({
     deviceName: device
 }: RegisterTemplateProps) {
     const { t } = useTranslate()
-    const stepperRef = useRef<DeviceTokenSteps>(stepper)
     const [agentEmail, setAgentEmail] = useState(email)
     const [deviceName, setDeviceName] = useState(device)
     const [isFocused, setIsFocused] = useState(false)
@@ -53,7 +52,7 @@ export default function RegisterTemplate({
                         </div>
 
                         {/* Form and Button container */}
-                        {stepperRef.current === DeviceTokenSteps.getCode && (
+                        {stepper === DeviceTokenSteps.getCode && (
                             <div
                                 className={`flex flex-col h-full gap-y-12 justify-center px-8`}>
                                 {/* Form */}
@@ -107,8 +106,7 @@ export default function RegisterTemplate({
                             </div>
                         )}
 
-                        {stepperRef.current ===
-                            DeviceTokenSteps.gettingToken && (
+                        {stepper === DeviceTokenSteps.gettingToken && (
                             <div
                                 className={`flex flex-col h-full gap-y-12 justify-center realtive`}>
                                 <div className="flex flex-col justify-center px-8">
@@ -142,7 +140,7 @@ export default function RegisterTemplate({
                             </div>
                         )}
 
-                        {stepperRef.current === DeviceTokenSteps.gotToken && (
+                        {stepper === DeviceTokenSteps.gotToken && (
                             <div
                                 className={`flex flex-col h-full pt-8 gap-y-24 justify-center px-8`}>
                                 <div className="flex flex-col justify-center gap-y-8">
@@ -159,14 +157,15 @@ export default function RegisterTemplate({
 
                                 <PrimaryButton
                                     text={t('register.continue')}
-                                    callback={() => navigate('/')}
+                                    callback={() => navigate('/welcome')}
                                 />
                             </div>
                         )}
                     </div>
                 </div>
             </div>
-            <div className={`keyboard-container ${isFocused ? 'active-keyboard' : ''}`}>
+            <div
+                className={`keyboard-container ${isFocused ? 'active-keyboard' : ''}`}>
                 <Footer />
             </div>
         </Container>

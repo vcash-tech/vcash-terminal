@@ -2,11 +2,17 @@ export type HomeItemProps = {
     title: string
     image: string
     body: string
+    handleClick: () => void
 }
 
-export default function HomeItem({ image, title, body }: HomeItemProps) {
+export default function HomeItem({
+    image,
+    title,
+    body,
+    handleClick
+}: HomeItemProps) {
     return (
-        <button className="home-item">
+        <button className="home-item" onClick={handleClick}>
             <div className="image-container">
                 <img src={image} alt={title} />
             </div>

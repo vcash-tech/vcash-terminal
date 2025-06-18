@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import RegisterTemplate from '@/components/templates/register/registerTemplate'
@@ -21,6 +21,12 @@ function RegisterPage() {
     const navigate = useNavigate()
 
     stepperRef.current = stepper
+
+    useEffect(() => {
+        if (AuthService.HasToken(Auth.POS)) {
+            navigate('/register')
+        }
+    }, [])
 
     async function getDeviceToken(agentId: string, deviceCode: string) {
         try {

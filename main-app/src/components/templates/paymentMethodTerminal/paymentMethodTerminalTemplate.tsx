@@ -4,8 +4,10 @@ import Footer from "@/components/organisms/footer/footer"
 import Header from "@/components/organisms/header/header"
 
 import { cashPayment, creditCardPayment } from "../../../assets/images"
+import { useNavigate } from "react-router-dom"
 
 export default function PaymentMethodTerminalTemplate() {
+  const navigate = useNavigate()
   return <Container isFullHeight={true}>
     <Header navigateBackUrl="#" navigationBackText="Back to Services" />
     <div className="payment-method-terminal">
@@ -20,7 +22,7 @@ export default function PaymentMethodTerminalTemplate() {
       <PaymentCard
         image={cashPayment}
         text="Cash Payment"
-        callback={() => console.log("Cash payment selected")}
+        callback={() => navigate('/buy-voucher-cash')}
       />
       </div>
     </div>

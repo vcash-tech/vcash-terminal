@@ -3,7 +3,9 @@ import ServiceListItem from '@/components/molecules/serviceListItem/serviceListI
 import Footer from '@/components/organisms/footer/footer'
 import Header from '@/components/organisms/header/header'
 import HorizontalList from '@/components/organisms/horizontalList/horizontalList'
+import QrCodeModal from '@/components/organisms/qrCodeModal/qrCodeModal'
 import { DigitalService } from '@/data/entities/digitalService'
+import { useNavigate } from 'react-router-dom'
 
 export type DigitalServicesTemplateProps = {
     gamingServices?: DigitalService[]
@@ -16,9 +18,11 @@ export default function DigitalServicesTemplate({
     streamingServices,
     topServices
 }: DigitalServicesTemplateProps) {
+    const navigate = useNavigate()
     return (
         <Container isFullHeight={true} style={{ gap: 0 }}>
             <Header navigateBackUrl="#" navigationBackText="Back to Services" />
+            <QrCodeModal isOpen={true} onClose={() => navigate('/')}/>
             <div className="digital-services">
                 {gamingServices && gamingServices?.length > 0 && (
                     <HorizontalList
