@@ -4,13 +4,13 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
 import { KeyboardProvider } from './context/KeyboardContext'
 import { TranslationProvider } from './i18n/TranslationProvider'
+import DigitalServicesPage from './pages/digitalSevicesPage'
+import DisclaimerPage from './pages/disclaimerPage'
 import HomePage from './pages/homePage'
+import InsertCashPage from './pages/insertCashPage'
+import PaymentMethodPage from './pages/paymentMethodPage'
 import RegisterPage from './pages/registerPage'
 import WelcomePage from './pages/welcomePage'
-import DisclaimerPage from './pages/disclaimerPage'
-import DigitalServicesPage from './pages/digitalSevicesPage'
-import PaymentMethodPage from './pages/paymentMethodPage'
-import InsertCashPage from './pages/insertCashPage'
 
 function Layout() {
     return (

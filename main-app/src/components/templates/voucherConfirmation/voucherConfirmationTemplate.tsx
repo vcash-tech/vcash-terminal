@@ -8,12 +8,15 @@ import HowToUse from '@/components/molecules/howToUse/howToUse'
 import Footer from '@/components/organisms/footer/footer'
 import Header from '@/components/organisms/header/header'
 import { VoucherConfirmation } from '@/data/entities/voucher-confirmation'
+import { useTranslate } from '@/i18n/useTranslate'
+
 
 export default function VoucherConfirmationTemplate({
     voucherConfirmation
 }: {
     voucherConfirmation: VoucherConfirmation
 }) {
+    const { t } = useTranslate()
     const onComplete = () => {
         alert('onComplete')
     }
@@ -22,60 +25,50 @@ export default function VoucherConfirmationTemplate({
         <Container style={{ flex: 1}}>
             <Header />
             <div className={'voucher-confirmation'}>
-                <h1>Your voucher has been issued successfully</h1>
+                <h1>{t('voucherGenerated.title')}</h1>
                 <div className="invoice-content">
                     <FlexWrapper gap={2} justify="space-between">
                         <HalfContainer>
                             <InvoiceItem
-                                label="Date"
+                                label={t('voucherGenerated.date')}
                                 value={voucherConfirmation.date}
                                 align="left"
                             />
                         </HalfContainer>
                         <HalfContainer>
                             <InvoiceItem
-                                label="Time"
+                                label={t('voucherGenerated.time')}
                                 value={voucherConfirmation.time}
                                 align="right"
                             />
                         </HalfContainer>
                     </FlexWrapper>
                     <InvoiceItem
-                        label="Reference No"
+                        label={t('voucherGenerated.referenceNo')}
                         value={voucherConfirmation.referenceNo}
                         align="left"
                     />
                     <InvoiceItem
-                        label="Terminal"
+                        label={t('voucherGenerated.terminal')}
                         value={voucherConfirmation.terminal}
                         align="left"
                     />
                     <Divider gap={1} />
                     <InvoiceItem 
-                        label="Amount" 
+                        label={t('voucherGenerated.amount')}
                         value={voucherConfirmation.amount} 
                     />
                     <InvoiceItem 
-                        label="Voucher Code" 
-                        value={voucherConfirmation.voucherCode} 
-                    />
-                    <InvoiceItem 
-                        label="Type" 
+                        label={t('voucherGenerated.type')}
                         value={voucherConfirmation.type} 
                     />
                     <InvoiceItem
-                        label="Usage"
+                        label={t('voucherGenerated.usage')}
                         value={voucherConfirmation.usage}
                     />
                     <HowToUse />
-                    <Divider gap={2} />
-                    <InvoiceItem
-                        label="Scan to Redeem"
-                        value={voucherConfirmation.qrCodeData || ''}
-                        isQrCode={true}
-                    />
                 </div>
-                <PrimaryButton callback={() => onComplete()} text="Finish" />
+                <PrimaryButton callback={() => onComplete()} text={t('voucherGenerated.buttonText')} />
             </div>
             <Footer />
         </Container>

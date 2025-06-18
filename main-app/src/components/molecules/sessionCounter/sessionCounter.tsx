@@ -2,8 +2,10 @@
 import { useEffect, useState } from "react"
 
 import WireButton from "@/components/atoms/wireButton/wireButton"
+import { useTranslate } from '@/i18n/useTranslate'
 
 export default function SessionCounter() {
+  const { t } = useTranslate()
   const [timeLeft, setTimeLeft] = useState(15)
   
   const sessionDuration = 15
@@ -27,8 +29,8 @@ export default function SessionCounter() {
 
   return (
     <div className="session-counter">
-      <div className="time-left">Time left: <span>{timeLeft}s</span></div>
-      <WireButton isDisabled={timeLeft > maxSessionDuration - sessionDuration} onClick={extendTime}>Extend Time</WireButton>
+      <div className="time-left">{t('sessionCounter.timeLeft')} <span>{timeLeft}s</span></div>
+      <WireButton isDisabled={timeLeft > maxSessionDuration - sessionDuration} onClick={extendTime}>{t('sessionCounter.extendTime')}</WireButton>
     </div>
   )
 }
