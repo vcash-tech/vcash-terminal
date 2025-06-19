@@ -44,12 +44,16 @@ export interface ConfirmVoucherData {
 }
 
 export interface VoucherRequest {
-  amount: number;
+  voucherTypeId: string;
 }
 
 export interface VoucherResponse {
   moneyTransfer: MoneyTransfer;
   timestamp: number;
+}
+
+export interface VoucherAmountResponse {
+  amount: number;
 }
 
 export interface Vendors {

@@ -2,9 +2,15 @@ import './styles/app.scss'
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
+import { KeyboardProvider } from './context/KeyboardContext'
+import { TranslationProvider } from './i18n/TranslationProvider'
+import DigitalServicesPage from './pages/digitalSevicesPage'
+import DisclaimerPage from './pages/disclaimerPage'
 import HomePage from './pages/homePage'
+import InsertCashPage from './pages/insertCashPage'
+import PaymentMethodPage from './pages/paymentMethodPage'
 import RegisterPage from './pages/registerPage'
-import WelcomePage from './pages/welcomePage/welcomePage'
+import WelcomePage from './pages/welcomePage'
 
 function Layout() {
     return (
@@ -14,6 +20,13 @@ function Layout() {
                 <Route path="/welcome" element={<WelcomePage />} />
                 <Route path="/register" element={<RegisterPage />} />
                 <Route path="/" element={<HomePage />} />
+                <Route path="/disclaimer" element={<DisclaimerPage />} />
+                <Route
+                    path="/digital-services"
+                    element={<DigitalServicesPage />}
+                />
+                <Route path="/payment-method" element={<PaymentMethodPage />} />
+                <Route path="/buy-voucher-cash" element={<InsertCashPage />} />
             </Routes>
         </>
     )
@@ -21,9 +34,13 @@ function Layout() {
 
 function App() {
     return (
-        <Router>
-            <Layout />
-        </Router>
+        <TranslationProvider>
+            <KeyboardProvider>
+                <Router>
+                    <Layout />
+                </Router>
+            </KeyboardProvider>
+        </TranslationProvider>
     )
 }
 

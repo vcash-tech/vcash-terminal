@@ -1,11 +1,16 @@
-import PeekButton from "@/components/atoms/peekButton/peekButton"
+import { useNavigate } from 'react-router-dom'
 
-import { arrowRight } from "../../../assets/icons"
-import WelcomeBanner from "../../molecules/welcomeBanner/welcomeBanner"
+import PeekButton from "@/components/atoms/peekButton/peekButton"
+import { useTranslate } from '@/i18n/useTranslate'
+
+import { arrowRight } from '../../../assets/icons'
+import WelcomeBanner from '../../molecules/welcomeBanner/welcomeBanner'
 
 // type WelcomeScreenProps = {};
 
 export default function WelcomeScreen() {
+  const navigate = useNavigate()
+  const { t } = useTranslate()
   return (
     <div className="welcome-screen">
       <WelcomeBanner />
@@ -13,13 +18,13 @@ export default function WelcomeScreen() {
         <PeekButton
           buttonContent={
             <div className="welcome-screen-button-content">
-              <span>Get Started</span>
+              <span>{t('welcome.getStarted')}</span>
               <img alt="right-arrow" src={arrowRight} />
             </div>
           }
-          handleClick={() => {}}
+          handleClick={() => navigate('/')}
         />
       </div>
     </div>
-  )
+    )
 }

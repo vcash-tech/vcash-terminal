@@ -1,22 +1,92 @@
-import Container from "@/components/atoms/container/container"
-import PrimaryButton from "@/components/atoms/primaryButton/primaryButton"
-import Footer from "@/components/organisms/footer/footer"
-import Header from "@/components/organisms/header/header"
+import Container from '@/components/atoms/container/container'
+import PrimaryButton from '@/components/atoms/primaryButton/primaryButton'
+import Footer from '@/components/organisms/footer/footer'
+import Header from '@/components/organisms/header/header'
+import { useTranslate } from '@/i18n/useTranslate'
+import { TransactionService } from '@/services/transactionService'
+import { infoCircle } from '../../../assets/icons'
+import { insertCash } from '../../../assets/images'
+import { useEffect, useState } from 'react'
+import PaymentSuccessfulTemplate from '../paymentSuccessful/paymentSuccessfulTemplate'
+import { useNavigate } from 'react-router-dom'
+import VoucherConfirmationTemplate from '../voucherConfirmation/voucherConfirmationTemplate'
+import { VoucherResponse } from '@/types/pos/deposit'
+import { VoucherConfirmation } from '@/data/entities/voucher-confirmation'
 
-import { infoCircle } from "../../../assets/icons"
-import { insertCash } from "../../../assets/images"
+export default function InsertCashTemplate() {
+    const { t } = useTranslate()
+    const navigate = useNavigate()
 
-export default function PaymentMethodTerminalTemplate() {
-  return <Container fullHeight={true}>
-    <Header />
-    <div className="insert-cash">
-      <h1>Insert cash</h1>
-      <h2>Accepted notes: 500 RSD and above</h2>
-      <img src={insertCash} alt="Insert cash" />
-      <div className="inserted-amount">Inserted Amount: <span>500 RSD</span></div>
-      <div className="info-box"><img src={infoCircle} alt="Info" />The machine does not return change Refunds are not available.</div>
-      <PrimaryButton text="Confirm Payment" callback={() => console.log("Payment confirmed")} />
-    </div>
-    <Footer />
-  </Container>
+    const [amount, setAmount] = useState<number>(0)
+    const [isLoading, setIsLoading] = useState<boolean>(false)
+    const [voucherData, setVoucherData] = useState<VoucherResponse | null>(null)
+
+    // useEffect(() => {
+    //     // Simulate fetching the amount from a service or state
+    //     const fetchAmount = async () => {
+    //         const amount = await TransactionService.GetVoucherAmount()
+    //         setAmount(amount.amount)
+    //     }
+
+    //     setInterval(() => fetchAmount(), 2000)
+    // }, [])
+
+    const handleBuy = async () => {
+        setIsLoading(true)
+        try {
+            const voucherData = await TransactionService.CreateVoucher({
+                voucherTypeId: '20' // Replace with actual voucher type ID
+            })
+            setVoucherData(voucherData)
+        } catch (err) {
+            console.error(err)
+        }
+
+        try {
+            // const voucherCodeDefault = '123-456-789' // Replace with actual logic
+            // const result = await window.api.print(voucherCodeDefault)
+        } catch (error) {
+            // printer unavailable handling
+        }
+        setIsLoading(false)
+    }
+
+    if (voucherData) {
+        return (
+            <VoucherConfirmationTemplate
+                voucherConfirmation={
+                    {
+                        voucherCode: voucherData.moneyTransfer.voucherCode
+                    } as VoucherConfirmation
+                }
+            />
+        )
+    }
+
+    if (isLoading) {
+        return <PaymentSuccessfulTemplate />
+    }
+
+    return (
+        <Container isFullHeight={true}>
+            <Header />
+            <div className="insert-cash">
+                <h1>{t('insertCash.title')}</h1>
+                <h2>{t('insertCash.acceptedNotes')}</h2>
+                <img src={insertCash} alt={t('insertCash.altText')} />
+                <div className="inserted-amount">
+                    {t('insertCash.insertedAmount')}: <span>{amount} RSD</span>
+                </div>
+                <div className="info-box">
+                    <img src={infoCircle} alt={t('common.info')} />
+                    {t('insertCash.noChangeWarning')}
+                </div>
+                <PrimaryButton
+                    text={t('insertCash.confirmPayment')}
+                    callback={handleBuy}
+                />
+            </div>
+            <Footer />
+        </Container>
+    )
 }

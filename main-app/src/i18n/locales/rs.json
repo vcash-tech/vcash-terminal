@@ -1,0 +1,134 @@
+{
+  "selectPaymentMethod": {
+    "backToServices": "Nazad na servise",
+    "title": "Izaberite način plaćanja",
+    "subtitle": "",
+    "cardPayment": "Plaćanje karticom",
+    "cashPayment": "Plaćanje gotovinom"
+  },
+  "ageDisclaimer": {
+    "backToServices": "Nazad na servise",
+    "title": "Upozorenje za kupovinu vaučera 18+",
+    "subtitle": "Ovaj vaučer omogućava dopunu naloga kod servisa za klađenje i namenjen je isključivo korisnicima starijim od 18 godina. Kupovinom potvrđujete da ste punoletni i da razumete rizike koji prate klađenje. Igrajte odgovorno.",
+    "continuePurchase": "Nastavi kupovinu"
+  },
+  "paymentSuccessful": {
+    "title": "Plaćanje uspešno",
+    "subtitle": "Štampamo vaš vaučer, molimo sačekajte…",
+    "generatingVoucher": "Vaučer se kreira..."
+  },
+  "insertCash": {
+    "title": "Ubacite novac",
+    "acceptedNotes": "Terminal prihvata sledeće novčanice: 500, 1000, 2000 i 5000 RSD.",
+    "altText": "Ubacite novac",
+    "insertedAmount": "Uneti iznos",
+    "noChangeWarning": "Ubacite tačan iznos - terminal ne vraća kusur. Povraćaj novca nakon uplate nije moguć.",
+    "confirmPayment": "Potvrdi plaćanje"
+  },
+  "home": {
+    "bettingServices": {
+      "title": "Svi servisi / VCash",
+      "body": "Svi VCash servisi - uključuje dopune za gejming servise, striming i naloge kod kladionica u Srbiji"
+    },
+    "digitalServices": {
+      "title": "VCash Digital",
+      "body": "Samo digitalni servisi - idealan za gejming servise, striming i dopune"
+    },
+    "billPayments": {
+      "title": "Plaćanje računa",
+      "body": "Skenirajte IPS kod sa računa za brzo plaćanje"
+    }
+  },
+  "digitalServices": {
+    "backToServices": "Nazad na izbor servisa",
+    "gamingServices": "Gejming servisi",
+    "streamingServices": "Striming servisi",
+    "topUpServices": "Dopune naloga"
+  },
+  "qrModal": {
+      "title": "Za više informacija o proizvodu, skenirajte QR kod i posetite VCash aplikaciju",
+      "back": "Nazad"
+  },
+  "voucherGenerated": {
+    "title": "VCash vaučer je uspešno izdat",
+    "date": "Datum",
+    "time": "Vreme",
+    "referenceNo": "Kod transakcije",
+    "terminal": "Terminal",
+    "amount": "Iznos",
+    "type": "Tip",
+    "usage": "Upotreba",
+    "howToUse": {
+      "title": "Kako da iskoristite vaučer:",
+      "1": "Skenirajte QR kod sa vaučera ili posetite: [LINK] i unesite kod ručno",
+      "2": "Pregledajte listu dostupnih servisa",
+      "3": "Izaberite gde želite da iskoristite vaučer - brzo i jednostavno!"
+    },
+    "buttonText": "Završi"
+  },
+  "cashboxFullModal": {
+      "title": "Dalja uplata nije moguća",
+      "subtitle": "Trenutno nije moguće nastaviti sa uplatom gotovine. Možete izdati vaučer za iznos koji ste do sada ubacili.",
+      "buttonText": "Generiši vaučer"
+  },
+  "printerUnavailableModal": {
+      "title": "Preuzmite svoj vaučer",
+      "subtitle": "Vaš vaučer je spreman. Možete ga preuzeti skeniranjem QR koda sa ekrana ili slanjem na email.",
+      "buttonText": "Pošalji na email"
+  },
+  "sessionCounter": {
+    "timeLeft": "Preostalo vreme:",
+    "extendTime": "Produži vreme"
+  },
+  "sessionTimeoutModal": {
+    "title": "Istekla je sesija",
+    "subtitle": "Zbog neaktivnosti, proces je automatski prekinut. Možete započeti ponovo od početka.",
+    "buttonText": "Započni ponovo"
+  },
+  "welcome": {
+    "title": "Dobrodošli u VCash",
+    "text": "Kupovina vaučera i plaćanje računa – brzo, jednostavno i bez čekanja.",
+    "getStarted": "Započni"
+  },
+  "emailInput": {
+    "title": "Pošalji vaučer na email",
+    "description": "Unesite email adresu na koju želite da vam pošaljemo vaučer.",
+    "emailPlaceholder": "Email adresa",
+    "sendButton": "Pošalji vaučer na email"
+  },
+  "actionCompleteStatus": {
+
+  },
+  "insertCard": {
+
+  },
+  "paymentMethod": {
+    
+  },
+  "header": {
+    "back": "Nazad",
+    "language": "Jezik"
+  },
+  "footer": {
+    "contactSupport": "Imate pitanje? Pozovite podršku:"
+  },
+  "common": {
+    "next": "Dalje",
+    "cancel": "Otkaži",
+    "confirm": "Potvrdi",
+    "submit": "Pošalji",
+    "info": "Info"
+  },
+  "register": {
+    "title": "Registracija uređaja",
+    "emailPlaceholder": "Email",
+    "deviceNamePlaceholder": "Ime uređaja",
+    "registerDevice": "Registruj uređaj",
+    "waitingForApproval": "Čeka se odobrenje",
+    "approvalPending": "Odobrenje uređaja je trenutno na čekanju, dok se ne odobri od strane Agenta iz {{brandName}} mreže.",
+    "successfulRegistration": "Uspešna registracija",
+    "welcomeMessage": "Uređaj je uspešno registrovan. Dobro došli u {{brandName}} mrežu.",
+    "continue": "Nastavi",
+    "tryAgain": "Pokušaj ponovo"
+  }
+}

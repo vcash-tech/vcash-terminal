@@ -1,14 +1,8 @@
 .welcome-screen {
     display: flex;
     flex-direction: column;
-    height: 100%;
-    width: 100%;
-    z-index: 1000;
-    position: absolute;
-    top: 200px;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    flex: 1;
+    margin: 20rem 0 0;
 
     .welcome-screen-button-container {
         display: flex;
@@ -16,6 +10,7 @@
         width: 100%;
         justify-content: flex-end;
         align-items: center;
+        margin: 26rem 0 7.7rem;
 
         .welcome-screen-button-content {
             display: flex;

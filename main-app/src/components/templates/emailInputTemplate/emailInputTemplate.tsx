@@ -2,9 +2,11 @@ import { useState } from 'react'
 
 import Container from '@/components/atoms/container/container'
 import PrimaryButton from '@/components/atoms/primaryButton/primaryButton'
+import FormContainer from '@/components/molecules/formContainer/formContainer'
 import InputField from '@/components/molecules/inputField/inputField'
 import Footer from '@/components/organisms/footer/footer'
 import Header from '@/components/organisms/header/header'
+import { useTranslate } from '@/i18n/useTranslate'
 
 import { emailCompleted, emailInputBackground } from '../../../assets/images'
 
@@ -22,40 +24,31 @@ export default function EmailInputTemplate({
         // If successful, set isCompleted to true
         setIsCompleted(true)
     }
+    const { t } = useTranslate()
 
     return (
         <>
             <Container isFullHeight={true}>
                 <Header />
-                {!isCompleted && (
-                    <div
-                        className={'email-input'}
-                        style={{
-                            backgroundImage: `url(${emailInputBackground})`
-                        }}>
-                        <div className={'title-section'}>
-                            <h1>Send voucher via email</h1>
-                            <p>
-                                We'll email your voucher - just drop your
-                                address below
-                            </p>
-                        </div>
-
-                        <InputField
-                            placeholder="Email Address"
-                            onChange={(_id, value) => {
-                                setEmailAddress(value)
-                            }}
-                            id="email"
-                            value={emailAddress}
-                            disableAutofill={true}
-                        />
-                        <PrimaryButton
-                            text={'Send Email'}
-                            callback={submitEmail}
-                        />
+                <FormContainer className="email-input">
+                    <div className={'title-section'}>
+                        <h1>{t('emailInput.title')}</h1>
+                        <p>
+                            {t('emailInput.description')}
+                        </p>
                     </div>
-                )}
+
+                    <InputField
+                        placeholder={t('emailInput.emailPlaceholder')}
+                        onChange={(_id, value) => {
+                            setEmailAddress(value)
+                        }}
+                        id="email"
+                        value={emailAddress}
+                        disableAutofill={true}
+                    />
+                    <PrimaryButton text={t('emailInput.sendButton')} />
+                </FormContainer>
                 {isCompleted && (
                     <div
                         className={'email-input-completed'}

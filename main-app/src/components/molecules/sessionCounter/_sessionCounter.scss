@@ -1,0 +1,24 @@
+@use "../../../styles/config/colors";
+@use "../../../styles/config/fonts";
+
+.session-counter {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  gap: 5.2rem;
+
+  .time-left {
+    font-family: fonts.$body-font;
+    color: #25292A;
+    font-weight: 500;
+    font-size: 3.2rem;
+    line-height: 3.8rem;
+    min-width: 22rem;
+
+    span {
+      color: #C63D46;
+    }
+  }
+}
