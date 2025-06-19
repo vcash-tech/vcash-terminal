@@ -48,7 +48,7 @@ export default function CashierSelect({ setHasCashierToken }: Props) {
             setLoader(false)
         }
         fetchCashiers()
-    }, [])
+    }, [setHasCashierToken])
 
     return <div>{loader && <CircularProgress />}</div>
 }
