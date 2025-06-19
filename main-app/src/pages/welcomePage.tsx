@@ -8,9 +8,7 @@ export default function WelcomePage() {
     const navigate = useNavigate()
     return (
         <div className="welcome-page">
-            <Header />
             <Welcome navigate={navigate} />
-            <Footer />
         </div>
     )
 }

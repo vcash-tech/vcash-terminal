@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { NavigateFunction } from 'react-router-dom'
 
 import Container from '@/components/atoms/container/container'
 import PrimaryButton from '@/components/atoms/primaryButton/primaryButton'
@@ -14,7 +15,7 @@ import { insertCash } from '../../../assets/images'
 import PaymentSuccessfulTemplate from '../paymentSuccessful/paymentSuccessfulTemplate'
 import VoucherConfirmationTemplate from '../voucherConfirmation/voucherConfirmationTemplate'
 
-export default function InsertCashTemplate() {
+export default function InsertCashTemplate({navigate}: {navigate: NavigateFunction}) {
     const { t } = useTranslate()
 
     const [amount, _setAmount] = useState<number>(0)
@@ -52,13 +53,22 @@ export default function InsertCashTemplate() {
     }
 
     if (voucherData) {
+        const transactionDate = new Date(voucherData.moneyTransfer.date)
+
         return (
             <VoucherConfirmationTemplate
                 voucherConfirmation={
                     {
-                        voucherCode: voucherData.moneyTransfer.voucherCode
+                        date: transactionDate.toLocaleDateString('sr-RS'),
+                        time: transactionDate.toLocaleTimeString('sr-RS'),
+                        referenceNo: voucherData.moneyTransfer.moneyTransferCode,
+                        terminal: voucherData.moneyTransfer.venue?.name,
+                        amount: `${voucherData.moneyTransfer.amount.toFixed(2)} ${voucherData.moneyTransfer.currencyCode}`,
+                        type: voucherData.moneyTransfer.typeCode,
+                        usage: '???'
                     } as VoucherConfirmation
                 }
+                navigate={navigate}
             />
         )
     }
