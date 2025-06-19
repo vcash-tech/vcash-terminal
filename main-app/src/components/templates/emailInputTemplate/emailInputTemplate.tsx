@@ -54,8 +54,7 @@ export default function EmailInputTemplate({
                     }}>
                     <img src={emailCompleted} alt="Email Completed" className={'email-success-status'} />
                     <h1>
-                        Great! The voucher has been delivered to your
-                        inbox!
+                        {t('emailInput.successMessage')}
                     </h1>
                     <PrimaryButton text={'Finish'} callback={onComplete} />
                 </div>
