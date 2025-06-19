@@ -11,18 +11,24 @@ const defaultContextValue: KeyboardContextType = {
     setKeyboardVisible: () => {}
 }
 
-const KeyboardContext = createContext<KeyboardContextType>(defaultContextValue)
+export const KeyboardContext =
+    createContext<KeyboardContextType>(defaultContextValue)
+
+export function useKeyboard() {
+    const context = useContext(KeyboardContext)
+    if (context === undefined) {
+        throw new Error('useKeyboard must be used within a KeyboardProvider')
+    }
+    return context
+}
 
 export function KeyboardProvider({ children }: { children: ReactNode }) {
     const [isKeyboardVisible, setKeyboardVisible] = useState(false)
 
     return (
-        <KeyboardContext.Provider value={{ isKeyboardVisible, setKeyboardVisible }}>
+        <KeyboardContext.Provider
+            value={{ isKeyboardVisible, setKeyboardVisible }}>
             {children}
         </KeyboardContext.Provider>
     )
-}
-
-export function useKeyboard() {
-    return useContext(KeyboardContext)
 }

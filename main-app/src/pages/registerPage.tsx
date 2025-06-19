@@ -26,7 +26,7 @@ function RegisterPage() {
         if (AuthService.HasToken(Auth.POS)) {
             navigate('/register')
         }
-    }, [])
+    }, [navigate])
 
     async function getDeviceToken(agentId: string, deviceCode: string) {
         try {

@@ -1,5 +1,5 @@
 import { LinearProgress } from '@mui/material'
-import { useRef, useState } from 'react'
+import { useState } from 'react'
 import { NavigateFunction } from 'react-router-dom'
 
 import { deviceIcon, userIcon } from '@/assets/icons'
@@ -7,6 +7,7 @@ import Container from '@/components/atoms/container/container'
 import Input from '@/components/atoms/input/input'
 import PrimaryButton from '@/components/atoms/primaryButton/primaryButton'
 import Footer from '@/components/organisms/footer/footer'
+import Header from '@/components/organisms/header/header'
 import { DeviceTokenSteps } from '@/data/enums/deviceTokenSteps'
 import { useTranslate } from '@/i18n/useTranslate'
 
@@ -43,6 +44,7 @@ export default function RegisterTemplate({
 
     return (
         <Container isFullHeight={true}>
+            <Header />
             <div
                 className={`register-container ${isFocused ? 'active-keyboard' : ''}`}>
                 <div className="card">

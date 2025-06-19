@@ -1,23 +1,23 @@
+import { useState } from 'react'
+
 import Container from '@/components/atoms/container/container'
 import PrimaryButton from '@/components/atoms/primaryButton/primaryButton'
 import Footer from '@/components/organisms/footer/footer'
 import Header from '@/components/organisms/header/header'
+import { VoucherConfirmation } from '@/data/entities/voucher-confirmation'
 import { useTranslate } from '@/i18n/useTranslate'
 import { TransactionService } from '@/services/transactionService'
+import { VoucherResponse } from '@/types/pos/deposit'
+
 import { infoCircle } from '../../../assets/icons'
 import { insertCash } from '../../../assets/images'
-import { useEffect, useState } from 'react'
 import PaymentSuccessfulTemplate from '../paymentSuccessful/paymentSuccessfulTemplate'
-import { useNavigate } from 'react-router-dom'
 import VoucherConfirmationTemplate from '../voucherConfirmation/voucherConfirmationTemplate'
-import { VoucherResponse } from '@/types/pos/deposit'
-import { VoucherConfirmation } from '@/data/entities/voucher-confirmation'
 
 export default function InsertCashTemplate() {
     const { t } = useTranslate()
-    const navigate = useNavigate()
 
-    const [amount, setAmount] = useState<number>(0)
+    const [amount, _setAmount] = useState<number>(0)
     const [isLoading, setIsLoading] = useState<boolean>(false)
     const [voucherData, setVoucherData] = useState<VoucherResponse | null>(null)
 
@@ -44,8 +44,8 @@ export default function InsertCashTemplate() {
 
         try {
             // const voucherCodeDefault = '123-456-789' // Replace with actual logic
-            // const result = await window.api.print(voucherCodeDefault)
-        } catch (error) {
+            // const result = await window.api.print(voucherCodeDefault
+        } catch {
             // printer unavailable handling
         }
         setIsLoading(false)

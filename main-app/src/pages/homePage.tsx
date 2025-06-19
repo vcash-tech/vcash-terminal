@@ -1,18 +1,16 @@
-import { CircularProgress } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import CashierSelect from '../components/cashierSelect'
-import { AuthService } from '../services/authService'
-import { TransactionService } from '../services/transactionService'
-import { Auth } from '../types/common/httpRequest'
 import HomeTemplate from '@/components/templates/home/homeTemplate'
+import { AuthService } from '@/services/authService'
+import { Auth } from '@/types/common/httpRequest'
 
 function HomePage() {
-    const [amount, setAmount] = useState<number | null>(null)
-    const [printResult, setPrintResult] = useState('')
-    const [hasCashierToken, setHasCashierToken] = useState<boolean>(false)
-    const [loader, setLoader] = useState<boolean>(false)
+    // TODO: Fix unused state variables
+    const [_amount, _setAmount] = useState<number | null>(null)
+    const [_printResult, _setPrintResult] = useState('')
+    const [_hasCashierToken, setHasCashierToken] = useState<boolean>(false)
+    const [_loader, _setLoader] = useState<boolean>(false)
 
     const navigate = useNavigate()
 
@@ -28,7 +26,7 @@ function HomePage() {
         setHasCashierToken(!!token)
     }, [navigate])
 
-    return <HomeTemplate />
+    return <HomeTemplate navigate={navigate} />
 }
 
 export default HomePage
