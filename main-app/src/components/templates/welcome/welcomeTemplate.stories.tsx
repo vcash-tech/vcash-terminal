@@ -17,6 +17,9 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {}
 
 export const Inverted: Story = {
+  args: {
+    navigate: () => {},
+  },
   parameters: {
     backgrounds: {
       default: "dark",

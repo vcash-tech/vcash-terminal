@@ -17,7 +17,8 @@ export function KeyboardProvider({ children }: { children: ReactNode }) {
     const [isKeyboardVisible, setKeyboardVisible] = useState(false)
 
     return (
-        <KeyboardContext.Provider value={{ isKeyboardVisible, setKeyboardVisible }}>
+        <KeyboardContext.Provider
+            value={{ isKeyboardVisible, setKeyboardVisible }}>
             {children}
         </KeyboardContext.Provider>
     )

@@ -1,5 +1,5 @@
 import { LinearProgress } from '@mui/material'
-import { useRef, useState } from 'react'
+import { useState } from 'react'
 import { NavigateFunction } from 'react-router-dom'
 
 import { deviceIcon, userIcon } from '@/assets/icons'

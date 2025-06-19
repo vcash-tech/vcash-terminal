@@ -69,7 +69,7 @@ export default function Input({
         return () => {
             document.removeEventListener('mousedown', handleClickOutside)
         }
-    }, [isFocused])
+    }, [isFocused, onFocus])
 
     const handleFocus = () => {
         setIsFocused(true)
