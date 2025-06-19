@@ -1,16 +1,21 @@
+import { useTranslate } from '@/i18n/useTranslate'
+
 export type HomeItemProps = {
     title: string
     image: string
     body: string
     handleClick: () => void
+    isDisabled?: boolean
 }
 
 export default function HomeItem({
     image,
     title,
     body,
-    handleClick
+    handleClick,
+    isDisabled
 }: HomeItemProps) {
+    const { t } = useTranslate()
     return (
         <button className="home-item" onClick={handleClick}>
             <div className="image-container">
@@ -18,7 +23,11 @@ export default function HomeItem({
             </div>
 
             <div className="text-content">
-                <p className="title">{title}</p>
+                <p className="title">
+                    {isDisabled && <span>{t('comingSoon')}</span>}
+                    <br />
+                    {title}
+                </p>
                 <p>{body}</p>
             </div>
         </button>

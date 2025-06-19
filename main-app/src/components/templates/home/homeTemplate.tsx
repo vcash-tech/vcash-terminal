@@ -36,6 +36,7 @@ export default function HomeTemplate({
                             image={digitalServices}
                             body={t('home.digitalServices.body')}
                             handleClick={() => navigate('/digital-services')}
+                            isDisabled={true}
                         />
                     </HalfContainer>
                 </HorizontalContainer>
@@ -43,6 +44,7 @@ export default function HomeTemplate({
                     title={t('home.billPayments.title')}
                     body={t('home.billPayments.body')}
                     image={paymentsIcon}
+                    isDisabled={true}
                 />
             </div>
             <Footer />

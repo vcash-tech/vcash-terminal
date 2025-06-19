@@ -15,7 +15,6 @@
     box-sizing: border-box;
     align-self: flex-start;
     justify-self: flex-start;
-    height: auto;
     @include mixins.item-shadow;
     height: 40rem;
 
@@ -50,6 +49,8 @@
         display: flex;
         align-items: center;
         overflow: hidden;
+        max-height: 20rem;
+        min-height: 20rem;
         justify-content: center;
 
         img {

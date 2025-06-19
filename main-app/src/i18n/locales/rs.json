@@ -130,5 +130,6 @@
     "welcomeMessage": "Uređaj je uspešno registrovan. Dobro došli u {{brandName}} mrežu.",
     "continue": "Nastavi",
     "tryAgain": "Pokušaj ponovo"
-  }
+  },
+  "comingSoon": "Dolazi uskoro..."
 }

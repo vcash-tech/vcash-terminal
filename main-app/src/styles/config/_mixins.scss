@@ -285,3 +285,21 @@
 @mixin item-active-shadow() {
     box-shadow: 4px 4px 14.4px 0px inset rgba(15, 32, 67, 0.075);
 }
+
+@mixin coming-soon {
+    background: #cecece;
+    box-shadow: none;
+    cursor: default;
+
+    img {
+        opacity: 0.9;
+    }
+
+    p {
+        color: lighten(black, 30%);
+
+        span {
+            color: colors.$brand-primary-color;
+        }
+    }
+}
