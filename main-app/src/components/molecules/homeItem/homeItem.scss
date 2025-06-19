@@ -60,6 +60,10 @@
                 }
             }
         }
+
+        &:hover {
+            cursor: default;
+        }
     }
 
     .image-container {
