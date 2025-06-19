@@ -13,7 +13,7 @@ export default function HorizontalItem({
 }) {
     const { t } = useTranslate()
     return (
-        <div className="horizontal-item">
+        <div className={`horizontal-item ${isDisabled ? 'coming-soon' : ''}`}>
             {image && <img src={image} alt={title} className="item-icon" />}
             <p className="title">
                 {isDisabled && <span>{t('comingSoon')}</span>}
