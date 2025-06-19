@@ -29,11 +29,20 @@ export default function Keyboard({
             return
         }
 
+        if (button === '{space}') {
+            handleSpaceButton()
+            return
+        }
+
         if (!['{backspace}', '{tab}'].includes(button)) {
             if (onChange) {
                 onChange(value + button)
+                
+                return
             }
-        } else if (button === '{backspace}' && value && value?.length > 0) {
+        }
+
+        if (button === '{backspace}' && value && value?.length > 0) {
             if (onChange) {
                 onChange((value ?? '')?.slice(0, -1))
             }
@@ -43,6 +52,12 @@ export default function Keyboard({
     const handleShiftButton = (_button: string) => {
         const newLayoutName = layoutName === 'default' ? 'shift' : 'default'
         setLayoutName(newLayoutName)
+    }
+
+    const handleSpaceButton = () => {
+        if (onChange) {
+            onChange(value + ' ')
+        }
     }
 
     return (

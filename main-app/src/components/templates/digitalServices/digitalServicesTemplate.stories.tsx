@@ -18,7 +18,8 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
     args: {
-        ...services
+        ...services,
+        navigate: () => {}
     },
     parameters: {
         backgrounds: {

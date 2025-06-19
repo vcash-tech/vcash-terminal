@@ -52,6 +52,22 @@
         @include mixins.coming-soon;
     }
 
+    &.coming-soon {
+        @include mixins.coming-soon;
+
+        .title {
+            color: #444;
+
+            span {
+                position: absolute;
+                top: 3rem;
+                left: 3rem;
+                text-align: left;
+                min-width: 100%;
+            }
+        }
+    }
+
     &.loading-container {
         background: #0F20432B;
         box-shadow: none;

@@ -13,7 +13,6 @@
     max-width: 100vw;
     padding-bottom: 3rem;
     box-sizing: border-box;
-    align-self: flex-start;
     justify-self: flex-start;
     @include mixins.item-shadow;
     height: 40rem;
@@ -23,6 +22,7 @@
         gap: 1rem;
         display: flex;
         flex-direction: column;
+        position: relative;
 
         p {
             font-size: 2rem;
@@ -40,6 +40,24 @@
                 line-height: 1.3;
                 display: flex;
                 color: colors.$brand-primary-color;
+            }
+        }
+    }
+
+    &.coming-soon {
+        @include mixins.coming-soon;
+
+        .text-content {
+            .title {
+                color: #444;
+
+                span {
+                    position: absolute;
+                    top: 3rem;
+                    left: 0;
+                    text-align: center;
+                    min-width: 100%;
+                }
             }
         }
     }
