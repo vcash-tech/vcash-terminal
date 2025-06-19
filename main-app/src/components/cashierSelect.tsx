@@ -1,9 +1,9 @@
 import { CircularProgress } from '@mui/material'
 import { useEffect, useState } from 'react'
 
-import { AuthService } from '../services/authService'
-import { POSService } from '../services/posService'
-import { Auth } from '../types/common/httpRequest'
+import { AuthService } from '@/services/authService'
+import { POSService } from '@/services/posService'
+import { Auth } from '@/types/common/httpRequest'
 
 interface Props {
     setHasCashierToken: (hasToken: boolean) => void
@@ -11,6 +11,22 @@ interface Props {
 
 export default function CashierSelect({ setHasCashierToken }: Props) {
     const [loader, setLoader] = useState<boolean>(false)
+
+    const handleUnlock = async (username: string, pin: string) => {
+        try {
+            const response = await POSService.unlockDevice({
+                userName: username,
+                pin
+            })
+            AuthService.SetToken(Auth.Cashier, response.accessToken)
+            // Handle successful unlock, e.g., redirect or show success message
+            console.log('Device unlocked successfully')
+            setHasCashierToken(true)
+        } catch (error) {
+            console.error('Error unlocking device:', error)
+            // Handle error, e.g., show error message
+        }
+    }
 
     useEffect(() => {
         const fetchCashiers = async () => {
@@ -32,23 +48,7 @@ export default function CashierSelect({ setHasCashierToken }: Props) {
             setLoader(false)
         }
         fetchCashiers()
-    }, [])
-
-    const handleUnlock = async (username: string, pin: string) => {
-        try {
-            const response = await POSService.unlockDevice({
-                userName: username,
-                pin
-            })
-            AuthService.SetToken(Auth.Cashier, response.accessToken)
-            // Handle successful unlock, e.g., redirect or show success message
-            console.log('Device unlocked successfully')
-            setHasCashierToken(true)
-        } catch (error) {
-            console.error('Error unlocking device:', error)
-            // Handle error, e.g., show error message
-        }
-    }
+    }, [handleUnlock])
 
     return <div>{loader && <CircularProgress />}</div>
 }

@@ -13,30 +13,26 @@ export default function EmailInputTemplate() {
     const { t } = useTranslate()
 
     return (
-        <>
-            <Container isFullHeight={true}>
-                <Header />
-                <FormContainer className="email-input">
-                    <div className={'title-section'}>
-                        <h1>{t('emailInput.title')}</h1>
-                        <p>
-                            {t('emailInput.description')}
-                        </p>
-                    </div>
+        <Container isFullHeight={true}>
+            <Header />
+            <FormContainer className="email-input">
+                <div className={'title-section'}>
+                    <h1>{t('emailInput.title')}</h1>
+                    <p>{t('emailInput.description')}</p>
+                </div>
 
-                    <InputField
-                        placeholder={t('emailInput.emailPlaceholder')}
-                        onChange={(_id, value) => {
-                            setEmailAddress(value)
-                        }}
-                        id="email"
-                        value={emailAddress}
-                        disableAutofill={true}
-                    />
-                    <PrimaryButton text={t('emailInput.sendButton')} />
-                </FormContainer>
-                <Footer />
-            </Container>
-        </>
+                <InputField
+                    placeholder={t('emailInput.emailPlaceholder')}
+                    onChange={(_id, value) => {
+                        setEmailAddress(value)
+                    }}
+                    id="email"
+                    value={emailAddress}
+                    disableAutofill={true}
+                />
+                <PrimaryButton text={t('emailInput.sendButton')} />
+            </FormContainer>
+            <Footer />
+        </Container>
     )
 }

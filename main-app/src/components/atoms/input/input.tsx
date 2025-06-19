@@ -31,14 +31,12 @@ export default function Input({
     const containerRef = useRef<HTMLDivElement>(null)
     const { setKeyboardVisible } = useKeyboard()
 
-    // Keep focus on the input element when keyboard is active
     useEffect(() => {
         if (isFocused && inputRef.current) {
             inputRef.current.focus()
         }
     }, [isFocused, value])
 
-    // Update keyboard visibility in context
     useEffect(() => {
         setKeyboardVisible(isFocused)
         return () => {
@@ -46,7 +44,6 @@ export default function Input({
         }
     }, [isFocused, setKeyboardVisible])
 
-    // Add click outside listener to dismiss keyboard
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
             if (
@@ -83,7 +80,7 @@ export default function Input({
         if(onFocus){
             onFocus(focused)
         }
-        // When keyboard is dismissed, remove focus from input
+
         if (!focused && inputRef.current) {
             inputRef.current.blur()
         }
