@@ -12,23 +12,23 @@ interface Props {
 export default function CashierSelect({ setHasCashierToken }: Props) {
     const [loader, setLoader] = useState<boolean>(false)
 
-    const handleUnlock = async (username: string, pin: string) => {
-        try {
-            const response = await POSService.unlockDevice({
-                userName: username,
-                pin
-            })
-            AuthService.SetToken(Auth.Cashier, response.accessToken)
-            // Handle successful unlock, e.g., redirect or show success message
-            console.log('Device unlocked successfully')
-            setHasCashierToken(true)
-        } catch (error) {
-            console.error('Error unlocking device:', error)
-            // Handle error, e.g., show error message
-        }
-    }
-
     useEffect(() => {
+        const handleUnlock = async (username: string, pin: string) => {
+            try {
+                const response = await POSService.unlockDevice({
+                    userName: username,
+                    pin
+                })
+                AuthService.SetToken(Auth.Cashier, response.accessToken)
+                // Handle successful unlock, e.g., redirect or show success message
+                console.log('Device unlocked successfully')
+                setHasCashierToken(true)
+            } catch (error) {
+                console.error('Error unlocking device:', error)
+                // Handle error, e.g., show error message
+            }
+        }
+
         const fetchCashiers = async () => {
             setLoader(true)
             try {
@@ -48,7 +48,7 @@ export default function CashierSelect({ setHasCashierToken }: Props) {
             setLoader(false)
         }
         fetchCashiers()
-    }, [handleUnlock])
+    }, [])
 
     return <div>{loader && <CircularProgress />}</div>
 }

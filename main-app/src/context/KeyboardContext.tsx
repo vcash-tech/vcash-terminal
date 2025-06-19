@@ -14,7 +14,6 @@ const defaultContextValue: KeyboardContextType = {
 export const KeyboardContext =
     createContext<KeyboardContextType>(defaultContextValue)
 
-// Custom hook to use the keyboard context
 export function useKeyboard() {
     const context = useContext(KeyboardContext)
     if (context === undefined) {
