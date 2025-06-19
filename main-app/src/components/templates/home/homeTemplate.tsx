@@ -12,9 +12,11 @@ import Header from '@/components/organisms/header/header'
 import { useTranslate } from '@/i18n/useTranslate'
 
 export default function HomeTemplate({
-    navigate
+    navigate,
+    isLoading
 }: {
     navigate: NavigateFunction
+    isLoading?: boolean
 }) {
     const { t } = useTranslate()
     return (
@@ -23,29 +25,38 @@ export default function HomeTemplate({
             <div className="home">
                 <HorizontalContainer>
                     <HalfContainer style={{ display: 'block' }}>
-                        <HomeItem
-                            title={t('home.bettingServices.title')}
-                            image={bettingServices}
-                            body={t('home.bettingServices.body')}
-                            handleClick={() => navigate('/disclaimer')}
-                        />
+                        {isLoading ? (
+                            <div className="home-item loading-container"></div>
+                        ) : (
+                            <HomeItem
+                                title={t('home.bettingServices.title')}
+                                image={bettingServices}
+                                body={t('home.bettingServices.body')}
+                                handleClick={() => navigate('/disclaimer')}
+                            />
+                        )}
                     </HalfContainer>
                     <HalfContainer style={{ display: 'block' }}>
-                        <HomeItem
+                        {isLoading ? (
+                            <div className="home-item loading-container"></div>
+                        ) : (    <HomeItem
                             title={t('home.digitalServices.title')}
                             image={digitalServices}
                             body={t('home.digitalServices.body')}
                             handleClick={() => navigate('/digital-services')}
                             isDisabled={true}
-                        />
+                        />)}
                     </HalfContainer>
                 </HorizontalContainer>
+                {isLoading ? (
+                    <div className="horizontal-item loading-container"></div>
+                ) : (
                 <HorizontalItem
                     title={t('home.billPayments.title')}
                     body={t('home.billPayments.body')}
                     image={paymentsIcon}
                     isDisabled={true}
-                />
+                />)}
             </div>
             <Footer />
         </Container>
