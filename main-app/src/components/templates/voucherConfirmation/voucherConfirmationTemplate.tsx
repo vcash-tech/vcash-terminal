@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom'
+import { NavigateFunction } from 'react-router-dom'
 
 import Container from '@/components/atoms/container/container'
 import HalfContainer from '@/components/atoms/container/halfContainer'
@@ -13,19 +13,21 @@ import { VoucherConfirmation } from '@/data/entities/voucher-confirmation'
 import { useTranslate } from '@/i18n/useTranslate'
 
 
+
 export default function VoucherConfirmationTemplate({
-    voucherConfirmation
+    voucherConfirmation,
+    navigate
 }: {
-    voucherConfirmation: VoucherConfirmation
+    voucherConfirmation: VoucherConfirmation,
+    navigate: NavigateFunction
 }) {
     const { t } = useTranslate()
-    const navigate = useNavigate()
     const onComplete = () => {
-        navigate('/')
+        navigate('/welcome')
     }
 
     return (
-        <Container style={{ flex: 1}}>
+        <Container isFullHeight={true}>
             <Header />
             <div className={'voucher-confirmation'}>
                 <h1>{t('voucherGenerated.title')}</h1>

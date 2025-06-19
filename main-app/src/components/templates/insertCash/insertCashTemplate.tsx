@@ -1,5 +1,6 @@
 import { format } from 'date-fns'
 import { useState } from 'react'
+import { NavigateFunction } from 'react-router-dom'
 
 import Container from '@/components/atoms/container/container'
 import PrimaryButton from '@/components/atoms/primaryButton/primaryButton'
@@ -15,7 +16,7 @@ import { insertCash } from '../../../assets/images'
 import PaymentSuccessfulTemplate from '../paymentSuccessful/paymentSuccessfulTemplate'
 import VoucherConfirmationTemplate from '../voucherConfirmation/voucherConfirmationTemplate'
 
-export default function InsertCashTemplate() {
+export default function InsertCashTemplate({navigate}: {navigate: NavigateFunction}) {
     const { t } = useTranslate()
 
     const [amount, _setAmount] = useState<number>(0)
@@ -55,11 +56,11 @@ export default function InsertCashTemplate() {
     }
 
     if (voucherData) {
+
         return (
             <VoucherConfirmationTemplate
                 voucherConfirmation={
                     {
-                        voucherCode: voucherData.moneyTransfer.voucherCode,
                         date: format(
                             new Date(voucherData.moneyTransfer.date),
                             'd MMMM, yyyy'
@@ -68,12 +69,14 @@ export default function InsertCashTemplate() {
                             new Date(voucherData.moneyTransfer.date),
                             'hh:mm a'
                         ),
-                        amount: `${voucherData.moneyTransfer.amount} ${voucherData.moneyTransfer.currencyCode}`,
-                        referenceNo:
-                            voucherData.moneyTransfer.moneyTransferCode,
-                        terminal: `${voucherData.moneyTransfer.venue?.address}, ${voucherData.moneyTransfer.venue?.city}`
+                        referenceNo: voucherData.moneyTransfer.moneyTransferCode,
+                        terminal: `${voucherData.moneyTransfer.venue?.address}, ${voucherData.moneyTransfer.venue?.city}`,
+                        amount: `${voucherData.moneyTransfer.amount.toFixed(2)} ${voucherData.moneyTransfer.currencyCode}`,
+                        type: voucherData.moneyTransfer.typeCode,
+                        usage: '???'
                     } as VoucherConfirmation
                 }
+                navigate={navigate}
             />
         )
     }

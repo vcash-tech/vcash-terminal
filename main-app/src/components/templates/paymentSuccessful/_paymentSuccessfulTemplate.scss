@@ -7,6 +7,7 @@
   align-items: center;
   padding: 8.5rem 0 2.4rem;
   background:  colors.$main-background-color url("../assets/images/paymentSuccessfulBackground.svg") no-repeat right bottom;
+  flex: 1;
 
   .progress-bar {
     display: flex;

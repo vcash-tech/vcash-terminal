@@ -17,7 +17,6 @@ export default function HorizontalItem({
             {image && <img src={image} alt={title} className="item-icon" />}
             <p className="title">
                 {isDisabled && <span>{t('comingSoon')}</span>}
-                <br />
                 {title}
             </p>
             <p>{body}</p>
