@@ -70,4 +70,19 @@
     &:active {
         @include mixins.item-active-shadow;
     }
+
+    &.loading-container {
+        background: #0F20432B;
+        box-shadow: none;
+        animation: pulse-opacity 2s infinite alternate;
+    }
+}
+
+@keyframes pulse-opacity {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }

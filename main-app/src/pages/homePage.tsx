@@ -1,10 +1,6 @@
-import { CircularProgress } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import Container from '@/components/atoms/container/container'
-import Footer from '@/components/organisms/footer/footer'
-import Header from '@/components/organisms/header/header'
 import HomeTemplate from '@/components/templates/home/homeTemplate'
 import { POSService } from '@/services/posService'
 
@@ -60,18 +56,24 @@ function HomePage() {
         }
     }, [navigate])
 
+    // if (loader) {
+    //     return (
+    //         <Container isFullHeight={true} className="home-container">
+    //             <Header navigateBackUrl="#" />
+    //             <div>
+    //                 <div className="loader-thumb"></div>
+    //             </div>
+    //             {/*<CircularProgress />*/}
+    //             <div>
+    //                 <div className="half-container"></div>
+    //                 <div className="half-container"></div>
+    //             </div>
+    //             <Footer />
+    //         </Container>
+    //     )
+    // }
 
-    if (loader) {
-        return (
-            <Container isFullHeight={true} className="home-container">
-                <Header navigateBackUrl="#" />
-                <CircularProgress />
-                <Footer />
-            </Container>
-        )
-    }
-
-    return <HomeTemplate navigate={navigate} />
+    return <HomeTemplate navigate={navigate} isLoading={loader} />
 }
 
 export default HomePage
