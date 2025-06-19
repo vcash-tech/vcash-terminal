@@ -1,41 +1,46 @@
+import { useNavigate } from 'react-router-dom'
+
+import { paymentsIcon } from '@/assets/icons'
 import { bettingServices, digitalServices } from '@/assets/images'
 import Container from '@/components/atoms/container/container'
 import HalfContainer from '@/components/atoms/container/halfContainer'
 import HorizontalContainer from '@/components/atoms/container/horizontalContainer'
 import HomeItem from '@/components/molecules/homeItem/homeItem'
+import HorizontalItem from '@/components/molecules/horizontalItem/horizontalItem'
 import Footer from '@/components/organisms/footer/footer'
 import Header from '@/components/organisms/header/header'
-import { useNavigate } from 'react-router-dom'
+import { useTranslate } from '@/i18n/useTranslate'
 
 export default function HomeTemplate() {
     const navigate = useNavigate()
+    const { t } = useTranslate()
     return (
         <Container isFullHeight={true} className="home-container">
-            <Header navigateBackUrl="#" />
+            <Header />
             <div className="home">
                 <HorizontalContainer>
                     <HalfContainer style={{ display: 'block' }}>
                         <HomeItem
-                            title="Betting Services"
+                            title={t('home.bettingServices.title')}
                             image={bettingServices}
-                            body="For Sports betting, Casino top-ups and others Betting Services."
+                            body={t('home.bettingServices.body')}
                             handleClick={() => navigate('/disclaimer')}
                         />
                     </HalfContainer>
                     <HalfContainer style={{ display: 'block' }}>
                         <HomeItem
-                            title="Digital Services"
+                            title={t('home.digitalServices.title')}
                             image={digitalServices}
-                            body="For gaming, streaming, E-SIMS, top-ups and other services."
+                            body={t('home.digitalServices.body')}
                             handleClick={() => navigate('/digital-services')}
                         />
                     </HalfContainer>
                 </HorizontalContainer>
-                {/* <HorizontalItem
-                    title="Bill Payments"
-                    body="Quickly Scan your bill to pay via barcodes."
+                <HorizontalItem
+                    title={t('home.billPayments.title')}
+                    body={t('home.billPayments.body')}
                     image={paymentsIcon}
-                /> */}
+                />
             </div>
             <Footer />
         </Container>

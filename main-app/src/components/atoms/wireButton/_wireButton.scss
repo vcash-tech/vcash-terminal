@@ -14,14 +14,15 @@
 
     color: colors.$brand-primary-color;
 
+    &:hover, &:active {
+        color: colors.$white-color;
+        background: colors.$brand-primary-color;
+    }
+
     &:disabled {
         cursor: default;
         border-color: #ccc;
         color: #ccc;
-    }
-
-    &:hover, &:active {
-        color: colors.$white-color;
-        background: colors.$brand-primary-color;
+        background: transparent;
     }
 }
