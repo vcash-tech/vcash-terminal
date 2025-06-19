@@ -26,7 +26,7 @@ function HomePage() {
         setHasCashierToken(!!token)
     }, [navigate])
 
-    return <HomeTemplate />
+    return <HomeTemplate navigate={navigate} />
 }
 
 export default HomePage
