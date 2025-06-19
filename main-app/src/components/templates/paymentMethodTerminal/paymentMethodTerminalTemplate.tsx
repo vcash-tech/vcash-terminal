@@ -1,12 +1,11 @@
 import { NavigateFunction } from 'react-router-dom'
 
+import { cash, creditCard } from '@/assets/images'
 import Container from '@/components/atoms/container/container'
 import PaymentCard from '@/components/atoms/paymentCard/paymentCard'
 import Footer from '@/components/organisms/footer/footer'
 import Header from '@/components/organisms/header/header'
 import { useTranslate } from '@/i18n/useTranslate'
-
-import { cashPayment, creditCardPayment } from '../../../assets/images'
 
 export default function PaymentMethodTerminalTemplate({
     navigate
@@ -26,12 +25,13 @@ export default function PaymentMethodTerminalTemplate({
                 <h2>{t('selectPaymentMethod.subtitle')}</h2>
                 <div className="payment-methods">
                     <PaymentCard
-                        image={creditCardPayment}
+                        image={creditCard}
                         text={t('selectPaymentMethod.cardPayment')}
                         callback={() => console.log('Card payment selected')}
+                        isDisabled={true}
                     />
                     <PaymentCard
-                        image={cashPayment}
+                        image={cash}
                         text={t('selectPaymentMethod.cashPayment')}
                         callback={() => navigate('/buy-voucher-cash')}
                     />

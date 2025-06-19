@@ -121,5 +121,6 @@
     "welcomeMessage": "The device has been successfully registered. Welcome to the {{brandName}} network.",
     "continue": "Continue",
     "tryAgain": "Try Again"
-  }
+  },
+  "comingSoon": "Coming soon..."
 }

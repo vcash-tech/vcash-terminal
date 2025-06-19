@@ -1,6 +1,6 @@
 @use "../../../styles/config/colors";
 @use "../../../styles/config/fonts";
-
+@use "../../../styles/config/mixins";
 
 .payment-card {
   display: flex;
@@ -23,7 +23,7 @@
   .card-text {
     flex: 1;
     z-index: 1;
-
+    text-align: left;
     font-family: fonts.$body-font;
     font-weight: 600;
     font-size: 3.6rem;
@@ -31,30 +31,45 @@
     letter-spacing: -1.5px;
     color: colors.$dark-text-color;
     padding: 0 0 42px;
-    
   }
 
   .card-image {
     flex-shrink: 0;
+    display: flex;
+    align-items: flex-end;
     margin-left: 40px;
+    width: 380px;
+    height: 300px;
+    justify-content: flex-end;
 
     img {
       height: auto;
       object-fit: contain;
-      display: block;
+      max-width: 100%;
+      max-height: 95%;
+    }
+
+    &:last-child {
+      img {
+        max-height: 90%;
+      }
     }
   }
 
   &:hover, &:active {
     background-color: colors.$hover-blue-color;
-    box-shadow: -3px 4px 14.4px 0px #0F20432B;
+    box-shadow: -3px 4px 14.4px 0 #0F20432B;
 
-    .card-text {
+    .card-text:default {
       color: colors.$brand-primary-color;
     }
   }
 
   &:active {
-    box-shadow: 4px 4px 14.4px 0px inset rgba(15, 32, 67, 0.075);
+    box-shadow: 4px 4px 14.4px 0 inset rgba(15, 32, 67, 0.075);
+  }
+
+  &.coming-soon {
+    @include mixins.coming-soon;
   }
 }
