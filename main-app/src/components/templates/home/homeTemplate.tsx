@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom'
+import { NavigateFunction } from 'react-router-dom'
 
 import { paymentsIcon } from '@/assets/icons'
 import { bettingServices, digitalServices } from '@/assets/images'
@@ -11,8 +11,11 @@ import Footer from '@/components/organisms/footer/footer'
 import Header from '@/components/organisms/header/header'
 import { useTranslate } from '@/i18n/useTranslate'
 
-export default function HomeTemplate() {
-    const navigate = useNavigate()
+export default function HomeTemplate({
+    navigate
+}: {
+    navigate: NavigateFunction
+}) {
     const { t } = useTranslate()
     return (
         <Container isFullHeight={true} className="home-container">

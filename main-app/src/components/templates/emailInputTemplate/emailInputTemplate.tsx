@@ -16,7 +16,7 @@ export default function EmailInputTemplate({
     onComplete: () => void
 }) {
     const [emailAddress, setEmailAddress] = useState('')
-    const [isCompleted, setIsCompleted] = useState(true)
+    const [isCompleted, setIsCompleted] = useState(false)
 
     const submitEmail = () => {
         // TODO: Validate email address
@@ -27,44 +27,40 @@ export default function EmailInputTemplate({
     const { t } = useTranslate()
 
     return (
-        <>
-            <Container isFullHeight={true}>
-                <Header />
-                <FormContainer className="email-input">
-                    <div className={'title-section'}>
-                        <h1>{t('emailInput.title')}</h1>
-                        <p>
-                            {t('emailInput.description')}
-                        </p>
-                    </div>
+        <Container isFullHeight={true}>
+            <Header />
+            <FormContainer className="email-input">
+                <div className={'title-section'}>
+                    <h1>{t('emailInput.title')}</h1>
+                    <p>{t('emailInput.description')}</p>
+                </div>
 
-                    <InputField
-                        placeholder={t('emailInput.emailPlaceholder')}
-                        onChange={(_id, value) => {
-                            setEmailAddress(value)
-                        }}
-                        id="email"
-                        value={emailAddress}
-                        disableAutofill={true}
-                    />
-                    <PrimaryButton text={t('emailInput.sendButton')} />
-                </FormContainer>
-                {isCompleted && (
-                    <div
-                        className={'email-input-completed'}
-                        style={{
-                            backgroundImage: `url(${emailInputBackground})`
-                        }}>
-                        <img src={emailCompleted} alt="Email Completed" className={'email-success-status'} />
-                        <h1>
-                            Great! The voucher has been delivered to your
-                            inbox!
-                        </h1>
-                        <PrimaryButton text={'Finish'} callback={onComplete} />
-                    </div>
-                )}
-                <Footer />
-            </Container>
-        </>
+                <InputField
+                    placeholder={t('emailInput.emailPlaceholder')}
+                    onChange={(_id, value) => {
+                        setEmailAddress(value)
+                    }}
+                    id="email"
+                    value={emailAddress}
+                    disableAutofill={true}
+                />
+                <PrimaryButton text={t('emailInput.sendButton')} callback={submitEmail} />
+            </FormContainer>
+            {isCompleted && (
+                <div
+                    className={'email-input-completed'}
+                    style={{
+                        backgroundImage: `url(${emailInputBackground})`
+                    }}>
+                    <img src={emailCompleted} alt="Email Completed" className={'email-success-status'} />
+                    <h1>
+                        Great! The voucher has been delivered to your
+                        inbox!
+                    </h1>
+                    <PrimaryButton text={'Finish'} callback={onComplete} />
+                </div>
+            )}
+            <Footer />
+        </Container>
     )
 }

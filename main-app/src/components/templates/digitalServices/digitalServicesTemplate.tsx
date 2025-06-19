@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom'
+import { NavigateFunction } from 'react-router-dom'
 
 import Container from '@/components/atoms/container/container'
 import ServiceListItem from '@/components/molecules/serviceListItem/serviceListItem'
@@ -13,19 +13,23 @@ export type DigitalServicesTemplateProps = {
     gamingServices?: DigitalService[]
     streamingServices?: DigitalService[]
     topServices?: DigitalService[]
+    navigate: NavigateFunction
 }
 
 export default function DigitalServicesTemplate({
     gamingServices,
     streamingServices,
-    topServices
+    topServices,
+    navigate
 }: DigitalServicesTemplateProps) {
-    const navigate = useNavigate()
     const { t } = useTranslate()
     return (
         <Container isFullHeight={true} style={{ gap: 0 }}>
-            <Header navigateBackUrl="#" navigationBackText={t('digitalServices.backToServices')} />
-            <QrCodeModal isOpen={true} onClose={() => navigate('/')}/>
+            <Header
+                navigateBackUrl="#"
+                navigationBackText={t('digitalServices.backToServices')}
+            />
+            <QrCodeModal isOpen={true} onClose={() => navigate('/')} />
             <div className="digital-services">
                 {gamingServices && gamingServices?.length > 0 && (
                     <HorizontalList

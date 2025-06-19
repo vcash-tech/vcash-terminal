@@ -1,5 +1,8 @@
+import { useNavigate } from 'react-router-dom'
+
 import AgeDisclaimerTemplate from '@/components/templates/ageDisclaimer/ageDisclaimerTemplate'
 
 export default function DisclaimerPage() {
-    return <AgeDisclaimerTemplate />
+    const navigate = useNavigate()
+    return <AgeDisclaimerTemplate navigate={navigate} />
 }
