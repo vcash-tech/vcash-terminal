@@ -1,18 +1,57 @@
+import { CircularProgress } from '@mui/material'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
+import Container from '@/components/atoms/container/container'
+import Footer from '@/components/organisms/footer/footer'
+import Header from '@/components/organisms/header/header'
 import HomeTemplate from '@/components/templates/home/homeTemplate'
-import { AuthService } from '@/services/authService'
-import { Auth } from '@/types/common/httpRequest'
+import { POSService } from '@/services/posService'
+
+import { AuthService } from '../services/authService'
+import { Auth } from '../types/common/httpRequest'
 
 function HomePage() {
-    // TODO: Fix unused state variables
-    const [_amount, _setAmount] = useState<number | null>(null)
-    const [_printResult, _setPrintResult] = useState('')
-    const [_hasCashierToken, setHasCashierToken] = useState<boolean>(false)
-    const [_loader, _setLoader] = useState<boolean>(false)
+    const [loader, setLoader] = useState<boolean>(false)
 
     const navigate = useNavigate()
+
+    useEffect(() => {
+        const fetchCashiers = async () => {
+            setLoader(true)
+            try {
+                const cashiersResponse = await POSService.getCashiersPOS()
+
+                const firstWithFixedPin = cashiersResponse.cashiers.find(
+                    (cashier) => !!cashier.fixedPin
+                )
+
+                await handleUnlock(
+                    firstWithFixedPin?.userName || '',
+                    firstWithFixedPin?.fixedPin || ''
+                )
+            } catch (error) {
+                console.error('Error fetching cashiers:', error)
+            }
+            setLoader(false)
+        }
+        fetchCashiers()
+    }, [])
+
+    const handleUnlock = async (username: string, pin: string) => {
+        try {
+            const response = await POSService.unlockDevice({
+                userName: username,
+                pin
+            })
+            AuthService.SetToken(Auth.Cashier, response.accessToken)
+            // Handle successful unlock, e.g., redirect or show success message
+            console.log('Device unlocked successfully')
+        } catch (error) {
+            console.error('Error unlocking device:', error)
+            // Handle error, e.g., show error message
+        }
+    }
 
     useEffect(() => {
         const token = AuthService.GetToken(Auth.POS)
@@ -21,10 +60,16 @@ function HomePage() {
         }
     }, [navigate])
 
-    useEffect(() => {
-        const token = AuthService.GetToken(Auth.Cashier)
-        setHasCashierToken(!!token)
-    }, [navigate])
+
+    if (loader) {
+        return (
+            <Container isFullHeight={true} className="home-container">
+                <Header navigateBackUrl="#" />
+                <CircularProgress />
+                <Footer />
+            </Container>
+        )
+    }
 
     return <HomeTemplate navigate={navigate} />
 }
