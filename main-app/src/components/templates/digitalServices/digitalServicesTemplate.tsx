@@ -26,7 +26,7 @@ export default function DigitalServicesTemplate({
     return (
         <Container isFullHeight={true} style={{ gap: 0 }}>
             <Header
-                navigateBackUrl="#"
+                navigateBackUrl="/"
                 navigationBackText={t('digitalServices.backToServices')}
             />
             <QrCodeModal isOpen={true} onClose={() => navigate('/')} />
