@@ -17,15 +17,21 @@ export default function HomeItem({
 }: HomeItemProps) {
     const { t } = useTranslate()
     return (
-        <button className="home-item" onClick={handleClick}>
+        <button
+            className={`home-item  ${isDisabled ? 'coming-soon' : ''}`}
+            onClick={handleClick}>
             <div className="image-container">
                 <img src={image} alt={title} />
             </div>
 
             <div className="text-content">
-                <p className="title">
-                    {isDisabled && <span>{t('comingSoon')}</span>}
-                    <br />
+                <p className={`title`}>
+                    {isDisabled && (
+                        <>
+                            <span>{t('comingSoon')}</span>
+                            <br />
+                        </>
+                    )}
                     {title}
                 </p>
                 <p>{body}</p>
