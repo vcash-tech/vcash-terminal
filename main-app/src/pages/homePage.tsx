@@ -31,7 +31,10 @@ function HomePage() {
             }
             setLoader(false)
         }
-        fetchCashiers()
+
+        if (!AuthService.GetToken(Auth.Cashier)) {
+            fetchCashiers()
+        }
     }, [])
 
     const handleUnlock = async (username: string, pin: string) => {
