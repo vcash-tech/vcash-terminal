@@ -57,7 +57,7 @@ export interface MoneyTransfer {
   };
   amount: number;
   statusCode: StatusCode;
-  date: Date;
+  date: string;
   transactions: Transaction[];
   voucherCode?: string;
   typeCode: TransactionType;
@@ -70,6 +70,8 @@ export interface MoneyTransfer {
   venue?: {
     name: string;
     venueId: number;
+    address?: string;
+    city?: string;
   };
   error?: string;
 }

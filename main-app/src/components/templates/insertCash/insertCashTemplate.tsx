@@ -1,3 +1,4 @@
+import { format } from 'date-fns'
 import { useState } from 'react'
 
 import Container from '@/components/atoms/container/container'
@@ -56,7 +57,19 @@ export default function InsertCashTemplate() {
             <VoucherConfirmationTemplate
                 voucherConfirmation={
                     {
-                        voucherCode: voucherData.moneyTransfer.voucherCode
+                        voucherCode: voucherData.moneyTransfer.voucherCode,
+                        date: format(
+                            new Date(voucherData.moneyTransfer.date),
+                            'd MMMM, yyyy'
+                        ),
+                        time: format(
+                            new Date(voucherData.moneyTransfer.date),
+                            'hh:mm a'
+                        ),
+                        amount: `${voucherData.moneyTransfer.amount} ${voucherData.moneyTransfer.currencyCode}`,
+                        referenceNo:
+                            voucherData.moneyTransfer.moneyTransferCode,
+                        terminal: `${voucherData.moneyTransfer.venue?.address}, ${voucherData.moneyTransfer.venue?.city}`
                     } as VoucherConfirmation
                 }
             />

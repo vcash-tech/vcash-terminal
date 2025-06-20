@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom'
+
 import Container from '@/components/atoms/container/container'
 import HalfContainer from '@/components/atoms/container/halfContainer'
 import Divider from '@/components/atoms/divider/divider'
@@ -17,8 +19,9 @@ export default function VoucherConfirmationTemplate({
     voucherConfirmation: VoucherConfirmation
 }) {
     const { t } = useTranslate()
+    const navigate = useNavigate()
     const onComplete = () => {
-        alert('onComplete')
+        navigate('/')
     }
 
     return (
