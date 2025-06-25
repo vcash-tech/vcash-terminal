@@ -11,5 +11,5 @@
     "strict": true,
     "resolveJsonModule": true
   },
-  "include": ["*.ts"]
+  "include": ["main.ts"]
 }

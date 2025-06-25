@@ -44,8 +44,10 @@ export default function InsertCashTemplate() {
         }
 
         try {
-            // const voucherCodeDefault = '123-456-789' // Replace with actual logic
-            // const result = await window.api.print(voucherCodeDefault
+            const result = await window.api.print(
+                '1232-1312-12312-12312' // Replace with actual voucher code
+            )
+            console.log('Print result:', result)
         } catch {
             // printer unavailable handling
         }

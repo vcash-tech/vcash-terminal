@@ -11,7 +11,9 @@ function createWindow() {
     width: 800,
     height: 600,
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js') // Built output of preload.ts
+      preload: path.join(__dirname, 'preload.js'), // Built output of preload.ts
+      contextIsolation: true,
+      nodeIntegration: false
     }
   })
 
@@ -21,5 +23,7 @@ function createWindow() {
 app.whenReady().then(createWindow)
 
 ipcMain.handle('print', (_event, voucherCode) => {
-  return voucherCode
+    // Here you would implement the actual printing logic
+
+    return voucherCode
 })

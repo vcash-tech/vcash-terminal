@@ -4,5 +4,5 @@
     "electron/preload.ts"
   ],
   "ext": "ts",
-  "exec": "npx tsc -p electron/tsconfig.json && electron dist-electron/main.js"
+  "exec": "npx tsc -p electron/tsconfig.main.json && npx tsc -p electron/tsconfig.preload.json && electron dist-electron/main.js"
 }
