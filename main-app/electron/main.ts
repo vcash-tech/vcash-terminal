@@ -26,7 +26,7 @@ function createWindow() {
         win.webContents.openDevTools()
     } else {
         // Production mode - load from built files
-        win.loadFile(path.join(__dirname, '../dist/index.html'))
+        win.loadURL('https://terminal-app-two.vercel.app')
     }
 }
 
