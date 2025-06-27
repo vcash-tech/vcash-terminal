@@ -64,5 +64,18 @@ export default tseslint.config(
             semi: ['error', 'never'],
             'no-use-before-define': 'off'
         }
+    },
+    // Specific configuration for Electron main process files
+    {
+        files: ['electron/**/*.ts'],
+        languageOptions: {
+            globals: {
+                ...globals.node
+            }
+        },
+        rules: {
+            // Disable React-specific rules for Electron files
+            'react-refresh/only-export-components': 'off'
+        }
     }
 )

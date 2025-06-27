@@ -3,16 +3,23 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "main": "dist-electron/main.js",
+  "description": "VCash Terminal - Digital services payment terminal",
+  "author": "VCash",
   "scripts": {
     "dev": "concurrently \"npm:dev:*\"",
     "dev:vite": "vite",
     "dev:electron": "nodemon",
-    "build": "vite build",
+    "build": "vite build && npm run build:electron",
+    "build:electron": "npx tsc -p electron/tsconfig.main.json && npx tsc -p electron/tsconfig.preload.json",
+    "build:win": "npm run build && npx electron-builder --win --x64",
+    "build:mac": "npm run build && npx electron-builder --mac",
+    "build:linux": "npm run build && npx electron-builder --linux",
     "lint": "eslint .",
     "preview": "vite preview",
     "lint:check": "eslint \"src/**/*.ts*\" && node scripts/check-file-names.js",
     "lint:names": "node scripts/check-file-names.js",
-    "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist",
+    "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist && rm -rf dist-electron",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "audit-stories": "ts-node scripts/audit-stories.ts",
@@ -44,6 +51,7 @@
     "@storybook/react": "^8.6.14",
     "@storybook/react-vite": "^8.6.14",
     "@storybook/test": "^8.6.14",
+    "@types/node": "^24.0.4",
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
     "@vitejs/plugin-react": "^4.4.1",
@@ -69,5 +77,51 @@
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.30.1",
     "vite": "^6.3.5"
+  },
+  "build": {
+    "appId": "com.vcash.terminal",
+    "productName": "VCash Terminal",
+    "directories": {
+      "output": "dist-build"
+    },
+    "files": [
+      "dist/**/*",
+      "dist-electron/**/*",
+      "node_modules/**/*"
+    ],
+    "extraMetadata": {
+      "main": "dist-electron/main.js"
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "mac": {
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        }
+      ]
+    },
+    "linux": {
+      "target": [
+        {
+          "target": "AppImage",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    }
   }
 }

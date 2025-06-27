@@ -6,21 +6,43 @@ import { fileURLToPath } from 'url'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
-function createWindow() {
-  const win = new BrowserWindow({
-    width: 800,
-    height: 600,
-    webPreferences: {
-      preload: path.join(__dirname, 'preload.js'), // Built output of preload.ts
-      contextIsolation: true,
-      nodeIntegration: false
-    }
-  })
+// Check if running in development mode
+const isDev = !app.isPackaged
 
-  win.loadURL('http://localhost:5173')
+function createWindow() {
+    const win = new BrowserWindow({
+        width: 800,
+        height: 600,
+        webPreferences: {
+            preload: path.join(__dirname, 'preload.js'), // Built output of preload.ts
+            contextIsolation: true,
+            nodeIntegration: false
+        }
+    })
+
+    if (isDev) {
+        // Development mode - load from Vite dev server
+        win.loadURL('http://localhost:5173')
+        win.webContents.openDevTools()
+    } else {
+        // Production mode - load from built files
+        win.loadFile(path.join(__dirname, '../dist/index.html'))
+    }
 }
 
 app.whenReady().then(createWindow)
+
+app.on('window-all-closed', () => {
+    if (process.platform !== 'darwin') {
+        app.quit()
+    }
+})
+
+app.on('activate', () => {
+    if (BrowserWindow.getAllWindows().length === 0) {
+        createWindow()
+    }
+})
 
 ipcMain.handle('print', (_event, voucherCode) => {
     // Here you would implement the actual printing logic
