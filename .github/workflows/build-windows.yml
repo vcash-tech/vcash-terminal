@@ -43,3 +43,23 @@ jobs:
           name: windows-installer
           path: main-app/dist-build/*.exe
           retention-days: 30
+
+      - name: Create Release
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v${{ github.run_number }}
+          name: VCash Terminal v${{ github.run_number }}
+          body: |
+            Automated release from commit ${{ github.sha }}
+
+            ## Changes
+            - Built from latest main branch
+
+            ## Installation
+            Download the Windows installer below and run it to install VCash Terminal.
+          files: main-app/dist-build/*.exe
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
