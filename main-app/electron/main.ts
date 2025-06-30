@@ -1,4 +1,6 @@
 import { app, BrowserWindow, ipcMain } from 'electron'
+import * as http from 'http'
+import * as https from 'https'
 import * as path from 'path'
 import { fileURLToPath } from 'url'
 
@@ -44,8 +46,65 @@ app.on('activate', () => {
     }
 })
 
-ipcMain.handle('print', (_event, voucherCode) => {
-    // Here you would implement the actual printing logic
+ipcMain.handle('activate', async (_event, jwt: string) => {
+    console.log('Activating with JWT:', jwt)
+})
 
-    return voucherCode
+ipcMain.handle('deactivate', async (_event) => {
+    console.log('Deactivating')
+})
+
+ipcMain.handle('print', async (_event, url: string): Promise<string> => {
+    try {
+        // Determine which module to use based on the URL protocol
+        const isHttps = url.startsWith('https:')
+        const httpModule = isHttps ? https : http
+
+        return new Promise((resolve, reject) => {
+            const request = httpModule.get(url, (response) => {
+                // Check if the response is successful
+                if (response.statusCode !== 200) {
+                    reject(
+                        new Error(
+                            `Failed to download image. Status code: ${response.statusCode}`
+                        )
+                    )
+                    return
+                }
+
+                const chunks: Buffer[] = []
+
+                // Collect data chunks
+                response.on('data', (chunk) => {
+                    chunks.push(chunk)
+                })
+
+                // When download is complete, convert to base64
+                response.on('end', () => {
+                    const buffer = Buffer.concat(chunks)
+                    const base64String = buffer.toString('base64')
+                    resolve(base64String)
+                })
+            })
+
+            // Handle request errors
+            request.on('error', (error) => {
+                reject(new Error(`Failed to download image: ${error.message}`))
+            })
+
+            // Set a timeout for the request
+            request.setTimeout(30000, () => {
+                request.destroy()
+                reject(
+                    new Error(
+                        'Request timeout - failed to download image within 30 seconds'
+                    )
+                )
+            })
+        })
+    } catch (error) {
+        throw new Error(
+            `Error downloading image: ${error instanceof Error ? error.message : 'Unknown error'}`
+        )
+    }
 })

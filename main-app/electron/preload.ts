@@ -1,5 +1,7 @@
-import { contextBridge, ipcRenderer } from "electron"
+import { contextBridge, ipcRenderer } from 'electron'
 
-contextBridge.exposeInMainWorld("api", {
-  print: (voucherCode: string) => ipcRenderer.invoke("print", voucherCode),
+contextBridge.exposeInMainWorld('api', {
+    print: (url: string) => ipcRenderer.invoke('print', url),
+    activate: (jwt: string) => ipcRenderer.invoke('activate', jwt),
+    deactivate: () => ipcRenderer.invoke('deactivate')
 })
