@@ -1,8 +1,16 @@
-import { app, BrowserWindow, ipcMain } from 'electron'
+import { app, BrowserWindow, ipcMain, screen } from 'electron'
+import * as fs from 'fs'
 import * as http from 'http'
 import * as https from 'https'
 import * as path from 'path'
 import { fileURLToPath } from 'url'
+
+import {
+    apiResponse,
+    executeActivate,
+    executeDeactivate,
+    executePrint
+} from './peripherals.js'
 
 // ES module equivalent for __dirname
 const __filename = fileURLToPath(import.meta.url)
@@ -12,9 +20,12 @@ const __dirname = path.dirname(__filename)
 const isDev = !app.isPackaged
 
 function createWindow() {
+    const primaryScreen = screen.getPrimaryDisplay()
     const win = new BrowserWindow({
-        width: 800,
-        height: 600,
+        width: isDev ? 1920 : primaryScreen.bounds.width * 0.8,
+        height: isDev ? 1080 : primaryScreen.bounds.height * 0.8,
+        fullscreen: !isDev,
+        frame: isDev,
         webPreferences: {
             preload: path.join(__dirname, 'preload.js'), // Built output of preload.ts
             contextIsolation: true,
@@ -46,15 +57,64 @@ app.on('activate', () => {
     }
 })
 
-ipcMain.handle('activate', async (_event, jwt: string) => {
-    console.log('Activating with JWT:', jwt)
+// Path to store the device token
+const getTokenFilePath = (): string => {
+    const userDataPath = app.getPath('userData')
+    return path.join(userDataPath, 'device-token.txt')
+}
+
+ipcMain.handle(
+    'saveDeviceToken',
+    async (_event, token: string): Promise<boolean> => {
+        try {
+            const tokenFilePath = getTokenFilePath()
+
+            // Ensure the user data directory exists
+            const userDataPath = app.getPath('userData')
+            if (!fs.existsSync(userDataPath)) {
+                fs.mkdirSync(userDataPath, { recursive: true })
+            }
+
+            // Write the token to the file
+            fs.writeFileSync(tokenFilePath, token, 'utf8')
+            return true
+        } catch (error) {
+            console.error('Failed to save device token:', error)
+            return false
+        }
+    }
+)
+
+ipcMain.handle('getDeviceToken', async (_event): Promise<string> => {
+    try {
+        const tokenFilePath = getTokenFilePath()
+
+        // Check if the file exists
+        if (!fs.existsSync(tokenFilePath)) {
+            return ''
+        }
+
+        // Read and return the token
+        const token = fs.readFileSync(tokenFilePath, 'utf8')
+        return token.trim()
+    } catch (error) {
+        console.error('Failed to read device token:', error)
+        return ''
+    }
 })
 
-ipcMain.handle('deactivate', async (_event) => {
-    console.log('Deactivating')
+ipcMain.handle(
+    'activate',
+    async (_event, jwt: string): Promise<apiResponse> => {
+        return executeActivate(jwt)
+    }
+)
+
+ipcMain.handle('deactivate', async (_event): Promise<apiResponse> => {
+    return executeDeactivate()
 })
 
-ipcMain.handle('print', async (_event, url: string): Promise<string> => {
+ipcMain.handle('print', async (_event, url: string): Promise<apiResponse> => {
     try {
         // Determine which module to use based on the URL protocol
         const isHttps = url.startsWith('https:')
@@ -83,7 +143,13 @@ ipcMain.handle('print', async (_event, url: string): Promise<string> => {
                 response.on('end', () => {
                     const buffer = Buffer.concat(chunks)
                     const base64String = buffer.toString('base64')
-                    resolve(base64String)
+                    executePrint(base64String)
+                        .then((response: apiResponse) => {
+                            resolve(response)
+                        })
+                        .catch((error: Error) => {
+                            reject(error)
+                        })
                 })
             })
 
