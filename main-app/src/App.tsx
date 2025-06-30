@@ -3,6 +3,7 @@ import './styles/app.scss'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
 import { KeyboardProvider } from './context/KeyboardContext'
+import useInactivityRedirect from './helpers/inactivityRedirect'
 import { TranslationProvider } from './i18n/TranslationProvider'
 import DigitalServicesPage from './pages/digitalSevicesPage'
 import DisclaimerPage from './pages/disclaimerPage'
@@ -13,6 +14,7 @@ import RegisterPage from './pages/registerPage'
 import WelcomePage from './pages/welcomePage'
 
 function Layout() {
+    useInactivityRedirect('/welcome')
     return (
         <>
             {/*{!shouldHideHeader && <Header />}*/}
