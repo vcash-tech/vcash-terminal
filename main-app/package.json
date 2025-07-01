@@ -101,22 +101,21 @@
           ]
         }
       ],
-      "artifactName": "${productName}-${version}-${os}-${arch}.${ext}",
-      "nsis": {
-        "oneClick": false,
-        "perMachine": true,
-        "allowToChangeInstallationDirectory": false,
-        "installationDirectoryName": "VCash\\UI",
-        "createDesktopShortcut": true,
-        "createStartMenuShortcut": true,
-        "menuCategory": "VCash",
-        "shortcutName": "VCash Terminal",
-        "runAfterFinish": false,
-        "allowElevation": true,
-        "installerLanguages": [
-          "en_US"
-        ]
-      }
+      "artifactName": "${productName}-${version}-${os}-${arch}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": true,
+      "allowToChangeInstallationDirectory": false,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "menuCategory": "VCash",
+      "shortcutName": "VCash Terminal",
+      "runAfterFinish": false,
+      "allowElevation": true,
+      "installerLanguages": [
+        "en_US"
+      ]
     },
     "mac": {
       "target": [
