@@ -95,26 +95,27 @@
     "win": {
       "target": [
         {
-          "target": "msi",
+          "target": "nsis",
           "arch": [
             "x64"
           ]
         }
       ],
-      "perMachine": true,
-      "oneClick": false,
-      "allowToChangeInstallationDirectory": false,
-      "installationDirectoryName": "VCash\\UI",
       "artifactName": "${productName}-${version}-${os}-${arch}.${ext}",
-      "msi": {
+      "nsis": {
         "oneClick": false,
         "perMachine": true,
         "allowToChangeInstallationDirectory": false,
+        "installationDirectoryName": "VCash\\UI",
         "createDesktopShortcut": true,
         "createStartMenuShortcut": true,
         "menuCategory": "VCash",
         "shortcutName": "VCash Terminal",
-        "runAfterFinish": false
+        "runAfterFinish": false,
+        "allowElevation": true,
+        "installerLanguages": [
+          "en_US"
+        ]
       }
     },
     "mac": {
