@@ -1,0 +1,108 @@
+@use '../../../styles/config/colors' as colors;
+
+$linear-gradient: linear-gradient(
+    to bottom,
+    colors.$brand-primary-color,
+    transparent
+);
+
+.home-cards {
+    display: flex;
+    gap: 1.6rem;
+    justify-content: center;
+    padding: 20px;
+    flex: 1;
+    max-height: 40vh;
+    overflow: hidden;
+    user-select: none;
+    pointer-events: none;
+    justify-self: flex-end;
+    position: relative;
+    max-width: 100%;
+    // Add transition for smooth animation between states
+    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+    .home-cards-header {
+        background: $linear-gradient;
+        display: flex;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4rem;
+        z-index: 10;
+    }
+}
+
+.home-cards.full-screen {
+    height: 100vh;
+    max-height: 100vh;
+    align-items: flex-start;
+    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+    // Add transform origin to create a more natural expansion/contraction
+    transform-origin: center bottom;
+}
+
+.home-cards-column {
+    display: flex;
+    flex-direction: column;
+    width: 220px;
+    height: 100%;
+    animation: columnFloat 120s linear infinite;
+    will-change: transform;
+    position: relative;
+    overflow: visible;
+    gap: 1.6rem;
+    transform-origin: center center;
+}
+
+.home-card-wrapper {
+    width: 100%;
+    opacity: 0;
+    animation: fadeIn 0.6s ease-in-out forwards;
+    will-change: opacity, transform;
+    // Add transition for individual cards
+    transition:
+        transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+        opacity 0.5s ease-in-out;
+}
+
+@keyframes columnFloat {
+    0% {
+        transform: translateY(0%);
+    }
+    100% {
+        transform: translateY(-100%);
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+// Animation for transitioning between states
+.home-cards.animating {
+    // Pause the column float animation during transition
+    .home-cards-column {
+        animation-play-state: paused;
+    }
+
+    // Add scale effect during transition
+    &.full-screen {
+        .home-card-wrapper {
+            transform: scale(1.05);
+        }
+    }
+
+    &:not(.full-screen) {
+        .home-card-wrapper {
+            transform: scale(0.95);
+        }
+    }
+}
