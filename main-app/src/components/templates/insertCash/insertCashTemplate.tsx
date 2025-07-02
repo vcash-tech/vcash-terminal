@@ -162,9 +162,8 @@ export default function InsertCashTemplate({
             ] || VOUCHER_TYPE_MAPPING['20'] // Default fallback
 
         return {
-            url: 'https://market.vcash.rs/',
-            voucherCode:
-                moneyTransfer.voucherCode || moneyTransfer.moneyTransferCode,
+            url: `https://market.vcash.rs/?code=${moneyTransfer.voucherCode}`,
+            voucherCode: moneyTransfer.voucherCode || '---',
             publicCode: moneyTransfer.moneyTransferCode,
             venueName: moneyTransfer.venue?.name || 'VCash Terminal',
             venueAddress: moneyTransfer.venue?.address || '',
