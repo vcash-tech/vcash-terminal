@@ -113,6 +113,29 @@ export default function InsertCashTemplate({
         }
     }, [callActivate, callDeactivate])
 
+    // Polling for voucher amount every 3 seconds
+    useEffect(() => {
+        const fetchAmount = async () => {
+            try {
+                const response = await TransactionService.GetVoucherAmount()
+                _setAmount(response.amount)
+            } catch (error) {
+                console.error('Error fetching voucher amount:', error)
+                // The HttpService will handle 401 errors and token cleanup automatically
+            }
+        }
+
+        // Initial fetch
+        fetchAmount()
+
+        // Set up 3-second polling
+        const amountPollingInterval = setInterval(fetchAmount, 5000)
+
+        return () => {
+            clearInterval(amountPollingInterval)
+        }
+    }, [])
+
     const createVoucherPrintObject = (
         voucherResponse: VoucherResponse,
         voucherTypeId: string
@@ -211,16 +234,6 @@ export default function InsertCashTemplate({
             setShowError(true)
         }
     }
-
-    // useEffect(() => {
-    //     // Simulate fetching the amount from a service or state
-    //     const fetchAmount = async () => {
-    //         const amount = await TransactionService.GetVoucherAmount()
-    //         setAmount(amount.amount)
-    //     }
-
-    //     setInterval(() => fetchAmount(), 2000)
-    // }, [])
 
     const handleBuy = async () => {
         // Clear interval and deactivate before proceeding
