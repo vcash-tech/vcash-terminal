@@ -27,7 +27,10 @@
     "errors": {
       "authRequired": "Authentication required.",
       "activationFailed": "Activation failed: {{message}}",
-      "cashAcceptorError": "Failed to activate cash acceptor."
+      "cashAcceptorError": "Failed to activate cash acceptor.",
+      "templateRendererNotConfigured": "Template renderer not configured.",
+      "printFailed": "Printing failed: {{message}}",
+      "printError": "Failed to print voucher."
     }
   },
   "home": {

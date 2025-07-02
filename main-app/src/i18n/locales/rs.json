@@ -27,7 +27,10 @@
     "errors": {
       "authRequired": "Potrebna je autentifikacija.",
       "activationFailed": "Aktivacija neuspešna: {{message}}",
-      "cashAcceptorError": "Neuspešna aktivacija prijemnika gotovine."
+      "cashAcceptorError": "Neuspešna aktivacija prijemnika gotovine.",
+      "templateRendererNotConfigured": "Template renderer nije konfigurisan.",
+      "printFailed": "Štampanje neuspešno: {{message}}",
+      "printError": "Neuspešno štampanje vaučera."
     }
   },
   "home": {

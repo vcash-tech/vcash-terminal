@@ -119,7 +119,7 @@ function createWindow() {
 
     if (isDev) {
         // Development mode - load from Vite dev server
-        win.loadURL('https://terminal-app-two.vercel.app')
+        win.loadURL('http://localhost:5173')
         win.webContents.openDevTools()
     } else {
         // Production mode - load from built files

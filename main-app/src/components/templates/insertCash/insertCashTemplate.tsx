@@ -19,6 +19,13 @@ import { insertCash } from '../../../assets/images'
 import PaymentSuccessfulTemplate from '../paymentSuccessful/paymentSuccessfulTemplate'
 import VoucherConfirmationTemplate from '../voucherConfirmation/voucherConfirmationTemplate'
 
+const VOUCHER_TYPE_MAPPING = {
+    STANDARD_VOUCHER: 'Bet Vaučer',
+    NON_BETTING_VOUCHER: 'Digital Vaučer',
+    '10': 'Bet Vaučer',
+    '20': 'Digital Vaučer'
+} as const
+
 export default function InsertCashTemplate({
     navigate
 }: {
@@ -110,6 +117,98 @@ export default function InsertCashTemplate({
         }
     }, [callActivate, callDeactivate])
 
+    const createVoucherPrintObject = (
+        voucherResponse: VoucherResponse,
+        voucherTypeId: string
+    ) => {
+        const { moneyTransfer } = voucherResponse
+
+        // Format dates
+        const createdAt = format(
+            new Date(moneyTransfer.date),
+            'dd.MM.yyyy. HH:mm'
+        )
+        const currentTime = format(new Date(), 'dd.MM.yyyy. HH:mm')
+
+        // Format amount
+        const formattedAmount = moneyTransfer.amount.toLocaleString('sr-RS', {
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 2
+        })
+
+        // Get voucher type text
+        const voucherType =
+            VOUCHER_TYPE_MAPPING[
+                voucherTypeId as keyof typeof VOUCHER_TYPE_MAPPING
+            ] || VOUCHER_TYPE_MAPPING['20'] // Default fallback
+
+        return {
+            url: 'https://market.vcash.rs/',
+            voucherCode:
+                moneyTransfer.voucherCode || moneyTransfer.moneyTransferCode,
+            publicCode: moneyTransfer.moneyTransferCode,
+            venueName: moneyTransfer.venue?.name || 'VCash Terminal',
+            venueAddress: moneyTransfer.venue?.address || '',
+            venueCity: moneyTransfer.venue?.city || '',
+            amount: formattedAmount,
+            currencyCode: moneyTransfer.currencyCode,
+            createdAt,
+            currentTime,
+            voucherType
+        }
+    }
+
+    // Function to print voucher with template renderer
+    const printVoucher = async (
+        voucherResponse: VoucherResponse,
+        voucherTypeId: string
+    ) => {
+        try {
+            const templateRendererUrl = import.meta.env
+                .VITE_TEMPLATE_RENDERER_URL
+            if (!templateRendererUrl) {
+                console.error('VITE_TEMPLATE_RENDERER_URL not configured')
+                setErrorMessage(
+                    t('insertCash.errors.templateRendererNotConfigured')
+                )
+                setShowError(true)
+                return
+            }
+
+            const voucherObject = createVoucherPrintObject(
+                voucherResponse,
+                voucherTypeId
+            )
+
+            // Convert to base64
+            const jsonString = JSON.stringify(voucherObject)
+            const base64Data = btoa(jsonString)
+
+            // Construct the print URL
+            const printUrl = `${templateRendererUrl}/terminal_voucher?data=${base64Data}&type=bmp`
+
+            console.log('Printing voucher with URL:', printUrl)
+            console.log('Voucher object:', voucherObject)
+
+            const result = await window.api.print(printUrl)
+            console.log('Print result:', result)
+
+            // Check if printing failed
+            if (!result.success) {
+                setErrorMessage(
+                    t('insertCash.errors.printFailed', {
+                        message: result.message
+                    })
+                )
+                setShowError(true)
+            }
+        } catch (error) {
+            console.error('Error printing voucher:', error)
+            setErrorMessage(t('insertCash.errors.printError'))
+            setShowError(true)
+        }
+    }
+
     // useEffect(() => {
     //     // Simulate fetching the amount from a service or state
     //     const fetchAmount = async () => {
@@ -130,21 +229,16 @@ export default function InsertCashTemplate({
 
         setIsLoading(true)
         try {
+            const voucherTypeId = '20' // Replace with actual voucher type ID
             const voucherData = await TransactionService.CreateVoucher({
-                voucherTypeId: '20' // Replace with actual voucher type ID
+                voucherTypeId
             })
             setVoucherData(voucherData)
+
+            // Print the voucher with the new template renderer
+            await printVoucher(voucherData, voucherTypeId)
         } catch (err) {
             console.error(err)
-        }
-
-        try {
-            const result = await window.api.print(
-                '1232-1312-12312-12312' // Replace with actual voucher code
-            )
-            console.log('Print result:', result)
-        } catch {
-            // printer unavailable handling
         }
         setIsLoading(false)
     }
