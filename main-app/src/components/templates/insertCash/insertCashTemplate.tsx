@@ -46,15 +46,19 @@ export default function InsertCashTemplate({
     }, [])
 
     const callActivate = useCallback(async () => {
+        console.log('callActivate')
         try {
             const jwt = getJwtToken()
+            console.log('jwt', jwt)
             if (!jwt) {
                 setErrorMessage(t('insertCash.errors.authRequired'))
                 setShowError(true)
                 return
             }
 
+            console.log('window.api.activate', window.api.activate)
             const result = await window.api.activate(jwt)
+            console.log('result', result)
             if (!result.success) {
                 setErrorMessage(
                     t('insertCash.errors.activationFailed', {
@@ -80,6 +84,7 @@ export default function InsertCashTemplate({
     }, [])
 
     useEffect(() => {
+        console.log('useEffect za aktivaciju')
         const startActivation = async () => {
             await callActivate()
 
