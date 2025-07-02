@@ -1,0 +1,2 @@
+STANDARD_VOUCHER: Bet Vaučer
+NON_BETTING_VOUCHER: Digital Vaučer

@@ -12,7 +12,7 @@ interface ApiResponse {
 declare global {
     interface Window {
         api: {
-            print: (voucherCode: string) => Promise<string>
+            print: (voucherCode: string) => Promise<ApiResponse>
             activate: (jwt: string) => Promise<ApiResponse>
             deactivate: () => Promise<ApiResponse>
             saveDeviceToken: (token: string) => Promise<boolean>
