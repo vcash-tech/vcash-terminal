@@ -66,12 +66,8 @@ export default function InsertCashTemplate({
             console.log('window.api.activate', window.api.activate)
             const result = await window.api.activate(jwt)
             console.log('result', result)
-            if (!result.success) {
-                setErrorMessage(
-                    t('insertCash.errors.activationFailed', {
-                        message: result.message
-                    })
-                )
+            if (!result.activated) {
+                setErrorMessage(t('insertCash.errors.cashAcceptorError'))
                 setShowError(true)
             }
         } catch (error) {

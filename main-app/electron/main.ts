@@ -6,6 +6,7 @@ import * as path from 'path'
 import { fileURLToPath } from 'url'
 
 import {
+    activateApiResponse,
     apiResponse,
     executeActivate,
     executeDeactivate,
@@ -259,13 +260,13 @@ ipcMain.handle('getDeviceToken', async (_event): Promise<string> => {
 
 ipcMain.handle(
     'activate',
-    async (_event, jwt: string): Promise<apiResponse> => {
-        return executeActivate(jwt)
+    async (_event, jwt: string): Promise<activateApiResponse> => {
+        return await executeActivate(jwt)
     }
 )
 
-ipcMain.handle('deactivate', async (_event): Promise<apiResponse> => {
-    return executeDeactivate()
+ipcMain.handle('deactivate', async (_event): Promise<void> => {
+    await executeDeactivate()
 })
 
 ipcMain.handle('print', async (_event, url: string): Promise<apiResponse> => {
