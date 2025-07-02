@@ -23,7 +23,12 @@
     "altText": "Ubacite novac",
     "insertedAmount": "Uneti iznos",
     "noChangeWarning": "Ubacite tačan iznos - terminal ne vraća kusur. Povraćaj novca nakon uplate nije moguć.",
-    "confirmPayment": "Potvrdi plaćanje"
+    "confirmPayment": "Potvrdi plaćanje",
+    "errors": {
+      "authRequired": "Potrebna je autentifikacija.",
+      "activationFailed": "Aktivacija neuspešna: {{message}}",
+      "cashAcceptorError": "Neuspešna aktivacija prijemnika gotovine."
+    }
   },
   "home": {
     "bettingServices": {
@@ -46,8 +51,8 @@
     "topUpServices": "Dopune naloga"
   },
   "qrModal": {
-      "title": "Za više informacija o proizvodu, skenirajte QR kod i posetite VCash aplikaciju",
-      "back": "Nazad"
+    "title": "Za više informacija o proizvodu, skenirajte QR kod i posetite VCash aplikaciju",
+    "back": "Nazad"
   },
   "voucherGenerated": {
     "title": "VCash vaučer je uspešno izdat",
@@ -67,14 +72,14 @@
     "buttonText": "Završi"
   },
   "cashboxFullModal": {
-      "title": "Dalja uplata nije moguća",
-      "subtitle": "Trenutno nije moguće nastaviti sa uplatom gotovine. Možete izdati vaučer za iznos koji ste do sada ubacili.",
-      "buttonText": "Generiši vaučer"
+    "title": "Dalja uplata nije moguća",
+    "subtitle": "Trenutno nije moguće nastaviti sa uplatom gotovine. Možete izdati vaučer za iznos koji ste do sada ubacili.",
+    "buttonText": "Generiši vaučer"
   },
   "printerUnavailableModal": {
-      "title": "Preuzmite svoj vaučer",
-      "subtitle": "Vaš vaučer je spreman. Možete ga preuzeti skeniranjem QR koda sa ekrana ili slanjem na email.",
-      "buttonText": "Pošalji na email"
+    "title": "Preuzmite svoj vaučer",
+    "subtitle": "Vaš vaučer je spreman. Možete ga preuzeti skeniranjem QR koda sa ekrana ili slanjem na email.",
+    "buttonText": "Pošalji na email"
   },
   "sessionCounter": {
     "timeLeft": "Preostalo vreme:",
@@ -96,15 +101,9 @@
     "emailPlaceholder": "Email adresa",
     "sendButton": "Pošalji vaučer na email"
   },
-  "actionCompleteStatus": {
-
-  },
-  "insertCard": {
-
-  },
-  "paymentMethod": {
-    
-  },
+  "actionCompleteStatus": {},
+  "insertCard": {},
+  "paymentMethod": {},
   "header": {
     "back": "Nazad",
     "language": "Jezik"

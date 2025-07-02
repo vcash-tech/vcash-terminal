@@ -23,7 +23,12 @@
     "altText": "Insert cash",
     "insertedAmount": "Inserted Amount",
     "noChangeWarning": "The machine does not return change. Refunds are not available.",
-    "confirmPayment": "Confirm Payment"
+    "confirmPayment": "Confirm Payment",
+    "errors": {
+      "authRequired": "Authentication required.",
+      "activationFailed": "Activation failed: {{message}}",
+      "cashAcceptorError": "Failed to activate cash acceptor."
+    }
   },
   "home": {
     "bettingServices": {
@@ -46,8 +51,8 @@
     "topUpServices": "Top-up services"
   },
   "qrModal": {
-      "title": "For more details about the product, scan the QR code to visit our marketplace app",
-      "back": "Back"
+    "title": "For more details about the product, scan the QR code to visit our marketplace app",
+    "back": "Back"
   },
   "voucherGenerated": {
     "title": "Your voucher has been issued successfully",
@@ -67,14 +72,14 @@
     "buttonText": "Finish"
   },
   "cashboxFullModal": {
-      "title": "Kiosk Cash Box Full",
-      "subtitle": "The cash deposit limit has been reached. You can generate a voucher for the amount you've inserted so far.",
-      "issueVoucher": "Issue Voucher"
+    "title": "Kiosk Cash Box Full",
+    "subtitle": "The cash deposit limit has been reached. You can generate a voucher for the amount you've inserted so far.",
+    "issueVoucher": "Issue Voucher"
   },
   "printerUnavailableModal": {
-      "title": "Printer Unavailable",
-      "subtitle": "You can still redeem your voucher - just scan the QR code below or send it to your email",
-      "buttonText": "Send to Email"
+    "title": "Printer Unavailable",
+    "subtitle": "You can still redeem your voucher - just scan the QR code below or send it to your email",
+    "buttonText": "Send to Email"
   },
   "sessionCounter": {
     "timeLeft": "Time left:",
