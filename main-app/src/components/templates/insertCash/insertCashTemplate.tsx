@@ -180,15 +180,22 @@ export default function InsertCashTemplate({
                 voucherTypeId
             )
 
-            // Convert to base64
+            // Convert to base64 with proper UTF-8 handling
             const jsonString = JSON.stringify(voucherObject)
-            const base64Data = btoa(jsonString)
+            console.log('Voucher JSON before base64:', jsonString)
+            console.log('Voucher object:', voucherObject)
+
+            // Use TextEncoder and btoa for proper UTF-8 to base64 conversion
+            const utf8Bytes = new TextEncoder().encode(jsonString)
+            const binaryString = Array.from(utf8Bytes, (byte) =>
+                String.fromCharCode(byte)
+            ).join('')
+            const base64Data = btoa(binaryString)
 
             // Construct the print URL
             const printUrl = `${templateRendererUrl}/terminal_voucher?data=${base64Data}&type=bmp`
 
             console.log('Printing voucher with URL:', printUrl)
-            console.log('Voucher object:', voucherObject)
 
             const result = await window.api.print(printUrl)
             console.log('Print result:', result)
