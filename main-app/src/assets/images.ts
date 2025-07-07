@@ -20,7 +20,15 @@ import ps from './images/ps.png'
 import qrCode from './images/qrCode.svg'
 import steam from './images/steam.png'
 import welcomeBackground from './images/welcomeBackground.svg'
-
+import betVoucher from './images/betVoucher.png'
+import gamingVoucher from './images/gamingVoucher.png'
+import chechLights from './images/chechLights.svg'
+import test from './images/test.png'
+import background from './images/background.png'
+import xboxCard from './images/xboxCard.png'
+import comingSoonBackground from './images/coming-soon-background.png'
+import playStationCard from './images/playstationCard-no-price.png'
+import steamCard from './images/steamCard.png'
 export {
     ageDisclaimerBackground,
     bettingServices,
@@ -43,4 +51,14 @@ export {
     ps,
     qrCode,
     steam,
-    welcomeBackground}
+    welcomeBackground,
+    betVoucher,
+    gamingVoucher,
+    chechLights,
+    test,
+    background,
+    xboxCard,
+    comingSoonBackground,
+    playStationCard,
+    steamCard
+}

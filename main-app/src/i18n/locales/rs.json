@@ -39,13 +39,138 @@
       "body": "Svi VCash servisi - uključuje dopune za gejming servise, striming i naloge kod kladionica u Srbiji"
     },
     "digitalServices": {
-      "title": "VCash Digital",
-      "body": "Samo digitalni servisi - idealan za gejming servise, striming i dopune"
+        "backToServices": "Nazad na izbor servisa",
+        "gamingServices": "Gejming servisi",
+        "streamingServices": "Striming servisi",
+        "topUpServices": "Dopune naloga"
     },
-    "billPayments": {
-      "title": "Plaćanje računa",
-      "body": "Skenirajte IPS kod sa računa za brzo plaćanje"
+    "qrModal": {
+        "title": "Za više informacija o proizvodu, skenirajte QR kod i posetite VCash aplikaciju",
+        "back": "Nazad"
+    },
+    "voucherGenerated": {
+        "title": "VCash vaučer je uspešno izdat",
+        "date": "Datum",
+        "time": "Vreme",
+        "referenceNo": "Kod transakcije",
+        "terminal": "Terminal",
+        "amount": "Iznos",
+        "type": "Tip",
+        "usage": "Upotreba",
+        "howToUse": {
+            "title": "Kako da iskoristite vaučer:",
+            "1": "Skenirajte QR kod sa vaučera ili posetite: [LINK] i unesite kod ručno",
+            "2": "Pregledajte listu dostupnih servisa",
+            "3": "Izaberite gde želite da iskoristite vaučer - brzo i jednostavno!"
+        },
+        "buttonText": "Završi"
+    },
+    "cashboxFullModal": {
+        "title": "Dalja uplata nije moguća",
+        "subtitle": "Trenutno nije moguće nastaviti sa uplatom gotovine. Možete izdati vaučer za iznos koji ste do sada ubacili.",
+        "buttonText": "Generiši vaučer"
+    },
+    "printerUnavailableModal": {
+        "title": "Preuzmite svoj vaučer",
+        "subtitle": "Vaš vaučer je spreman. Možete ga preuzeti skeniranjem QR koda sa ekrana ili slanjem na email.",
+        "buttonText": "Pošalji na email"
+    },
+    "sessionCounter": {
+        "timeLeft": "Preostalo vreme:",
+        "extendTime": "Produži vreme"
+    },
+    "sessionTimeoutModal": {
+        "title": "Istekla je sesija",
+        "subtitle": "Zbog neaktivnosti, proces je automatski prekinut. Možete započeti ponovo od početka.",
+        "buttonText": "Započni ponovo"
+    },
+    "welcome": {
+        "title": "Dobrodošli u VCash",
+        "text": "Kupovina vaučera i plaćanje računa – brzo, jednostavno i bez čekanja.",
+        "getStarted": "Započni"
+    },
+    "emailInput": {
+        "title": "Pošalji vaučer na email",
+        "description": "Unesite email adresu na koju želite da vam pošaljemo vaučer.",
+        "emailPlaceholder": "Email adresa",
+        "sendButton": "Pošalji vaučer na email"
+    },
+    "actionCompleteStatus": {},
+    "insertCard": {},
+    "paymentMethod": {},
+    "header": {
+        "back": "Nazad",
+        "language": "Jezik"
+    },
+    "footer": {
+        "contactSupport": "Imate pitanje? Pozovite podršku:"
+    },
+    "common": {
+        "next": "Dalje",
+        "cancel": "Otkaži",
+        "confirm": "Potvrdi",
+        "submit": "Pošalji",
+        "info": "Info"
+    },
+    "register": {
+        "title": "Registracija uređaja",
+        "emailPlaceholder": "Email",
+        "deviceNamePlaceholder": "Ime uređaja",
+        "registerDevice": "Registruj uređaj",
+        "waitingForApproval": "Čeka se odobrenje",
+        "approvalPending": "Odobrenje uređaja je trenutno na čekanju, dok se ne odobri od strane Agenta iz {{brandName}} mreže.",
+        "successfulRegistration": "Uspešna registracija",
+        "welcomeMessage": "Uređaj je uspešno registrovan. Dobro došli u {{brandName}} mrežu.",
+        "continue": "Nastavi",
+        "tryAgain": "Pokušaj ponovo"
+    },
+    "comingSoon": "Dolazi uskoro..."
+  },
+  "service": {
+    "title": "Izaberi svoj vaučer",
+    "subtitle": "Kupi kredit za kladionice ili online gaming servise",
+    "cards": {
+        "bet": {
+            "title": "Bet Vaučer",
+            "body": "Za sportske kladionice, kazino i ostale igre na sreću."
+        },
+        "gaming": {
+            "title": "Gaming Vaučer",
+            "body": "Kupi vaučer za XBox, Playstation ili Steam prodavnice"
+        }
+    },
+    "payBills": {
+        "title": "Plati račune",
+        "body": "Brzo i jednostavno plaćanje računa, bez gužve i čekanja",
+        "simpleScanTitle": "Plaćanje računa",
+        "simpleScanBody": "Jednostavno skeniraj i plati"
     }
+  },
+  "gamingVouchers": {
+    "title": "Gejming vaučeri",
+    "description": "Iskoristi VCash gejming vaučer za kupovinu PlayStation/Xbox/Steam dopuna.",
+    "qrInfo": "Skenirajte ili posetite <span style='color:#1048A3;'>market.vcash.rs</span> da se informišete o aktuelnim cenama proizvoda",
+    "qrInfo2": "Direktna kupovina proizvoda <b>nije moguća</b>. \nProizvodi se kupuju i aktiviraju kupovinom višenamenskog vaučera u odabranoj vrednosti prema proizvodu / servisu koji aktivirate",
+    "cards": {
+      "playstation": {
+          "title": "PlayStation Dopune",
+          "body": "Dopunite svoj PSN nalog i uživajte u igrama, pretplatama, filmovima i in-game sadržaju po izboru.."
+      },
+      "xbox": {
+          "title": "XBOX Gift Cards",
+          "body": "Dopunite svoj Xbox nalog i iskoristite kod za igre, pretplate i digitalni sadržaj iz Microsoft Store-a."
+      },
+      "steam": {
+          "title": "Steam Gift Cards",
+          "body": "Dopunite svoj Steam nalog i kupujte igre, dodatke i in-game sadržaj po izboru."
+      },
+      "comingSoon": {
+          "title": "Još servisa stiže uskoro",
+          "body": "Spremamo dodatne servise i popularne platforme – još više sadržaja koji volite, uskoro dostupno."
+      }
+    },
+    "priceFrom": "<span style='color: #000000; font-weight: 400;'>Od</span> $25 - $150",
+    "buttonText": "Kupi višenamenski vaučer"
   },
   "digitalServices": {
     "backToServices": "Nazad na izbor servisa",

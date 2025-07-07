@@ -1,0 +1,68 @@
+@use '../../../styles/config/colors';
+@use '../../../styles/config/fonts';
+.service-template {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 10rem;
+    background: colors.$main-background-color url("../assets/images/coming-soon-background.png") no-repeat right bottom;
+    background-size: cover;
+
+    h1 {
+        font-family: fonts.$body-font;
+        font-weight: 600;
+        font-size: 4.2rem;
+        line-height: 100%;
+        color: colors.$black-color;
+        margin: 0 0 0.8rem;
+    }
+
+    h2 {
+        font-family: fonts.$body-font;
+        font-weight: 400;
+        font-size: 2.4rem;
+        line-height: 150%;
+        color: colors.$dark-text-color;
+        margin: 0 0 5.6rem;
+    }
+    
+
+
+    h4 {
+        font-size: 2.8rem;
+        font-weight: 600;
+        color: #385ac9;
+        margin-top: 3rem;
+    }
+    &__pay-bills {
+        width: 94.3rem;
+        height: 17.5rem;
+        display: flex;
+        justify-content: space-between;
+        background-color: colors.$white-color;
+        border-radius: 1.6rem;
+        box-shadow: 0rem 0.4rem 2.4rem 0rem rgba(31, 63, 168, 0.21);
+        padding: 2.8rem 2.5rem;
+        position: relative;
+        overflow: hidden;
+        margin-top: -1.5rem;
+        z-index: 1;
+    }
+    &__pay-bills__content {
+        display: flex;
+        flex-direction: column;
+        gap: 1.6rem;
+    }
+}
+
+.coming-soon-badge {
+    position: absolute;
+    top: 0rem;
+    right: 0;
+    font-size: 2.2rem;
+    color: #fff;
+    font-weight: 700;
+    border-radius: 0.5rem;
+    z-index: 2;
+    text-align: center;
+}

@@ -11,6 +11,11 @@ import sessionExpired from './icons/sessionExpired.svg'
 import userIcon from './icons/userIcon.svg'
 import warningIcon from './icons/warningIcon.svg'
 import welcomeGift from './icons/welcomeGift.svg'
+import usIcon from './icons/usIcon.svg'
+import ukIcon from './icons/ukIcon.svg'
+import croIcon from './icons/croIcon.svg'
+import comingSoonGaming from './icons/coming-soon-gaming.svg'
+import comingSoon from './icons/coming-soon.svg'
 
 export {
     ageDisclaimer,
@@ -25,5 +30,10 @@ export {
     sessionExpired,
     userIcon,
     warningIcon,
-    welcomeGift
+    welcomeGift,
+    usIcon,
+    ukIcon,
+    croIcon,
+    comingSoonGaming,
+    comingSoon
 }
