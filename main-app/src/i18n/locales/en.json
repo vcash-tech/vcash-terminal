@@ -23,7 +23,15 @@
     "altText": "Insert cash",
     "insertedAmount": "Inserted Amount",
     "noChangeWarning": "The machine does not return change. Refunds are not available.",
-    "confirmPayment": "Confirm Payment"
+    "confirmPayment": "Confirm Payment",
+    "errors": {
+      "authRequired": "Authentication required.",
+      "activationFailed": "Activation failed: {{message}}",
+      "cashAcceptorError": "Failed to activate cash acceptor.",
+      "templateRendererNotConfigured": "Template renderer not configured.",
+      "printFailed": "Printing failed: {{message}}",
+      "printError": "Failed to print voucher."
+    }
   },
   "home": {
     "title": "Welcome to VCash",
