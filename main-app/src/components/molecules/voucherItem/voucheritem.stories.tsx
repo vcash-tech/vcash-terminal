@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import VoucherItem from './voucherItem'
+
 import { betVoucher, gamingVoucher } from '../../../assets/images'
+import VoucherItem from './voucherItem'
 
 const meta = {
     title: '2. Molecules/VoucherItem',

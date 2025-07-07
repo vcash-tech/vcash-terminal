@@ -1,11 +1,12 @@
-import Container from '@/components/atoms/container/container'
-import Header from '@/components/organisms/header/header'
-import Footer from '@/components/organisms/footer/footer'
 import { useTranslation } from 'react-i18next'
+
 import { qrCode } from '@/assets/images'
-import { gamingVoucherCards } from '@/data/mocks/gamingVoucher.mock'
-import GamingVoucherItem from '@/components/molecules/gamingVoucherItem/gamingVoucherItem'
+import Container from '@/components/atoms/container/container'
 import PrimaryButton from '@/components/atoms/primaryButton/primaryButton'
+import GamingVoucherItem from '@/components/molecules/gamingVoucherItem/gamingVoucherItem'
+import Footer from '@/components/organisms/footer/footer'
+import Header from '@/components/organisms/header/header'
+import { gamingVoucherCards } from '@/data/mocks/gamingVoucher.mock'
 
 export default function GamingVoucher() {
     const { t } = useTranslation()

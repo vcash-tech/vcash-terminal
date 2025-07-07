@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import GamingVoucherItem, { GamingVoucherItemProps } from './gamingVoucherItem'
+
 import test from '@/assets/images/test.png'
+
+import GamingVoucherItem, { GamingVoucherItemProps } from './gamingVoucherItem'
 
 const meta: Meta<typeof GamingVoucherItem> = {
     title: '2. Molecules/GamingVoucherItem',

@@ -1,11 +1,13 @@
-import React from 'react'
 import './_gamingVoucherItem.scss'
+
+import React from 'react'
 import { useTranslation } from 'react-i18next'
-import usIcon from '@/assets/icons/usIcon.svg'
-import ukIcon from '@/assets/icons/ukIcon.svg'
-import croIcon from '@/assets/icons/croIcon.svg'
-import background from '@/assets/images/background.png'
+
 import { comingSoonGaming } from '@/assets/icons'
+import croIcon from '@/assets/icons/croIcon.svg'
+import ukIcon from '@/assets/icons/ukIcon.svg'
+import usIcon from '@/assets/icons/usIcon.svg'
+import background from '@/assets/images/background.png'
 
 export interface GamingVoucherItemProps {
     title: string

@@ -1,12 +1,13 @@
-import React from 'react'
 import './_voucherItem.scss'
+
+import React from 'react'
 import { useTranslation } from 'react-i18next'
 
 export interface VoucherItemProps {
     title: string
     subtitle: string
     image: string
-    variant: 'bet' | 'gaming',
+    variant: 'bet' | 'gaming'
     onPress?: () => void
 }
 
@@ -19,7 +20,9 @@ const VoucherItem: React.FC<VoucherItemProps> = ({
 }) => {
     const { t } = useTranslation()
     return (
-        <button onClick={onPress} className={`voucher-item voucher-item--${variant}`}>
+        <button
+            onClick={onPress}
+            className={`voucher-item voucher-item--${variant}`}>
             <div className="voucher-item__text">
                 <h3 className="voucher-item__title">{t(title)}</h3>
                 <p className="voucher-item__subtitle">{t(subtitle)}</p>
