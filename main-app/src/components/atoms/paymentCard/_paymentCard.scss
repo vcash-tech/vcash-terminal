@@ -70,6 +70,29 @@
   }
 
   &.coming-soon {
-    @include mixins.coming-soon;
+    position: relative;
+    cursor: default;
+
+    &:hover, &:active {
+      background-color: colors.$white-color;
+      box-shadow: -3px 4px 14.4px 0 #0F20432B;
+
+      .card-text:default {
+        color: colors.$brand-primary-color;
+      }
+    }
+
+    &:after {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 22rem;
+      height: 15rem;
+      background: url('../assets/icons/coming-soon.svg') no-repeat center center;
+      background-size: 100% auto;
+      z-index: 2;
+      
+    }
   }
 }
