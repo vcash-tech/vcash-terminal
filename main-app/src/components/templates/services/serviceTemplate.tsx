@@ -15,9 +15,10 @@ export default function ServiceTemplate() {
         <Container isFullHeight={true}>
             <Header />
             <div className="service-template">
-                <h1>{t('service.title')}</h1>
-                <h2>{t('service.subtitle')}</h2>
                 <div className="service-template__vouchers">
+                    <h1>{t('service.title')}</h1>
+                    <h2>{t('service.subtitle')}</h2>
+                
                     {serviceList.map((item) => (
                         <VoucherItem
                             title={item.title}
@@ -28,11 +29,10 @@ export default function ServiceTemplate() {
                         />
                     ))}
                 </div>
-                
+
                 <h1>{t('service.payBills.title')}</h1>
                 <h2>{t('service.payBills.body')}</h2>
-
-                <div className="service-template__pay-bills">
+                <button className="service-template__pay-bills"> 
                     <span className="coming-soon-badge">
                         <img src={comingSoon} />
                     </span>
@@ -43,7 +43,7 @@ export default function ServiceTemplate() {
                     <div className="service-template__pay-bills__image">
                         <img src={chechLights} alt="Check Lights" />
                     </div>
-                </div>
+                </button>
             </div>
             <Footer />
         </Container>

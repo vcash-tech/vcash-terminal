@@ -4,7 +4,7 @@
     display: flex;
     flex-direction: column;
     flex: 1;
-    padding: 10rem;
+    padding: 6.8rem;
     background: colors.$main-background-color url("../assets/images/view-background.png") no-repeat right bottom;
     background-size: cover;
 
@@ -14,7 +14,7 @@
         font-size: 4.2rem;
         line-height: 100%;
         color: colors.$black-color;
-        margin: 0 0 0.8rem;
+        margin: 13rem 0 0.8rem;
     }
 
     h2 {
@@ -26,14 +26,31 @@
         margin: 0 0 5.6rem;
     }
     
+    &__vouchers {
+        display: flex;
+        flex-direction: column;
 
+        img {
+            height: auto;
+        }
+    }
 
     h4 {
+        font-family: fonts.$body-font;
         font-size: 2.8rem;
         font-weight: 600;
         color: #385ac9;
         margin-top: 3rem;
     }
+
+    p {
+        font-family: fonts.$body-font;
+        color: colors.$dark-text-color;
+        font-size: 1.8rem;
+        font-weight: 400;
+        margin-bottom: 4rem;
+    }
+
     &__pay-bills {
         width: 94.3rem;
         height: 17.5rem;
