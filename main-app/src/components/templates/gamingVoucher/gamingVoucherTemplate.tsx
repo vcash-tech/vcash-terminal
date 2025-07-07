@@ -11,11 +11,13 @@ import { gamingVoucherCards } from '@/data/mocks/gamingVoucher.mock'
 export default function GamingVoucher() {
     const { t } = useTranslation()
     return (
-        <Container>
+        <Container isFullHeight={true}>
             <Header />
             <div className="gaming-voucher">
                 <h1>{t('gamingVouchers.title')}</h1>
-                <p>{t('gamingVouchers.description')}</p>
+                <p dangerouslySetInnerHTML={{
+                    __html: t('gamingVouchers.description')
+                }} />
                 <div className="gaming-voucher__qr-box">
                     <div className="gaming-voucher__qr-image-wrapper">
                         <img src={qrCode} alt="QR Code" />

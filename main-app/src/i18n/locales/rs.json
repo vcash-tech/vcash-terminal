@@ -148,7 +148,7 @@
   },
   "gamingVouchers": {
     "title": "Gejming vaučeri",
-    "description": "Iskoristi VCash gejming vaučer za kupovinu PlayStation/Xbox/Steam dopuna.",
+    "description": "Iskoristi VCash <span style='font-weight: bold;'>višenamenski vaučer</span> za kupovinu PlayStation/Xbox/Steam dopuna.",
     "qrInfo": "Skenirajte ili posetite <span style='color:#1048A3;'>market.vcash.rs</span> da se informišete o aktuelnim cenama proizvoda",
     "qrInfo2": "Direktna kupovina proizvoda <b>nije moguća</b>. \nProizvodi se kupuju i aktiviraju kupovinom višenamenskog vaučera u odabranoj vrednosti prema proizvodu / servisu koji aktivirate",
     "cards": {

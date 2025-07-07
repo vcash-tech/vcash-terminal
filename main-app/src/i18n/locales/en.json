@@ -145,7 +145,7 @@
   },
   "gamingVouchers": {
     "title": "Gaming Vouchers",
-    "description": "Use a VCash gaming voucher to purchase PlayStation/Xbox/Steam top-ups.",
+    "description": "Use a VCash <b>multipurpose</b> gaming voucher to purchase PlayStation/Xbox/Steam top-ups.",
     "qrInfo": "Scan or visit <span style='color:#1048A3;'>market.vcash.rs</span> for current product prices.",
     "qrInfo2": "Direct product purchases <b>are not available</b>. \nProducts are purchased and activated using a multi-purpose voucher in a selected amount based on the product/service you wish to activate.",
     "cards": {
