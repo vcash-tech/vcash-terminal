@@ -172,6 +172,39 @@
     "priceFrom": "<span style='color: #000000; font-weight: 400;'>Od</span> $25 - $150",
     "buttonText": "Kupi višenamenski vaučer"
   },
+  "bettingVouchers": {
+    "title": "Betting voučeri",
+    "description": "Iskoristi VCash <b>višenamenski</b> vaučer kao dopune za kladionice, kazino i druge...",
+    "qrInfo": "Skenirajte ili posetite <span style='color:#1048A3;'>market.vcash.rs</span> da se informišete o aktuelnim cenama proizvoda.",
+    "qrInfo2": "Direktna kupovina proizvoda <b>nije moguća</b>.<br />Proizvodi se kupuju i aktiviraju kupovinom višenamenskog vaučera u odabranoj vrednosti prema proizvodu / servisu koji aktivirate.",
+    "cards": {
+      "balkanBet": {
+          "title": "BalkanBet Kladionice",
+          "body": "Dopunite svoj BalkanBet nalog i iskoristite sredstva za klađenje, igre na sreću i druge usluge koje <b>BalkanBet</b> nudi."
+      },
+      "soccerBet": {
+          "title": "SoccerBet Kladionice",
+          "body": "Dopunite svoj <b>SoccerBet</b> nalog i iskoristite dopunu za sportsko klađenje, kazino igre i druge zabavne opcije koje SoccerBet nudi."
+      },
+      "merkurXTip": {
+          "title": "Merkur X Tip Kladionice",
+          "body": "Uplatite dopunu na svoj <b>MerkurXtip</b> nalog i otkrijte svet sportskog klađenja, slot igara i ekskluzivnih bonusa."
+      },
+      "meridianBet": {
+          "title": "MeridianBet Kladionice",
+          "body": "Dodajte sredstva na svoj <b>MeridianBet</b> nalog i uživajte u bogatoj ponudi sportskog klađenja, kazino igara i promocija po vašem izboru."
+      },
+      "maxBet": {
+          "title": "MaxBet Kladionice",
+          "body": "Dopunite svoj <b>MaxBet</b> nalog i iskoristite sredstva za klađenje, kazino igre i druge uzbudljive opcije u MaxBet ponudi."
+      },
+      "commingSoon": {
+          "title": "Još servisa stiže uskoro",
+          "body": "Spremamo dodatne servise i popularne platforme – još više sadržaja koji volite, uskoro dostupno."
+      }
+    },
+    "buttonText": "Kupi višenamenski vaučer"
+  },
   "digitalServices": {
     "backToServices": "Nazad na izbor servisa",
     "gamingServices": "Gejming servisi",

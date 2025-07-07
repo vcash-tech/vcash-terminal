@@ -169,6 +169,40 @@
     "priceFrom": "<span style='color: #000000; font-weight: 400;'>From</span> $25 - $150",
     "buttonText": "Buy Multi-Purpose Voucher"
   },
+  "bettingVouchers": {
+    "title": "Betting Vouchers",
+    "description": "Use a <b>multi-purpose</b> VCash voucher as credit for betting shops, casinos, and more...",
+    "qrInfo": "Scan or visit <span style='color:#1048A3;'>market.vcash.rs</span> to check current product prices.",
+    "qrInfo2": "Direct purchase of products is <b>not available</b>.<br />Products are purchased and activated by buying a multi-purpose voucher in a selected value based on the product/service you wish to activate.",
+    "cards": {
+      "balkanBet": {
+        "title": "BalkanBet Betting Shops",
+        "body": "Top up your BalkanBet account and use the funds for betting, games of chance, and other services offered by <b>BalkanBet</b>."
+      },
+      "soccerBet": {
+        "title": "SoccerBet Betting Shops",
+        "body": "Top up your <b>SoccerBet</b> account and use the credit for sports betting, casino games, and other fun options offered by SoccerBet."
+      },
+      "merkurXTip": {
+        "title": "Merkur X Tip Betting Shops",
+        "body": "Top up your <b>MerkurXtip</b> account and discover the world of sports betting, slot games, and exclusive bonuses."
+      },
+      "meridianBet": {
+        "title": "MeridianBet Betting Shops",
+        "body": "Add funds to your <b>MeridianBet</b> account and enjoy a rich selection of sports betting, casino games, and promotions of your choice."
+      },
+      "maxBet": {
+        "title": "MaxBet Betting Shops",
+        "body": "Top up your <b>MaxBet</b> account and use the funds for betting, casino games, and other exciting options in the MaxBet offer."
+      },
+      "commingSoon": {
+        "title": "More Services Coming Soon",
+        "body": "We're preparing additional services and popular platforms – even more content you love, coming soon."
+      }
+    },
+    "priceFrom": "<span style='color: #000000; font-weight: 400;'>From</span> $25 - $150",
+    "buttonText": "Buy Multi-Purpose Voucher"
+  },
   "digitalServices": {
     "backToServices": "Back to service selection",
     "gamingServices": "Gaming platforms",
