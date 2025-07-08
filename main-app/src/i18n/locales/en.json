@@ -15,7 +15,9 @@
   "paymentSuccessful": {
     "title": "Payment Successful",
     "subtitle": "Please be patient, while we are printing your voucher",
-    "generatingVoucher": "Generating voucher..."
+    "generatingVoucher": "Generating voucher...",
+    "voucherUnavailable": "Voucher is not printed? Click on the button bellow to view it on the screen.",
+    "buttonText": "View Voucher on Screen"
   },
   "insertCash": {
     "title": "Insert cash",

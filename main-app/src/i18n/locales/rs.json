@@ -15,7 +15,9 @@
   "paymentSuccessful": {
     "title": "Plaćanje uspešno",
     "subtitle": "Štampamo vaš vaučer, molimo sačekajte…",
-    "generatingVoucher": "Vaučer se kreira..."
+    "generatingVoucher": "Vaučer se kreira...",
+    "voucherUnavailable": "Nisi dobio vaučer? Klikni ispod i pogledaj na ekranu",
+    "buttonText": "Pogledaj Vaučer na Ekranu"
   },
   "insertCash": {
     "title": "Ubacite novac",
