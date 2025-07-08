@@ -65,7 +65,8 @@
             "2": "Pregledajte listu dostupnih servisa",
             "3": "Izaberite gde želite da iskoristite vaučer - brzo i jednostavno!"
         },
-        "buttonText": "Završi"
+      "buttonText": "Završi",
+      "scanToRedeem": "Skenirajte za preuzimanje"
     },
     "cashboxFullModal": {
         "title": "Dalja uplata nije moguća",
@@ -232,7 +233,8 @@
       "2": "Pregledajte listu dostupnih servisa",
       "3": "Izaberite gde želite da iskoristite vaučer - brzo i jednostavno!"
     },
-    "buttonText": "Završi"
+    "buttonText": "Završi",
+    "code": "Vaučer kod"
   },
   "cashboxFullModal": {
     "title": "Dalja uplata nije moguća",
@@ -245,8 +247,8 @@
     "buttonText": "Pošalji na email"
   },
   "sessionCounter": {
-    "timeLeft": "Preostalo vreme:",
-    "extendTime": "Produži vreme"
+    "timeLeft": "Vreme prikaza:",
+    "extendTime": "Produži vreme prikaza"
   },
   "sessionTimeoutModal": {
     "title": "Istekla je sesija",

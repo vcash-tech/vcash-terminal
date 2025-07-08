@@ -65,7 +65,8 @@
             "2": "Log into your account",
             "3": "Enter the voucher code above "
         },
-        "buttonText": "Finish"
+        "buttonText": "Finish",
+      "code": "Voucher code"
     },
     "cashboxFullModal": {
         "title": "Kiosk Cash Box Full",
@@ -230,7 +231,8 @@
       "2": "Log into your account",
       "3": "Enter the voucher code above "
     },
-    "buttonText": "Finish"
+    "buttonText": "Finish",
+    "scanToRedeem": "Scan to Redeem"
   },
   "cashboxFullModal": {
     "title": "Kiosk Cash Box Full",
@@ -243,7 +245,7 @@
     "buttonText": "Send to Email"
   },
   "sessionCounter": {
-    "timeLeft": "Time left:",
+    "timeLeft": "Remaining display time:",
     "extendTime": "Extend time"
   },
   "sessionTimeoutModal": {
