@@ -10,7 +10,7 @@ import { ProductCardType } from './productCardType'
 
 export type HomeCardProps = {
     type: ProductCardType
-    onClick: () => void
+    onClick?: () => void
 }
 
 export default function HomeCard({

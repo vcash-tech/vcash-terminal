@@ -21,13 +21,7 @@ type ColumnData = {
     lastCardAddition: number // timestamp when last card was added
 }
 
-interface UseHomeCardsColumnsProps {
-    isFullScreen: boolean
-}
-
-export const useHomeCardsColumns = ({
-    isFullScreen: _
-}: UseHomeCardsColumnsProps) => {
+export const useHomeCardsColumns = () => {
     const containerRef = useRef<HTMLDivElement>(null)
     const [columns, setColumns] = useState<ColumnData[]>([])
     const [isAnimating, setIsAnimating] = useState(false)
@@ -43,8 +37,7 @@ export const useHomeCardsColumns = ({
         const sportCards = homeCardsData.filter(
             (card) =>
                 card.type === ProductCardType.socker ||
-                card.type === ProductCardType.basketball ||
-                card.type === ProductCardType.f1
+                card.type === ProductCardType.basketball
         )
         const casinoCards = homeCardsData.filter(
             (card) => card.type === ProductCardType.casino

@@ -18,7 +18,7 @@ export default function ServiceTemplate({ navigate }: ServiceTemplateProps) {
 
     return (
         <Container isFullHeight={true}>
-            <Header />
+            <Header navigationBackText=' ' navigateBackUrl='/' />
             <div className="service-template">
                 <div className="service-template__vouchers">
                     <h1>{t('service.title')}</h1>

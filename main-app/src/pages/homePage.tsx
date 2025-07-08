@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import ScreenSaverTemplate from '@/components/templates/screenSaver/screenSaverTemplate'
+import Welcome from '@/components/templates/welcome/welcomeTemplate'
 import { POSService } from '@/services/posService'
 
 import { AuthService } from '../services/authService'
@@ -55,7 +55,7 @@ function HomePage() {
         }
     }, [navigate])
 
-    return <ScreenSaverTemplate navigate={navigate} isFullScreen={false} />
+    return <Welcome navigate={navigate} />
 }
 
 export default HomePage

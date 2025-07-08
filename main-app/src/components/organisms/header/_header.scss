@@ -2,6 +2,11 @@
 @use '../../../styles/config/fonts';
 
 .header {
+
+    &.welcome-no-border {
+        border-bottom: 0;
+    }
+
     max-height: 86px;
     display: flex;
     flex: 1;

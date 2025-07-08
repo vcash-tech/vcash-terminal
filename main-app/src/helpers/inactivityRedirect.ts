@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 
-const INACTIVITY_TIME = 5 * 60 * 1000 // 5 minutes in milliseconds
+const INACTIVITY_TIME = 1 * 60 * 1000 // 5 minutes in milliseconds
 
 export default function useInactivityRedirect(redirectPath = '/welcome') {
     const navigate = useNavigate()
