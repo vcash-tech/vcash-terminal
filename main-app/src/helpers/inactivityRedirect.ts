@@ -8,16 +8,16 @@ export default function useInactivityRedirect(redirectPath = '/welcome') {
     const location = useLocation()
     const timer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
-    const resetTimer = () => {
-        if (timer.current) clearTimeout(timer.current)
-        timer.current = setTimeout(() => {
-            if (location.pathname !== redirectPath)
-                // Only redirect if not already on the redirect path
-                navigate(redirectPath)
-        }, INACTIVITY_TIME)
-    }
-
     useEffect(() => {
+        const resetTimer = () => {
+            if (timer.current) clearTimeout(timer.current)
+            timer.current = setTimeout(() => {
+                if (location.pathname !== redirectPath)
+                    // Only redirect if not already on the redirect path
+                    navigate(redirectPath)
+            }, INACTIVITY_TIME)
+        }
+
         const events = ['mousemove', 'keydown', 'click', 'scroll', 'touchstart']
 
         events.forEach((event) => window.addEventListener(event, resetTimer))
@@ -30,5 +30,5 @@ export default function useInactivityRedirect(redirectPath = '/welcome') {
             )
             if (timer.current) clearTimeout(timer.current)
         }
-    }, [resetTimer])
+    }, [])
 }

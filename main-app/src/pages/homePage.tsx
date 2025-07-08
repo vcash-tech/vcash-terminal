@@ -18,7 +18,7 @@ function HomePage() {
             try {
                 const cashiersResponse = await POSService.getCashiersPOS()
 
-                const firstWithFixedPin = cashiersResponse.cashiers?.find(
+                const firstWithFixedPin = cashiersResponse?.cashiers?.find(
                     (cashier) => !!cashier.fixedPin
                 )
 
