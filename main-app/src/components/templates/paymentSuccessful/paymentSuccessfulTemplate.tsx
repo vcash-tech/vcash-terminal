@@ -27,7 +27,7 @@ export default function PaymentSuccessfulTemplate({
                 </div>
 
                 <div className='payment-successful-fallback'>
-                    <SessionCounter />
+                    <SessionCounter onEndSession={() => navigate('/')} />
                     <p>{t('paymentSuccessful.voucherUnavailable')}</p>
                     <PrimaryButton text={t('paymentSuccessful.buttonText')} callback={() => { navigate('/') }} />
                 </div>

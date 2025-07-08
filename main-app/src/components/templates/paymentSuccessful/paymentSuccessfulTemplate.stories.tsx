@@ -15,7 +15,11 @@ export default meta
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  args: {},
+  args: {
+    navigate: () => {
+      console.log(`Navigating to page`)
+    },
+  },
   parameters: {
     backgrounds: {
       default: "dark",

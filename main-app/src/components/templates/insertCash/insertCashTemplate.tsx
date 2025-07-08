@@ -290,7 +290,7 @@ export default function InsertCashTemplate({
     }
 
     if (isLoading) {
-        return <PaymentSuccessfulTemplate />
+        return <PaymentSuccessfulTemplate navigate={() => navigate('/')} />
     }
 
     return (
