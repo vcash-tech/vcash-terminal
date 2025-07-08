@@ -7,13 +7,14 @@ import { flagEN, flagRS } from '../../../assets/icons'
 type HeaderProps = {
     navigationBackText?: string
     navigateBackUrl?: string
+    isWelcome?: boolean
 }
 
-const Header = ({ navigationBackText, navigateBackUrl }: HeaderProps) => {
+const Header = ({ navigationBackText, navigateBackUrl, isWelcome }: HeaderProps) => {
     const { t, changeLanguage, isLanguageActive } = useTranslate()
 
     return (
-        <header className="header">
+        <header className={`header ${isWelcome ? 'welcome-no-border' : ''}`}>
             <div className="header-left">
                 {navigationBackText && navigateBackUrl && (
                     <LinkBackButton

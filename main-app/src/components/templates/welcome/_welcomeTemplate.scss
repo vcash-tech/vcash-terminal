@@ -1,8 +1,7 @@
 @use '../../../styles/config/colors';
 
 .screen-saver-content {
-    background: colors.$brand-primary-color url('../../../assets/images/screen-saver-background.png') no-repeat center center;
-    background-color: colors.$brand-primary-color;
+    background: colors.$brand-primary-color;
     min-height: 100vh;
     background-size: cover;
     display: flex;
@@ -10,7 +9,7 @@
     flex-direction: column;
     align-items: center;
     flex: 1;
-    transition: all 0.5s ease-in-out;
+    transition: all 0.75s ease-in-out;
 
     .home-cards-container {
         margin-top: -6rem;
@@ -30,6 +29,7 @@
     }
 
     .home-screen-title {
+        background: colors.$brand-primary-color;
         flex: 1;
         display: flex;
         flex-direction: column;
@@ -73,9 +73,9 @@
     height: 100vh;
     width: 100vw;
 
-    transition: all 0.5s ease-in-out;
+    transition: all 0.75 ease-in-out;
 
     .home-cards {
-        transition: all 0.5s ease-in-out;
+        transition: all 0.75 ease-in-out;
     }
 }

@@ -17,7 +17,7 @@ export default function AgeDisclaimerTemplate({
 
     return (
         <Container isFullHeight={true}>
-            <Header navigateBackUrl="/" navigationBackText={' '} />
+            <Header navigateBackUrl="/digital-services" navigationBackText={' '} />
             <div className="age-disclaimer">
                 <img
                     src={ageDisclaimer}

@@ -6,6 +6,13 @@ $linear-gradient: linear-gradient(
     transparent
 );
 
+
+$linear-gradient-reverse: linear-gradient(
+    to top,
+    colors.$brand-primary-color,
+    transparent
+);
+
 .home-cards {
     display: flex;
     gap: 1.6rem;
@@ -27,6 +34,17 @@ $linear-gradient: linear-gradient(
         display: flex;
         position: absolute;
         top: 0;
+        left: 0;
+        right: 0;
+        height: 4rem;
+        z-index: 10;
+    }
+
+    .home-cards-footer {
+        background: $linear-gradient-reverse;
+        display: flex;
+        position: absolute;
+        bottom: 0;
         left: 0;
         right: 0;
         height: 4rem;

@@ -45,7 +45,7 @@ export async function executePrint(base64: string): Promise<apiResponse> {
         body: JSON.stringify({ file: 'data:image/bmp;base64,' + base64 })
     })
     const data = await response.json()
-    return data
+    return data as apiResponse
 }
 
 export async function executeActivate(
@@ -59,7 +59,7 @@ export async function executeActivate(
         body: JSON.stringify({ token: jwt })
     })
     const data = await response.json()
-    return data
+    return data as activateApiResponse
 }
 
 export async function executeDeactivate(): Promise<void> {

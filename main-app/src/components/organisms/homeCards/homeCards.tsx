@@ -7,29 +7,24 @@ import HomeCard from '@/components/molecules/homeCard/homeCard'
 import { useHomeCardsColumns } from './useHomeCardsColumns'
 
 export type HomeCardsProps = {
-    isFullScreen: boolean
-    onTap: () => void
+    onTap?: () => void
     isAnimating?: boolean
 }
 
 const HomeCards = ({
-    isFullScreen,
     onTap,
     isAnimating = false
 }: HomeCardsProps) => {
-    const { containerRef, columns, getVisibleCards } = useHomeCardsColumns({
-        isFullScreen
-    })
+    const { containerRef, columns, getVisibleCards } = useHomeCardsColumns()
     return (
         <div
             ref={containerRef}
-            className={`home-cards ${isFullScreen ? 'full-screen' : ''} ${isAnimating ? 'animating' : ''}`}>
+            className={`home-cards ${isAnimating ? 'animating' : ''}`}>
             {columns?.map((column) => (
                 <div
                     key={column.id}
                     className="home-cards-column"
                     style={{
-                        animationDelay: `${column?.startOffset * 0.01}s`,
                         animationDuration: `${column?.animationDuration}s`
                     }}>
                     {getVisibleCards(column.id)?.map((card) => (
@@ -40,6 +35,7 @@ const HomeCards = ({
                 </div>
             ))}
             <div className="home-cards-header" />
+            <div className="home-cards-footer" />
         </div>
     )
 }
