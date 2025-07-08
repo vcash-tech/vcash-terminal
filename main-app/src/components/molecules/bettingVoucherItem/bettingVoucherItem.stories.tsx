@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import test from '@/assets/images/test.png'
+import { balkanBetLogo, soccerBetLogo } from '@/assets/images'
 
 import BettingVoucherItem, { BettingVoucherItemProps } from './bettingVoucherItem'
 
@@ -24,37 +24,26 @@ export default meta
 
 type Story = StoryObj<typeof BettingVoucherItem>
 
-export const Playstation: Story = {
+export const BalkanBet: Story = {
     args: {
-        title: 'gamingVouchers.cards.playstation.title',
-        body: 'gamingVouchers.cards.playstation.body',
-        image: test,
-        price: 'gamingVouchers.priceFrom'
+        title: 'bettingVouchers.cards.balkanBet.title',
+        body: 'bettingVouchers.cards.balkanBet.body',
+        image: balkanBetLogo
     } as BettingVoucherItemProps
 }
 
-export const Xbox: Story = {
+export const SoccerBet: Story = {
     args: {
-        title: 'gamingVouchers.cards.xbox.title',
-        body: 'gamingVouchers.cards.xbox.body',
-        image: test,
-        price: 'gamingVouchers.priceFrom'
-    } as BettingVoucherItemProps
-}
-
-export const Steam: Story = {
-    args: {
-        title: 'gamingVouchers.cards.steam.title',
-        body: 'gamingVouchers.cards.steam.body',
-        image: test,
-        price: 'gamingVouchers.priceFrom'
+        title: 'bettingVouchers.cards.soccerBet.title',
+        body: 'bettingVouchers.cards.soccerBet.body',
+        image: soccerBetLogo
     } as BettingVoucherItemProps
 }
 
 export const ComingSoon: Story = {
     args: {
-        title: 'gamingVouchers.cards.comingSoon.title',
-        body: 'gamingVouchers.cards.comingSoon.body',
+        title: 'bettingVouchers.cards.comingSoon.title',
+        body: 'bettingVouchers.cards.comingSoon.body',
         isComing: true,
     } as BettingVoucherItemProps
 }

@@ -27,8 +27,8 @@ export const bettingVoucherCards = [
         image: maxBetLogo
     },
     {
-        title: 'bettingVouchers.cards.commingSoon.title',
-        body: 'bettingVouchers.cards.commingSoon.body',
+        title: 'bettingVouchers.cards.comingSoon.title',
+        body: 'bettingVouchers.cards.comingSoon.body',
         isComing: true
     }
 ]
