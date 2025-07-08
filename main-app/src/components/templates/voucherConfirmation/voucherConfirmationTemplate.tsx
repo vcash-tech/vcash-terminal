@@ -72,13 +72,15 @@ export default function VoucherConfirmationTemplate({
                     )}
                 </div>
 
-                <div className={'action-wrapper'}>
-                    <SessionCounter onEndSession={() => navigate('/')} />
+                <div className={'action-wrapper'}>        
                     <PrimaryButton
                         callback={() => onComplete()}
                         text={t('voucherGenerated.buttonText')}
                     />
-                </div>
+                    <div>
+                    <SessionCounter onEndSession={() => navigate('/')} />
+                </div></div>
+            
             </div>
             <Footer />
         </Container>
