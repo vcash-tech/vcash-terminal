@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { BrowserRouter } from 'react-router-dom'
 
+import { TranslationProvider } from '@/i18n/TranslationProvider'
+
 import VoucherCode from './voucherCode'
 
 const meta: Meta<typeof VoucherCode> = {
@@ -26,7 +28,9 @@ const meta: Meta<typeof VoucherCode> = {
     decorators: [
         (Story) => (
             <BrowserRouter>
-                <Story />
+                <TranslationProvider>
+                    <Story />
+                </TranslationProvider>
             </BrowserRouter>
         )
     ]

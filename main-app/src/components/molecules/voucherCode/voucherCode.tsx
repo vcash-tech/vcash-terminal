@@ -12,8 +12,8 @@ export default function VoucherCode({
 
     return (
         <div className="voucher-code">
-            <p className="title-label">{t('voucherCode.voucher')}</p>
-            <p className="mono">{t('voucherGenerated.scan')}:</p>
+            <p className="title-label">VCASH {t('home.code.voucher')}</p>
+            <p className="mono">{t('home.code.scan')}:</p>
             {voucherCode.qrCodeData && (
                 <QRCode
                     value={voucherCode.qrCodeData}
@@ -21,8 +21,8 @@ export default function VoucherCode({
                     className="qr-code"
                 />
             )}
-            <p>{t('voucherCode.siteLink')}</p>
-            <p className={'mono-title'}>{t('voucherCode.activationCode')}:</p>
+            <p className={"mono"} dangerouslySetInnerHTML={{ __html: t('home.code.siteLink') }} />
+            <p className={'mono-title'}>{t('home.code.activationCode')}:</p>
             <p className={'mono-title'}>{voucherCode.voucherCode}</p>
         </div>
     )

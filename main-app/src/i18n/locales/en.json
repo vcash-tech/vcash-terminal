@@ -71,7 +71,7 @@
     "code": {
       "voucher": "Voucher",
       "scan": "Scan",
-      "siteLink": "or go to site vcash.rs and ACTIVATE VOUCHER",
+      "siteLink": "or go to site vcash.rs and <strong>ACTIVATE VOUCHER</strong>",
       "activationCode": "Activation Code"
     },
     "cashboxFullModal": {

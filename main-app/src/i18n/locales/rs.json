@@ -69,10 +69,10 @@
       "scanToRedeem": "Skenirajte za preuzimanje",
       "scan": "Skeniraj"
     },
-    "voucherCode": {
+    "code": {
       "voucher": "Vaučer",
       "scan": "Skeniraj",
-      "siteLink": "ili na sajtu vcash.rs AKTIVIRAJ VAUČER",
+      "siteLink": "ili na sajtu vcash.rs <strong>AKTIVIRAJ VAUČER</strong>",
       "activationCode": "Aktivacioni kod"
     },
     "cashboxFullModal": {
