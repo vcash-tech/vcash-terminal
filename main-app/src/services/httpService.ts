@@ -15,7 +15,11 @@ const serviceApiUrls: requestServiceKeys = {
 
 export class HttpService {
     static async Request<T>(req: HttpRequest): Promise<T> {
-        const serviceUrl = serviceApiUrls[req.service]
+        // Determine if we're in development mode
+        const isDev = import.meta.env.DEV === true
+        
+        // In development mode, we use the proxy for all API endpoints
+        const serviceUrl = isDev ? '' : serviceApiUrls[req.service]
         const requestUrl = `${serviceUrl}${req.url}`
 
         const request: globalThis.RequestInit = {}
@@ -60,40 +64,47 @@ export class HttpService {
 
         request.headers = headers
 
-        const response = await fetch(requestUrl, request)
+        try {
+            const response = await fetch(requestUrl, request)
 
-        if (!response.ok) {
-            if (response.status === 401 && hasToken) {
-                AuthService.DeleteToken(req.authorization as Auth)
-                if ((req.authorization as Auth) === Auth.Agent) {
-                    location.reload()
+            if (!response.ok) {
+                if (response.status === 401 && hasToken) {
+                    AuthService.DeleteToken(req.authorization as Auth)
+                    if ((req.authorization as Auth) === Auth.Agent) {
+                        location.reload()
+                    }
                 }
+
+                const textError = await response.text()
+                let jsonError = undefined
+
+                try {
+                    jsonError = JSON.parse(textError)
+                } catch (error: unknown) {
+                    console.log('error parsing json from bad api response', error)
+                }
+
+                throw {
+                    status: response.status,
+                    statusText: response.statusText,
+                    errors: jsonError?.errors,
+                    text: textError
+                } as HttpError
             }
 
-            const textError = await response.text()
-            let jsonError = undefined
-
-            try {
-                jsonError = JSON.parse(textError)
-            } catch (error: unknown) {
-                console.log('error parsing json from bad api response', error)
+            // Only try to parse as JSON if the content-type indicates JSON
+            const contentType = response.headers.get('content-type')
+            if (contentType && contentType.includes('application/json')) {
+                const result = await response.json()
+                return result as T
+            } else {
+                // For non-JSON responses, return an empty object or handle as needed
+                return {} as T
             }
-
-            throw {
-                status: response.status,
-                statusText: response.statusText,
-                errors: jsonError?.errors,
-                text: textError
-            } as HttpError
+        } catch (error) {
+            console.error('API request failed:', error)
+            throw error
         }
-
-        const result = response.headers
-            .get('content-type')
-            ?.includes('application/json')
-            ? await response.json()
-            : undefined
-
-        return result as T
     }
 
     static async Get<T>(

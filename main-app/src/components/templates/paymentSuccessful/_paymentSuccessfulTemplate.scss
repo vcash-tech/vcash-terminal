@@ -39,4 +39,24 @@
     margin: 0 0 5.6rem;
   }
 
+
+  .demo-wrapper {
+    background: #CED9F9;
+    border-radius: 100rem;
+    margin-bottom: 4.2rem;
+    overflow: hidden;
+    display: flex;
+    height: 50rem;
+    flex-direction: column;
+    width: 50rem;
+    justify-content: flex-end;
+
+    img {
+      display: flex;
+      flex: 1;
+      min-width: 140%;
+      object-fit: contain;
+    }
+  }
+
 }

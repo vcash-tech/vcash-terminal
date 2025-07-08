@@ -18,7 +18,7 @@ export default function PaymentMethodTerminalTemplate({
         <Container isFullHeight={true}>
             <Header
                 navigateBackUrl="/"
-                navigationBackText={t('selectPaymentMethod.backToServices')}
+                navigationBackText={' '}
             />
             <div className="payment-method-terminal">
                 <h1>{t('selectPaymentMethod.title')}</h1>

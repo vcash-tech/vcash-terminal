@@ -88,8 +88,6 @@ function RegisterPage() {
         }
     }
 
-    console.log('agentma', agentEmail)
-
     return (
         <RegisterTemplate
             onRegister={handleRegisterDevice}

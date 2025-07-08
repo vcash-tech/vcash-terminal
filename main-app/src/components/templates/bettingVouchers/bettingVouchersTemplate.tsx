@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next'
+import { NavigateFunction } from 'react-router-dom'
 
 import { ageDisclaimer } from '@/assets/icons'
 import { qrCode } from '@/assets/images'
@@ -9,16 +10,28 @@ import Footer from '@/components/organisms/footer/footer'
 import Header from '@/components/organisms/header/header'
 import { bettingVoucherCards } from '@/data/mocks/bettingVoucher.mock'
 
-export default function BettingVoucher() {
+export type BettingVoucherProps = {
+    navigate: NavigateFunction
+}
+
+export default function BettingVoucher({ navigate }: BettingVoucherProps) {
     const { t } = useTranslation()
     return (
         <Container isFullHeight={true}>
-            <Header />
+            <Header
+                navigateBackUrl={'/'}
+                navigationBackText={' '} //t('digitalServices.backToServices')}
+            />
             <div className="betting-voucher">
-                <h1>{t('bettingVouchers.title')} <img className='header-ico' src={ageDisclaimer} /></h1>
-                <h2 dangerouslySetInnerHTML={{
-                    __html: t('bettingVouchers.description')
-                }} />
+                <h1>
+                    {t('bettingVouchers.title')}{' '}
+                    <img className="header-ico" src={ageDisclaimer} />
+                </h1>
+                <h2
+                    dangerouslySetInnerHTML={{
+                        __html: t('bettingVouchers.description')
+                    }}
+                />
                 <div className="betting-voucher__qr-box">
                     <div className="betting-voucher__qr-image-wrapper">
                         <img src={qrCode} alt="QR Code" />
@@ -46,7 +59,10 @@ export default function BettingVoucher() {
                     ))}
                 </div>
                 <div className="gaming-voucher__primary-button">
-                    <PrimaryButton text={t('bettingVouchers.buttonText')} />
+                    <PrimaryButton
+                        text={t('bettingVouchers.buttonText')}
+                        onPress={() => navigate('/payment-method')}
+                    />
                 </div>
             </div>
             <Footer />

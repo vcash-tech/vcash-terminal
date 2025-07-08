@@ -1,3 +1,6 @@
+// @ts-check
+// This file should be compiled using the electron/tsconfig.main.json config
+// which has "module": "Node16" to support ES module features like import.meta
 import { app, BrowserWindow, ipcMain, screen } from 'electron'
 import * as fs from 'fs'
 import * as http from 'http'
@@ -18,7 +21,7 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 // Check if running in development mode
-const isDev = true
+const isDev = process.env.NODE_ENV === 'development' || !app.isPackaged
 
 // Logging setup
 const vCashPath = `C:\\VCash\\UI`
@@ -120,8 +123,12 @@ function createWindow() {
 
     if (isDev) {
         // Development mode - load from Vite dev server
-        win.loadURL('https://terminal-app-two.vercel.app')
-        win.webContents.openDevTools()
+        win.loadURL('http://localhost:5173') // TODO: Correct path or use mocked API since CORS prevent loading data from server
+        // win.loadURL('https://terminal-app-two.vercel.app')
+        // Only open DevTools when explicitly requested through an env variable
+        if (process.env.OPEN_DEVTOOLS === 'true') {
+            win.webContents.openDevTools()
+        }
     } else {
         // Production mode - load from built files
         win.loadURL('https://terminal-app-two.vercel.app')

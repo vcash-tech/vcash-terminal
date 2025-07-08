@@ -1,22 +1,22 @@
-import { playStationCard, steamCard, xboxCard } from '@/assets/images'
+import { playstationClean, steamClean, xboxClean } from '@/assets/images'
 
 export const gamingVoucherCards = [
     {
         title: 'gamingVouchers.cards.playstation.title',
         body: 'gamingVouchers.cards.playstation.body',
-        image: playStationCard,
+        image: playstationClean,
         price: 'gamingVouchers.priceFrom'
     },
     {
         title: 'gamingVouchers.cards.xbox.title',
         body: 'gamingVouchers.cards.xbox.body',
-        image: xboxCard,
+        image: xboxClean,
         price: 'gamingVouchers.priceFrom'
     },
     {
         title: 'gamingVouchers.cards.steam.title',
         body: 'gamingVouchers.cards.steam.body',
-        image: steamCard,
+        image: steamClean,
         price: 'gamingVouchers.priceFrom'
     },
     {
