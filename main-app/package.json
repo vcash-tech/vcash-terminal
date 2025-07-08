@@ -36,6 +36,7 @@
     "react-i18next": "^15.5.3",
     "react-router-dom": "^7.6.1",
     "react-simple-keyboard": "^3.8.85",
+    "uuid": "^11.1.0",
     "zod": "^3.25.64"
   },
   "devDependencies": {
