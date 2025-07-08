@@ -15,7 +15,9 @@
   "paymentSuccessful": {
     "title": "Payment Successful",
     "subtitle": "Please be patient, while we are printing your voucher",
-    "generatingVoucher": "Generating voucher..."
+    "generatingVoucher": "Generating voucher...",
+    "voucherUnavailable": "Voucher is not printed? Click on the button bellow to view it on the screen.",
+    "buttonText": "View Voucher on Screen"
   },
   "insertCash": {
     "title": "Insert cash",
@@ -63,7 +65,8 @@
             "2": "Log into your account",
             "3": "Enter the voucher code above "
         },
-        "buttonText": "Finish"
+        "buttonText": "Finish",
+      "code": "Voucher code"
     },
     "cashboxFullModal": {
         "title": "Kiosk Cash Box Full",
@@ -195,7 +198,7 @@
         "title": "MaxBet Betting Shops",
         "body": "Top up your <b>MaxBet</b> account and use the funds for betting, casino games, and other exciting options in the MaxBet offer."
       },
-      "commingSoon": {
+      "comingSoon": {
         "title": "More Services Coming Soon",
         "body": "We're preparing additional services and popular platforms – even more content you love, coming soon."
       }
@@ -228,7 +231,8 @@
       "2": "Log into your account",
       "3": "Enter the voucher code above "
     },
-    "buttonText": "Finish"
+    "buttonText": "Finish",
+    "scanToRedeem": "Scan to Redeem"
   },
   "cashboxFullModal": {
     "title": "Kiosk Cash Box Full",
@@ -241,7 +245,7 @@
     "buttonText": "Send to Email"
   },
   "sessionCounter": {
-    "timeLeft": "Time left:",
+    "timeLeft": "Remaining display time:",
     "extendTime": "Extend time"
   },
   "sessionTimeoutModal": {
