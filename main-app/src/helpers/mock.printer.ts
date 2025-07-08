@@ -30,14 +30,14 @@ const mockedTransaction = (): MoneyTransfer => {
             identifier: 'ID-RECIP-001',
             agentTypeCode: 'CUSTOMER'
         },
-        amount: 1000.5,
+        amount: 2000,
         statusCode: StatusCode.completed,
         date: date.toISOString(),
         transactions: [
             {
                 transactionId: 12345,
                 ToUserIdentifier: 'ID-RECIP-001',
-                amount: 1000.5,
+                amount: 2000,
                 date,
                 statusCode: StatusCode.completed,
                 externalTransactionId: 'EXT-12345'
@@ -46,7 +46,7 @@ const mockedTransaction = (): MoneyTransfer => {
         voucherCode: 'VOUCHER-' + Math.floor(1000000 + Math.random() * 9000000),
         typeCode: TransactionType.DIRECT_TRANSFER,
         moneyTransferCode: 'MT-' + Math.floor(10000 + Math.random() * 90000),
-        currencyCode: 'EUR',
+        currencyCode: 'RSD',
         cashier: {
             fullName: 'John Doe',
             cashierId: 'CASH-001'
