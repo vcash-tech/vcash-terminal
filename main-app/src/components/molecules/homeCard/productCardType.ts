@@ -7,7 +7,7 @@ const productCardTypeValues = [
     'playstation',
     'xbox',
     'steam',
-    'f1'
+    'tennis'
 ] as const
 
 export const ProductCardTypeSchema = z.enum(productCardTypeValues)
@@ -21,7 +21,7 @@ export const ProductCardType = {
     playstation: 'playstation' as const,
     xbox: 'xbox' as const,
     steam: 'steam' as const,
-    f1: 'f1' as const,
+    tennis: 'tennis' as const,
     schema: ProductCardTypeSchema,
     parse: (value: unknown) => ProductCardTypeSchema.parse(value),
     safeParse: (value: unknown) => ProductCardTypeSchema.safeParse(value)

@@ -6,6 +6,7 @@
     flex-direction: column;
     flex: 1;
     padding: 5rem;
+    background: colors.$main-background-color url('../assets/images/background.png') center/cover;
 
     h1 {
       position: relative;

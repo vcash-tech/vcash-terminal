@@ -6,6 +6,7 @@ const meta = {
     title: '4. Templates/ScreenSaver',
     component: ScreenSaverTemplate,
     parameters: {
+        isFullScreen: false,
         layout: 'centered'
     },
     tags: ['autodocs'],
@@ -28,6 +29,7 @@ export const Inactive: Story = {
 export const Active: Story = {
     name: 'Active State',
     args: {
-        isFullScreen: true
+        isFullScreen: true,
+        navigate: () => {}
     }
 }

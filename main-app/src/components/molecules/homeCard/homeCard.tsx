@@ -2,10 +2,8 @@ import {
     casinoNewCard,
     footballCard,
     nbaCard,
-    playstationCard,
-    steamCard,
-    tennisNewCard,
-    xboxCard
+    playstationClean, steamClean, tennisNewCard,
+    xboxClean
 } from '@/assets/images'
 
 import { ProductCardType } from './productCardType'
@@ -23,10 +21,10 @@ export default function HomeCard({
         [ProductCardType.socker]: footballCard,
         [ProductCardType.basketball]: nbaCard,
         [ProductCardType.casino]: casinoNewCard,
-        [ProductCardType.playstation]: playstationCard,
-        [ProductCardType.xbox]: xboxCard,
-        [ProductCardType.steam]: steamCard,
-        [ProductCardType.f1]: tennisNewCard
+        [ProductCardType.playstation]: playstationClean,
+        [ProductCardType.xbox]: xboxClean,
+        [ProductCardType.steam]: steamClean,
+        [ProductCardType.tennis]: tennisNewCard
     }
 
     const cardImage = () => {

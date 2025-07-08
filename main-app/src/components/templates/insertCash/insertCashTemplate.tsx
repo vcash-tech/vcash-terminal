@@ -15,7 +15,7 @@ import { Auth } from '@/types/common/httpRequest'
 import { VoucherResponse } from '@/types/pos/deposit'
 
 import { infoCircle } from '../../../assets/icons'
-import { insertCash } from '../../../assets/images'
+import { insertCashImg } from '../../../assets/images'
 import PaymentSuccessfulTemplate from '../paymentSuccessful/paymentSuccessfulTemplate'
 import VoucherConfirmationTemplate from '../voucherConfirmation/voucherConfirmationTemplate'
 
@@ -301,11 +301,16 @@ export default function InsertCashTemplate({
                 onClose={handleErrorClose}
             />
             <Container isFullHeight={true}>
-                <Header />
+                <Header  navigationBackText={' '} navigateBackUrl={'/payment-method'}  />
                 <div className="insert-cash">
                     <h1>{t('insertCash.title')}</h1>
                     <h2>{t('insertCash.acceptedNotes')}</h2>
-                    <img src={insertCash} alt={t('insertCash.altText')} />
+                    <div className="demo-wrapper">
+                        <img
+                            src={insertCashImg}
+                            alt={t('insertCash.altText')}
+                        />
+                    </div>
                     <div className="inserted-amount">
                         {t('insertCash.insertedAmount')}:{' '}
                         <span>{amount} RSD</span>

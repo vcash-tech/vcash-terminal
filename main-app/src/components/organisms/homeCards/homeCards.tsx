@@ -12,23 +12,29 @@ export type HomeCardsProps = {
     isAnimating?: boolean
 }
 
-const HomeCards = ({ isFullScreen, onTap, isAnimating = false }: HomeCardsProps) => {
-    const { containerRef, columns, getVisibleCards } = useHomeCardsColumns({ isFullScreen })
+const HomeCards = ({
+    isFullScreen,
+    onTap,
+    isAnimating = false
+}: HomeCardsProps) => {
+    const { containerRef, columns, getVisibleCards } = useHomeCardsColumns({
+        isFullScreen
+    })
     return (
         <div
             ref={containerRef}
             className={`home-cards ${isFullScreen ? 'full-screen' : ''} ${isAnimating ? 'animating' : ''}`}>
-            {columns.map((column) => (
+            {columns?.map((column) => (
                 <div
                     key={column.id}
                     className="home-cards-column"
                     style={{
-                        animationDelay: `${column.startOffset * 0.01}s`,
-                        animationDuration: `${column.animationDuration}s`
+                        animationDelay: `${column?.startOffset * 0.01}s`,
+                        animationDuration: `${column?.animationDuration}s`
                     }}>
-                    {getVisibleCards(column.id).map((card) => (
+                    {getVisibleCards(column.id)?.map((card) => (
                         <div key={card.id} className="home-card-wrapper">
-                            <HomeCard type={card.type} onClick={onTap} />
+                            <HomeCard type={card?.type} onClick={onTap} />
                         </div>
                     ))}
                 </div>

@@ -3,12 +3,17 @@ import { useTranslation } from 'react-i18next'
 import { NavigateFunction } from 'react-router-dom'
 
 import { logoWhite, tickets } from '@/assets/images'
+// import { logoWhite, tickets } from '@/assets/images'
 import Container from '@/components/atoms/container/container'
 import PrimaryButton from '@/components/atoms/primaryButton/primaryButton'
 import Footer from '@/components/organisms/footer/footer'
 import Header from '@/components/organisms/header/header'
 import HomeCards from '@/components/organisms/homeCards/homeCards'
 import { useWindowSize } from '@/hooks/useWindowSize'
+// import PrimaryButton from '@/components/atoms/primaryButton/primaryButton'
+// import Footer from '@/components/organisms/footer/footer'
+// import Header from '@/components/organisms/header/header'
+// import HomeCards from '@/components/organisms/homeCards/homeCards'
 
 export default function ScreenSaverTemplate({
     navigate,
@@ -40,7 +45,7 @@ export default function ScreenSaverTemplate({
                 style={{ maxHeight: height }}>
                 <div className="home-cards-container">
                     <HomeCards
-                        isFullScreen={isFullSize && isFullSize}
+                        isFullScreen={isFullSize ?? false}
                         onTap={() => {
                             setIsAnimating(true)
                             setIsFullSize(!isFullSize)
@@ -49,20 +54,19 @@ export default function ScreenSaverTemplate({
                     />
                 </div>
 
-                {!isFullSize && (
-                    <div className="home-screen-title">
-                        <div className="vcash-logo">
-                            <img src={logoWhite} alt="" />
-                        </div>
-                        <h1> {t('home.title')}</h1>
-                        <p>{t('home.body')}</p>
-                        <PrimaryButton
-                            text={t('home.buttonText')}
-                            callback={() => navigate('/services')}
-                            inverted={true}
-                        />
+                <div className="home-screen-title">
+                    <div className="vcash-logo">
+                        <img src={logoWhite} alt="" />
                     </div>
-                )}
+                    <h1> {t('home.title')}</h1>
+                    <p>{t('home.body')}</p>
+                    <PrimaryButton
+                        text={t('home.buttonText')}
+                        callback={() => navigate('/services')}
+                        inverted={true}
+                    />
+                </div>
+
                 <div className="tickets-container">
                     <img src={tickets} alt="" className="tickets-image" />
                 </div>

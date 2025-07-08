@@ -10,11 +10,23 @@
   background:  colors.$main-background-color;
   flex: 1;
 
-  img {
-    width: 100%;
-    height: auto;
-    max-width: 600px;
+  .demo-wrapper {
+    background: #CED9F9;
+    border-radius: 100rem;
     margin-bottom: 4.2rem;
+    overflow: hidden;
+    display: flex;
+    height: 50rem;
+    flex-direction: column;
+    width: 50rem;
+    justify-content: flex-end;
+
+    img {
+      display: flex;
+      flex: 1;
+      min-width: 120%;
+      object-fit: contain;
+    }
   }
 
   h1 {

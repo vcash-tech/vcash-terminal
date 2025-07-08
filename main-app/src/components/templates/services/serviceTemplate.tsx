@@ -1,3 +1,5 @@
+import { NavigateFunction } from 'react-router-dom'
+
 import { comingSoon } from '@/assets/icons'
 import Container from '@/components/atoms/container/container'
 import VoucherItem from '@/components/molecules/voucherItem/voucherItem'
@@ -8,7 +10,10 @@ import { useTranslate } from '@/i18n/useTranslate'
 
 import { chechLights } from '../../../assets/images'
 
-export default function ServiceTemplate() {
+export type ServiceTemplateProps = {
+    navigate: NavigateFunction
+}
+export default function ServiceTemplate({ navigate }: ServiceTemplateProps) {
     const { t } = useTranslate()
 
     return (
@@ -18,21 +23,22 @@ export default function ServiceTemplate() {
                 <div className="service-template__vouchers">
                     <h1>{t('service.title')}</h1>
                     <h2>{t('service.subtitle')}</h2>
-                
+
                     {serviceList.map((item) => (
                         <VoucherItem
+                            key={item.title}
                             title={item.title}
                             subtitle={item.subtitle}
                             image={item.image}
                             variant={item.variant as 'bet' | 'gaming'}
-                            onPress={() => console.log('Voucher pressed')}
+                            onPress={() => navigate(item.link)}
                         />
                     ))}
                 </div>
 
                 <h1>{t('service.payBills.title')}</h1>
                 <h2>{t('service.payBills.body')}</h2>
-                <button className="service-template__pay-bills"> 
+                <button className="service-template__pay-bills">
                     <span className="coming-soon-badge">
                         <img src={comingSoon} />
                     </span>

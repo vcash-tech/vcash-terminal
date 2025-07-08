@@ -6,13 +6,13 @@ export const serviceList = [
         subtitle: 'service.cards.bet.body',
         image: betVoucher,
         variant: 'bet',
-        onPress: () => console.log('Bet voucher pressed')
+        link: '/disclaimer'
     },
     {
         title: 'service.cards.gaming.title',
         subtitle: 'service.cards.gaming.body',
         image: gamingVoucher,
         variant: 'gaming',
-        onPress: () => console.log('Gaming voucher pressed')
+        link: '/gaming'
     }
 ]
