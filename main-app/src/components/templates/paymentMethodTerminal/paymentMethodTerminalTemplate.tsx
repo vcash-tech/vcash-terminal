@@ -25,15 +25,15 @@ export default function PaymentMethodTerminalTemplate({
                 <h2>{t('selectPaymentMethod.subtitle')}</h2>
                 <div className="payment-methods">
                     <PaymentCard
+                        image={cash}
+                        text={t('selectPaymentMethod.cashPayment')}
+                        callback={() => navigate('/buy-voucher-cash')}
+                    />
+                    <PaymentCard
                         image={creditCard}
                         text={t('selectPaymentMethod.cardPayment')}
                         callback={() => console.log('Card payment selected')}
                         isDisabled={true}
-                    />
-                    <PaymentCard
-                        image={cash}
-                        text={t('selectPaymentMethod.cashPayment')}
-                        callback={() => navigate('/buy-voucher-cash')}
                     />
                 </div>
             </div>

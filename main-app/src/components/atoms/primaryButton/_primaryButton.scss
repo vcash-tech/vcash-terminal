@@ -25,4 +25,10 @@
     background: colors.$hover-blue-color;
     color: colors.$brand-primary-color;
   }
+
+  &:disabled {
+        cursor: default;
+        color: #999;
+        background: #ccc;
+    }
 }

@@ -1,79 +1,128 @@
-@use "../../../styles/config/colors";
-@use "../../../styles/config/fonts";
+@use '../../../styles/config/colors';
+@use '../../../styles/config/fonts';
 
 .payment-successful {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 8.5rem 0 2.4rem;
-  background:  colors.$main-background-color url("../assets/images/paymentSuccessfulBackground.svg") no-repeat right bottom;
-  flex: 1;
-
-  .progress-bar {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 4.2rem;
-    width: 100%;
-    padding-bottom: 44rem;
-
-  }
-
-  h1 {
-    font-family: fonts.$body-font;
-    font-weight: 600;
-    font-size: 4.2rem;
-    line-height: 100%;
-    color: colors.$black-color;
-    text-align: center;
-    margin: 0 0 0.8rem;
-  }
-
-  h2 {
-    font-family: fonts.$body-font;
-    font-weight: 400;
-    font-size: 2.4rem;
-    line-height: 150%;
-    color: colors.$dark-text-color;
-    text-align: center;
-    margin: 0 0 5.6rem;
-  }
-
-  .payment-successful-fallback {
-    padding: 4.5rem 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+    flex: 1;
+    padding: 8.5rem 0 0;
+    background: colors.$main-background-color
+        url('../assets/images/paymentSuccessfulBackground.svg') no-repeat right
+        bottom;
+    flex: 1;
 
-    p {
-      margin: 4.5rem 0;
-      color: #333839;
-      font-family: fonts.$body-font;
-      font-weight: 400;
-      font-size: 2.4rem;
-      text-align: center;
+    h1 {
+        font-family: fonts.$body-font;
+        font-weight: 600;
+        font-size: 4.2rem;
+        line-height: 100%;
+        color: colors.$black-color;
+        text-align: center;
+        margin: 0 0 0.8rem;
+        margin-top: 20rem;
     }
-  }
 
-
-  .demo-wrapper {
-    background: #CED9F9;
-    border-radius: 100rem;
-    margin-bottom: 4.2rem;
-    overflow: hidden;
-    display: flex;
-    height: 50rem;
-    flex-direction: column;
-    width: 50rem;
-    justify-content: flex-end;
-
-    img {
-      display: flex;
-      flex: 1;
-      min-width: 140%;
-      object-fit: contain;
+    h2 {
+        font-family: fonts.$body-font;
+        font-weight: 400;
+        font-size: 2.4rem;
+        line-height: 150%;
+        color: colors.$dark-text-color;
+        text-align: center;
+        margin: 0 0 5.6rem;
     }
-  }
 
+    .fallback-wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding-bottom: 7rem;
+        gap: 7rem;
+        justify-self: flex-end;
+        flex: 1;
+
+        .fallback {
+            background: white;
+            width: 80vw;
+            padding: 4rem 3rem;
+            border-radius: 1rem;
+            display: flex;
+            justify-self: flex-end;
+
+            background: linear-gradient(
+                97.98deg,
+                rgba(255, 255, 255, 0.712) 51.72%,
+                rgba(255, 255, 255, 0.656) 77.75%
+            );
+            border: 1px solid rgba(56, 90, 201, 0.8);
+            border-radius: 16px;
+            justify-content: space-between;
+
+            p {
+                color: black;
+                font-size: 1.8rem;
+                font-weight: 500;
+
+                &:first-child {
+                    font-size: 2.4rem;
+                    font-weight: 600;
+                }
+            }
+            .wire-button {
+                font-size: 2rem;
+                padding: 1rem 2rem;
+            }
+        }
+    }
+
+    .payment-successful-fallback {
+        padding: 4.5rem 0 10rem;
+        display: flex;
+        flex: 1;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+
+        background: linear-gradient(
+            97.98deg,
+            rgba(255, 255, 255, 0.712) 51.72%,
+            rgba(255, 255, 255, 0.656) 77.75%
+        );
+        border: 1px solid rgba(56, 90, 201, 0.8);
+        border-radius: 16px;
+
+        p {
+            margin: 4.5rem 0;
+            color: #333839;
+            font-family: fonts.$body-font;
+            font-weight: 400;
+            font-size: 2.4rem;
+            text-align: center;
+        }
+
+        .session-counter {
+            flex: none;
+        }
+    }
+
+    .demo-wrapper {
+        background: #ced9f9;
+        border-radius: 100rem;
+        margin-bottom: 4.2rem;
+        overflow: hidden;
+        display: flex;
+        height: 50rem;
+        flex-direction: column;
+        width: 50rem;
+        justify-content: flex-end;
+
+        img {
+            display: flex;
+            flex: 1;
+            min-width: 140%;
+            object-fit: contain;
+        }
+    }
 }

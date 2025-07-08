@@ -13,11 +13,12 @@
     "continuePurchase": "Da, imam 18+ godina"
   },
   "paymentSuccessful": {
-    "title": "Plaćanje uspešno",
-    "subtitle": "Štampamo vaš vaučer, molimo sačekajte…",
+    "title": "Izdavanje voučera",
+    "subtitle": "Preuzmite Vaš vaučer na poziciji sa slike...",
     "generatingVoucher": "Vaučer se kreira...",
-    "voucherUnavailable": "Nisi dobio vaučer? Klikni ispod i pogledaj na ekranu",
-    "buttonText": "Pogledaj Vaučer na Ekranu"
+    "voucherUnavailable": "Klikni i slikaj ili skeniraj voučer na ekranu",
+    "buttonText": "Prikaži vaučer",
+    "fallbackTitle": "Nisi dobio vaučer?"
   },
   "insertCash": {
     "title": "Ubacite novac",
@@ -41,91 +42,98 @@
       "body": "Svi VCash servisi - uključuje dopune za gejming servise, striming i naloge kod kladionica u Srbiji"
     },
     "digitalServices": {
-        "backToServices": "Nazad na izbor servisa",
-        "gamingServices": "Gejming servisi",
-        "streamingServices": "Striming servisi",
-        "topUpServices": "Dopune naloga"
+      "backToServices": "Nazad na izbor servisa",
+      "gamingServices": "Gejming servisi",
+      "streamingServices": "Striming servisi",
+      "topUpServices": "Dopune naloga"
     },
     "qrModal": {
-        "title": "Za više informacija o proizvodu, skenirajte QR kod i posetite VCash aplikaciju",
-        "back": "Nazad"
+      "title": "Za više informacija o proizvodu, skenirajte QR kod i posetite VCash aplikaciju",
+      "back": "Nazad"
     },
     "voucherGenerated": {
-        "title": "VCash vaučer je uspešno izdat",
-        "date": "Datum",
-        "time": "Vreme",
-        "referenceNo": "Kod transakcije",
-        "terminal": "Terminal",
-        "amount": "Iznos",
-        "type": "Tip",
-        "usage": "Upotreba",
-        "howToUse": {
-            "title": "Kako da iskoristite vaučer:",
-            "1": "Skenirajte QR kod sa vaučera ili posetite: [LINK] i unesite kod ručno",
-            "2": "Pregledajte listu dostupnih servisa",
-            "3": "Izaberite gde želite da iskoristite vaučer - brzo i jednostavno!"
-        },
+      "title": "VCash vaučer je uspešno izdat",
+      "date": "Datum",
+      "time": "Vreme",
+      "referenceNo": "Kod transakcije",
+      "terminal": "Terminal",
+      "amount": "Iznos",
+      "type": "Tip",
+      "usage": "Upotreba",
+      "howToUse": {
+        "title": "Kako da iskoristite vaučer:",
+        "1": "Skenirajte QR kod sa vaučera ili posetite: [LINK] i unesite kod ručno",
+        "2": "Pregledajte listu dostupnih servisa",
+        "3": "Izaberite gde želite da iskoristite vaučer - brzo i jednostavno!"
+      },
       "buttonText": "Završi",
-      "scanToRedeem": "Skenirajte za preuzimanje"
+      "scanToRedeem": "Skenirajte za preuzimanje",
+      "scan": "Skeniraj"
+    },
+    "code": {
+      "voucher": "Vaučer",
+      "scan": "Skeniraj",
+      "siteLink": "ili na sajtu vcash.rs <strong>AKTIVIRAJ VAUČER</strong>",
+      "activationCode": "Aktivacioni kod"
     },
     "cashboxFullModal": {
-        "title": "Dalja uplata nije moguća",
-        "subtitle": "Trenutno nije moguće nastaviti sa uplatom gotovine. Možete izdati vaučer za iznos koji ste do sada ubacili.",
-        "buttonText": "Generiši vaučer"
+      "title": "Dalja uplata nije moguća",
+      "subtitle": "Trenutno nije moguće nastaviti sa uplatom gotovine. Možete izdati vaučer za iznos koji ste do sada ubacili.",
+      "buttonText": "Generiši vaučer"
     },
     "printerUnavailableModal": {
-        "title": "Preuzmite svoj vaučer",
-        "subtitle": "Vaš vaučer je spreman. Možete ga preuzeti skeniranjem QR koda sa ekrana ili slanjem na email.",
-        "buttonText": "Pošalji na email"
+      "title": "Preuzmite svoj vaučer",
+      "subtitle": "Vaš vaučer je spreman. Možete ga preuzeti skeniranjem QR koda sa ekrana ili slanjem na email.",
+      "buttonText": "Pošalji na email"
     },
     "sessionCounter": {
-        "timeLeft": "Preostalo vreme:",
-        "extendTime": "Produži vreme"
+      "timeLeft": "Preostalo vreme:",
+      "extendTime": "Produži vreme"
     },
     "sessionTimeoutModal": {
-        "title": "Istekla je sesija",
-        "subtitle": "Zbog neaktivnosti, proces je automatski prekinut. Možete započeti ponovo od početka.",
-        "buttonText": "Započni ponovo"
+      "title": "Istekla je sesija",
+      "subtitle": "Zbog neaktivnosti, proces je automatski prekinut. Možete započeti ponovo od početka.",
+      "buttonText": "Započni ponovo"
     },
     "welcome": {
-        "title": "Dobrodošli u VCash",
-        "text": "Kupovina vaučera i plaćanje računa – brzo, jednostavno i bez čekanja.",
-        "getStarted": "Započni"
+      "title": "Dobrodošli u VCash",
+      "text": "Kupovina vaučera i plaćanje računa – brzo, jednostavno i bez čekanja.",
+      "getStarted": "Započni"
     },
     "emailInput": {
-        "title": "Pošalji vaučer na email",
-        "description": "Unesite email adresu na koju želite da vam pošaljemo vaučer.",
-        "emailPlaceholder": "Email adresa",
-        "sendButton": "Pošalji vaučer na email"
+      "title": "Pošalji vaučer na email",
+      "description": "Unesite email adresu na koju želite da vam pošaljemo vaučer.",
+      "emailPlaceholder": "Email adresa",
+      "sendButton": "Pošalji vaučer na email"
     },
     "actionCompleteStatus": {},
     "insertCard": {},
     "paymentMethod": {},
     "header": {
-        "back": "Nazad",
-        "language": "Jezik"
+      "back": "Nazad",
+      "language": "Jezik"
     },
     "footer": {
-        "contactSupport": "Imate pitanje? Pozovite podršku:"
+      "contactSupport": "Imate pitanje? Pozovite podršku:"
     },
     "common": {
-        "next": "Dalje",
-        "cancel": "Otkaži",
-        "confirm": "Potvrdi",
-        "submit": "Pošalji",
-        "info": "Info"
+      "next": "Dalje",
+      "cancel": "Otkaži",
+      "confirm": "Potvrdi",
+      "submit": "Pošalji",
+      "info": "Info"
     },
     "register": {
-        "title": "Registracija uređaja",
-        "emailPlaceholder": "Email",
-        "deviceNamePlaceholder": "Ime uređaja",
-        "registerDevice": "Registruj uređaj",
-        "waitingForApproval": "Čeka se odobrenje",
-        "approvalPending": "Odobrenje uređaja je trenutno na čekanju, dok se ne odobri od strane Agenta iz {{brandName}} mreže.",
-        "successfulRegistration": "Uspešna registracija",
-        "welcomeMessage": "Uređaj je uspešno registrovan. Dobro došli u {{brandName}} mrežu.",
-        "continue": "Nastavi",
-        "tryAgain": "Pokušaj ponovo"
+      "title": "Registracija uređaja",
+      "emailPlaceholder": "Email",
+      "deviceNamePlaceholder": "Ime uređaja",
+      "registerDevice": "Registruj uređaj",
+      "waitingForApproval": "Čeka se odobrenje",
+      "approvalPending": "Odobrenje uređaja je trenutno na čekanju, dok se ne odobri od strane Agenta iz {{brandName}} mreže.",
+      "successfulRegistration": "Uspešna registracija",
+      "welcomeMessage": "Uređaj je uspešno registrovan. Dobro došli u {{brandName}} mrežu.",
+      "continue": "Nastavi",
+      "tryAgain": "Pokušaj ponovo"
     },
     "comingSoon": "Dolazi uskoro..."
   },
@@ -133,20 +141,20 @@
     "title": "Izaberi svoj vaučer",
     "subtitle": "Kupi kredit za kladionice ili online gaming servise",
     "cards": {
-        "bet": {
-            "title": "Bet Vaučer",
-            "body": "Za sportske kladionice, kazino i ostale igre na sreću."
-        },
-        "gaming": {
-            "title": "Gaming Vaučer",
-            "body": "Kupi vaučer za XBox, Playstation ili Steam prodavnice"
-        }
+      "bet": {
+        "title": "Bet Vaučer",
+        "body": "Za sportske kladionice, kazino i ostale igre na sreću."
+      },
+      "gaming": {
+        "title": "Gaming Vaučer",
+        "body": "Kupi vaučer za XBox, Playstation ili Steam prodavnice"
+      }
     },
     "payBills": {
-        "title": "Plati račune",
-        "body": "Brzo i jednostavno plaćanje računa, bez gužve i čekanja",
-        "simpleScanTitle": "Plaćanje računa",
-        "simpleScanBody": "Jednostavno skeniraj i plati"
+      "title": "Plati račune",
+      "body": "Brzo i jednostavno plaćanje računa, bez gužve i čekanja",
+      "simpleScanTitle": "Plaćanje računa",
+      "simpleScanBody": "Jednostavno skeniraj i plati"
     }
   },
   "gamingVouchers": {
@@ -156,20 +164,20 @@
     "qrInfo2": "Direktna kupovina proizvoda <b>nije moguća</b>. \nProizvodi se kupuju i aktiviraju kupovinom višenamenskog vaučera u odabranoj vrednosti prema proizvodu / servisu koji aktivirate",
     "cards": {
       "playstation": {
-          "title": "PlayStation Dopune",
-          "body": "Dopunite svoj PSN nalog i uživajte u igrama, pretplatama, filmovima i in-game sadržaju po izboru.."
+        "title": "PlayStation Dopune",
+        "body": "Dopunite svoj PSN nalog i uživajte u igrama, pretplatama, filmovima i in-game sadržaju po izboru.."
       },
       "xbox": {
-          "title": "XBOX Gift Cards",
-          "body": "Dopunite svoj Xbox nalog i iskoristite kod za igre, pretplate i digitalni sadržaj iz Microsoft Store-a."
+        "title": "XBOX Gift Cards",
+        "body": "Dopunite svoj Xbox nalog i iskoristite kod za igre, pretplate i digitalni sadržaj iz Microsoft Store-a."
       },
       "steam": {
-          "title": "Steam Gift Cards",
-          "body": "Dopunite svoj Steam nalog i kupujte igre, dodatke i in-game sadržaj po izboru."
+        "title": "Steam Gift Cards",
+        "body": "Dopunite svoj Steam nalog i kupujte igre, dodatke i in-game sadržaj po izboru."
       },
       "comingSoon": {
-          "title": "Još servisa stiže uskoro",
-          "body": "Spremamo dodatne servise i popularne platforme – još više sadržaja koji volite, uskoro dostupno."
+        "title": "Još servisa stiže uskoro",
+        "body": "Spremamo dodatne servise i popularne platforme – još više sadržaja koji volite, uskoro dostupno."
       }
     },
     "priceFrom": "<span style='color: #000000; font-weight: 400;'>Od</span> $25 - $150",
@@ -177,33 +185,33 @@
   },
   "bettingVouchers": {
     "title": "Betting voučeri",
-    "description": "Iskoristi VCash <b>višenamenski</b> vaučer kao dopune za kladionice, kazino i druge...",
+    "description": "Iskoristi VCash <b>višenamenski</b> vaučer za dopunu svog naloga.",
     "qrInfo": "Skenirajte ili posetite <span style='color:#1048A3;'>market.vcash.rs</span> da se informišete o aktuelnim cenama proizvoda.",
     "qrInfo2": "Direktna kupovina proizvoda <b>nije moguća</b>.<br />Proizvodi se kupuju i aktiviraju kupovinom višenamenskog vaučera u odabranoj vrednosti prema proizvodu / servisu koji aktivirate.",
     "cards": {
       "balkanBet": {
-          "title": "BalkanBet Kladionice",
-          "body": "Dopunite svoj BalkanBet nalog i iskoristite sredstva za klađenje, igre na sreću i druge usluge koje <b>BalkanBet</b> nudi."
+        "title": "BalkanBet Kladionice",
+        "body": "Dopunite svoj BalkanBet nalog i iskoristite sredstva za klađenje, igre na sreću i druge usluge koje <b>BalkanBet</b> nudi."
       },
       "soccerBet": {
-          "title": "SoccerBet Kladionice",
-          "body": "Dopunite svoj <b>SoccerBet</b> nalog i iskoristite dopunu za sportsko klađenje, kazino igre i druge zabavne opcije koje SoccerBet nudi."
+        "title": "SoccerBet Kladionice",
+        "body": "Dopunite svoj <b>SoccerBet</b> nalog i iskoristite dopunu za sportsko klađenje, kazino igre i druge zabavne opcije koje SoccerBet nudi."
       },
       "merkurXTip": {
-          "title": "Merkur X Tip Kladionice",
-          "body": "Uplatite dopunu na svoj <b>MerkurXtip</b> nalog i otkrijte svet sportskog klađenja, slot igara i ekskluzivnih bonusa."
+        "title": "Merkur X Tip Kladionice",
+        "body": "Uplatite dopunu na svoj <b>MerkurXtip</b> nalog i otkrijte svet sportskog klađenja, slot igara i ekskluzivnih bonusa."
       },
       "meridianBet": {
-          "title": "MeridianBet Kladionice",
-          "body": "Dodajte sredstva na svoj <b>MeridianBet</b> nalog i uživajte u bogatoj ponudi sportskog klađenja, kazino igara i promocija po vašem izboru."
+        "title": "MeridianBet Kladionice",
+        "body": "Dodajte sredstva na svoj <b>MeridianBet</b> nalog i uživajte u bogatoj ponudi sportskog klađenja, kazino igara i promocija po vašem izboru."
       },
       "maxBet": {
-          "title": "MaxBet Kladionice",
-          "body": "Dopunite svoj <b>MaxBet</b> nalog i iskoristite sredstva za klađenje, kazino igre i druge uzbudljive opcije u MaxBet ponudi."
+        "title": "MaxBet Kladionice",
+        "body": "Dopunite svoj <b>MaxBet</b> nalog i iskoristite sredstva za klađenje, kazino igre i druge uzbudljive opcije u MaxBet ponudi."
       },
       "comingSoon": {
-          "title": "Još servisa stiže uskoro",
-          "body": "Spremamo dodatne servise i popularne platforme – još više sadržaja koji volite, uskoro dostupno."
+        "title": "Još servisa stiže uskoro",
+        "body": "Spremamo dodatne servise i popularne platforme – još više sadržaja koji volite, uskoro dostupno."
       }
     },
     "buttonText": "Kupi višenamenski vaučer"

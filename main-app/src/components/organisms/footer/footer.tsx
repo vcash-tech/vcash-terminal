@@ -9,7 +9,7 @@ const Footer = ({ isWelcome = false }: FooterProps) => {
 
     return (
         <footer className={`footer ${isWelcome ? 'footer--welcome' : ''}`}>
-            {t('footer.contactSupport')} <span>0800 123 456</span>
+            {t('footer.contactSupport')} <span>069 888 55 58</span>
         </footer>
     )
 }

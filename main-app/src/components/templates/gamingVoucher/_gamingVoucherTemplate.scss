@@ -96,7 +96,8 @@
 
 .gaming-voucher__primary-button {
     display: flex;
+    flex: 1;
+    align-items: end;
     justify-content: center;
-    margin-top: 20rem;
-    margin-bottom: 16rem;
+    margin-bottom: 5rem;
 }

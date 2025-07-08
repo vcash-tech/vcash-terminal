@@ -13,11 +13,12 @@
     "continuePurchase": "Yes, I have 18+ years"
   },
   "paymentSuccessful": {
-    "title": "Payment Successful",
-    "subtitle": "Please be patient, while we are printing your voucher",
+    "title": "Voucher Printing",
+    "subtitle": "Take your voucher at the location from the image...",
     "generatingVoucher": "Generating voucher...",
-    "voucherUnavailable": "Voucher is not printed? Click on the button bellow to view it on the screen.",
-    "buttonText": "View Voucher on Screen"
+    "buttonText": "View Voucher",
+    "fallbackTitle": "Didn't receive your voucher?",
+    "voucherUnavailable": "Click below, take a photo or scan the voucher on the screen"
   },
   "insertCash": {
     "title": "Insert cash",
@@ -41,110 +42,116 @@
       "body": "For sports betting, Casino top-ups and other betting services "
     },
     "digitalServices": {
-        "backToServices": "Back to service selection",
-        "gamingServices": "Gaming platforms",
-        "streamingServices": "Streaming services",
-        "topUpServices": "Top-up services"
+      "backToServices": "Back to service selection",
+      "gamingServices": "Gaming platforms",
+      "streamingServices": "Streaming services",
+      "topUpServices": "Top-up services"
     },
     "qrModal": {
-        "title": "For more details about the product, scan the QR code to visit our marketplace app",
-        "back": "Back"
+      "title": "For more details about the product, scan the QR code to visit our marketplace app",
+      "back": "Back"
     },
     "voucherGenerated": {
-        "title": "Your voucher has been issued successfully",
-        "date": "Date",
-        "time": "Time",
-        "referenceNo": "Reference No",
-        "terminal": "Terminal",
-        "amount": "Amount",
-        "type": "Type",
-        "usage": "Usage",
-        "howToUse": {
-            "title": "How to use:",
-            "1": "Go to [LINK]",
-            "2": "Log into your account",
-            "3": "Enter the voucher code above "
-        },
-        "buttonText": "Finish",
+      "title": "Your voucher is ready!",
+      "date": "Date",
+      "time": "Time",
+      "referenceNo": "Reference No",
+      "terminal": "Terminal",
+      "amount": "Amount",
+      "type": "Type",
+      "usage": "Usage",
+      "howToUse": {
+        "title": "How to use:",
+        "1": "Go to [LINK]",
+        "2": "Log into your account",
+        "3": "Enter the voucher code above "
+      },
+      "buttonText": "Finish",
       "code": "Voucher code"
     },
+    "code": {
+      "voucher": "Voucher",
+      "scan": "Scan",
+      "siteLink": "or go to site vcash.rs and <strong>ACTIVATE VOUCHER</strong>",
+      "activationCode": "Activation Code"
+    },
     "cashboxFullModal": {
-        "title": "Kiosk Cash Box Full",
-        "subtitle": "The cash deposit limit has been reached. You can generate a voucher for the amount you've inserted so far.",
-        "issueVoucher": "Issue Voucher"
+      "title": "Kiosk Cash Box Full",
+      "subtitle": "The cash deposit limit has been reached. You can generate a voucher for the amount you've inserted so far.",
+      "issueVoucher": "Issue Voucher"
     },
     "printerUnavailableModal": {
-        "title": "Printer Unavailable",
-        "subtitle": "You can still redeem your voucher - just scan the QR code below or send it to your email",
-        "buttonText": "Send to Email"
+      "title": "Printer Unavailable",
+      "subtitle": "You can still redeem your voucher - just scan the QR code below or send it to your email",
+      "buttonText": "Send to Email"
     },
     "sessionCounter": {
-        "timeLeft": "Time left:",
-        "extendTime": "Extend time"
+      "timeLeft": "Time left:",
+      "extendTime": "Extend time"
     },
     "sessionTimeoutModal": {
-        "title": "Session Timeout",
-        "subtitle": "For your security, the session has expired due to inactivity. Please start again to continue.",
-        "buttonText": "Start again"
+      "title": "Session Timeout",
+      "subtitle": "For your security, the session has expired due to inactivity. Please start again to continue.",
+      "buttonText": "Start again"
     },
     "welcome": {
-        "title": "Welcome to VCash",
-        "text": "Buy vouchers, pay bills, or top up digital services in a few taps",
-        "getStarted": "Get started"
+      "title": "Welcome to VCash",
+      "text": "Buy vouchers, pay bills, or top up digital services in a few taps",
+      "getStarted": "Get started"
     },
     "emailInput": {
-        "title": "Send voucher via email",
-        "description": "We'll email your voucher - just drop your address below",
-        "emailPlaceholder": "Email Address",
-        "sendButton": "Send Email"
+      "title": "Send voucher via email",
+      "description": "We'll email your voucher - just drop your address below",
+      "emailPlaceholder": "Email Address",
+      "sendButton": "Send Email"
     },
     "header": {
-        "back": "Back",
-        "language": "Language"
+      "back": "Back",
+      "language": "Language"
     },
     "footer": {
-        "contactSupport": "Contact support:"
+      "contactSupport": "Contact support:"
     },
     "common": {
-        "next": "Next",
-        "cancel": "Cancel",
-        "confirm": "Confirm",
-        "submit": "Submit",
-        "info": "Info"
+      "next": "Next",
+      "cancel": "Cancel",
+      "confirm": "Confirm",
+      "submit": "Submit",
+      "info": "Info"
     },
     "register": {
-        "title": "Device Registration",
-        "emailPlaceholder": "Email",
-        "deviceNamePlaceholder": "Device Name",
-        "registerDevice": "Register Device",
-        "waitingForApproval": "Waiting for Approval",
-        "approvalPending": "Device approval is pending until approved by an Agent from the {{brandName}} network.",
-        "successfulRegistration": "Registration Successful",
-        "welcomeMessage": "The device has been successfully registered. Welcome to the {{brandName}} network.",
-        "continue": "Continue",
-        "tryAgain": "Try Again"
+      "title": "Device Registration",
+      "emailPlaceholder": "Email",
+      "deviceNamePlaceholder": "Device Name",
+      "registerDevice": "Register Device",
+      "waitingForApproval": "Waiting for Approval",
+      "approvalPending": "Device approval is pending until approved by an Agent from the {{brandName}} network.",
+      "successfulRegistration": "Registration Successful",
+      "welcomeMessage": "The device has been successfully registered. Welcome to the {{brandName}} network.",
+      "continue": "Continue",
+      "tryAgain": "Try Again"
     },
     "comingSoon": "Coming soon..."
   },
   "service": {
-      "title": "Choose your voucher",
-      "subtitle": "Buy credit for betting shops or online gaming services",
-      "cards": {
-          "bet": {
-              "title": "Bet Voucher",
-              "body": "For sports betting, casinos, and other games of chance."
-          },
-          "gaming": {
-              "title": "Gaming Voucher",
-              "body": "Buy a voucher for Xbox, PlayStation, or Steam stores."
-          }
+    "title": "Choose your voucher",
+    "subtitle": "Buy credit for betting shops or online gaming services",
+    "cards": {
+      "bet": {
+        "title": "Bet Voucher",
+        "body": "For sports betting, casinos, and other games of chance."
       },
-      "payBills": {
-          "title": "Pay bills",
-          "body": "Fast and easy bill payment, no crowds or waiting",
-          "simpleScanTitle": "Bill payment",
-          "simpleScanBody": "Simply scan and pay"
+      "gaming": {
+        "title": "Gaming Voucher",
+        "body": "Buy a voucher for Xbox, PlayStation, or Steam stores."
       }
+    },
+    "payBills": {
+      "title": "Pay bills",
+      "body": "Fast and easy bill payment, no crowds or waiting",
+      "simpleScanTitle": "Bill payment",
+      "simpleScanBody": "Simply scan and pay"
+    }
   },
   "gamingVouchers": {
     "title": "Gaming Vouchers",
@@ -153,20 +160,20 @@
     "qrInfo2": "Direct product purchases <b>are not available</b>. \nProducts are purchased and activated using a multi-purpose voucher in a selected amount based on the product/service you wish to activate.",
     "cards": {
       "playstation": {
-          "title": "PlayStation Top-Ups",
-          "body": "Top up your PSN account and enjoy games, subscriptions, movies, and in-game content of your choice."
+        "title": "PlayStation Top-Ups",
+        "body": "Top up your PSN account and enjoy games, subscriptions, movies, and in-game content of your choice."
       },
       "xbox": {
-          "title": "XBOX Gift Cards",
-          "body": "Top up your Xbox account and redeem the code for games, subscriptions, and digital content from the Microsoft Store."
+        "title": "XBOX Gift Cards",
+        "body": "Top up your Xbox account and redeem the code for games, subscriptions, and digital content from the Microsoft Store."
       },
       "steam": {
-          "title": "Steam Gift Cards",
-          "body": "Top up your Steam account and purchase games, add-ons, and in-game content of your choice."
+        "title": "Steam Gift Cards",
+        "body": "Top up your Steam account and purchase games, add-ons, and in-game content of your choice."
       },
       "comingSoon": {
-          "title": "More services coming soon",
-          "body": "We're preparing additional services and popular platforms – even more content you love, coming soon."
+        "title": "More services coming soon",
+        "body": "We're preparing additional services and popular platforms – even more content you love, coming soon."
       }
     },
     "priceFrom": "<span style='color: #000000; font-weight: 400;'>From</span> $25 - $150",
@@ -174,7 +181,7 @@
   },
   "bettingVouchers": {
     "title": "Betting Vouchers",
-    "description": "Use a <b>multi-purpose</b> VCash voucher as credit for betting shops, casinos, and more...",
+    "description": "Use a <b>multi-purpose</b> VCash voucher to add credit to your account.",
     "qrInfo": "Scan or visit <span style='color:#1048A3;'>market.vcash.rs</span> to check current product prices.",
     "qrInfo2": "Direct purchase of products is <b>not available</b>.<br />Products are purchased and activated by buying a multi-purpose voucher in a selected value based on the product/service you wish to activate.",
     "cards": {

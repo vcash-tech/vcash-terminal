@@ -2,6 +2,7 @@
 @use '../../../styles/config/media-queries';
 
 .voucher-confirmation {
+    margin-top: 25rem;
     display: flex;
     flex-direction: column;
     width: 100vw;
@@ -14,7 +15,7 @@
     gap: 2rem;
     max-height: 100%;
     box-sizing: border-box;
-    padding-bottom: 4rem;
+    height: 100vh;
 
     h1 {
         text-align: center;
@@ -41,11 +42,17 @@
         width: 100%;
         flex-direction: column;
         padding: 0 3rem;
-        margin: 4rem auto;
+        margin: 4rem auto 10rem;
         justify-self: flex-end;
         display: flex;
-        justify-content: center;
+        justify-content: end;
         align-items: center;
+        flex: 1;
+        gap: 5rem;
+
+        .session-counter {
+            flex: none;
+        }
     }
 }
 

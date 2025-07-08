@@ -326,13 +326,14 @@ export default function InsertCashTemplate({
                     </div>
                     <div className="inserted-amount">
                         {t('insertCash.insertedAmount')}:{' '}
-                        <span>{amount} RSD</span>
+                        <span>{amount || 0} RSD</span>
                     </div>
                     <div className="info-box">
                         <img src={infoCircle} alt={t('common.info')} />
                         {t('insertCash.noChangeWarning')}
                     </div>
                     <PrimaryButton
+                        isDisabled={!amount || amount <= 0}
                         text={t('insertCash.confirmPayment')}
                         callback={handleBuy}
                     />
