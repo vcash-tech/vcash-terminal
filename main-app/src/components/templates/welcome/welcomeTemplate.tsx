@@ -3,23 +3,14 @@ import { useTranslation } from 'react-i18next'
 import { NavigateFunction } from 'react-router-dom'
 
 import { logoWhite, tickets } from '@/assets/images'
-// import { logoWhite, tickets } from '@/assets/images'
 import Container from '@/components/atoms/container/container'
 import PrimaryButton from '@/components/atoms/primaryButton/primaryButton'
 import Footer from '@/components/organisms/footer/footer'
 import Header from '@/components/organisms/header/header'
 import HomeCards from '@/components/organisms/homeCards/homeCards'
 import { useWindowSize } from '@/hooks/useWindowSize'
-// import PrimaryButton from '@/components/atoms/primaryButton/primaryButton'
-// import Footer from '@/components/organisms/footer/footer'
-// import Header from '@/components/organisms/header/header'
-// import HomeCards from '@/components/organisms/homeCards/homeCards'
 
-export default function Welcome({
-    navigate
-}: {
-    navigate: NavigateFunction
-}) {
+export default function Welcome({ navigate }: { navigate: NavigateFunction }) {
     const [isAnimating, setIsAnimating] = useState(false)
     const { height } = useWindowSize()
     const { t } = useTranslation()
@@ -41,9 +32,7 @@ export default function Welcome({
                 className={`screen-saver-content`}
                 style={{ maxHeight: height }}>
                 <div className="home-cards-container">
-                    <HomeCards
-                        isAnimating={isAnimating}
-                    />
+                    <HomeCards isAnimating={isAnimating} />
                 </div>
 
                 <div className="home-screen-title">
