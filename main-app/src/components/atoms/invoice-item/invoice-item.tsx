@@ -5,19 +5,23 @@ export default function InvoiceItem({
     value,
     align = 'justify',
     isQrCode = false,
-    codeSize = 115
+    codeSize = 115,
+    qrData
 }: {
     label: string
-    value: string
+    value?: string
     align?: 'left' | 'justify' | 'right'
     isQrCode?: boolean
     codeSize?: number
+    qrData?: string
 }) {
     return (
-        <div className={`invoice-item align-${align} ${isQrCode ? 'qr-code' : ''}`}>
+        <div
+            className={`invoice-item align-${align} ${isQrCode ? 'qr-code' : ''}`}>
             <p className="label">{label}: </p>
             {!isQrCode && <p className="value">{value}</p>}
-            {isQrCode && <QRCode value={value} size={codeSize} />}
+            {value && isQrCode && <QRCode value={value} size={codeSize} />}
+            {qrData && <QRCode value={qrData} size={codeSize} />}
         </div>
     )
 }

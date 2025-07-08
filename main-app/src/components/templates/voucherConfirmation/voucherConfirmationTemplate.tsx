@@ -6,19 +6,17 @@ import Divider from '@/components/atoms/divider/divider'
 import FlexWrapper from '@/components/atoms/flexWrapper/flexWrapper'
 import InvoiceItem from '@/components/atoms/invoice-item/invoice-item'
 import PrimaryButton from '@/components/atoms/primaryButton/primaryButton'
-import HowToUse from '@/components/molecules/howToUse/howToUse'
+import SessionCounter from '@/components/molecules/sessionCounter/sessionCounter'
 import Footer from '@/components/organisms/footer/footer'
 import Header from '@/components/organisms/header/header'
 import { VoucherConfirmation } from '@/data/entities/voucher-confirmation'
 import { useTranslate } from '@/i18n/useTranslate'
 
-
-
 export default function VoucherConfirmationTemplate({
     voucherConfirmation,
     navigate
 }: {
-    voucherConfirmation: VoucherConfirmation,
+    voucherConfirmation: VoucherConfirmation
     navigate: NavigateFunction
 }) {
     const { t } = useTranslate()
@@ -59,21 +57,37 @@ export default function VoucherConfirmationTemplate({
                         align="left"
                     />
                     <Divider gap={1} />
-                    <InvoiceItem 
+                    <InvoiceItem
                         label={t('voucherGenerated.amount')}
-                        value={voucherConfirmation.amount} 
-                    />
-                    <InvoiceItem 
-                        label={t('voucherGenerated.type')}
-                        value={voucherConfirmation.type} 
+                        value={voucherConfirmation.amount}
                     />
                     <InvoiceItem
-                        label={t('voucherGenerated.usage')}
-                        value={voucherConfirmation.usage}
+                        label={t('voucherGenerated.code')}
+                        value={voucherConfirmation.voucherCode}
                     />
-                    <HowToUse />
+
+                    {/*<InvoiceItem*/}
+                    {/*    label={t('voucherGenerated.usage')}*/}
+                    {/*    value={voucherConfirmation.usage}*/}
+                    {/*/>*/}
+                    {voucherConfirmation.qrCodeData && (
+                        <>
+                            <Divider gap={1} />
+                            <InvoiceItem
+                                label={t('voucherGenerated.scanToRedeem')}
+                                qrData={voucherConfirmation.qrCodeData}
+                            />
+                        </>
+                    )}
                 </div>
-                <PrimaryButton callback={() => onComplete()} text={t('voucherGenerated.buttonText')} />
+
+                <div className={'action-wrapper'}>
+                    <SessionCounter onEndSession={() => navigate('/')} />
+                    <PrimaryButton
+                        callback={() => onComplete()}
+                        text={t('voucherGenerated.buttonText')}
+                    />
+                </div>
             </div>
             <Footer />
         </Container>

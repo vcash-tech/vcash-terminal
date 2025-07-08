@@ -19,7 +19,7 @@ export default function GamingVoucher({ navigate }: GamingVoucherProps) {
             <Header navigationBackText={' '} navigateBackUrl={'/digital-services'} />
             <div className="gaming-voucher">
                 <h1>{t('gamingVouchers.title')}</h1>
-                <p
+                <h2
                     dangerouslySetInnerHTML={{
                         __html: t('gamingVouchers.description')
                     }}
