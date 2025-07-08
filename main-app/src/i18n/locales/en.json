@@ -14,10 +14,11 @@
   },
   "paymentSuccessful": {
     "title": "Voucher Printing",
-    "subtitle": "Download your voucher at the location shown in the image...",
+    "subtitle": "Take your voucher at the location from the image...",
     "generatingVoucher": "Generating voucher...",
-    "voucherUnavailable": "Didn't receive your voucher? Click below, take a photo or scan the voucher on the screen",
-    "buttonText": "View Voucher on Screen"
+    "buttonText": "View Voucher",
+    "fallbackTitle": "Didn't receive your voucher?",
+    "voucherUnavailable": "Click below, take a photo or scan the voucher on the screen"
   },
   "insertCash": {
     "title": "Insert cash",
