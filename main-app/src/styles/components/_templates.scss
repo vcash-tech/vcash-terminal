@@ -1,4 +1,3 @@
-@use '../../components/templates/welcome/welcome';
 @use '../../components/templates/paymentMethodTerminal/paymentMethodTerminalTemplate';
 @use '../../components/templates/insertCash/insertCashTemplate';
 @use '../../components/templates/paymentSuccessful/paymentSuccessfulTemplate';
@@ -8,6 +7,8 @@
 @use '../../components/templates/voucherConfirmation/voucherConfirmationTemplate';
 @use '../../components/templates/emailInputTemplate/emailInputTemplate';
 @use '../../components/templates/register/registerTemplate';
+@use '../../components/templates/welcome/welcomeTemplate';
 @use '../../components/templates/services/serviceTemplate';
 @use '../../components/templates/gamingVoucher/gamingVoucherTemplate';
-@use '../../components/templates/bettingVouchers/bettingVouchersTemplate'
+@use '../../components/templates/bettingVouchers/bettingVouchersTemplate';
+

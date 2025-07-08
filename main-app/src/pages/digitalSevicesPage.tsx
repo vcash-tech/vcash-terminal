@@ -1,8 +1,8 @@
 import { useNavigate } from 'react-router-dom'
 
-import DigitalServicesTemplate from '@/components/templates/digitalServices/digitalServicesTemplate'
+import ServiceTemplate from '@/components/templates/services/serviceTemplate'
 
 export default function DigitalServicesPage() {
     const navigate = useNavigate()
-    return <DigitalServicesTemplate navigate={navigate} />
+    return <ServiceTemplate navigate={navigate} />
 }

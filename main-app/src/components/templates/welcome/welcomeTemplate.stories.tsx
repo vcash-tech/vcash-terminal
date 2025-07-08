@@ -1,28 +1,32 @@
-import type { Meta, StoryObj } from "@storybook/react"
+import type { Meta, StoryObj } from '@storybook/react'
 
-import Welcome from "./welcomeTemplate"
+import ScreenSaverTemplate from './welcomeTemplate'
 
 const meta = {
-  title: "4. Templates/Welcome",
-  component: Welcome,
-  parameters: {
-    layout: "centered",
-  },
-  tags: ["autodocs"],
-} satisfies Meta<typeof Welcome>
+    title: '4. Templates/ScreenSaver',
+    component: ScreenSaverTemplate,
+    parameters: {
+        layout: 'centered'
+    },
+    tags: ['autodocs'],
+    args: {
+        navigate: () => console.log('navigate')
+    }
+} satisfies Meta<typeof ScreenSaverTemplate>
 
 export default meta
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof meta>
 
-export const Default: Story = {}
+export const Inactive: Story = {
+    name: 'Inactive State',
+    args: {
+        navigate: () => {}
+    }
+}
 
-export const Inverted: Story = {
-  args: {
-    navigate: () => {},
-  },
-  parameters: {
-    backgrounds: {
-      default: "dark",
-    },
-  },
+export const Active: Story = {
+    name: 'Active State',
+    args: {
+        navigate: () => {}
+    }
 }

@@ -9,9 +9,11 @@ import Header from '@/components/organisms/header/header'
 import { useTranslate } from '@/i18n/useTranslate'
 
 export default function PaymentSuccessfulTemplate({
-        navigate
+        navigate,
+        onPrimaryButtonClick,
     }: {
         navigate: NavigateFunction
+        onPrimaryButtonClick?: () => void
     }) {
     const { t } = useTranslate()
 
@@ -29,7 +31,7 @@ export default function PaymentSuccessfulTemplate({
                 <div className='payment-successful-fallback'>
                     <SessionCounter onEndSession={() => navigate('/')} />
                     <p>{t('paymentSuccessful.voucherUnavailable')}</p>
-                    <PrimaryButton text={t('paymentSuccessful.buttonText')} callback={() => { navigate('/') }} />
+                    <PrimaryButton text={t('paymentSuccessful.buttonText')} callback={ onPrimaryButtonClick } />
                 </div>
             </div>
             <Footer />

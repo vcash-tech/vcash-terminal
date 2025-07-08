@@ -35,7 +35,8 @@ export default function InsertCashTemplate({
     const { t } = useTranslate()
 
     const [amount, _setAmount] = useState<number>(0)
-    const [isLoading, setIsLoading] = useState<boolean>(false)
+    const [isVoucherPrinting, setIsVoucherPrinting] = useState<boolean>(false)
+    const [showVoucher, setShowVoucher] = useState<boolean>(false)
     const [voucherData, setVoucherData] = useState<VoucherResponse | null>(null)
     const [errorMessage, setErrorMessage] = useState<string>('')
     const [showError, setShowError] = useState<boolean>(false)
@@ -236,6 +237,8 @@ export default function InsertCashTemplate({
     }
 
     const handleBuy = async () => {
+        setIsVoucherPrinting(true)
+        
         if (shouldMockPrinter()) {
             const mockedData = mockedPrinterData()
             setVoucherData(mockedData)
@@ -250,7 +253,6 @@ export default function InsertCashTemplate({
         }
         await callDeactivate()
 
-        setIsLoading(true)
         try {
             const voucherTypeId = '20' // Replace with actual voucher type ID
             const voucherData = await TransactionService.CreateVoucher({
@@ -263,7 +265,6 @@ export default function InsertCashTemplate({
         } catch (err) {
             console.error(err)
         }
-        setIsLoading(false)
     }
 
     const handleErrorClose = () => {
@@ -271,7 +272,7 @@ export default function InsertCashTemplate({
         setErrorMessage('')
     }
 
-    if (voucherData) {
+    if (showVoucher && voucherData) {
         return (
             <VoucherConfirmationTemplate
                 voucherConfirmation={
@@ -298,8 +299,8 @@ export default function InsertCashTemplate({
         )
     }
 
-    if (isLoading) {
-        return <PaymentSuccessfulTemplate navigate={() => navigate('/')} />
+    if (isVoucherPrinting) {
+        return <PaymentSuccessfulTemplate onPrimaryButtonClick={() => setShowVoucher(true)} navigate={() => navigate('/')} />
     }
 
     return (

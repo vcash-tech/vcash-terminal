@@ -1,15 +1,13 @@
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import ServiceTemplate from '@/components/templates/services/serviceTemplate'
+import Welcome from '@/components/templates/welcome/welcomeTemplate'
 import { POSService } from '@/services/posService'
 
 import { AuthService } from '../services/authService'
 import { Auth } from '../types/common/httpRequest'
 
 function HomePage() {
-    // const [loader, setLoader] = useState<boolean>(false)
-
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -57,7 +55,7 @@ function HomePage() {
         }
     }, [navigate])
 
-    return <ServiceTemplate navigate={navigate} />
+    return <Welcome navigate={navigate} />
 }
 
 export default HomePage

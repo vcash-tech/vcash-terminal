@@ -16,7 +16,7 @@ export default function GamingVoucher({ navigate }: GamingVoucherProps) {
     const { t } = useTranslation()
     return (
         <Container isFullHeight={true}>
-            <Header navigationBackText={' '} navigateBackUrl={'/'} />
+            <Header navigationBackText={' '} navigateBackUrl={'/digital-services'} />
             <div className="gaming-voucher">
                 <h1>{t('gamingVouchers.title')}</h1>
                 <h2

@@ -19,7 +19,7 @@ export default function BettingVoucher({ navigate }: BettingVoucherProps) {
     return (
         <Container isFullHeight={true}>
             <Header
-                navigateBackUrl={'/'}
+                navigateBackUrl={'/digital-services'}
                 navigationBackText={' '} //t('digitalServices.backToServices')}
             />
             <div className="betting-voucher">
