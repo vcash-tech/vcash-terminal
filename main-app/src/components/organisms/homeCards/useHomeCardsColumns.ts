@@ -47,9 +47,7 @@ export const useHomeCardsColumns = ({
                 card.type === ProductCardType.f1
         )
         const casinoCards = homeCardsData.filter(
-            (card) =>
-                card.type === ProductCardType.casino ||
-                card.type === ProductCardType.casino2
+            (card) => card.type === ProductCardType.casino
         )
         const gamingCards = homeCardsData.filter(
             (card) =>

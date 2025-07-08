@@ -1,4 +1,3 @@
-import { action } from '@storybook/addon-actions'
 import type { Meta, StoryObj } from '@storybook/react'
 
 import ScreenSaverTemplate from './screenSaverTemplate'
@@ -11,7 +10,7 @@ const meta = {
     },
     tags: ['autodocs'],
     args: {
-        navigate: action('navigate')
+        navigate: () => console.log('navigate')
     }
 } satisfies Meta<typeof ScreenSaverTemplate>
 
@@ -21,7 +20,8 @@ type Story = StoryObj<typeof meta>
 export const Inactive: Story = {
     name: 'Inactive State',
     args: {
-        isFullScreen: false
+        isFullScreen: false,
+        navigate: () => {}
     }
 }
 

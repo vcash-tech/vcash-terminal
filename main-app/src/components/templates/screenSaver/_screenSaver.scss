@@ -1,9 +1,8 @@
 @use '../../../styles/config/colors';
 
 .screen-saver-content {
-    background: colors.$brand-primary-color
-        url('../../../assets/images/screen-saver-background.png') no-repeat
-        center center;
+    background: colors.$brand-primary-color url('../../../assets/images/screen-saver-background.png') no-repeat center center;
+    background-color: colors.$brand-primary-color;
     background-size: cover;
     display: flex;
     justify-content: space-between;
@@ -11,6 +10,7 @@
     align-items: center;
     flex: 1;
     transition: all 0.5s ease-in-out;
+
     .home-cards-container {
         margin-top: -6rem;
         z-index: 1;

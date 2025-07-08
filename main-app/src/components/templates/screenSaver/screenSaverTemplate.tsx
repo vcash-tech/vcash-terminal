@@ -15,7 +15,7 @@ export default function ScreenSaverTemplate({
     isFullScreen
 }: {
     navigate: NavigateFunction
-    isFullScreen: boolean
+    isFullScreen?: boolean
 }) {
     const [isFullSize, setIsFullSize] = useState(isFullScreen)
     const [isAnimating, setIsAnimating] = useState(false)
@@ -38,14 +38,9 @@ export default function ScreenSaverTemplate({
             <div
                 className={`screen-saver-content ${isFullSize ? 'full-size' : ''}`}
                 style={{ maxHeight: height }}>
-                {/* {isFullSize && (
-                    <div className="vcash-logo fs-logo">
-                        <img src={logoWhite} alt="" />
-                    </div>
-                )} */}
                 <div className="home-cards-container">
                     <HomeCards
-                        isFullScreen={isFullSize}
+                        isFullScreen={isFullSize && isFullSize}
                         onTap={() => {
                             setIsAnimating(true)
                             setIsFullSize(!isFullSize)
