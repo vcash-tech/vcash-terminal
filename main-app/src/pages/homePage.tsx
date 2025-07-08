@@ -1,24 +1,23 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import HomeTemplate from '@/components/templates/home/homeTemplate'
+import ServiceTemplate from '@/components/templates/services/serviceTemplate'
 import { POSService } from '@/services/posService'
 
 import { AuthService } from '../services/authService'
 import { Auth } from '../types/common/httpRequest'
 
 function HomePage() {
-    const [loader, setLoader] = useState<boolean>(false)
+    // const [loader, setLoader] = useState<boolean>(false)
 
     const navigate = useNavigate()
 
     useEffect(() => {
         const fetchCashiers = async () => {
-            setLoader(true)
             try {
                 const cashiersResponse = await POSService.getCashiersPOS()
 
-                const firstWithFixedPin = cashiersResponse.cashiers?.find(
+                const firstWithFixedPin = cashiersResponse?.cashiers?.find(
                     (cashier) => !!cashier.fixedPin
                 )
 
@@ -29,7 +28,6 @@ function HomePage() {
             } catch (error) {
                 console.error('Error fetching cashiers:', error)
             }
-            setLoader(false)
         }
 
         if (!AuthService.GetToken(Auth.Cashier)) {
@@ -59,24 +57,7 @@ function HomePage() {
         }
     }, [navigate])
 
-    // if (loader) {
-    //     return (
-    //         <Container isFullHeight={true} className="home-container">
-    //             <Header navigateBackUrl="#" />
-    //             <div>
-    //                 <div className="loader-thumb"></div>
-    //             </div>
-    //             {/*<CircularProgress />*/}
-    //             <div>
-    //                 <div className="half-container"></div>
-    //                 <div className="half-container"></div>
-    //             </div>
-    //             <Footer />
-    //         </Container>
-    //     )
-    // }
-
-    return <HomeTemplate navigate={navigate} isLoading={loader} />
+    return <ServiceTemplate navigate={navigate} />
 }
 
 export default HomePage

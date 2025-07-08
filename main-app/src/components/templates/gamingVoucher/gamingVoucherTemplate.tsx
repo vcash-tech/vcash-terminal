@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next'
+import { NavigateFunction } from 'react-router-dom'
 
 import { qrCode } from '@/assets/images'
 import Container from '@/components/atoms/container/container'
@@ -8,16 +9,21 @@ import Footer from '@/components/organisms/footer/footer'
 import Header from '@/components/organisms/header/header'
 import { gamingVoucherCards } from '@/data/mocks/gamingVoucher.mock'
 
-export default function GamingVoucher() {
+export type GamingVoucherProps = {
+    navigate: NavigateFunction
+}
+export default function GamingVoucher({ navigate }: GamingVoucherProps) {
     const { t } = useTranslation()
     return (
         <Container isFullHeight={true}>
-            <Header />
+            <Header navigationBackText={' '} navigateBackUrl={'/'} />
             <div className="gaming-voucher">
                 <h1>{t('gamingVouchers.title')}</h1>
-                <p dangerouslySetInnerHTML={{
-                    __html: t('gamingVouchers.description')
-                }} />
+                <h2
+                    dangerouslySetInnerHTML={{
+                        __html: t('gamingVouchers.description')
+                    }}
+                />
                 <div className="gaming-voucher__qr-box">
                     <div className="gaming-voucher__qr-image-wrapper">
                         <img src={qrCode} alt="QR Code" />
@@ -45,7 +51,10 @@ export default function GamingVoucher() {
                     ))}
                 </div>
                 <div className="gaming-voucher__primary-button">
-                    <PrimaryButton text={t('gamingVouchers.buttonText')} />
+                    <PrimaryButton
+                        text={t('gamingVouchers.buttonText')}
+                        onPress={() => navigate('/payment-method')}
+                    />
                 </div>
             </div>
             <Footer />

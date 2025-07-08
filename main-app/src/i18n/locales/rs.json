@@ -15,7 +15,9 @@
   "paymentSuccessful": {
     "title": "Plaćanje uspešno",
     "subtitle": "Štampamo vaš vaučer, molimo sačekajte…",
-    "generatingVoucher": "Vaučer se kreira..."
+    "generatingVoucher": "Vaučer se kreira...",
+    "voucherUnavailable": "Nisi dobio vaučer? Klikni ispod i pogledaj na ekranu",
+    "buttonText": "Pogledaj Vaučer na Ekranu"
   },
   "insertCash": {
     "title": "Ubacite novac",
@@ -63,7 +65,8 @@
             "2": "Pregledajte listu dostupnih servisa",
             "3": "Izaberite gde želite da iskoristite vaučer - brzo i jednostavno!"
         },
-        "buttonText": "Završi"
+      "buttonText": "Završi",
+      "scanToRedeem": "Skenirajte za preuzimanje"
     },
     "cashboxFullModal": {
         "title": "Dalja uplata nije moguća",
@@ -198,7 +201,7 @@
           "title": "MaxBet Kladionice",
           "body": "Dopunite svoj <b>MaxBet</b> nalog i iskoristite sredstva za klađenje, kazino igre i druge uzbudljive opcije u MaxBet ponudi."
       },
-      "commingSoon": {
+      "comingSoon": {
           "title": "Još servisa stiže uskoro",
           "body": "Spremamo dodatne servise i popularne platforme – još više sadržaja koji volite, uskoro dostupno."
       }
@@ -230,7 +233,8 @@
       "2": "Pregledajte listu dostupnih servisa",
       "3": "Izaberite gde želite da iskoristite vaučer - brzo i jednostavno!"
     },
-    "buttonText": "Završi"
+    "buttonText": "Završi",
+    "code": "Vaučer kod"
   },
   "cashboxFullModal": {
     "title": "Dalja uplata nije moguća",
@@ -243,8 +247,8 @@
     "buttonText": "Pošalji na email"
   },
   "sessionCounter": {
-    "timeLeft": "Preostalo vreme:",
-    "extendTime": "Produži vreme"
+    "timeLeft": "Vreme prikaza:",
+    "extendTime": "Produži vreme prikaza"
   },
   "sessionTimeoutModal": {
     "title": "Istekla je sesija",

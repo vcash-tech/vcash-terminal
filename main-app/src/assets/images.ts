@@ -19,6 +19,7 @@ import gPay from './images/googlePay.png'
 import hbo from './images/hbo.png'
 import homeBackground from './images/homeBackground.png'
 import hulu from './images/hulu.png'
+import insertCashImg from './images/insertCash.png'
 import insertCash from './images/insertCash.svg'
 import maxBetLogo from './images/maxBetLogo.svg'
 import meridianBetLogo from './images/meridianBetLogo.svg'
@@ -26,15 +27,18 @@ import merkurXTipLogo from './images/merkurXTipLogo.svg'
 import paymentCardBackground from './images/paymentCardBackground.svg'
 import paymentMethodBackground from './images/paymentMethodBackground.png'
 import playStationCard from './images/playstationCard-no-price.png'
+import playstationClean from './images/playstationCardClean.png'
+import printVoucher from './images/printVoucher.png'
 import ps from './images/ps.png'
 import qrCode from './images/qrCode.svg'
 import soccerBetLogo from './images/soccerBetLogo.svg'
 import steam from './images/steam.png'
 import steamCard from './images/steamCard.png'
+import steamClean from './images/steamClean.png'
 import test from './images/test.png'
 import viewBackground from './images/view-background.png'
 import welcomeBackground from './images/welcomeBackground.svg'
-import xboxCard from './images/xboxCard.png'
+import xboxClean from './images/xboxCardClean.png'
 
 export {
     ageDisclaimerBackground,
@@ -59,19 +63,23 @@ export {
     homeBackground,
     hulu,
     insertCash,
+    insertCashImg,
     maxBetLogo,
     meridianBetLogo,
     merkurXTipLogo,
     paymentCardBackground,
     paymentMethodBackground,
     playStationCard,
+    playstationClean,
+    printVoucher,
     ps,
     qrCode,
     soccerBetLogo,
     steam,
     steamCard,
+    steamClean,
     test,
     viewBackground,
     welcomeBackground,
-    xboxCard
+    xboxClean
 }

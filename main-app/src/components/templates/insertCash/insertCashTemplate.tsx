@@ -8,6 +8,7 @@ import PrimaryButton from '@/components/atoms/primaryButton/primaryButton'
 import Footer from '@/components/organisms/footer/footer'
 import Header from '@/components/organisms/header/header'
 import { VoucherConfirmation } from '@/data/entities/voucher-confirmation'
+import { mockedPrinterData, shouldMockPrinter } from '@/helpers/mock.printer'
 import { useTranslate } from '@/i18n/useTranslate'
 import { AuthService } from '@/services/authService'
 import { TransactionService } from '@/services/transactionService'
@@ -15,7 +16,7 @@ import { Auth } from '@/types/common/httpRequest'
 import { VoucherResponse } from '@/types/pos/deposit'
 
 import { infoCircle } from '../../../assets/icons'
-import { insertCash } from '../../../assets/images'
+import { insertCashImg } from '../../../assets/images'
 import PaymentSuccessfulTemplate from '../paymentSuccessful/paymentSuccessfulTemplate'
 import VoucherConfirmationTemplate from '../voucherConfirmation/voucherConfirmationTemplate'
 
@@ -235,6 +236,13 @@ export default function InsertCashTemplate({
     }
 
     const handleBuy = async () => {
+        if (shouldMockPrinter()) {
+            const mockedData = mockedPrinterData()
+            setVoucherData(mockedData)
+
+            return
+        }
+
         // Clear interval and deactivate before proceeding
         if (activateIntervalRef.current) {
             clearInterval(activateIntervalRef.current)
@@ -276,6 +284,7 @@ export default function InsertCashTemplate({
                             new Date(voucherData.moneyTransfer.date),
                             'hh:mm a'
                         ),
+                        voucherCode: voucherData.moneyTransfer.voucherCode,
                         referenceNo:
                             voucherData.moneyTransfer.moneyTransferCode,
                         terminal: `${voucherData.moneyTransfer.venue?.address}, ${voucherData.moneyTransfer.venue?.city}`,
@@ -290,7 +299,7 @@ export default function InsertCashTemplate({
     }
 
     if (isLoading) {
-        return <PaymentSuccessfulTemplate />
+        return <PaymentSuccessfulTemplate navigate={() => navigate('/')} />
     }
 
     return (
@@ -301,11 +310,19 @@ export default function InsertCashTemplate({
                 onClose={handleErrorClose}
             />
             <Container isFullHeight={true}>
-                <Header />
+                <Header
+                    navigationBackText={' '}
+                    navigateBackUrl={'/payment-method'}
+                />
                 <div className="insert-cash">
                     <h1>{t('insertCash.title')}</h1>
                     <h2>{t('insertCash.acceptedNotes')}</h2>
-                    <img src={insertCash} alt={t('insertCash.altText')} />
+                    <div className="demo-wrapper">
+                        <img
+                            src={insertCashImg}
+                            alt={t('insertCash.altText')}
+                        />
+                    </div>
                     <div className="inserted-amount">
                         {t('insertCash.insertedAmount')}:{' '}
                         <span>{amount} RSD</span>
