@@ -49,6 +49,7 @@ import steamClean from './images/steamClean.png'
 import tennisNewCard from './images/tennisNew.png'
 import test from './images/test.png'
 import tickets from './images/tickets.png'
+import marketplaceQR from './images/vcash-marketplace.svg'
 import viewBackground from './images/view-background.png'
 import welcomeBackground from './images/welcomeBackground.svg'
 import xboxClean from './images/xboxCardClean.png'
@@ -85,6 +86,7 @@ export {
     insertCash,
     insertCashImg,
     logoWhite,
+    marketplaceQR,
     maxBetLogo,
     meridianBetLogo,
     merkurXTipLogo,
@@ -107,5 +109,4 @@ export {
     tickets,
     viewBackground,
     welcomeBackground,
-    xboxClean
-}
+    xboxClean}
