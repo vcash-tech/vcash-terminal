@@ -7,6 +7,7 @@ import FlexWrapper from '@/components/atoms/flexWrapper/flexWrapper'
 import InvoiceItem from '@/components/atoms/invoice-item/invoice-item'
 import PrimaryButton from '@/components/atoms/primaryButton/primaryButton'
 import SessionCounter from '@/components/molecules/sessionCounter/sessionCounter'
+import VoucherCode from '@/components/molecules/voucherCode/voucherCode'
 import Footer from '@/components/organisms/footer/footer'
 import Header from '@/components/organisms/header/header'
 import { VoucherConfirmation } from '@/data/entities/voucher-confirmation'
@@ -66,18 +67,8 @@ export default function VoucherConfirmationTemplate({
                         value={voucherConfirmation.voucherCode}
                     />
 
-                    {/*<InvoiceItem*/}
-                    {/*    label={t('voucherGenerated.usage')}*/}
-                    {/*    value={voucherConfirmation.usage}*/}
-                    {/*/>*/}
                     {voucherConfirmation.qrCodeData && (
-                        <>
-                            <Divider gap={1} />
-                            <InvoiceItem
-                                label={t('voucherGenerated.scanToRedeem')}
-                                qrData={voucherConfirmation.qrCodeData}
-                            />
-                        </>
+                        <VoucherCode voucherCode={voucherConfirmation} />
                     )}
                 </div>
 
