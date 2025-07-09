@@ -2,8 +2,6 @@ import './_homeCards.scss'
 
 import { memo } from 'react'
 
-import HomeCard from '@/components/molecules/homeCard/homeCard'
-
 import { useHomeCardsColumns } from './useHomeCardsColumns'
 
 export type HomeCardsProps = {
