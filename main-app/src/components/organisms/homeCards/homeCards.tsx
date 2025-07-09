@@ -20,7 +20,7 @@ const HomeCards = ({
         <div
             ref={containerRef}
             className={`home-cards ${isAnimating ? 'animating' : ''}`}>
-            {columns?.map((column) => (
+            {/* {columns?.map((column) => (
                 <div
                     key={column.id}
                     className="home-cards-column"
@@ -33,7 +33,7 @@ const HomeCards = ({
                         </div>
                     ))}
                 </div>
-            ))}
+            ))} */}
             <div className="home-cards-header" />
             <div className="home-cards-footer" />
         </div>
