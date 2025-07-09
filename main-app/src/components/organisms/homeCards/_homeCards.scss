@@ -13,7 +13,36 @@ $linear-gradient-reverse: linear-gradient(
     transparent
 );
 
+.home-cards::before {
+    content: '';
+    position: absolute;
+    top: 0px;
+    left: 0;
+    right: 0;
+    background: #385ac9;
+    height: 1px;
+    z-index: 11; // Ensure it is below the header and footer
+}
+
+
+.home-cards::after {
+    content: '';
+    position: absolute;
+    bottom: 0px;
+    left: 0;
+    right: 0;
+    background: #385ac9;
+    height: 1px;
+    z-index: 11; // Ensure it is below the header and footer
+}
+
 .home-cards {
+    position: relative;
+    width: 100vw;
+    height: 60rem;
+    background: #385ac9 url('../../../assets/images/mockedAnimationCards.png') no-repeat center center;
+    background-size: cover;
+
     display: flex;
     gap: 1.6rem;
     justify-content: center;
@@ -33,7 +62,7 @@ $linear-gradient-reverse: linear-gradient(
         background: $linear-gradient;
         display: flex;
         position: absolute;
-        top: 0;
+        top: -1px;
         left: 0;
         right: 0;
         height: 4rem;
@@ -44,7 +73,7 @@ $linear-gradient-reverse: linear-gradient(
         background: $linear-gradient-reverse;
         display: flex;
         position: absolute;
-        bottom: 0;
+        bottom: -3px;
         left: 0;
         right: 0;
         height: 4rem;
