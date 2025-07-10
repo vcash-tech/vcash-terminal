@@ -16,6 +16,7 @@ export interface GamingVoucherItemProps {
     price?: string
     isComing?: boolean
     flags?: string[]
+    onPress?: () => void
 }
 
 const flagIcons: Record<string, string> = {
@@ -30,13 +31,15 @@ const GamingVoucherItem: React.FC<GamingVoucherItemProps> = ({
     image,
     price,
     isComing,
-    flags = ['us', 'uk', 'cro']
+    flags = ['us', 'uk', 'cro'],
+    onPress
 }) => {
     const { t } = useTranslation()
     return (
-        <div
+        <button
             className={`gaming-voucher-item${isComing ? ' coming' : ''}`}
-            style={isComing ? { backgroundImage: `url(${background})` } : {}}>
+            style={isComing ? { backgroundImage: `url(${background})` } : {}}
+            onClick={onPress}>
             <div
                 className={`gaming-voucher-item__content${isComing ? ' coming' : ''}`}>
                 <h3>{t(title)}</h3>
@@ -78,7 +81,7 @@ const GamingVoucherItem: React.FC<GamingVoucherItemProps> = ({
                     )}
                 </div>
             )}
-        </div>
+        </button>
     )
 }
 

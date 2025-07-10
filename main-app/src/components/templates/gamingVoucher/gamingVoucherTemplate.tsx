@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { NavigateFunction } from 'react-router-dom'
 
@@ -14,6 +15,18 @@ export type GamingVoucherProps = {
 }
 export default function GamingVoucher({ navigate }: GamingVoucherProps) {
     const { t } = useTranslation()
+    const [shouldNotify, setShouldNotify] = useState(false)
+
+    const showNotification = () => {
+        if (shouldNotify === true) {
+            return
+        }
+        setShouldNotify(true)
+        setTimeout(() => {
+            setShouldNotify(false)
+        }, 5000)
+    }
+
     return (
         <Container isFullHeight={true}>
             <Header
@@ -27,7 +40,8 @@ export default function GamingVoucher({ navigate }: GamingVoucherProps) {
                         __html: t('gamingVouchers.description')
                     }}
                 />
-                <div className="gaming-voucher__qr-box">
+                <div
+                    className={`gaming-voucher__qr-box ${shouldNotify ? 'active-notification' : ''}`}>
                     <div className="gaming-voucher__qr-image-wrapper">
                         <img src={marketplaceQR} alt="QR Code" />
                     </div>
@@ -50,7 +64,11 @@ export default function GamingVoucher({ navigate }: GamingVoucherProps) {
                 </div>
                 <div className="gaming-voucher__cards-grid">
                     {gamingVoucherCards.map((card, idx) => (
-                        <GamingVoucherItem key={idx} {...card} />
+                        <GamingVoucherItem
+                            key={idx}
+                            {...card}
+                            onPress={showNotification}
+                        />
                     ))}
                 </div>
                 <div className="gaming-voucher__primary-button">
