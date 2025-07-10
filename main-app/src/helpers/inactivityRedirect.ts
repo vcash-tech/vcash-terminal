@@ -12,8 +12,8 @@ export default function useInactivityRedirect(redirectPath = '/welcome') {
         const resetTimer = () => {
             if (timer.current) clearTimeout(timer.current)
             timer.current = setTimeout(() => {
-                if (location.pathname !== redirectPath)
-                    // Only redirect if not already on the redirect path
+                if (location.pathname !== redirectPath && !['/register', '/', '/under-maintenance'].includes(location.pathname))
+                    // Only redirect if not already on the redirect path or in register/maintenance pages
                     navigate(redirectPath)
             }, INACTIVITY_TIME)
         }
