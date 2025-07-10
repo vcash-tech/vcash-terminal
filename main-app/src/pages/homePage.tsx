@@ -28,6 +28,7 @@ function HomePage() {
             }
         }
 
+        // Only create session if we don't already have a cashier token
         if (!AuthService.GetToken(Auth.Cashier)) {
             fetchCashiers()
         }

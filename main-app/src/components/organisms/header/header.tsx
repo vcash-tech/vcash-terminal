@@ -2,6 +2,8 @@ import LanguageButton from '@/components/atoms/languageButton/languageButton'
 import LinkBackButton from '@/components/atoms/linkBackButton/linkBackButton'
 import { useTranslate } from '@/i18n/useTranslate'
 import { apiService } from '@/services/apiService'
+import { AuthService } from '@/services/authService'
+import { Auth } from '@/types/common/httpRequest'
 
 import { flagEN, flagRS } from '../../../assets/icons'
 
@@ -47,6 +49,33 @@ const Header = ({
         }
     }
 
+    const handleResetDeviceRegistration = async () => {
+        const confirmed = confirm(
+            'Are you sure you want to reset device registration? This will clear all tokens and require re-registration.'
+        )
+
+        if (!confirmed) return
+
+        alert('Resetting device registration...')
+
+        try {
+            // Clear persistent storage by saving empty token
+            await apiService.saveDeviceToken('')
+
+            // Clear localStorage tokens
+            AuthService.DeleteToken(Auth.POS)
+            AuthService.DeleteToken(Auth.Cashier)
+
+            alert(
+                'Device registration reset successfully! Please refresh the page.'
+            )
+        } catch (error) {
+            alert(
+                `Reset error: ${error instanceof Error ? error.message : 'Unknown error'}`
+            )
+        }
+    }
+
     return (
         <header className={`header ${isWelcome ? 'welcome-no-border' : ''}`}>
             <div className="header-left">
@@ -85,6 +114,20 @@ const Header = ({
                             cursor: 'pointer'
                         }}>
                         Debug Credentials
+                    </button>
+                    <button
+                        onClick={handleResetDeviceRegistration}
+                        style={{
+                            marginLeft: '5px',
+                            padding: '5px 10px',
+                            background: '#e74c3c',
+                            color: 'white',
+                            border: 'none',
+                            borderRadius: '4px',
+                            fontSize: '12px',
+                            cursor: 'pointer'
+                        }}>
+                        Reset Device
                     </button>
                 </>
             </div>

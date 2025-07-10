@@ -87,6 +87,9 @@ function RegisterPage() {
 
             setStepper(DeviceTokenSteps.gotToken)
             await deviceTokenService.saveDeviceToken(deviceTokenResponse.token)
+
+            // Create session immediately after device registration
+            await POSService.createSession()
         } catch (err: unknown) {
             const { code, description: _description } = getErrorInfo(err) // TODO: remove _ in _description once we start using it
 

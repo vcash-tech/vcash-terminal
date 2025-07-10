@@ -214,7 +214,7 @@ export default function InsertCashTemplate({
             const base64Data = btoa(binaryString)
 
             // Construct the print URL
-            const printUrl = `${templateRendererUrl}/terminal_voucher?data=${base64Data}&type=bmp`
+            const printUrl = `${templateRendererUrl}/terminal_voucher?rotate=180&data=${base64Data}&type=bmp`
 
             console.log('Printing voucher with URL:', printUrl)
 

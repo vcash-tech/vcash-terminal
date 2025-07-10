@@ -10,9 +10,9 @@ The app now supports automatic switching between Electron and standalone browser
 
 ### At App Startup
 1. `deviceTokenService.initialize()` is called in `main.tsx`
-2. Checks if device token exists in localStorage (fast access)
-3. If not found, loads from persistent storage via `apiService.getDeviceToken()`
-4. Stores any found token in localStorage for synchronous access
+2. Always loads from persistent storage via `apiService.getDeviceToken()` to validate localStorage
+3. If token found, stores it in localStorage for synchronous access
+4. If no token found or API fails, clears any stale localStorage to ensure consistency
 
 ### During Registration
 1. **Auto-Registration (Browser Mode)**: If credentials are available via `/api/v1/device/get-credentials`, registration starts automatically
@@ -109,6 +109,7 @@ When running in browser mode, the app can automatically register devices without
 4. **One-time Loading**: Device token loaded once at startup for performance
 5. **Reliable Persistence**: Token saved to both memory and persistent storage
 6. **Auto-Registration**: Kiosk mode support with automatic device registration
+7. **localStorage Validation**: Always validates localStorage against persistent storage, clearing stale tokens
 
 ## Usage Examples
 

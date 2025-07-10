@@ -159,7 +159,7 @@ export default function RegisterTemplate({
 
                                 <PrimaryButton
                                     text={t('register.continue')}
-                                    callback={() => navigate('/welcome')}
+                                    callback={() => navigate('/')}
                                 />
                             </div>
                         )}
