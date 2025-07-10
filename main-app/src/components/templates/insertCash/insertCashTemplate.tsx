@@ -10,6 +10,7 @@ import Header from '@/components/organisms/header/header'
 import { VoucherConfirmation } from '@/data/entities/voucher-confirmation'
 import { mockedPrinterData, shouldMockPrinter } from '@/helpers/mock.printer'
 import { useTranslate } from '@/i18n/useTranslate'
+import { apiService } from '@/services/apiService'
 import { AuthService } from '@/services/authService'
 import { TransactionService } from '@/services/transactionService'
 import { Auth } from '@/types/common/httpRequest'
@@ -65,8 +66,8 @@ export default function InsertCashTemplate({
                 return
             }
 
-            console.log('window.api.activate', window.api.activate)
-            const result = await window.api.activate(jwt)
+            console.log('apiService.activate', apiService.activate)
+            const result = await apiService.activate(jwt)
             console.log('result', result)
             if (!result.activated) {
                 setErrorMessage(t('insertCash.errors.cashAcceptorError'))
@@ -81,7 +82,7 @@ export default function InsertCashTemplate({
 
     const callDeactivate = useCallback(async () => {
         try {
-            await window.api.deactivate()
+            await apiService.deactivate()
         } catch (error) {
             console.error('Deactivation error:', error)
             // Silent failure for deactivate as per requirements
@@ -217,7 +218,7 @@ export default function InsertCashTemplate({
 
             console.log('Printing voucher with URL:', printUrl)
 
-            const result = await window.api.print(printUrl)
+            const result = await apiService.print(printUrl)
             console.log('Print result:', result)
 
             // Check if printing failed
@@ -238,7 +239,7 @@ export default function InsertCashTemplate({
 
     const handleBuy = async () => {
         setIsVoucherPrinting(true)
-        
+
         if (shouldMockPrinter()) {
             const mockedData = mockedPrinterData()
             setVoucherData(mockedData)
@@ -300,7 +301,12 @@ export default function InsertCashTemplate({
     }
 
     if (isVoucherPrinting) {
-        return <PaymentSuccessfulTemplate onPrimaryButtonClick={() => setShowVoucher(true)} navigate={() => navigate('/')} />
+        return (
+            <PaymentSuccessfulTemplate
+                onPrimaryButtonClick={() => setShowVoucher(true)}
+                navigate={() => navigate('/')}
+            />
+        )
     }
 
     return (

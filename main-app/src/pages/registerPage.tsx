@@ -4,7 +4,9 @@ import { useNavigate } from 'react-router-dom'
 import RegisterTemplate from '@/components/templates/register/registerTemplate'
 import { DeviceTokenSteps } from '@/data/enums/deviceTokenSteps'
 import { getErrorInfo } from '@/helpers/getErrorInfo'
+import { apiService } from '@/services/apiService'
 import { AuthService } from '@/services/authService'
+import { deviceTokenService } from '@/services/deviceTokenService'
 import { POSService } from '@/services/posService'
 import { Auth } from '@/types/common/httpRequest'
 
@@ -28,6 +30,54 @@ function RegisterPage() {
         }
     }, [navigate])
 
+    // Check for auto-credentials and start registration automatically
+    useEffect(() => {
+        const checkCredentials = async () => {
+            try {
+                const credentials = await apiService.getCredentials()
+                if (credentials) {
+                    console.log('Auto-credentials found:', credentials)
+                    // Set the form fields
+                    setAgentEmail(credentials.email)
+                    setDeviceName(credentials.device_name)
+
+                    // Auto-start the registration process
+                    setLoader(true)
+                    try {
+                        const deviceCodeResponse =
+                            await POSService.generateDeviceCodeEmail({
+                                agentEmail: credentials.email,
+                                deviceName: credentials.device_name,
+                                deviceTypeId: 20
+                            })
+                        setStepper(DeviceTokenSteps.gettingToken)
+                        getDeviceToken(
+                            deviceCodeResponse.agentId,
+                            deviceCodeResponse.deviceCode
+                        )
+                    } catch (error) {
+                        const { code, description } = getErrorInfo(error)
+                        console.log(
+                            'Auto-registration failed:',
+                            code,
+                            description
+                        )
+                        setStepper(DeviceTokenSteps.getCode)
+                    } finally {
+                        setLoader(false)
+                    }
+                }
+            } catch (error) {
+                console.error('Error checking credentials:', error)
+            }
+        }
+
+        // Only check credentials if we don't already have a device token
+        if (!AuthService.HasToken(Auth.POS)) {
+            checkCredentials()
+        }
+    }, [navigate])
+
     async function getDeviceToken(agentId: string, deviceCode: string) {
         try {
             const deviceTokenResponse = await POSService.generateDeviceToken({
@@ -36,7 +86,7 @@ function RegisterPage() {
             })
 
             setStepper(DeviceTokenSteps.gotToken)
-            AuthService.SetToken(Auth.POS, deviceTokenResponse.token)
+            await deviceTokenService.saveDeviceToken(deviceTokenResponse.token)
         } catch (err: unknown) {
             const { code, description: _description } = getErrorInfo(err) // TODO: remove _ in _description once we start using it
 
