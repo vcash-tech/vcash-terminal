@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import ScreenSaverTemplate from './welcomeTemplate'
+import Welcome from './welcomeTemplate'
 
 const meta = {
-    title: '4. Templates/ScreenSaver',
-    component: ScreenSaverTemplate,
+    title: '4. Templates/Welcome Screen',
+    component: Welcome,
     parameters: {
         layout: 'centered'
     },
@@ -12,7 +12,7 @@ const meta = {
     args: {
         navigate: () => console.log('navigate')
     }
-} satisfies Meta<typeof ScreenSaverTemplate>
+} satisfies Meta<typeof Welcome>
 
 export default meta
 type Story = StoryObj<typeof meta>
