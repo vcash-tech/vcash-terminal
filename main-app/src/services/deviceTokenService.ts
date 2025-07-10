@@ -12,32 +12,36 @@ class DeviceTokenService {
     /**
      * Initialize device token from persistent storage
      * Should be called once at app startup
+     * Always validates localStorage against persistent storage
      */
     async initialize(): Promise<void> {
         if (this.initialized) return
 
         try {
-            // Check if we already have a device token in localStorage
-            const existingToken = localStorage.getItem(`${Auth.POS}_token`)
-            if (existingToken) {
-                console.log('Device token already exists in localStorage')
-                this.initialized = true
-                return
-            }
-
-            // Try to load device token from apiService
+            // Always check persistent storage first to validate localStorage
             console.log('Loading device token from persistent storage...')
             const deviceToken = await apiService.getDeviceToken()
 
             if (deviceToken) {
-                // Store in localStorage for synchronous access
+                // Valid token found in persistent storage
                 localStorage.setItem(`${Auth.POS}_token`, deviceToken)
-                console.log('Device token loaded from persistent storage')
+                console.log(
+                    'Device token loaded from persistent storage and stored in localStorage'
+                )
             } else {
-                console.log('No device token found in persistent storage')
+                // No token in persistent storage, clear any stale localStorage
+                localStorage.removeItem(`${Auth.POS}_token`)
+                console.log(
+                    'No device token found in persistent storage, cleared localStorage'
+                )
             }
         } catch (error) {
-            console.error('Error loading device token:', error)
+            // API failed, clear localStorage to be safe
+            localStorage.removeItem(`${Auth.POS}_token`)
+            console.error(
+                'Error loading device token, cleared localStorage:',
+                error
+            )
         } finally {
             this.initialized = true
         }
