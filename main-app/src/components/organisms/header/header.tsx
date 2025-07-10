@@ -76,6 +76,33 @@ const Header = ({
         }
     }
 
+    const handleRefreshPage = () => {
+        window.location.reload()
+    }
+
+    const handleGetDeviceTokenDebug = async () => {
+        alert('About to call apiService.getDeviceToken()...')
+
+        try {
+            const deviceToken = await apiService.getDeviceToken()
+            const localStorageToken = localStorage.getItem(`${Auth.POS}_token`)
+
+            const result = {
+                deviceToken: deviceToken || '(empty)',
+                localStorageToken: localStorageToken || '(empty)',
+                hasDeviceToken: !!deviceToken,
+                hasLocalStorageToken: !!localStorageToken,
+                tokensMatch: deviceToken === localStorageToken
+            }
+
+            alert(`Device Token Info:\n${JSON.stringify(result, null, 2)}`)
+        } catch (error) {
+            alert(
+                `Get Device Token error: ${error instanceof Error ? error.message : 'Unknown error'}`
+            )
+        }
+    }
+
     return (
         <header className={`header ${isWelcome ? 'welcome-no-border' : ''}`}>
             <div className="header-left">
@@ -128,6 +155,34 @@ const Header = ({
                             cursor: 'pointer'
                         }}>
                         Reset Device
+                    </button>
+                    <button
+                        onClick={handleRefreshPage}
+                        style={{
+                            marginLeft: '5px',
+                            padding: '5px 10px',
+                            background: '#9b59b6',
+                            color: 'white',
+                            border: 'none',
+                            borderRadius: '4px',
+                            fontSize: '12px',
+                            cursor: 'pointer'
+                        }}>
+                        Refresh
+                    </button>
+                    <button
+                        onClick={handleGetDeviceTokenDebug}
+                        style={{
+                            marginLeft: '5px',
+                            padding: '5px 10px',
+                            background: '#f39c12',
+                            color: 'white',
+                            border: 'none',
+                            borderRadius: '4px',
+                            fontSize: '12px',
+                            cursor: 'pointer'
+                        }}>
+                        Get Token
                     </button>
                 </>
             </div>
