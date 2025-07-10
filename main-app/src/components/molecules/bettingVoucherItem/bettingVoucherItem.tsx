@@ -9,6 +9,7 @@ export interface BettingVoucherItemProps {
     body: string
     image?: string
     isComing?: boolean
+    onPress?: () => void
 }
 
 const BettingVoucherItem: React.FC<BettingVoucherItemProps> = ({
@@ -16,16 +17,18 @@ const BettingVoucherItem: React.FC<BettingVoucherItemProps> = ({
     body,
     image,
     isComing,
+    onPress
 }) => {
     const { t } = useTranslation()
     return (
-        <div
+        <button
             className={`betting-voucher-item${isComing ? ' coming' : ''}`}
-            style={isComing ? { backgroundImage: `url(${background})` } : {}}>
+            style={isComing ? { backgroundImage: `url(${background})` } : {}}
+            onClick={onPress}>
             <div
                 className={`betting-voucher-item__content${isComing ? ' coming' : ''}`}>
                 <h3>{t(title)}</h3>
-                <p dangerouslySetInnerHTML={{__html: t(body)}} />
+                <p dangerouslySetInnerHTML={{ __html: t(body) }} />
             </div>
             {!isComing && image && (
                 <img
@@ -39,7 +42,7 @@ const BettingVoucherItem: React.FC<BettingVoucherItemProps> = ({
                     <img src={comingSoonGaming} />
                 </span>
             )}
-        </div>
+        </button>
     )
 }
 

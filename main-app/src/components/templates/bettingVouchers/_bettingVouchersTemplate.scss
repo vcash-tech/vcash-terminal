@@ -6,32 +6,32 @@
     flex-direction: column;
     flex: 1;
     padding: 5rem;
-    background: colors.$main-background-color url('../assets/images/background.png') center/cover;
+    background: colors.$main-background-color
+        url('../assets/images/background.png') center/cover;
 
     h1 {
-      position: relative;
-      font-family: fonts.$body-font;
-      font-weight: 600;
-      font-size: 4.2rem;
-      line-height: 100%;
-      color: colors.$black-color;
-      margin: 0 0 1rem;
+        position: relative;
+        font-family: fonts.$body-font;
+        font-weight: 600;
+        font-size: 4.2rem;
+        line-height: 100%;
+        color: colors.$black-color;
+        margin: 0 0 1rem;
 
-
-      .header-ico {
-        width: 4.5rem;
-        height: 4.5rem;
-        position: absolute;
-        top: -2.5rem;
-      }
+        .header-ico {
+            width: 4.5rem;
+            height: 4.5rem;
+            position: absolute;
+            top: -2.5rem;
+        }
     }
 
     h2 {
-      font-family: fonts.$body-font;
-      font-weight: 400;
-      font-size: 2.4rem;
-      color: colors.$dark-text-color;
-      margin: 0 0 4.3rem;
+        font-family: fonts.$body-font;
+        font-weight: 400;
+        font-size: 2.4rem;
+        color: colors.$dark-text-color;
+        margin: 0 0 4.3rem;
     }
 
     .betting-voucher__qr-box {
@@ -97,6 +97,10 @@
         .betting-voucher__cards-grid {
             grid-template-columns: 1fr;
         }
+    }
+
+    .active-notification {
+        background-color: rgba(#55c938, 0.2);
     }
 }
 
