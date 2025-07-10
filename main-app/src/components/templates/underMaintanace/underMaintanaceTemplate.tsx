@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { logoWhite, marketplaceQR,tickets } from '@/assets/images'
+import { logoWhite, marketplace, tickets } from '@/assets/images'
 import Container from '@/components/atoms/container/container'
 import Footer from '@/components/organisms/footer/footer'
 import Header from '@/components/organisms/header/header'
@@ -40,7 +40,7 @@ export default function UnderMaintanace() {
                     <h1> {t('underMaintanace.title')}</h1>
                     <p>{t('underMaintanace.text')}</p>
                     <div className='QR-code'>
-                        <img src={marketplaceQR} alt="QR Code" />
+                        <img src={marketplace} alt="QR Code" />
                     </div>
                 </div>
 

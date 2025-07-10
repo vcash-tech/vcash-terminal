@@ -13,6 +13,7 @@ import gPay from './images/googlePay.png'
 import hbo from './images/hbo.png'
 import hulu from './images/hulu.png'
 import insertCashImg from './images/insertCash.jpg'
+import marketplace from './images/marketplace.png'
 import ageDisclaimerBackground from './images/optimised/ageDisclaimerBackground.webp'
 import background from './images/optimised/background.webp'
 import balkanBetLogo from './images/optimised/balkanBetLogo.png'
@@ -84,6 +85,7 @@ export {
     hulu,
     insertCashImg,
     logoWhite,
+    marketplace,
     marketplaceQR,
     maxBetLogo,
     meridianBetLogo,

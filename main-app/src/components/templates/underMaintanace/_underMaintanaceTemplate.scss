@@ -46,7 +46,9 @@
         .QR-code {
             width: 20rem;
             height: 20rem;
-            padding: 1rem;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            overflow: hidden;
             background: colors.$white-color;
 
             img {
@@ -55,7 +57,6 @@
                 object-fit: cover;
             }
         }
-
     }
     .vcash-logo {
         width: 18rem;
