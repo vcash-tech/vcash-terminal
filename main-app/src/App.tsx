@@ -14,6 +14,7 @@ import HomePage from './pages/homePage'
 import InsertCashPage from './pages/insertCashPage'
 import PaymentMethodPage from './pages/paymentMethodPage'
 import RegisterPage from './pages/registerPage'
+import UnderMaintenacePage from './pages/UnderMaintenance'
 import WelcomePage from './pages/welcomePage'
 
 function Layout() {
@@ -33,6 +34,7 @@ function Layout() {
                 />
                 <Route path="/payment-method" element={<PaymentMethodPage />} />
                 <Route path="/buy-voucher-cash" element={<InsertCashPage />} />
+                <Route path="/under-maintenance" element={<UnderMaintenacePage />} />
             </Routes>
         </>
     )

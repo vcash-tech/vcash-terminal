@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
-import UnderMaintanace from './underMaintanaceTemplate'
+import UnderMaintenance from './underMaintenanceTemplate'
 
 const meta = {
     title: '4. Templates/Under Maintanace Screen',
-    component: UnderMaintanace,
+    component: UnderMaintenance,
     parameters: {
         layout: 'centered'
     },
@@ -12,7 +12,7 @@ const meta = {
     args: {
         navigate: () => console.log('navigate')
     }
-} satisfies Meta<typeof UnderMaintanace>
+} satisfies Meta<typeof UnderMaintenance>
 
 export default meta
 type Story = StoryObj<typeof meta>
