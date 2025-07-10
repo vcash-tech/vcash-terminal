@@ -59,15 +59,32 @@ const Header = ({
         alert('Resetting device registration...')
 
         try {
-            // Clear persistent storage by saving empty token
-            await apiService.saveDeviceToken('')
+            // Try clearing with "token-reset" to ensure it overwrites
+            const resetTokenResponse =
+                await apiService.saveDeviceToken('token-reset')
+
+            // Show the API response
+            alert(
+                `Reset Token API Response: ${JSON.stringify(resetTokenResponse, null, 2)}`
+            )
+
+            // Also try with empty string
+            const emptyTokenResponse = await apiService.saveDeviceToken('')
+
+            // Show the empty token API response
+            alert(
+                `Empty Token API Response: ${JSON.stringify(emptyTokenResponse, null, 2)}`
+            )
 
             // Clear localStorage tokens
             AuthService.DeleteToken(Auth.POS)
             AuthService.DeleteToken(Auth.Cashier)
 
+            // Verify the token was actually cleared by checking what's stored
+            const verifyToken = await apiService.getDeviceToken()
+
             alert(
-                'Device registration reset successfully! Please refresh the page.'
+                `Device registration reset completed!\nStored token after reset: "${verifyToken}"\nPlease refresh the page.`
             )
         } catch (error) {
             alert(
