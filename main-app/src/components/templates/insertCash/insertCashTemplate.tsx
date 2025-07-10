@@ -183,7 +183,7 @@ export default function InsertCashTemplate({
     const printVoucher = async (
         voucherResponse: VoucherResponse,
         voucherTypeId: string
-    ) => {
+    ): Promise<boolean> => {
         try {
             const templateRendererUrl = import.meta.env
                 .VITE_TEMPLATE_RENDERER_URL
@@ -193,7 +193,7 @@ export default function InsertCashTemplate({
                     t('insertCash.errors.templateRendererNotConfigured')
                 )
                 setShowError(true)
-                return
+                return false
             }
 
             const voucherObject = createVoucherPrintObject(
@@ -229,11 +229,17 @@ export default function InsertCashTemplate({
                     })
                 )
                 setShowError(true)
+                return false
             }
+
+            // Printing succeeded
+            console.log('✅ Voucher printed successfully')
+            return true
         } catch (error) {
             console.error('Error printing voucher:', error)
             setErrorMessage(t('insertCash.errors.printError'))
             setShowError(true)
+            return false
         }
     }
 
@@ -243,7 +249,8 @@ export default function InsertCashTemplate({
         if (shouldMockPrinter()) {
             const mockedData = mockedPrinterData()
             setVoucherData(mockedData)
-
+            // Auto-proceed for mock data after a short delay
+            setTimeout(() => setShowVoucher(true), 1000)
             return
         }
 
@@ -262,7 +269,19 @@ export default function InsertCashTemplate({
             setVoucherData(voucherData)
 
             // Print the voucher with the new template renderer
-            await printVoucher(voucherData, voucherTypeId)
+            const printSuccess = await printVoucher(voucherData, voucherTypeId)
+
+            // If printing succeeded, automatically proceed to voucher confirmation
+            if (printSuccess) {
+                console.log(
+                    '🎯 Print successful - auto-proceeding to voucher confirmation'
+                )
+                setTimeout(() => setShowVoucher(true), 200) // Small delay for UX
+            } else {
+                console.log(
+                    '❌ Print failed - staying on success screen for manual interaction'
+                )
+            }
         } catch (err) {
             console.error(err)
         }
