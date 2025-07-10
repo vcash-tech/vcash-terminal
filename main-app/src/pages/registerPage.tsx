@@ -25,9 +25,29 @@ function RegisterPage() {
     stepperRef.current = stepper
 
     useEffect(() => {
-        if (AuthService.HasToken(Auth.POS)) {
-            navigate('/register')
+        const checkExistingTokenAndSession = async () => {
+            // If we have a device token, try to create session and go to welcome
+            if (AuthService.HasToken(Auth.POS)) {
+                try {
+                    console.log(
+                        'Device token found on register page - attempting to create session...'
+                    )
+                    await POSService.createSession()
+                    console.log(
+                        '✅ Session created successfully - redirecting to welcome from register page'
+                    )
+                    navigate('/welcome')
+                } catch (error) {
+                    console.error(
+                        'Failed to create session despite having device token:',
+                        error
+                    )
+                    // Stay on register page if session creation fails
+                }
+            }
         }
+
+        checkExistingTokenAndSession()
     }, [navigate])
 
     // Check for auto-credentials and start registration automatically
