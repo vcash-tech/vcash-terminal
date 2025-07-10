@@ -34,7 +34,10 @@ function Layout() {
                 />
                 <Route path="/payment-method" element={<PaymentMethodPage />} />
                 <Route path="/buy-voucher-cash" element={<InsertCashPage />} />
-                <Route path="/under-maintenance" element={<UnderMaintenacePage />} />
+                <Route
+                    path="/under-maintenance"
+                    element={<UnderMaintenacePage />}
+                />
             </Routes>
         </>
     )
