@@ -5,23 +5,24 @@
     flex-direction: column;
     flex: 1;
     padding: 5rem;
-    background: colors.$main-background-color url('../assets/images/background.png') center/cover;
+    background: colors.$main-background-color
+        url('../assets/images/background.png') center/cover;
 
     h1 {
-      font-family: fonts.$body-font;
-      font-weight: 600;
-      font-size: 4.2rem;
-      line-height: 100%;
-      color: colors.$black-color;
-      margin: 0 0 1rem;
+        font-family: fonts.$body-font;
+        font-weight: 600;
+        font-size: 4.2rem;
+        line-height: 100%;
+        color: colors.$black-color;
+        margin: 0 0 1rem;
     }
 
     h2 {
-      font-family: fonts.$body-font;
-      font-weight: 400;
-      font-size: 2.4rem;
-      color: colors.$dark-text-color;
-      margin: 0 0 4.3rem;
+        font-family: fonts.$body-font;
+        font-weight: 400;
+        font-size: 2.4rem;
+        color: colors.$dark-text-color;
+        margin: 0 0 4.3rem;
     }
 
     p {
@@ -91,6 +92,10 @@
         .gaming-voucher__cards-grid {
             grid-template-columns: 1fr;
         }
+    }
+
+    .active-notification {
+        background-color: rgba(#55c938, 0.2);
     }
 }
 
