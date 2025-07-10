@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { NavigateFunction } from 'react-router-dom'
 
@@ -16,13 +17,27 @@ export type BettingVoucherProps = {
 
 export default function BettingVoucher({ navigate }: BettingVoucherProps) {
     const { t } = useTranslation()
+    const [shouldNotify, setShouldNotify] = useState(false)
+
+        const showNotification = () => {
+        if (shouldNotify === true) {
+            return
+        }
+        setShouldNotify(true)
+        setTimeout(() => {
+            setShouldNotify(false)
+        }, 5000)
+    }
+
+
     return (
         <Container isFullHeight={true}>
             <Header
                 navigateBackUrl={'/digital-services'}
                 navigationBackText={' '} //t('digitalServices.backToServices')}
             />
-            <div className="betting-voucher">
+            <div 
+                className={`betting-voucher`}>
                 <h1>
                     {t('bettingVouchers.title')}{' '}
                     <img className="header-ico" src={ageDisclaimer} />
@@ -32,7 +47,7 @@ export default function BettingVoucher({ navigate }: BettingVoucherProps) {
                         __html: t('bettingVouchers.description')
                     }}
                 />
-                <div className="betting-voucher__qr-box">
+                <div className={`betting-voucher__qr-box ${shouldNotify ? 'active-notification' : ''}`}>
                     <div className="betting-voucher__qr-image-wrapper">
                         <img src={qrCode} alt="QR Code" />
                     </div>
@@ -55,7 +70,7 @@ export default function BettingVoucher({ navigate }: BettingVoucherProps) {
                 </div>
                 <div className="betting-voucher__cards-grid">
                     {bettingVoucherCards.map((card, idx) => (
-                        <BettingVoucherItem key={idx} {...card} />
+                        <BettingVoucherItem key={idx} {...card} onPress={showNotification} />
                     ))}
                 </div>
                 <div className="gaming-voucher__primary-button">
