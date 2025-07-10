@@ -8,7 +8,7 @@ import Header from '@/components/organisms/header/header'
 import HomeCards from '@/components/organisms/homeCards/homeCards'
 import { useWindowSize } from '@/hooks/useWindowSize'
 
-export default function UnderMaintanace() {
+export default function UnderMaintenance() {
     const [isAnimating, setIsAnimating] = useState(false)
     const { height } = useWindowSize()
     const { t } = useTranslation()
@@ -37,8 +37,8 @@ export default function UnderMaintanace() {
                     <div className="vcash-logo">
                         <img src={logoWhite} alt="" />
                     </div>
-                    <h1> {t('underMaintanace.title')}</h1>
-                    <p>{t('underMaintanace.text')}</p>
+                    <h1> {t('underMaintenance.title')}</h1>
+                    <p>{t('underMaintenance.text')}</p>
                     <div className='QR-code'>
                         <img src={marketplace} alt="QR Code" />
                     </div>
