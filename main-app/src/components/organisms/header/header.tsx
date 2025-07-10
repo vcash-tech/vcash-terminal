@@ -131,6 +131,7 @@ const Header = ({
                 )}
                 {/* Debug buttons */}
                 <>
+                    <span>Verizija: 10.07 22:41</span>
                     <button
                         onClick={handlePrintDebug}
                         style={{
