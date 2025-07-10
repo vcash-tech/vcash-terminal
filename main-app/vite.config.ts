@@ -2,6 +2,7 @@ import react from '@vitejs/plugin-react'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import { defineConfig } from 'vite'
+import { VitePWA } from 'vite-plugin-pwa'
 
 // Recreate __dirname for ESM
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
@@ -16,7 +17,34 @@ export default defineConfig(() => {
     // const apiUrl = env.VITE_API_URL || 'http://localhost:8181'
 
     return {
-        plugins: [react()],
+        plugins: [
+            react(),
+            VitePWA({
+                registerType: 'autoUpdate', // auto update when new version is available
+                manifest: {
+                    name: 'Vcash Terminal',
+                    short_name: 'Vcash',
+                    start_url: '/',
+                    display: 'standalone',
+                    icons: [],
+                },
+                workbox: {
+                    runtimeCaching: [
+                    {
+                        urlPattern: /\.(?:png|jpg|jpeg|svg|gif|webp)$/,
+                        handler: 'CacheFirst',
+                        options: {
+                        cacheName: 'images-cache',
+                        expiration: {
+                            maxEntries: 100,
+                            maxAgeSeconds: 60 * 60 * 24 * 30, // 30 days
+                        },
+                        },
+                    },
+                    ],
+                },
+            }),
+        ],
         resolve: {
             alias: {
                 '@': path.resolve(__dirname, './src')
