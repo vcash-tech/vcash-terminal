@@ -12,8 +12,7 @@ import gamingServices from './images/gamingServices.png'
 import gPay from './images/googlePay.png'
 import hbo from './images/hbo.png'
 import hulu from './images/hulu.png'
-import insertCashImg from './images/insertCash.png'
-import insertCash from './images/insertCash.svg'
+import insertCashImg from './images/insertCash.webp'
 import ageDisclaimerBackground from './images/optimised/ageDisclaimerBackground.webp'
 import background from './images/optimised/background.webp'
 import balkanBetLogo from './images/optimised/balkanBetLogo.png'
@@ -83,7 +82,6 @@ export {
     hbo,
     homeBackground,
     hulu,
-    insertCash,
     insertCashImg,
     logoWhite,
     marketplaceQR,
@@ -109,4 +107,5 @@ export {
     tickets,
     viewBackground,
     welcomeBackground,
-    xboxClean}
+    xboxClean
+}

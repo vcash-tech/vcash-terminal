@@ -25,6 +25,10 @@
     &.footer--welcome {
         background-color: colors.$white-color;
         color: colors.$dark-text-color;
+        position: fixed;
+        bottom: 0;
+        z-index: 100;
+        width: 100vw;
 
         span {
             color: colors.$dark-text-color;
