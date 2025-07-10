@@ -11,43 +11,22 @@ function HomePage() {
     const navigate = useNavigate()
 
     useEffect(() => {
-        const fetchCashiers = async () => {
+        const createSession = async () => {
             try {
-                const cashiersResponse = await POSService.getCashiersPOS()
-
-                const firstWithFixedPin = cashiersResponse?.cashiers?.find(
-                    (cashier) => !!cashier.fixedPin
-                )
-
-                await handleUnlock(
-                    firstWithFixedPin?.userName || '',
-                    firstWithFixedPin?.fixedPin || ''
-                )
+                console.log('Attempting to create session...')
+                await POSService.createSession()
             } catch (error) {
-                console.error('Error fetching cashiers:', error)
+                console.error(
+                    'Failed to create session, redirecting to registration:',
+                    error
+                )
+                navigate('/register')
             }
         }
 
-        // Only create session if we don't already have a cashier token
-        if (!AuthService.GetToken(Auth.Cashier)) {
-            fetchCashiers()
-        }
-    }, [])
-
-    const handleUnlock = async (username: string, pin: string) => {
-        try {
-            const response = await POSService.unlockDevice({
-                userName: username,
-                pin
-            })
-            AuthService.SetToken(Auth.Cashier, response.accessToken)
-            // Handle successful unlock, e.g., redirect or show success message
-            console.log('Device unlocked successfully')
-        } catch (error) {
-            console.error('Error unlocking device:', error)
-            // Handle error, e.g., show error message
-        }
-    }
+        // Always try to create session on home page load
+        createSession()
+    }, [navigate])
 
     useEffect(() => {
         const token = AuthService.GetToken(Auth.POS)

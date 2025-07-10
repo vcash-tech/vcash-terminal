@@ -69,8 +69,52 @@ export class HttpService {
 
             if (!response.ok) {
                 if (response.status === 401 && hasToken) {
-                    AuthService.DeleteToken(req.authorization as Auth)
-                    if ((req.authorization as Auth) === Auth.Agent) {
+                    const authType = req.authorization as Auth
+                    AuthService.DeleteToken(authType)
+
+                    // If it's a Cashier token 401, try to recreate session
+                    if (authType === Auth.Cashier) {
+                        console.log(
+                            '🔄 401 error with Cashier token - attempting to recreate session...'
+                        )
+                        try {
+                            const { POSService } = await import('./posService')
+                            await POSService.createSession()
+                            console.log(
+                                '✅ Session recreated successfully after 401'
+                            )
+                            // Throw special error to indicate session was recreated
+                            throw {
+                                status: 401,
+                                statusText: 'Session Recreated',
+                                sessionRecreated: true,
+                                text: 'Session token was recreated, please retry request'
+                            }
+                        } catch (sessionError: unknown) {
+                            // If it's our special "session recreated" error, re-throw it
+                            if (
+                                typeof sessionError === 'object' &&
+                                sessionError !== null &&
+                                'sessionRecreated' in sessionError
+                            ) {
+                                throw sessionError
+                            }
+
+                            console.error(
+                                '❌ Failed to recreate session after 401:',
+                                sessionError
+                            )
+                            // Redirect to registration if session creation fails
+                            window.location.href = '/register'
+                            throw {
+                                status: 401,
+                                statusText: 'Session Recreation Failed',
+                                text: 'Failed to recreate session, redirecting to registration'
+                            }
+                        }
+                    }
+
+                    if (authType === Auth.Agent) {
                         location.reload()
                     }
                 }

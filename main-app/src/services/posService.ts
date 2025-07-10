@@ -76,10 +76,16 @@ export class POSService {
         return response
     }
 
-    // Session creation after device registration
+    // Session creation - creates session token if needed
     static async createSession(): Promise<void> {
         try {
-            console.log('Creating session after device registration...')
+            // Check if we already have a valid session token
+            if (AuthService.HasToken(Auth.Cashier)) {
+                console.log('✅ Session token already exists')
+                return
+            }
+
+            console.log('Creating new session token...')
 
             // Fetch cashiers
             const cashiersResponse = await POSService.getCashiersPOS()
@@ -89,27 +95,26 @@ export class POSService {
                 (cashier) => !!cashier.fixedPin
             )
 
-            if (firstWithFixedPin) {
-                // Unlock device with the found cashier credentials
-                const response = await POSService.unlockDevice({
-                    userName: firstWithFixedPin.userName || '',
-                    pin: firstWithFixedPin.fixedPin || ''
-                })
-
-                // Save the session token
-                AuthService.SetToken(Auth.Cashier, response.accessToken)
-                console.log(
-                    'Session created successfully after device registration'
+            if (!firstWithFixedPin) {
+                throw new Error(
+                    'No cashier with fixed pin found for auto-unlock'
                 )
-            } else {
-                console.warn('No cashier with fixed pin found for auto-unlock')
             }
+
+            // Unlock device with the found cashier credentials
+            const response = await POSService.unlockDevice({
+                userName: firstWithFixedPin.userName || '',
+                pin: firstWithFixedPin.fixedPin || ''
+            })
+
+            // Save the session token
+            AuthService.SetToken(Auth.Cashier, response.accessToken)
+            console.log('✅ Session token created successfully')
         } catch (error) {
-            console.error(
-                'Error creating session after device registration:',
-                error
-            )
-            // Don't throw error to avoid breaking the registration flow
+            console.error('❌ Error creating session token:', error)
+            // Clear any partial session token
+            AuthService.DeleteToken(Auth.Cashier)
+            throw error // Re-throw so caller can handle navigation
         }
     }
 
