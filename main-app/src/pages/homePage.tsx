@@ -15,6 +15,10 @@ function HomePage() {
             try {
                 console.log('Attempting to create session...')
                 await POSService.createSession()
+                console.log(
+                    '✅ Session created successfully - redirecting to welcome'
+                )
+                navigate('/welcome')
             } catch (error) {
                 console.error(
                     'Failed to create session, redirecting to registration:',
