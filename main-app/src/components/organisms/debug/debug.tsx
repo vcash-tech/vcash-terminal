@@ -15,7 +15,8 @@ const Debug = () => {
     const [firstClickTime, setFirstClickTime] = useState<number | null>(null)
 
     // Check if debug mode is active (either build-time or runtime)
-    const isDebugActive = __DEBUG_MODE__ || runtimeDebugMode
+    const isDebugActive =
+        import.meta.env.VITE_DEBUG_MODE === 'true' || runtimeDebugMode
 
     const handleSecretAreaClick = () => {
         const now = Date.now()

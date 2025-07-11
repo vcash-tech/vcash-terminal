@@ -9,9 +9,6 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 // https://vite.dev/config/
 export default defineConfig(() => {
-    // Check if we're in debug mode
-    const isDebugMode = process.env.DEBUG_MODE === 'true'
-
     // Default API URL if not provided in environment
     // const apiUrl = env.VITE_API_URL || 'http://localhost:8181'
 
@@ -26,8 +23,7 @@ export default defineConfig(() => {
 
     return {
         define: {
-            __BUILD_TIMESTAMP__: JSON.stringify(buildTimestamp),
-            __DEBUG_MODE__: JSON.stringify(isDebugMode)
+            __BUILD_TIMESTAMP__: JSON.stringify(buildTimestamp)
         },
         plugins: [
             react(),

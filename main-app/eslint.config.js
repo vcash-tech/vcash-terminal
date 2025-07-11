@@ -17,8 +17,7 @@ export default tseslint.config(
             ecmaVersion: 2020,
             globals: {
                 ...globals.browser,
-                __BUILD_TIMESTAMP__: 'readonly',
-                __DEBUG_MODE__: 'readonly'
+                __BUILD_TIMESTAMP__: 'readonly'
             },
             parserOptions: {
                 ecmaFeatures: {
