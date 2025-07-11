@@ -9,14 +9,26 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 // https://vite.dev/config/
 export default defineConfig(() => {
-    // Load env file based on `mode` in the current directory.
-    // Set the third parameter to '' to load all env regardless of the `VITE_` prefix.
-    // const env = loadEnv(mode, process.cwd(), '')
+    // Check if we're in debug mode
+    const isDebugMode = process.env.DEBUG_MODE === 'true'
 
     // Default API URL if not provided in environment
     // const apiUrl = env.VITE_API_URL || 'http://localhost:8181'
 
+    // Generate build timestamp
+    const buildTimestamp = new Date().toLocaleString('sr-RS', {
+        day: '2-digit',
+        month: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        timeZone: 'Europe/Belgrade'
+    })
+
     return {
+        define: {
+            __BUILD_TIMESTAMP__: JSON.stringify(buildTimestamp),
+            __DEBUG_MODE__: JSON.stringify(isDebugMode)
+        },
         plugins: [
             react(),
             VitePWA({
@@ -26,24 +38,24 @@ export default defineConfig(() => {
                     short_name: 'Vcash',
                     start_url: '/',
                     display: 'standalone',
-                    icons: [],
+                    icons: []
                 },
                 workbox: {
                     runtimeCaching: [
-                    {
-                        urlPattern: /\.(?:png|jpg|jpeg|svg|gif|webp)$/,
-                        handler: 'CacheFirst',
-                        options: {
-                        cacheName: 'images-cache',
-                        expiration: {
-                            maxEntries: 100,
-                            maxAgeSeconds: 60 * 60 * 24 * 30, // 30 days
-                        },
-                        },
-                    },
-                    ],
-                },
-            }),
+                        {
+                            urlPattern: /\.(?:png|jpg|jpeg|svg|gif|webp)$/,
+                            handler: 'CacheFirst',
+                            options: {
+                                cacheName: 'images-cache',
+                                expiration: {
+                                    maxEntries: 100,
+                                    maxAgeSeconds: 60 * 60 * 24 * 30 // 30 days
+                                }
+                            }
+                        }
+                    ]
+                }
+            })
         ],
         resolve: {
             alias: {

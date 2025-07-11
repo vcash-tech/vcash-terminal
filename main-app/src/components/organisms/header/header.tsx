@@ -130,79 +130,81 @@ const Header = ({
                     />
                 )}
                 {/* Debug buttons */}
-                <>
-                    <span>Verizija: 10.07 22:41</span>
-                    <button
-                        onClick={handlePrintDebug}
-                        style={{
-                            marginLeft: '10px',
-                            padding: '5px 10px',
-                            background: '#ff6b6b',
-                            color: 'white',
-                            border: 'none',
-                            borderRadius: '4px',
-                            fontSize: '12px',
-                            cursor: 'pointer'
-                        }}>
-                        Debug Print
-                    </button>
-                    <button
-                        onClick={handleGetCredentialsDebug}
-                        style={{
-                            marginLeft: '5px',
-                            padding: '5px 10px',
-                            background: '#4ecdc4',
-                            color: 'white',
-                            border: 'none',
-                            borderRadius: '4px',
-                            fontSize: '12px',
-                            cursor: 'pointer'
-                        }}>
-                        Debug Credentials
-                    </button>
-                    <button
-                        onClick={handleResetDeviceRegistration}
-                        style={{
-                            marginLeft: '5px',
-                            padding: '5px 10px',
-                            background: '#e74c3c',
-                            color: 'white',
-                            border: 'none',
-                            borderRadius: '4px',
-                            fontSize: '12px',
-                            cursor: 'pointer'
-                        }}>
-                        Reset Device
-                    </button>
-                    <button
-                        onClick={handleRefreshPage}
-                        style={{
-                            marginLeft: '5px',
-                            padding: '5px 10px',
-                            background: '#9b59b6',
-                            color: 'white',
-                            border: 'none',
-                            borderRadius: '4px',
-                            fontSize: '12px',
-                            cursor: 'pointer'
-                        }}>
-                        Refresh
-                    </button>
-                    <button
-                        onClick={handleGetDeviceTokenDebug}
-                        style={{
-                            marginLeft: '5px',
-                            padding: '5px 10px',
-                            background: '#f39c12',
-                            color: 'white',
-                            border: 'none',
-                            borderRadius: '4px',
-                            fontSize: '12px',
-                            cursor: 'pointer'
-                        }}>
-                        Get Token
-                    </button>
-                </>
+                {__DEBUG_MODE__ && (
+                    <>
+                        <span>build: {__BUILD_TIMESTAMP__}</span>
+                        <button
+                            onClick={handlePrintDebug}
+                            style={{
+                                marginLeft: '10px',
+                                padding: '5px 10px',
+                                background: '#ff6b6b',
+                                color: 'white',
+                                border: 'none',
+                                borderRadius: '4px',
+                                fontSize: '12px',
+                                cursor: 'pointer'
+                            }}>
+                            Debug Print
+                        </button>
+                        <button
+                            onClick={handleGetCredentialsDebug}
+                            style={{
+                                marginLeft: '5px',
+                                padding: '5px 10px',
+                                background: '#4ecdc4',
+                                color: 'white',
+                                border: 'none',
+                                borderRadius: '4px',
+                                fontSize: '12px',
+                                cursor: 'pointer'
+                            }}>
+                            Debug Credentials
+                        </button>
+                        <button
+                            onClick={handleResetDeviceRegistration}
+                            style={{
+                                marginLeft: '5px',
+                                padding: '5px 10px',
+                                background: '#e74c3c',
+                                color: 'white',
+                                border: 'none',
+                                borderRadius: '4px',
+                                fontSize: '12px',
+                                cursor: 'pointer'
+                            }}>
+                            Reset Device
+                        </button>
+                        <button
+                            onClick={handleRefreshPage}
+                            style={{
+                                marginLeft: '5px',
+                                padding: '5px 10px',
+                                background: '#9b59b6',
+                                color: 'white',
+                                border: 'none',
+                                borderRadius: '4px',
+                                fontSize: '12px',
+                                cursor: 'pointer'
+                            }}>
+                            Refresh
+                        </button>
+                        <button
+                            onClick={handleGetDeviceTokenDebug}
+                            style={{
+                                marginLeft: '5px',
+                                padding: '5px 10px',
+                                background: '#f39c12',
+                                color: 'white',
+                                border: 'none',
+                                borderRadius: '4px',
+                                fontSize: '12px',
+                                cursor: 'pointer'
+                            }}>
+                            Get Token
+                        </button>
+                    </>
+                )}
             </div>
             <div className="header-right">
                 <LanguageButton

@@ -16,6 +16,10 @@ interface ActivateApiResponse {
 }
 
 declare global {
+    // Build-time injected variables
+    const __BUILD_TIMESTAMP__: string
+    const __DEBUG_MODE__: boolean
+
     interface Window {
         api: {
             print: (voucherCode: string) => Promise<ApiResponse>
