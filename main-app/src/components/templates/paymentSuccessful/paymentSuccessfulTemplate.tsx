@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { NavigateFunction } from 'react-router-dom'
 
 import { printVoucher } from '@/assets/images'
@@ -15,6 +16,14 @@ export default function PaymentSuccessfulTemplate({
     onPrimaryButtonClick?: () => void
 }) {
     const { t } = useTranslate()
+    const [showHelp, setShowHelp] = useState<boolean>(false)
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setShowHelp(true)
+        }, 10000)
+        return () => clearTimeout(timer)
+    }, [])
 
     return (
         <Container isFullHeight={true}>
@@ -29,13 +38,13 @@ export default function PaymentSuccessfulTemplate({
                 </div>
             
             <div className='fallback-wrapper'>
-                    <div className="fallback">
+                    {showHelp && <div className="fallback">
                         <div>
                         <p>{t('paymentSuccessful.fallbackTitle')}</p>
                         <p>{t('paymentSuccessful.voucherUnavailable')}</p>
                         </div>
                         <WireButton onClick={() => navigate('/')}>{t('paymentSuccessful.buttonText')}</WireButton>
-                    </div>
+                    </div>}
                     <div>
                         <SessionCounter onEndSession={() => navigate('/')} />
                     </div></div>

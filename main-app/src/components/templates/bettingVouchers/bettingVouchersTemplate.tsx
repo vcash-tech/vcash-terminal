@@ -29,7 +29,6 @@ export default function BettingVoucher({ navigate }: BettingVoucherProps) {
         }, 5000)
     }
 
-
     return (
         <Container isFullHeight={true}>
             <Header
