@@ -1,4 +1,4 @@
-// API Service - Handles switching between Electron and HTTP modes
+// API Service - Handles switching between HTTP and Local modes
 interface ApiResponse {
     success: boolean
     message: string
@@ -45,23 +45,63 @@ interface CredentialsResponse {
     timestamp: string
 }
 
-type ApiMode = 'electron' | 'http' | 'auto'
+type ApiMode = 'http' | 'local'
 
 class ApiService {
-    private mode: ApiMode = 'auto'
+    private mode: ApiMode = 'http'
     private baseUrl = 'http://localhost:3001'
 
     constructor() {
-        // Auto-detect environment on initialization
-        this.detectEnvironment()
+        // Load mode from localStorage if available, otherwise default to http
+        this.loadModeFromStorage()
     }
 
     /**
-     * Set the API mode manually
+     * Load API mode from environment variable or localStorage, default to http if not found
+     */
+    private loadModeFromStorage(): void {
+        // Check for environment variable override first
+        const envMode = import.meta.env?.VITE_API_MODE as ApiMode
+        if (envMode === 'local') {
+            this.mode = 'local'
+            console.log('API Service mode forced via VITE_API_MODE: local')
+            return
+        }
+
+        try {
+            const storedMode = localStorage.getItem('api_mode') as ApiMode
+            if (storedMode && ['http', 'local'].includes(storedMode)) {
+                this.mode = storedMode
+                console.log(
+                    `API Service mode loaded from localStorage: ${storedMode}`
+                )
+            } else {
+                this.mode = 'http'
+                console.log('API Service mode defaulted to: http')
+            }
+        } catch {
+            this.mode = 'http'
+            console.log(
+                'API Service mode defaulted to: http (localStorage unavailable)'
+            )
+        }
+    }
+
+    /**
+     * Set the API mode manually and persist to localStorage
      */
     setMode(mode: ApiMode) {
         this.mode = mode
-        console.log(`API Service mode set to: ${mode}`)
+        try {
+            localStorage.setItem('api_mode', mode)
+            console.log(
+                `API Service mode set to: ${mode} (saved to localStorage)`
+            )
+        } catch {
+            console.log(
+                `API Service mode set to: ${mode} (localStorage save failed)`
+            )
+        }
     }
 
     /**
@@ -87,32 +127,10 @@ class ApiService {
     }
 
     /**
-     * Detect if we're running in Electron or browser
+     * Check if we should use HTTP mode
      */
-    private detectEnvironment(): void {
-        if (this.mode !== 'auto') return
-
-        // Check for environment variable override
-        const forceMode = import.meta.env?.VITE_API_MODE as ApiMode
-        if (forceMode && ['electron', 'http'].includes(forceMode)) {
-            this.mode = forceMode
-            console.log(
-                `API Service mode forced via VITE_API_MODE: ${forceMode}`
-            )
-            return
-        }
-
-        // Auto-detect based on window.api availability
-        const isElectron = !!(window && window.api)
-        this.mode = isElectron ? 'electron' : 'http'
-        console.log(`API Service auto-detected mode: ${this.mode}`)
-    }
-
-    /**
-     * Check if Electron API is available and we should use it
-     */
-    private isElectronMode(): boolean {
-        return this.mode === 'electron' && !!(window && window.api)
+    private isHttpMode(): boolean {
+        return this.mode === 'http'
     }
 
     /**
@@ -285,57 +303,139 @@ class ApiService {
         }
     }
 
+    /**
+     * Local implementation for saveDeviceToken
+     * Persists token to localStorage
+     */
+    private async localSaveDeviceToken(token: string): Promise<boolean> {
+        try {
+            localStorage.setItem('localapi_vcash_device_token', token)
+            console.log('Local saveDeviceToken: token saved to localStorage')
+            return true
+        } catch (error) {
+            console.error('Local saveDeviceToken error:', error)
+            return false
+        }
+    }
+
+    /**
+     * Local implementation for getDeviceToken
+     * Retrieves token from localStorage
+     */
+    private async localGetDeviceToken(): Promise<string> {
+        try {
+            const token =
+                localStorage.getItem('localapi_vcash_device_token') || ''
+            console.log('Local getDeviceToken: retrieved from localStorage')
+            return token
+        } catch (error) {
+            console.error('Local getDeviceToken error:', error)
+            return ''
+        }
+    }
+
+    /**
+     * Local implementation for sendLog
+     * Does nothing, just returns success
+     */
+    private async localSendLog(level: string, message: string): Promise<void> {
+        console.log(`Local sendLog [${level}]: ${message}`)
+        // Does nothing in local mode
+    }
+
+    /**
+     * Local implementation for getCredentials
+     * Returns no credentials stored
+     */
+    private async localGetCredentials(): Promise<DeviceCredentials | null> {
+        console.log('Local getCredentials: no credentials stored')
+        return null
+    }
+
+    /**
+     * Local implementation for print
+     * Returns success without actually printing
+     */
+    private async localPrint(imageUrl: string): Promise<ApiResponse> {
+        console.log(`Local print: mock print for ${imageUrl}`)
+        return {
+            success: true,
+            message: 'Print successful (local mode)',
+            status: { iLogicCode: 0, iPhyCode: 0 }
+        }
+    }
+
+    /**
+     * Local implementation for activate
+     * Returns success without actually activating
+     */
+    private async localActivate(_jwt: string): Promise<ActivateApiResponse> {
+        console.log('Local activate: mock activation')
+        return {
+            activated: true,
+            timer_seconds: 300, // 5 minutes mock timer
+            expires_at: new Date(Date.now() + 300000).toISOString()
+        }
+    }
+
+    /**
+     * Local implementation for deactivate
+     * Returns success without actually deactivating
+     */
+    private async localDeactivate(): Promise<void> {
+        console.log('Local deactivate: mock deactivation')
+        // Does nothing in local mode
+    }
+
     // Public API methods that route to appropriate implementation
 
     async print(imageUrl: string): Promise<ApiResponse> {
-        if (this.isElectronMode()) {
-            return window.api.print(imageUrl)
+        if (this.isHttpMode()) {
+            return this.httpPrint(imageUrl)
         }
-        return this.httpPrint(imageUrl)
+        return this.localPrint(imageUrl)
     }
 
     async activate(jwt: string): Promise<ActivateApiResponse> {
-        if (this.isElectronMode()) {
-            return window.api.activate(jwt)
+        if (this.isHttpMode()) {
+            return this.httpActivate(jwt)
         }
-        return this.httpActivate(jwt)
+        return this.localActivate(jwt)
     }
 
     async deactivate(): Promise<void> {
-        if (this.isElectronMode()) {
-            return window.api.deactivate()
+        if (this.isHttpMode()) {
+            return this.httpDeactivate()
         }
-        return this.httpDeactivate()
+        return this.localDeactivate()
     }
 
     async saveDeviceToken(token: string): Promise<boolean> {
-        if (this.isElectronMode()) {
-            return window.api.saveDeviceToken(token)
+        if (this.isHttpMode()) {
+            return this.httpSaveDeviceToken(token)
         }
-        return this.httpSaveDeviceToken(token)
+        return this.localSaveDeviceToken(token)
     }
 
     async getDeviceToken(): Promise<string> {
-        if (this.isElectronMode()) {
-            return window.api.getDeviceToken()
+        if (this.isHttpMode()) {
+            return this.httpGetDeviceToken()
         }
-        return this.httpGetDeviceToken()
+        return this.localGetDeviceToken()
     }
 
     async sendLog(level: string, message: string): Promise<void> {
-        if (this.isElectronMode()) {
-            return window.api.sendLog(level, message)
+        if (this.isHttpMode()) {
+            return this.httpSendLog(level, message)
         }
-        return this.httpSendLog(level, message)
+        return this.localSendLog(level, message)
     }
 
     async getCredentials(): Promise<DeviceCredentials | null> {
-        // Credentials are only available in HTTP mode (browser)
-        // In Electron mode, act as if credentials don't exist
-        if (this.isElectronMode()) {
-            return null
+        if (this.isHttpMode()) {
+            return this.httpGetCredentials()
         }
-        return this.httpGetCredentials()
+        return this.localGetCredentials()
     }
 }
 
