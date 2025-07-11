@@ -1,5 +1,5 @@
 import { LinearProgress } from '@mui/material'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { NavigateFunction } from 'react-router-dom'
 
 import { deviceIcon, userIcon } from '@/assets/icons'
@@ -41,6 +41,17 @@ export default function RegisterTemplate({
     const [agentEmail, setAgentEmail] = useState(email)
     const [deviceName, setDeviceName] = useState(device)
     const [isFocused, setIsFocused] = useState(false)
+
+    // Auto-navigate to welcome after 5 seconds on successful registration
+    useEffect(() => {
+        if (stepper === DeviceTokenSteps.gotToken) {
+            const timer = setTimeout(() => {
+                navigate('/welcome')
+            }, 5000)
+
+            return () => clearTimeout(timer)
+        }
+    }, [stepper, navigate])
 
     return (
         <Container isFullHeight={true}>
