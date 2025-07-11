@@ -22,7 +22,7 @@
   },
   "insertCash": {
     "title": "Ubacite novac",
-    "acceptedNotes": "Terminal prihvata sledeće novčanice: 500, 1000, 2000 i 5000 RSD.",
+    "acceptedNotes": "Terminal prihvata sledeće novčanice: 500, 1000 i 2000 RSD.",
     "altText": "Ubacite novac",
     "insertedAmount": "Uneti iznos",
     "noChangeWarning": "Ubacite tačan iznos - terminal ne vraća kusur. Povraćaj novca nakon uplate nije moguć.",
@@ -96,7 +96,7 @@
       "buttonText": "Započni ponovo"
     },
     "welcome": {
-      "title": "Dobrodošli u VCash",
+      "title": "Dobro Došli u VCash",
       "text": "Kupovina vaučera i plaćanje računa – brzo, jednostavno i bez čekanja.",
       "getStarted": "Započni"
     },
@@ -268,7 +268,7 @@
     "buttonText": "Započni ponovo"
   },
   "welcome": {
-    "title": "Dobrodošli u VCash",
+    "title": "Dobro Došli u VCash",
     "text": "Kupovina vaučera i plaćanje računa – brzo, jednostavno i bez čekanja.",
     "getStarted": "Započni"
   },
