@@ -169,8 +169,8 @@ const Debug = () => {
                 style={{
                     position: 'absolute',
                     top: 0,
-                    left: 0,
-                    width: '120px',
+                    right: '350px', // Position just before language buttons
+                    width: '320px',
                     height: '80px',
                     cursor: 'default',
                     zIndex: 1000
