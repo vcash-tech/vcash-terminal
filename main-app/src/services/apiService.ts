@@ -192,10 +192,10 @@ class ApiService {
 
             const data: LogResponse = await response.json()
             if (!data.success) {
-                console.error('HTTP sendLog failed:', data.message)
+                // Do nothing
             }
-        } catch (error) {
-            console.error('HTTP sendLog error:', error)
+        } catch {
+            // Do nothing
         }
     }
 
@@ -338,8 +338,8 @@ class ApiService {
      * Local implementation for sendLog
      * Does nothing, just returns success
      */
-    private async localSendLog(level: string, message: string): Promise<void> {
-        console.log(`Local sendLog [${level}]: ${message}`)
+    private async localSendLog(_: string, __: string): Promise<void> {
+        // console.log(`Local sendLog [${level}]: ${message}`)
         // Does nothing in local mode
     }
 
