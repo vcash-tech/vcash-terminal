@@ -1,0 +1,59 @@
+@use '../../../styles/config/colors';
+@use '../../../styles/config/fonts';
+
+.voucher-code {
+    padding: 3rem 2rem;
+    border: 1px solid rgba(colors.$black-color, 0.2);
+    border-radius: 1rem;
+    color: colors.$dark-text-color;
+    align-self: center;
+    margin-top: 2rem;
+    display: flex;
+    justify-self: center;
+    flex-direction: column;
+    gap: 0.8rem;
+    align-items: center;
+    justify-content: center;
+    max-width: 35rem;
+
+    .qr-code {
+        margin: 1rem auto 2rem;
+    }
+
+    p {
+        color: colors.$dark-text-color;
+        margin: 0;
+        font-size: 1.6rem;
+        padding: 0;
+        text-align: center;
+
+        &.title-label {
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+            font-size: 2.3rem;
+            font-family: fonts.$monospace-font;
+        }
+
+        &.label {
+            font-family: fonts.$monospace-font;
+            font-size: 1.6rem;
+        }
+        &.mono {
+            font-family: fonts.$monospace-font;
+            font-size: 1.6rem;
+        }
+        &.mono-title {
+            font-family: fonts.$monospace-font;
+            font-size: 1.6rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 2.3rem;
+            line-height: 1.1;
+        }
+
+        &:nth-child(5) {
+            margin-top: 1.5rem;
+        }
+    }
+}

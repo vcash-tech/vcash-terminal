@@ -1,0 +1,71 @@
+@use '../../../styles/config/colors';
+@use '../../../styles/config/fonts';
+
+.error-notification {
+    position: fixed;
+    top: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    max-width: 90vw;
+    animation: slideDown 0.3s ease-out;
+
+    .error-content {
+        display: flex;
+        align-items: center;
+        gap: 1.2rem;
+        background: rgba(198, 61, 70, 0.95);
+        color: colors.$white-color;
+        padding: 1.6rem 2.4rem;
+        border-radius: 0.8rem;
+        backdrop-filter: blur(5px);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+        font-family: fonts.$body-font;
+        font-weight: 500;
+        font-size: 1.8rem;
+        line-height: 2.4rem;
+        
+        img {
+            width: 2.4rem;
+            height: 2.4rem;
+            flex-shrink: 0;
+            filter: brightness(0) invert(1);
+        }
+
+        span {
+            flex: 1;
+        }
+
+        .close-button {
+            background: none;
+            border: none;
+            color: colors.$white-color;
+            font-size: 2.4rem;
+            font-weight: bold;
+            cursor: pointer;
+            padding: 0;
+            width: 2.4rem;
+            height: 2.4rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background-color 0.2s;
+
+            &:hover {
+                background: rgba(255, 255, 255, 0.2);
+            }
+        }
+    }
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+} 

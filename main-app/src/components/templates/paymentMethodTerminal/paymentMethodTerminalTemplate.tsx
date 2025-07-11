@@ -17,23 +17,23 @@ export default function PaymentMethodTerminalTemplate({
     return (
         <Container isFullHeight={true}>
             <Header
-                navigateBackUrl="#"
-                navigationBackText={t('selectPaymentMethod.backToServices')}
+                navigateBackUrl="/digital-services"
+                navigationBackText={' '}
             />
             <div className="payment-method-terminal">
                 <h1>{t('selectPaymentMethod.title')}</h1>
                 <h2>{t('selectPaymentMethod.subtitle')}</h2>
                 <div className="payment-methods">
                     <PaymentCard
+                        image={cash}
+                        text={t('selectPaymentMethod.cashPayment')}
+                        callback={() => navigate('/buy-voucher-cash')}
+                    />
+                    <PaymentCard
                         image={creditCard}
                         text={t('selectPaymentMethod.cardPayment')}
                         callback={() => console.log('Card payment selected')}
                         isDisabled={true}
-                    />
-                    <PaymentCard
-                        image={cash}
-                        text={t('selectPaymentMethod.cashPayment')}
-                        callback={() => navigate('/buy-voucher-cash')}
                     />
                 </div>
             </div>

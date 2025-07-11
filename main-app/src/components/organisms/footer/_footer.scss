@@ -1,24 +1,37 @@
-@use "../../../styles/config/colors";
-@use "../../../styles/config/fonts";
+@use '../../../styles/config/colors';
+@use '../../../styles/config/fonts';
 
 .footer {
-  max-height: 86px;
-  display: flex;
-  flex: 1;
-  flex-direction: row;
-  justify-content: center;
-  gap: 10px;
-  align-items: center;
-  padding: 16px 40px;
-  background-color: colors.$brand-primary-color;
-  color: colors.$white-color;
-  font-family: fonts.$body-font;
-  font-weight: 500;
-  font-size: 2rem;
-
-  span {
+    max-height: 86px;
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+    align-items: center;
+    padding: 16px 40px;
+    background-color: colors.$brand-primary-color;
     color: colors.$white-color;
-    text-decoration: none;
-    font-weight: 800;
-  }
+    font-family: fonts.$body-font;
+    font-weight: 500;
+    font-size: 2rem;
+
+    span {
+        color: colors.$white-color;
+        text-decoration: none;
+        font-weight: 800;
+    }
+
+    &.footer--welcome {
+        background-color: colors.$white-color;
+        color: colors.$dark-text-color;
+        position: fixed;
+        bottom: 0;
+        z-index: 100;
+        width: 100vw;
+
+        span {
+            color: colors.$dark-text-color;
+        }
+    }
 }

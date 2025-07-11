@@ -13,6 +13,13 @@
   background-position: center bottom;
   background-size: cover;
   flex: 1;
+  padding: 0 10rem;
+  justify-content: end;
+
+  .primary-button {
+    margin: 50rem 0 10rem;
+  }
+
 
   .age-disclaimer-icon {
     width: 14rem;

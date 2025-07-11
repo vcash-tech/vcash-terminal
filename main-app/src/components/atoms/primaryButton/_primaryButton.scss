@@ -14,7 +14,6 @@
   font-weight: 600;
   font-size: 2.8rem;
   text-align: center;
-  text-transform: capitalize;
   color: colors.$white-color;
 
   &.inverted {
@@ -26,4 +25,10 @@
     background: colors.$hover-blue-color;
     color: colors.$brand-primary-color;
   }
+
+  &:disabled {
+        cursor: default;
+        color: #999;
+        background: #ccc;
+    }
 }

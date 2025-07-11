@@ -15,7 +15,11 @@ const serviceApiUrls: requestServiceKeys = {
 
 export class HttpService {
     static async Request<T>(req: HttpRequest): Promise<T> {
-        const serviceUrl = serviceApiUrls[req.service]
+        // Determine if we're in development mode
+        const isDev = import.meta.env.DEV === true
+
+        // In development mode, we use the proxy for all API endpoints
+        const serviceUrl = isDev ? '' : serviceApiUrls[req.service]
         const requestUrl = `${serviceUrl}${req.url}`
 
         const request: globalThis.RequestInit = {}
@@ -60,40 +64,94 @@ export class HttpService {
 
         request.headers = headers
 
-        const response = await fetch(requestUrl, request)
+        try {
+            const response = await fetch(requestUrl, request)
 
-        if (!response.ok) {
-            if (response.status === 401 && hasToken) {
-                AuthService.DeleteToken(req.authorization as Auth)
-                if ((req.authorization as Auth) === Auth.Agent) {
-                    location.reload()
+            if (!response.ok) {
+                if (response.status === 401 && hasToken) {
+                    const authType = req.authorization as Auth
+                    AuthService.DeleteToken(authType)
+
+                    // If it's a Cashier token 401, try to recreate session
+                    if (authType === Auth.Cashier) {
+                        console.log(
+                            '🔄 401 error with Cashier token - attempting to recreate session...'
+                        )
+                        try {
+                            const { POSService } = await import('./posService')
+                            await POSService.createSession()
+                            console.log(
+                                '✅ Session recreated successfully after 401'
+                            )
+                            // Throw special error to indicate session was recreated
+                            throw {
+                                status: 401,
+                                statusText: 'Session Recreated',
+                                sessionRecreated: true,
+                                text: 'Session token was recreated, please retry request'
+                            }
+                        } catch (sessionError: unknown) {
+                            // If it's our special "session recreated" error, re-throw it
+                            if (
+                                typeof sessionError === 'object' &&
+                                sessionError !== null &&
+                                'sessionRecreated' in sessionError
+                            ) {
+                                throw sessionError
+                            }
+
+                            console.error(
+                                '❌ Failed to recreate session after 401:',
+                                sessionError
+                            )
+                            // Redirect to registration if session creation fails
+                            window.location.href = '/register'
+                            throw {
+                                status: 401,
+                                statusText: 'Session Recreation Failed',
+                                text: 'Failed to recreate session, redirecting to registration'
+                            }
+                        }
+                    }
+
+                    if (authType === Auth.Agent) {
+                        location.reload()
+                    }
                 }
+
+                const textError = await response.text()
+                let jsonError = undefined
+
+                try {
+                    jsonError = JSON.parse(textError)
+                } catch (error: unknown) {
+                    console.log(
+                        'error parsing json from bad api response',
+                        error
+                    )
+                }
+
+                throw {
+                    status: response.status,
+                    statusText: response.statusText,
+                    errors: jsonError?.errors,
+                    text: textError
+                } as HttpError
             }
 
-            const textError = await response.text()
-            let jsonError = undefined
-
-            try {
-                jsonError = JSON.parse(textError)
-            } catch (error: unknown) {
-                console.log('error parsing json from bad api response', error)
+            // Only try to parse as JSON if the content-type indicates JSON
+            const contentType = response.headers.get('content-type')
+            if (contentType && contentType.includes('application/json')) {
+                const result = await response.json()
+                return result as T
+            } else {
+                // For non-JSON responses, return an empty object or handle as needed
+                return {} as T
             }
-
-            throw {
-                status: response.status,
-                statusText: response.statusText,
-                errors: jsonError?.errors,
-                text: textError
-            } as HttpError
+        } catch (error) {
+            console.error('API request failed:', error)
+            throw error
         }
-
-        const result = response.headers
-            .get('content-type')
-            ?.includes('application/json')
-            ? await response.json()
-            : undefined
-
-        return result as T
     }
 
     static async Get<T>(

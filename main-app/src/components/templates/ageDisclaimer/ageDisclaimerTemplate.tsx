@@ -17,10 +17,7 @@ export default function AgeDisclaimerTemplate({
 
     return (
         <Container isFullHeight={true}>
-            <Header
-                navigateBackUrl="/"
-                navigationBackText={t('ageDisclaimer.backToServices')}
-            />
+            <Header navigateBackUrl="/digital-services" navigationBackText={' '} />
             <div className="age-disclaimer">
                 <img
                     src={ageDisclaimer}
@@ -31,7 +28,7 @@ export default function AgeDisclaimerTemplate({
                 <h2>{t('ageDisclaimer.subtitle')}</h2>
                 <PrimaryButton
                     text={t('ageDisclaimer.continuePurchase')}
-                    callback={() => navigate('/payment-method')}
+                    callback={() => navigate('/betting')}
                 />
             </div>
             <Footer />

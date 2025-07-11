@@ -1,31 +1,55 @@
-import { useEffect,useState } from 'react'
+import { useEffect, useState } from 'react'
+import { NavigateFunction } from 'react-router-dom'
 
-import Container from "@/components/atoms/container/container"
-import GeneratingProgress from  "@/components/atoms/generatingProgress/generatingProgress"
-import Footer from "@/components/organisms/footer/footer"
-import Header from "@/components/organisms/header/header"
+import { printVoucher } from '@/assets/images'
+import Container from '@/components/atoms/container/container'
+import WireButton from '@/components/atoms/wireButton/wireButton'
+import SessionCounter from '@/components/molecules/sessionCounter/sessionCounter'
+import Footer from '@/components/organisms/footer/footer'
+import Header from '@/components/organisms/header/header'
 import { useTranslate } from '@/i18n/useTranslate'
 
-export default function PaymentSuccessfulTemplate() {
-  const { t } = useTranslate()
-  const [progress, setProgress] = useState(0)
+export default function PaymentSuccessfulTemplate({
+    navigate
+}: {
+    navigate: NavigateFunction
+    onPrimaryButtonClick?: () => void
+}) {
+    const { t } = useTranslate()
+    const [showHelp, setShowHelp] = useState<boolean>(false)
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setProgress((prev) => (prev >= 100 ? 100 : prev + 1))
-    }, 100)
-    return () => clearInterval(timer)
-  }, [])
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setShowHelp(true)
+        }, 10000)
+        return () => clearTimeout(timer)
+    }, [])
 
-  return <Container isFullHeight={true}>
-    <Header />
-    <div className="payment-successful">
-      <h1>{t('paymentSuccessful.title')}</h1>
-      <h2>{t('paymentSuccessful.subtitle')}</h2>
-      <div className="progress-bar">
-        <GeneratingProgress progress={progress} text={t('paymentSuccessful.generatingVoucher')} />
-      </div>
-    </div>
-    <Footer />
-  </Container>
+    return (
+        <Container isFullHeight={true}>
+            <Header />
+            <div className="payment-successful">
+            
+                <h1>{t('paymentSuccessful.title')}</h1>
+                <h2>{t('paymentSuccessful.subtitle')}</h2>
+
+                <div className="demo-wrapper">
+                    <img src={printVoucher} alt={t('insertCash.altText')} />
+                </div>
+            
+            <div className='fallback-wrapper'>
+                    {showHelp && <div className="fallback">
+                        <div>
+                        <p>{t('paymentSuccessful.fallbackTitle')}</p>
+                        <p>{t('paymentSuccessful.voucherUnavailable')}</p>
+                        </div>
+                        <WireButton onClick={() => navigate('/')}>{t('paymentSuccessful.buttonText')}</WireButton>
+                    </div>}
+                    <div>
+                        <SessionCounter onEndSession={() => navigate('/')} />
+                    </div></div>
+                </div>
+            <Footer />
+        </Container>
+    )
 }

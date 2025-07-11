@@ -1,0 +1,126 @@
+@use '../../../styles/config/colors';
+@use '../../../styles/config/fonts';
+
+.gaming-voucher-item {
+    position: relative;
+    width: 46.4rem;
+    height: 35.7rem;
+    background: #fff;
+    border-radius: 1.2rem;
+    border: 1px solid #dddddd;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 7rem 3rem 2.5rem 2.5rem;
+    box-sizing: border-box;
+    font-family: fonts.$body-font;
+
+    .gaming-voucher-item__content {
+        width: 22rem;
+    }
+
+    &.coming {
+        background: #fff url('~@/assets/images/background.png') center/cover
+            no-repeat;
+        overflow: hidden;
+        padding-top: 10rem;
+        h3 {
+            font-size: 3rem;
+        }
+    }
+
+    &__content {
+        z-index: 2;
+        position: relative;
+    }
+
+    h3 {
+        font-size: 2.4rem;
+        font-weight: 600;
+        margin-bottom: 1.2rem;
+        font-family: fonts.$body-font;
+    }
+
+    p {
+        font-size: 1.6rem;
+        color: colors.$black-color;
+        margin-bottom: 2rem;
+        line-height: 1.2;
+    }
+
+    &__flags {
+        display: flex;
+        gap: 1.2rem;
+        margin-bottom: 1.2rem;
+        img {
+            width: 5rem;
+            height: 5rem;
+            object-fit: contain;
+        }
+    }
+
+    &__price {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: #385ac9;
+    }
+
+    &__image {
+        position: absolute;
+        right: 1rem;
+        top: -1.2rem;
+        height: 28rem;
+        object-fit: cover;
+        transform: rotate(3deg);
+        z-index: 1;
+        border-radius: 1.2rem;
+    }
+
+    &__coming-badge {
+        position: absolute;
+        top: 0;
+        right: -0.5rem;
+
+        color: #fff;
+        font-weight: 700;
+
+        z-index: 3;
+    }
+}
+
+.gaming-voucher-item__bottom-bar {
+    width: 100%;
+    height: 6.4rem;
+    background: linear-gradient(180deg, #fff 0%, #d8d8d8 100%);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    padding: 0 2.5rem;
+    box-sizing: border-box;
+    z-index: 2;
+}
+
+.gaming-voucher-item__flags {
+    display: flex;
+    gap: 1.2rem;
+    align-items: center;
+    height: 100%;
+    img {
+        width: 3rem;
+        height: 3rem;
+        object-fit: cover;
+    }
+}
+
+.gaming-voucher-item__price {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #315a94;
+}
+
+.gaming-voucher-item__content.coming {
+    margin-bottom: 4.8rem;
+}

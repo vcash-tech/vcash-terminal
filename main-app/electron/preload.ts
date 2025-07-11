@@ -6,5 +6,7 @@ contextBridge.exposeInMainWorld('api', {
     deactivate: () => ipcRenderer.invoke('deactivate'),
     saveDeviceToken: (token: string) =>
         ipcRenderer.invoke('saveDeviceToken', token),
-    getDeviceToken: () => ipcRenderer.invoke('getDeviceToken')
+    getDeviceToken: () => ipcRenderer.invoke('getDeviceToken'),
+    sendLog: (level: string, message: string) =>
+        ipcRenderer.invoke('sendLog', level, message)
 })

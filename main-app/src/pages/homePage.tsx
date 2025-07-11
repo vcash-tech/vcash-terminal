@@ -1,82 +1,35 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import HomeTemplate from '@/components/templates/home/homeTemplate'
+import Welcome from '@/components/templates/welcome/welcomeTemplate'
 import { POSService } from '@/services/posService'
 
-import { AuthService } from '../services/authService'
-import { Auth } from '../types/common/httpRequest'
-
 function HomePage() {
-    const [loader, setLoader] = useState<boolean>(false)
-
     const navigate = useNavigate()
 
     useEffect(() => {
-        const fetchCashiers = async () => {
-            setLoader(true)
+        const createSession = async () => {
             try {
-                const cashiersResponse = await POSService.getCashiersPOS()
-
-                const firstWithFixedPin = cashiersResponse.cashiers.find(
-                    (cashier) => !!cashier.fixedPin
+                console.log('Attempting to create session...')
+                await POSService.createSession()
+                console.log(
+                    '✅ Session created successfully - redirecting to welcome'
                 )
-
-                await handleUnlock(
-                    firstWithFixedPin?.userName || '',
-                    firstWithFixedPin?.fixedPin || ''
-                )
+                navigate('/welcome')
             } catch (error) {
-                console.error('Error fetching cashiers:', error)
+                console.error(
+                    'Failed to create session, redirecting to registration:',
+                    error
+                )
+                navigate('/register')
             }
-            setLoader(false)
         }
 
-        if (!AuthService.GetToken(Auth.Cashier)) {
-            fetchCashiers()
-        }
-    }, [])
-
-    const handleUnlock = async (username: string, pin: string) => {
-        try {
-            const response = await POSService.unlockDevice({
-                userName: username,
-                pin
-            })
-            AuthService.SetToken(Auth.Cashier, response.accessToken)
-            // Handle successful unlock, e.g., redirect or show success message
-            console.log('Device unlocked successfully')
-        } catch (error) {
-            console.error('Error unlocking device:', error)
-            // Handle error, e.g., show error message
-        }
-    }
-
-    useEffect(() => {
-        const token = AuthService.GetToken(Auth.POS)
-        if (!token) {
-            navigate('/register')
-        }
+        // Always try to create session on home page load
+        createSession()
     }, [navigate])
 
-    // if (loader) {
-    //     return (
-    //         <Container isFullHeight={true} className="home-container">
-    //             <Header navigateBackUrl="#" />
-    //             <div>
-    //                 <div className="loader-thumb"></div>
-    //             </div>
-    //             {/*<CircularProgress />*/}
-    //             <div>
-    //                 <div className="half-container"></div>
-    //                 <div className="half-container"></div>
-    //             </div>
-    //             <Footer />
-    //         </Container>
-    //     )
-    // }
-
-    return <HomeTemplate navigate={navigate} isLoading={loader} />
+    return <Welcome navigate={navigate} />
 }
 
 export default HomePage

@@ -1,5 +1,3 @@
-import { useTranslate } from '@/i18n/useTranslate'
-
 export default function PaymentCard({
     image,
     text,
@@ -11,7 +9,6 @@ export default function PaymentCard({
     isDisabled?: boolean
     callback: () => void
 }) {
-    const { t } = useTranslate()
 
     return (
         <button
@@ -19,8 +16,6 @@ export default function PaymentCard({
             className={`payment-card ${isDisabled ? 'coming-soon' : ''}`}
             disabled={isDisabled}>
             <p className="card-text">
-                {isDisabled && <span>{t('comingSoon')}</span>}
-                <br />
                 {text}
             </p>
             <div className="card-image">

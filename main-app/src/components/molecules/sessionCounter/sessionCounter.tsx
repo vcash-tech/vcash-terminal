@@ -4,7 +4,11 @@ import { useEffect, useState } from "react"
 import WireButton from "@/components/atoms/wireButton/wireButton"
 import { useTranslate } from '@/i18n/useTranslate'
 
-export default function SessionCounter() {
+export default function SessionCounter({ 
+  onEndSession
+}: {
+  onEndSession?: () => void
+}) {
   const { t } = useTranslate()
   const [timeLeft, setTimeLeft] = useState(15)
   
@@ -18,14 +22,16 @@ export default function SessionCounter() {
   useEffect(() => {
     const timer = setInterval(() => {
       if (timeLeft <= 0) {
-        // todo callback
+        if (onEndSession) {
+          onEndSession()
+        }
         clearInterval(timer)
         return
       }
       setTimeLeft((prev) => prev - 1)
     }, 1000)
     return () => clearInterval(timer)
-  }, [timeLeft])
+  }, [onEndSession, timeLeft])
 
   return (
     <div className="session-counter">
