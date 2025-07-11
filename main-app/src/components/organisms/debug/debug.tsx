@@ -163,22 +163,24 @@ const Debug = () => {
 
     return (
         <>
-            {/* Hidden debug activation area */}
-            <div
-                onClick={handleSecretAreaClick}
-                style={{
-                    position: 'absolute',
-                    top: 0,
-                    right: '350px', // Position just before language buttons
-                    width: '320px',
-                    height: '80px',
-                    cursor: 'default',
-                    zIndex: 1000
-                    // Uncomment next line for debugging the click area
-                    // backgroundColor: 'rgba(255, 0, 0, 0.1)'
-                }}
-                title="" // No tooltip to keep it hidden
-            />
+            {/* Hidden debug activation area - only render when debug is not active */}
+            {!isDebugActive && (
+                <div
+                    onClick={handleSecretAreaClick}
+                    style={{
+                        position: 'absolute',
+                        top: 0,
+                        right: '350px', // Position just before language buttons
+                        width: '320px',
+                        height: '80px',
+                        cursor: 'default',
+                        zIndex: 1000
+                        // Uncomment next line for debugging the click area
+                        // backgroundColor: 'rgba(255, 0, 0, 0.1)'
+                    }}
+                    title="" // No tooltip to keep it hidden
+                />
+            )}
 
             {/* Debug buttons */}
             {isDebugActive && (
