@@ -110,8 +110,29 @@ const Debug = () => {
     const handlePrintDebug = async () => {
         alert('About to call apiService.print() with template URL...')
 
-        const templateUrl =
-            'https://bp-templates.fly.dev/render/terminal_voucher?data=ewogICAgInVybCI6ICJodHRwczovL3ZjYXNoLnJzL3VybG1vcmFiaXRpbWFsb2R1emlkYWJpcHJlY2kvZHN0YXZpb2tha29jZWl6Z2xlZGF0aS9rYWRhc2V6YXByYXZva29yaXN0aXphbmVzdG9rb3Jpc25vc3RvdXNlYml1a2xqdWN1amVrb2R2YXVjZXJlYWlkcnVnZWtvcmlzbmVzdHZhcmkiLAogICAgInZvdWNoZXJDb2RlIjogIjEyMy00NTYtNzg5IiwKICAgICJwdWJsaWNDb2RlIjogIkFQVC1BUFQiLAogICAgInZlbnVlTmFtZSI6ICJUZXN0IFVwbGF0bm8gTWVzdG8iLAogICAgInZlbnVlQWRkcmVzcyI6ICJUZXN0IEFkcmVzYSIsCiAgICAidmVudWVDaXR5IjogIlRlc3QgZ3JhZCIsCiAgICAiYW1vdW50IjogIjEuMDAwIiwKICAgICJjdXJyZW5jeUNvZGUiOiAiUlNEIiwKICAgICJjcmVhdGVkQXQiOiAiMDQuMTAuMjAyMy4gMjM6MjgiLAogICAgImN1cnJlbnRUaW1lIjogIjA0LjEwLjIwMjIuIDIzOjI4Igp9&type=bmp&rotate=180'
+        const voucherData = {
+            url: 'https://vcash.rs/urlmorabitimaloduzidabipreci/dstaviokakoceizgledati/kadasezapravokoristizanestokorisnostousebiukljucujekodvaucereaidrugekorisnestvari',
+            voucherCode: '123-456-789',
+            publicCode: 'APT-APT',
+            venueName: 'Test Uplatno Mesto  ',
+            venueAddress: 'Булевар Вудроа Вилсона 14',
+            venueCity: 'Београд',
+            amount: '1.000',
+            currencyCode: 'RSD',
+            createdAt: '04.10.2023. 23:28',
+            currentTime: '04.10.2022. 23:28',
+            voucherType: 'Bet Vaučer'
+        }
+
+        const jsonString = JSON.stringify(voucherData)
+        const utf8Bytes = new TextEncoder().encode(jsonString)
+
+        // Convert Uint8Array to base64
+        const base64Data = btoa(
+            Array.from(utf8Bytes, (byte) => String.fromCharCode(byte)).join('')
+        )
+
+        const templateUrl = `https://bp-templates.fly.dev/render/terminal_voucher?data=${encodeURIComponent(base64Data)}&type=bmp&rotate=180`
 
         try {
             const response = await apiService.print(templateUrl)

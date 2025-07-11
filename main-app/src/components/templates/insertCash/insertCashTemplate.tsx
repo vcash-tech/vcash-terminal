@@ -203,14 +203,14 @@ export default function InsertCashTemplate({
 
             // Convert to base64 with proper UTF-8 handling
             const jsonString = JSON.stringify(voucherObject)
-            console.log('Voucher JSON before base64:', jsonString)
-
-            // Proper UTF-8 to base64 encoding without deprecated functions
             const utf8Bytes = new TextEncoder().encode(jsonString)
-            const binaryString = Array.from(utf8Bytes, (byte) =>
-                String.fromCharCode(byte)
-            ).join('')
-            const base64Data = btoa(binaryString)
+
+            // Convert Uint8Array to base64
+            const base64Data = btoa(
+                Array.from(utf8Bytes, (byte) => String.fromCharCode(byte)).join(
+                    ''
+                )
+            )
 
             // Construct the print URL
             const printUrl = `${templateRendererUrl}/terminal_voucher?rotate=180&data=${base64Data}&type=bmp`
