@@ -14,12 +14,60 @@ const Debug = () => {
     const [clickCount, setClickCount] = useState(0)
     const [firstClickTime, setFirstClickTime] = useState<number | null>(null)
 
+    // PIN entry state
+    const [showPinEntry, setShowPinEntry] = useState(false)
+    const [enteredDigits, setEnteredDigits] = useState<number[]>([])
+    const [pinTimeout, setPinTimeout] = useState<number | null>(null)
+
     // Speed test dialog state
     const [isSpeedTestOpen, setIsSpeedTestOpen] = useState(false)
 
     // Check if debug mode is active (either build-time or runtime)
     const isDebugActive =
         import.meta.env.VITE_DEBUG_MODE === 'true' || runtimeDebugMode
+
+    const clearPinTimeout = () => {
+        if (pinTimeout) {
+            clearTimeout(pinTimeout)
+            setPinTimeout(null)
+        }
+    }
+
+    const resetPinEntry = () => {
+        setShowPinEntry(false)
+        setEnteredDigits([])
+        clearPinTimeout()
+    }
+
+    const startPinTimeout = () => {
+        clearPinTimeout()
+        const timeout = setTimeout(() => {
+            resetPinEntry()
+        }, 10000) // 10 seconds
+        setPinTimeout(timeout as unknown as number)
+    }
+
+    const handleDigitClick = (digit: number) => {
+        clearPinTimeout()
+        const newDigits = [...enteredDigits, digit]
+        setEnteredDigits(newDigits)
+
+        // Check if we have the last 4 digits as 2213
+        if (newDigits.length >= 4) {
+            const lastFour = newDigits.slice(-4)
+            if (lastFour.join('') === '2213') {
+                // Activate debug mode
+                setRuntimeDebugMode(true)
+                localStorage.setItem('runtime_debug_mode', 'true')
+                resetPinEntry()
+                alert('Debug mode activated!')
+                return
+            }
+        }
+
+        // Restart timeout
+        startPinTimeout()
+    }
 
     const handleSecretAreaClick = () => {
         const now = Date.now()
@@ -45,15 +93,10 @@ const Debug = () => {
                 setClickCount(0)
                 setFirstClickTime(null)
 
-                // Prompt for PIN
-                const pin = prompt('Enter debug PIN:')
-                if (pin === '2213') {
-                    setRuntimeDebugMode(true)
-                    localStorage.setItem('runtime_debug_mode', 'true')
-                    alert('Debug mode activated!')
-                } else if (pin !== null) {
-                    alert('Invalid PIN')
-                }
+                // Show PIN entry interface
+                setShowPinEntry(true)
+                setEnteredDigits([])
+                startPinTimeout()
             }
         }
     }
@@ -191,6 +234,71 @@ const Debug = () => {
                     }}
                     title="" // No tooltip to keep it hidden
                 />
+            )}
+
+            {/* PIN Entry Interface */}
+            {showPinEntry && (
+                <div
+                    style={{
+                        position: 'absolute',
+                        top: '100px',
+                        right: '50px',
+                        background: 'rgba(0, 0, 0, 0.9)',
+                        padding: '20px',
+                        borderRadius: '8px',
+                        zIndex: 2000
+                    }}>
+                    <div
+                        style={{
+                            color: 'white',
+                            marginBottom: '15px',
+                            textAlign: 'center',
+                            fontSize: '14px'
+                        }}>
+                        Enter PIN (last 4 digits:{' '}
+                        {enteredDigits.slice(-4).join('')})
+                    </div>
+                    <div
+                        style={{
+                            display: 'grid',
+                            gridTemplateColumns: 'repeat(5, 1fr)',
+                            gap: '8px',
+                            maxWidth: '250px'
+                        }}>
+                        {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((digit) => (
+                            <button
+                                key={digit}
+                                onClick={() => handleDigitClick(digit)}
+                                style={{
+                                    padding: '12px',
+                                    background: '#3498db',
+                                    color: 'white',
+                                    border: 'none',
+                                    borderRadius: '4px',
+                                    fontSize: '16px',
+                                    cursor: 'pointer',
+                                    minWidth: '40px'
+                                }}>
+                                {digit}
+                            </button>
+                        ))}
+                    </div>
+                    <button
+                        onClick={resetPinEntry}
+                        style={{
+                            marginTop: '15px',
+                            padding: '8px 12px',
+                            background: '#e74c3c',
+                            color: 'white',
+                            border: 'none',
+                            borderRadius: '4px',
+                            fontSize: '12px',
+                            cursor: 'pointer',
+                            width: '100%'
+                        }}>
+                        Cancel
+                    </button>
+                </div>
             )}
 
             {/* Debug buttons */}
