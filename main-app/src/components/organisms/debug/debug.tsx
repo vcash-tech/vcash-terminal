@@ -14,6 +14,9 @@ const Debug = () => {
     const [clickCount, setClickCount] = useState(0)
     const [firstClickTime, setFirstClickTime] = useState<number | null>(null)
 
+    // Speed test dialog state
+    const [isSpeedTestOpen, setIsSpeedTestOpen] = useState(false)
+
     // Check if debug mode is active (either build-time or runtime)
     const isDebugActive =
         import.meta.env.VITE_DEBUG_MODE === 'true' || runtimeDebugMode
@@ -161,6 +164,14 @@ const Debug = () => {
         }
     }
 
+    const handleOpenSpeedTest = () => {
+        setIsSpeedTestOpen(true)
+    }
+
+    const handleCloseSpeedTest = () => {
+        setIsSpeedTestOpen(false)
+    }
+
     return (
         <>
             {/* Hidden debug activation area - only render when debug is not active */}
@@ -272,7 +283,103 @@ const Debug = () => {
                         }}>
                         Get Token
                     </button>
+                    <button
+                        onClick={handleOpenSpeedTest}
+                        style={{
+                            marginLeft: '5px',
+                            padding: '5px 10px',
+                            background: '#3498db',
+                            color: 'white',
+                            border: 'none',
+                            borderRadius: '4px',
+                            fontSize: '12px',
+                            cursor: 'pointer'
+                        }}>
+                        Speed Test
+                    </button>
                 </>
+            )}
+
+            {/* Speed Test Dialog */}
+            {isSpeedTestOpen && (
+                <dialog
+                    open
+                    style={{
+                        position: 'fixed',
+                        top: '50%',
+                        left: '50%',
+                        transform: 'translate(-50%, -50%)',
+                        width: '90%',
+                        maxWidth: '800px',
+                        height: '80%',
+                        maxHeight: '600px',
+                        border: '1px solid #ccc',
+                        borderRadius: '8px',
+                        padding: '20px',
+                        backgroundColor: 'white',
+                        zIndex: 10000
+                    }}
+                    onClick={(e) => {
+                        // Close if clicking on backdrop
+                        if (e.target === e.currentTarget) {
+                            handleCloseSpeedTest()
+                        }
+                    }}>
+                    <div
+                        style={{
+                            display: 'flex',
+                            justifyContent: 'space-between',
+                            alignItems: 'center',
+                            marginBottom: '20px'
+                        }}>
+                        <h3 style={{ margin: 0 }}>Internet Speed Test</h3>
+                        <button
+                            onClick={handleCloseSpeedTest}
+                            style={{
+                                background: '#e74c3c',
+                                color: 'white',
+                                border: 'none',
+                                borderRadius: '4px',
+                                padding: '8px 12px',
+                                cursor: 'pointer',
+                                fontSize: '14px'
+                            }}>
+                            Close
+                        </button>
+                    </div>
+                    <div style={{ textAlign: 'right' }}>
+                        <div style={{ minHeight: '360px' }}>
+                            <div
+                                style={{
+                                    width: '100%',
+                                    height: 0,
+                                    paddingBottom: '50%',
+                                    position: 'relative'
+                                }}>
+                                <iframe
+                                    style={{
+                                        border: 'none',
+                                        position: 'absolute',
+                                        top: 0,
+                                        left: 0,
+                                        width: '100%',
+                                        height: '100%',
+                                        minHeight: '360px',
+                                        overflow: 'hidden !important'
+                                    }}
+                                    src="https://www.metercustom.net/plugin/"
+                                />
+                            </div>
+                        </div>
+                        Provided by{' '}
+                        <a
+                            href="https://www.meter.net"
+                            target="_blank"
+                            rel="noopener noreferrer">
+                            Meter.net
+                        </a>
+                    </div>
+                </dialog>
             )}
         </>
     )
