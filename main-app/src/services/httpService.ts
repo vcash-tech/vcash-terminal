@@ -16,10 +16,10 @@ const serviceApiUrls: requestServiceKeys = {
 export class HttpService {
     static async Request<T>(req: HttpRequest): Promise<T> {
         // Determine if we're in development mode
-        const isDev = import.meta.env.DEV === true
+        // const isDev = import.meta.env.DEV === true
 
         // In development mode, we use the proxy for all API endpoints
-        const serviceUrl = isDev ? '' : serviceApiUrls[req.service]
+        const serviceUrl = serviceApiUrls[req.service]
         const requestUrl = `${serviceUrl}${req.url}`
 
         const request: globalThis.RequestInit = {}

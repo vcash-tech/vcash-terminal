@@ -24,7 +24,7 @@ const __dirname = path.dirname(__filename)
 const isDev = process.env.NODE_ENV === 'development' || !app.isPackaged
 
 // Logging setup
-const vCashPath = `C:\\VCash\\UI`
+const vCashPath = `./`
 const logFilePath = path.join(vCashPath, 'application.log')
 
 // Ensure log directory exists
@@ -131,7 +131,7 @@ function createWindow() {
         }
     } else {
         // Production mode - load from built files
-        win.loadURL('https://terminal-app-two.vercel.app')
+        win.loadURL('http://localhost:5173')
     }
 
     // Inject console override script once the page is ready

@@ -39,9 +39,9 @@ export default function UnderMaintenance() {
                     </div>
                     <h1> {t('underMaintenance.title')}</h1>
                     <p>{t('underMaintenance.text')}</p>
-                    <div className='QR-code'>
+                    {/* <div className='QR-code'>
                         <img src={marketplace} alt="QR Code" />
-                    </div>
+                    </div> */}
                 </div>
 
                 <div className="tickets-container">
