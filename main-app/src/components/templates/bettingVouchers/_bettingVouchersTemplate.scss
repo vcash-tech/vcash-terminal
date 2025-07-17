@@ -6,23 +6,22 @@
     flex-direction: column;
     flex: 1;
     padding: 5rem;
-    background: colors.$main-background-color
-        url('../assets/images/background.png') center/cover;
+    text-align: center;
 
     h1 {
-        position: relative;
         font-family: fonts.$body-font;
         font-weight: 600;
         font-size: 4.2rem;
         line-height: 100%;
         color: colors.$black-color;
-        margin: 0 0 1rem;
+        margin: 0 0 2rem;
 
         .header-ico {
-            width: 4.5rem;
-            height: 4.5rem;
-            position: absolute;
-            top: -2.5rem;
+            width: 5rem;
+            height: 5rem;
+            position: relative;
+            top: 0.8rem;
+            left: 0.5rem;
         }
     }
 

@@ -1,0 +1,31 @@
+@use '../../../styles/config/fonts';
+
+.availableServices {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5rem 0 6.5rem;
+    border: 1px solid #B6BDD4;
+    border-radius: 1.6rem;
+    width: 100vw;
+    max-width: 100%;
+    background-color: #fff;
+
+    h3 {
+        font-size: 2.4rem;
+        font-weight: 600;
+        font-family: fonts.$body-font;
+        margin-bottom: 5rem;
+        text-align: center;
+    }
+
+    .marquee-item {
+        display: inline-block;
+        margin-right: 2rem;
+
+        img {
+            max-width: 28.5rem;
+            height: auto;
+        }
+    }
+}
