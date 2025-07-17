@@ -301,5 +301,27 @@
     "continue": "Continue",
     "tryAgain": "Try Again"
   },
-  "comingSoon": "Coming soon..."
+  "comingSoon": "Coming soon...",
+  "howTo": {
+    "title": "How it works",
+    "description": "In 4 steps, activate the voucher and top up your account",
+    "steps": [
+      {
+        "title": "Buy voucher",
+        "description": "Enter cash and complete voucher purchase"
+      },
+      {
+        "title": "Scan QR code",
+        "description": "Scan the QR code below or activate the voucher on"
+      },
+      {
+        "title": "Select Platform",
+        "description": "Select the platform and desired product from the list"
+      },
+      {
+        "title": "Activate Voucher",
+        "description": "Confirm purchase by entering your email address and phone number."
+      }
+    ]
+  }
 }

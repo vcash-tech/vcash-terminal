@@ -4,6 +4,7 @@ import arrowRight from './icons/arrowRight.svg'
 import comingSoon from './icons/coming-soon.svg'
 import comingSoonGaming from './icons/coming-soon-gaming.svg'
 import croIcon from './icons/croIcon.svg'
+import dashLine from './icons/dash-line.svg'
 import deviceIcon from './icons/deviceIcon.svg'
 import flagEN from './icons/flagEN.svg'
 import flagRS from './icons/flagRS.svg'
@@ -24,6 +25,7 @@ export {
     comingSoon,
     comingSoonGaming,
     croIcon,
+    dashLine,
     deviceIcon,
     flagEN,
     flagRS,
@@ -35,4 +37,5 @@ export {
     userIcon,
     usIcon,
     warningIcon,
-    welcomeGift}
+    welcomeGift
+}

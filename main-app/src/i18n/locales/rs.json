@@ -307,5 +307,27 @@
     "continue": "Nastavi",
     "tryAgain": "Pokušaj ponovo"
   },
-  "comingSoon": "Dolazi uskoro..."
+  "comingSoon": "Dolazi uskoro...",
+  "howTo": {
+    "title": "Kako funkcioniše",
+    "description": "U 4 koraka, aktiviraj vaučer i dopuni svoj nalog",
+    "steps": [
+      {
+        "title": "Kupi vaučer",
+        "description": "Unesi novac i završi kupovinu vaučera"
+      },
+      {
+        "title": "Skeniraj QR kod",
+        "description": "Skeniraj dobijeni QR kod kamerom ili aktiviraj vaučer na "
+      },
+      {
+        "title": "Izaberi Platformu",
+        "description": "Odaberi platformu i željeni proizvod iz liste"
+      },
+      {
+        "title": "Aktiviraj Vaučer",
+        "description": "Potvrdi kupovinu unosom svoje e-mail adrese i broja telefona."
+      }
+    ]
+  }
 }
