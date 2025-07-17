@@ -1,4 +1,8 @@
 import basketballCard from './images/basketballCard.svg'
+import betting_balkanBet from './images/betting/balkanBet.png'
+import betting_meridian from './images/betting/meridian.png'
+import betting_merkurXtip from './images/betting/merkurXtip.png'
+import betting_soccerBet from './images/betting/soccerBet.png'
 import bettingServices from './images/bettingServices.png'
 import cashPayment from './images/cashPayment.svg'
 import casinoCard from './images/casinoCard.png'
@@ -8,6 +12,10 @@ import digitalServices from './images/digitalServices.png'
 import disney from './images/disney.png'
 import eaPlay from './images/eaPlay.png'
 import f1Card from './images/f1Card.png'
+import gaming_josServisaUskoro from './images/gaming/josServisaUskoro.png'
+import gaming_playstation from './images/gaming/playstation.png'
+import gaming_steam from './images/gaming/steam.png'
+import gaming_xbox from './images/gaming/xbox.png'
 import gamingServices from './images/gamingServices.png'
 import gPay from './images/googlePay.png'
 import hbo from './images/hbo.png'
@@ -59,6 +67,10 @@ export {
     background,
     balkanBetLogo,
     basketballCard,
+    betting_balkanBet,
+    betting_meridian,
+    betting_merkurXtip,
+    betting_soccerBet,
     bettingServices,
     betVoucher,
     cash,
@@ -77,6 +89,10 @@ export {
     emailInputBackground,
     f1Card,
     footballCard,
+    gaming_josServisaUskoro,
+    gaming_playstation,
+    gaming_steam,
+    gaming_xbox,
     gamingServices,
     gamingVoucher,
     gPay,

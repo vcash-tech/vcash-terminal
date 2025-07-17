@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { logoWhite, marketplace, tickets } from '@/assets/images'
+import { logoWhite, tickets } from '@/assets/images'
 import Container from '@/components/atoms/container/container'
 import Footer from '@/components/organisms/footer/footer'
 import Header from '@/components/organisms/header/header'

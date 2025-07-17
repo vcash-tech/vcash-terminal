@@ -1,4 +1,4 @@
-import ageDisclaimer from './icons/ageDisclaimer.svg'
+import ageDisclaimer from './icons/18plus.png'
 import angleLeft from './icons/angleLeft.svg'
 import arrowRight from './icons/arrowRight.svg'
 import comingSoon from './icons/coming-soon.svg'
