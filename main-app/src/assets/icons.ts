@@ -1,4 +1,5 @@
-import ageDisclaimer from './icons/18plus.png'
+import ageDisclaimerPng from './icons/18plus.png'
+import ageDisclaimer from './icons/ageDisclaimer.svg'
 import angleLeft from './icons/angleLeft.svg'
 import arrowRight from './icons/arrowRight.svg'
 import closeIcon from './icons/closeIcon.svg'
@@ -21,6 +22,7 @@ import welcomeGift from './icons/welcomeGift.svg'
 
 export {
     ageDisclaimer,
+    ageDisclaimerPng,
     angleLeft,
     arrowRight,
     closeIcon,

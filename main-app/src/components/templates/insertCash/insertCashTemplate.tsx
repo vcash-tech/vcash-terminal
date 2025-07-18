@@ -39,6 +39,7 @@ export default function InsertCashTemplate({
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [amount, _setAmount] = useState<number>(0)
     const [isVoucherPrinting, setIsVoucherPrinting] = useState<boolean>(false)
+    const [showPrintVoucher, setShowPrintVoucher] = useState<boolean>(false)
     const [showVoucher, setShowVoucher] = useState<boolean>(false)
     const [voucherData, setVoucherData] = useState<VoucherResponse | null>(null)
     const [errorMessage, setErrorMessage] = useState<string>('')
@@ -277,13 +278,19 @@ export default function InsertCashTemplate({
                 console.log(
                     '🎯 Print successful - auto-proceeding to voucher confirmation'
                 )
-                setTimeout(() => setShowVoucher(true), 200) // Small delay for UX
+                // printed
+                setShowPrintVoucher(false)
+                //setTimeout(() => setShowVoucher(true), 200) // Small delay for UX
             } else {
+                // not printed
+                setShowPrintVoucher(true)
                 console.log(
                     '❌ Print failed - staying on success screen for manual interaction'
                 )
             }
         } catch (err) {
+            // not printed
+            setShowPrintVoucher(true)
             console.error(err)
         }
     }
@@ -291,6 +298,16 @@ export default function InsertCashTemplate({
     const handleErrorClose = () => {
         setShowError(false)
         setErrorMessage('')
+    }
+
+    if (isVoucherPrinting && !showVoucher) {
+        return (
+            <PaymentSuccessfulTemplate
+                showHelp={showPrintVoucher}
+                navigate={navigate}
+                onPrimaryButtonClick={() => setShowVoucher(true)}
+            />
+        )
     }
 
     if (showVoucher && voucherData) {
@@ -316,15 +333,6 @@ export default function InsertCashTemplate({
                     } as VoucherConfirmation
                 }
                 navigate={navigate}
-            />
-        )
-    }
-
-    if (isVoucherPrinting) {
-        return (
-            <PaymentSuccessfulTemplate
-                onPrimaryButtonClick={() => setShowVoucher(true)}
-                navigate={() => navigate('/')}
             />
         )
     }
