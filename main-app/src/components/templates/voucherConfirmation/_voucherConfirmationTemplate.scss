@@ -2,7 +2,7 @@
 @use '../../../styles/config/media-queries';
 
 .voucher-confirmation {
-    margin-top: 25rem;
+    margin-top: 15rem;
     display: flex;
     flex-direction: column;
     width: 100vw;
@@ -15,7 +15,6 @@
     gap: 2rem;
     max-height: 100%;
     box-sizing: border-box;
-    height: 100vh;
 
     h1 {
         text-align: center;
@@ -54,6 +53,15 @@
             flex: none;
         }
     }
+ .instruction {
+     color: colors.$dark-text-color;
+     width: 80%;
+     text-align: center;
+     font-weight: 600;
+     font-size: 2.4rem;
+     line-height: 150%;
+     margin: 3rem auto 2rem;
+ }
 }
 
 @include media-queries.media('<=desktop') {

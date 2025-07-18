@@ -163,7 +163,8 @@
   },
   "gamingVouchers": {
     "title": "Gejming vaučeri",
-    "description": "Iskoristi VCash <span style='font-weight: bold;'>višenamenski vaučer</span> za kupovinu PlayStation/Xbox/Steam dopuna.",
+    "description": "Iskoristi <b>VCash vaučer</b> za kupovinu dopuna na PlayStation, Xbox, Steam i brojnim drugim servisima.",
+    "availableServices": "Podržane platforme",
     "qrInfo": "Skenirajte ili posetite <span style='color:#1048A3;'>market.vcash.rs</span> da se informišete o aktuelnim cenama proizvoda",
     "qrInfo2": "Direktna kupovina proizvoda <b>nije moguća</b>. \nProizvodi se kupuju i aktiviraju kupovinom višenamenskog vaučera u odabranoj vrednosti prema proizvodu / servisu koji aktivirate",
     "cards": {
@@ -185,11 +186,12 @@
       }
     },
     "priceFrom": "<span style='color: #000000; font-weight: 400;'>Od</span> $25 - $150",
-    "buttonText": "Kupi višenamenski vaučer"
+    "buttonText": "Kupi vaučer"
   },
   "bettingVouchers": {
     "title": "Betting voučeri",
-    "description": "Iskoristi VCash <b>višenamenski</b> vaučer za dopunu svog naloga.",
+    "description": "Iskoristi <b>VCash vaučer</b> za brzu dopunu svog naloga u vodećim kladionicama u Srbiji.",
+    "availableServices": "Dostupni servisi",
     "qrInfo": "Skenirajte ili posetite <span style='color:#1048A3;'>market.vcash.rs</span> da se informišete o aktuelnim cenama proizvoda.",
     "qrInfo2": "Direktna kupovina proizvoda <b>nije moguća</b>.<br />Proizvodi se kupuju i aktiviraju kupovinom višenamenskog vaučera u odabranoj vrednosti prema proizvodu / servisu koji aktivirate.",
     "cards": {
@@ -218,7 +220,7 @@
         "body": "Spremamo dodatne servise i popularne platforme – još više sadržaja koji volite, uskoro dostupno."
       }
     },
-    "buttonText": "Kupi višenamenski vaučer"
+    "buttonText": "Kupi vaučer"
   },
   "digitalServices": {
     "backToServices": "Nazad na izbor servisa",
@@ -307,5 +309,29 @@
     "continue": "Nastavi",
     "tryAgain": "Pokušaj ponovo"
   },
-  "comingSoon": "Dolazi uskoro..."
+  "comingSoon": "Dolazi uskoro...",
+  "howTo": {
+    "title": "Kako funkcioniše",
+    "description": "U 4 koraka, aktiviraj vaučer i dopuni svoj nalog",
+    "steps": [
+      {
+        "title": "Kupi vaučer",
+        "description": "Unesi novac i završi kupovinu vaučera"
+      },
+      {
+        "title": "Skeniraj QR kod",
+        "description": "Skeniraj dobijeni QR kod kamerom ili aktiviraj vaučer na "
+      },
+      {
+        "title": "Izaberi Platformu",
+        "description": "Odaberi platformu i željeni proizvod iz liste"
+      },
+      {
+        "title": "Aktiviraj Vaučer",
+        "description": "Potvrdi kupovinu unosom svoje e-mail adrese i broja telefona."
+      }
+    ]
+  },
+  "voucherValue": "Vrednost vaučera",
+  "voucherInstruction":"Slikaj kod ili upiši aktivacioni kod ispod QR koda"
 }

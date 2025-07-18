@@ -4,9 +4,11 @@ import { NavigateFunction } from 'react-router-dom'
 
 import Container from '@/components/atoms/container/container'
 import ErrorNotification from '@/components/atoms/errorNotification/errorNotification'
+import HelpButton from '@/components/atoms/helpButton/helpButton'
 import PrimaryButton from '@/components/atoms/primaryButton/primaryButton'
 import Footer from '@/components/organisms/footer/footer'
 import Header from '@/components/organisms/header/header'
+import HowTo from '@/components/organisms/how-to/how-to'
 import { VoucherConfirmation } from '@/data/entities/voucher-confirmation'
 import { mockedPrinterData, shouldMockPrinter } from '@/helpers/mock.printer'
 import { useTranslate } from '@/i18n/useTranslate'
@@ -34,7 +36,7 @@ export default function InsertCashTemplate({
     navigate: NavigateFunction
 }) {
     const { t } = useTranslate()
-
+    const [isModalOpen, setIsModalOpen] = useState(false)
     const [amount, _setAmount] = useState<number>(0)
     const [isVoucherPrinting, setIsVoucherPrinting] = useState<boolean>(false)
     const [showVoucher, setShowVoucher] = useState<boolean>(false)
@@ -363,6 +365,17 @@ export default function InsertCashTemplate({
                     />
                 </div>
                 <Footer />
+                {isModalOpen && (
+                    <HowTo
+                        isModal={true}
+                        onClose={() => setIsModalOpen(false)}
+                    />
+                )}
+                <HelpButton
+                    onPress={() => {
+                        setIsModalOpen(true)
+                    }}
+                />
             </Container>
         </>
     )

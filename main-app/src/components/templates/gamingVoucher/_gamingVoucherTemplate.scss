@@ -5,8 +5,7 @@
     flex-direction: column;
     flex: 1;
     padding: 5rem;
-    background: colors.$main-background-color
-        url('../assets/images/background.png') center/cover;
+    text-align: center;
 
     h1 {
         font-family: fonts.$body-font;
@@ -14,7 +13,7 @@
         font-size: 4.2rem;
         line-height: 100%;
         color: colors.$black-color;
-        margin: 0 0 1rem;
+        margin: 0 0 2rem;
     }
 
     h2 {

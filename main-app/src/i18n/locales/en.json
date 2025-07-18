@@ -181,11 +181,12 @@
       }
     },
     "priceFrom": "<span style='color: #000000; font-weight: 400;'>From</span> $25 - $150",
-    "buttonText": "Buy Multi-Purpose Voucher"
+    "buttonText": "Buy Voucher"
   },
   "bettingVouchers": {
     "title": "Betting Vouchers",
     "description": "Use a <b>multi-purpose</b> VCash voucher to add credit to your account.",
+    "availableServices": "Available services",
     "qrInfo": "Scan or visit <span style='color:#1048A3;'>market.vcash.rs</span> to check current product prices.",
     "qrInfo2": "Direct purchase of products is <b>not available</b>.<br />Products are purchased and activated by buying a multi-purpose voucher in a selected value based on the product/service you wish to activate.",
     "cards": {
@@ -215,7 +216,7 @@
       }
     },
     "priceFrom": "<span style='color: #000000; font-weight: 400;'>From</span> $25 - $150",
-    "buttonText": "Buy Multi-Purpose Voucher"
+    "buttonText": "Buy Voucher"
   },
   "digitalServices": {
     "backToServices": "Back to service selection",
@@ -301,5 +302,29 @@
     "continue": "Continue",
     "tryAgain": "Try Again"
   },
-  "comingSoon": "Coming soon..."
+  "comingSoon": "Coming soon...",
+  "howTo": {
+    "title": "How it works",
+    "description": "In 4 steps, activate the voucher and top up your account",
+    "steps": [
+      {
+        "title": "Buy voucher",
+        "description": "Enter cash and complete voucher purchase"
+      },
+      {
+        "title": "Scan QR code",
+        "description": "Scan the QR code below or activate the voucher on"
+      },
+      {
+        "title": "Select Platform",
+        "description": "Select the platform and desired product from the list"
+      },
+      {
+        "title": "Activate Voucher",
+        "description": "Confirm purchase by entering your email address and phone number."
+      }
+    ]
+  },
+  "voucherValue": "Voucher Value",
+  "voucherInstruction": "Slikaj kod ili upiši aktivacioni kod ispod QR koda"
 }
