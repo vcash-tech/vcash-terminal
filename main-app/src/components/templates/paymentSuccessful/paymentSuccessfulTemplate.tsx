@@ -3,9 +3,11 @@ import { NavigateFunction } from 'react-router-dom'
 
 import { printVoucher } from '@/assets/images'
 import Container from '@/components/atoms/container/container'
+import HelpButton from '@/components/atoms/helpButton/helpButton'
 import WireButton from '@/components/atoms/wireButton/wireButton'
 import Footer from '@/components/organisms/footer/footer'
 import Header from '@/components/organisms/header/header'
+import HowTo from '@/components/organisms/how-to/how-to'
 import { useTranslate } from '@/i18n/useTranslate'
 
 export default function PaymentSuccessfulTemplate({
@@ -16,6 +18,7 @@ export default function PaymentSuccessfulTemplate({
 }) {
     const { t } = useTranslate()
     const [showHelp, setShowHelp] = useState<boolean>(false)
+    const [isModalOpen, setIsModalOpen] = useState(false)
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -55,6 +58,14 @@ export default function PaymentSuccessfulTemplate({
                 </div>
             </div>
             <Footer />
+            {isModalOpen && (
+                <HowTo isModal={true} onClose={() => setIsModalOpen(false)} />
+            )}
+            <HelpButton
+                onPress={() => {
+                    setIsModalOpen(true)
+                }}
+            />
         </Container>
     )
 }

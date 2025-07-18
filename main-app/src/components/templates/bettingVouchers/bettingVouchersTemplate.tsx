@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { NavigateFunction } from 'react-router-dom'
 
@@ -10,7 +9,6 @@ import {
     betting_soccerBet
 } from '@/assets/images'
 import Container from '@/components/atoms/container/container'
-import HelpButton from '@/components/atoms/helpButton/helpButton'
 import PrimaryButton from '@/components/atoms/primaryButton/primaryButton'
 import AvailableServices from '@/components/molecules/availableServices/availableServices'
 import Footer from '@/components/organisms/footer/footer'
