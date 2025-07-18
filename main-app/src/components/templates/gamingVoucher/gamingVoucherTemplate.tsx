@@ -1,12 +1,18 @@
 import { useTranslation } from 'react-i18next'
 import { NavigateFunction } from 'react-router-dom'
 
-import { gaming_josServisaUskoro, gaming_playstation, gaming_steam, gaming_xbox } from '@/assets/images'
+import {
+    gaming_josServisaUskoro,
+    gaming_playstation,
+    gaming_steam,
+    gaming_xbox
+} from '@/assets/images'
 import Container from '@/components/atoms/container/container'
 import PrimaryButton from '@/components/atoms/primaryButton/primaryButton'
 import AvailableServices from '@/components/molecules/availableServices/availableServices'
 import Footer from '@/components/organisms/footer/footer'
 import Header from '@/components/organisms/header/header'
+import HowTo from '@/components/organisms/how-to/how-to'
 
 export type GamingVoucherProps = {
     navigate: NavigateFunction
@@ -27,9 +33,17 @@ export default function GamingVoucher({ navigate }: GamingVoucherProps) {
                         __html: t('gamingVouchers.description')
                     }}
                 />
-                <AvailableServices title={t('gamingVouchers.availableServices')} images={[gaming_xbox, gaming_steam, gaming_playstation, gaming_josServisaUskoro]} />
-                
-                
+                <AvailableServices
+                    title={t('gamingVouchers.availableServices')}
+                    images={[
+                        gaming_xbox,
+                        gaming_steam,
+                        gaming_playstation,
+                        gaming_josServisaUskoro
+                    ]}
+                />
+
+                <HowTo isModal={false} />
                 <div className="gaming-voucher__primary-button">
                     <PrimaryButton
                         text={t('gamingVouchers.buttonText')}

@@ -1,27 +1,82 @@
-import { disney } from '@/assets/images'
+import { closeIcon } from '@/assets/icons'
+import {
+    gamingMarketplace,
+    insertCashImg2,
+    izaberiPlatformu,
+    mockupVoucher,
+    useVoucherBetting, useVoucherGaming
+} from '@/assets/images'
+import PrimaryButton from '@/components/atoms/primaryButton/primaryButton'
 import { useTranslate } from '@/i18n/useTranslate'
 
 import StepItem from './step-item'
 
-const stepImages = [disney, disney, disney, disney]
-export default function HowTo() {
-    const { t } = useTranslate()
+export type StepItemProps = {
+    title: string
+    description: string
+    image: string
+    stepIndex: number
+}
 
-    return (
-        <div className="how-to">
-            <h1>{t('howTo.title')}</h1>
-            <p className="description">{t('howTo.description')}</p>
-            <div className="steps">
-                {stepImages?.map((step, index) => (
-                    <StepItem
-                        key={index}
-                        title={t(`howTo.steps.${index}.title`)}
-                        description={t(`howTo.steps.${index}.description`)}
-                        image={step}
-                        stepIndex={index + 1}
-                    />
-                ))}
+export type HowToProps = {
+    onClose?: () => void
+    isModal?: boolean
+    isBetting?: boolean
+}
+
+export default function HowTo({ onClose, isModal, isBetting = false }: HowToProps) {
+    const { t } = useTranslate()
+    const gamingImages = [
+        insertCashImg2,
+        mockupVoucher,
+        gamingMarketplace,
+        useVoucherGaming
+    ]
+    const bettingImages = [
+        insertCashImg2,
+        mockupVoucher,
+        izaberiPlatformu,
+        useVoucherBetting
+    ]
+
+    const renderContent = () => {
+        return (
+            <div className="how-to">
+                {isModal && (
+                    <button className="close-btn" onClick={onClose}>
+                        <img src={closeIcon} alt="close" />
+                    </button>
+                )}
+                <h1>{t('howTo.title')}</h1>
+                <p className="description">{t('howTo.description')}</p>
+                <div className="steps">
+                    {(isBetting ? bettingImages : gamingImages)?.map((step, index) => (
+                        <StepItem
+                            key={index}
+                            title={t(`howTo.steps.${index}.title`)}
+                            description={t(`howTo.steps.${index}.description`)}
+                            image={step}
+                            stepIndex={index + 1}
+                        />
+                    ))}
+                </div>
             </div>
-        </div>
-    )
+        )
+    }
+
+    if (isModal) {
+        return (
+            <div className="backdrop">
+                {renderContent()}
+                <div className={'action-wrapper'}>
+                    <PrimaryButton
+                        callback={onClose}
+                        text={t('register.continue')}
+                    />
+                </div>
+            </div>
+        )
+    }
+
+    return renderContent()
 }

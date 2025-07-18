@@ -331,5 +331,7 @@
         "description": "Potvrdi kupovinu unosom svoje e-mail adrese i broja telefona."
       }
     ]
-  }
+  },
+  "voucherValue": "Vrednost vaučera",
+  "voucherInstruction":"Slikaj kod ili upiši aktivacioni kod ispod QR koda"
 }

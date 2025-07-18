@@ -16,12 +16,17 @@ import gaming_josServisaUskoro from './images/gaming/josServisaUskoro.png'
 import gaming_playstation from './images/gaming/playstation.png'
 import gaming_steam from './images/gaming/steam.png'
 import gaming_xbox from './images/gaming/xbox.png'
+import gamingMarketplace from './images/gamingMarketplace.jpg'
 import gamingServices from './images/gamingServices.png'
 import gPay from './images/googlePay.png'
 import hbo from './images/hbo.png'
+import helpIcon from './images/helpIcon.svg'
 import hulu from './images/hulu.png'
 import insertCashImg from './images/insertCash.jpg'
+import insertCashImg2 from './images/insertCash2.jpg'
+import izaberiPlatformu from './images/izaberiPlatformuBetting.jpg'
 import marketplace from './images/marketplace.png'
+import mockupVoucher from './images/mockupVoucher.jpg'
 import ageDisclaimerBackground from './images/optimised/ageDisclaimerBackground.webp'
 import background from './images/optimised/background.webp'
 import balkanBetLogo from './images/optimised/balkanBetLogo.png'
@@ -59,6 +64,8 @@ import printVoucher from './images/printVoucher.jpg'
 import sockerCard from './images/sockerCard.svg'
 import test from './images/test.png'
 import tickets from './images/tickets.png'
+import useVoucherBetting from './images/useVoucherBetting.jpg'
+import useVoucherGaming from './images/useVoucherGaming.jpg'
 import marketplaceQR from './images/vcash-marketplace.svg'
 import welcomeBackground from './images/welcomeBackground.svg'
 
@@ -93,19 +100,24 @@ export {
     gaming_playstation,
     gaming_steam,
     gaming_xbox,
+    gamingMarketplace,
     gamingServices,
     gamingVoucher,
     gPay,
     hbo,
+    helpIcon,
     homeBackground,
     hulu,
     insertCashImg,
+    insertCashImg2,
+    izaberiPlatformu,
     logoWhite,
     marketplace,
     marketplaceQR,
     maxBetLogo,
     meridianBetLogo,
     merkurXTipLogo,
+    mockupVoucher,
     nbaCard,
     paymentCardBackground,
     paymentMethodBackground,
@@ -123,7 +135,8 @@ export {
     tennisNewCard,
     test,
     tickets,
+    useVoucherBetting,
+    useVoucherGaming,
     viewBackground,
     welcomeBackground,
-    xboxClean
-}
+    xboxClean}

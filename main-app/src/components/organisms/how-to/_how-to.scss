@@ -1,3 +1,30 @@
+.backdrop {
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 998;
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: flex-end;
+  background-color: #00000090;
+
+  .action-wrapper {
+    background: #e6ecff;
+    width: 100%;
+    justify-content: center;
+    display: flex;
+    padding: 4rem 2rem 14rem 2rem;
+
+    .primary-button {
+      width: 50vw;
+    }
+  }
+}
+
 .how-to {
   display: flex;
   box-sizing: border-box;
@@ -8,7 +35,15 @@
   min-height:40vh;
   width: 100%;
   border-top: 1rem;
-  padding: 12rem 0 4rem 0;
+  padding: 12rem 0 12rem 0;
+  position: relative;
+
+  .close-btn {
+    position: absolute;
+    top: 5rem;
+    right: 5rem;
+    cursor: pointer;
+  }
 
   p {
     font-size: 24px;
@@ -34,7 +69,7 @@
       box-sizing: border-box;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
       padding: 2rem;
       max-width: 23%;
       align-self: flex-start;
@@ -43,10 +78,11 @@
       h2 {
         font-weight: 600;
         font-size: 22px;
-        line-height: 33px;
         text-align: center;
         letter-spacing: 0.01em;
         color: #231f20;
+        height: 4rem;
+        margin-top: 1rem;
       }
 
       .index-container {
@@ -55,7 +91,7 @@
         .dash-line {
           position: absolute;
           bottom: 4rem;
-          right: -18rem;
+          right: -18.5rem;
         }
 
         .step-item-index {
@@ -95,9 +131,56 @@
         text-align: center;
         color: #333839;
         margin-top: 2rem;
+
+        span {
+          color: #385AC9;
+          display: inline-block;
+          font-weight: 600;
+        }
+
+        &.no-margin {
+          padding-bottom: 0;
+          margin-bottom: 0;
+        }
+
+        &:last-child {
+          margin-top: 0;
+        }
+      }
+
+      &:first-child {
+        .step-item-image {
+          img {
+            object-fit: cover;
+            height: 100%;
+            width: 130%;
+          }
+        }
+      }
+
+      &:nth-child(2) {
+        .step-item-image {
+          img {
+            object-fit: cover;
+            position: relative;
+            height: 110%;
+            width: 100%;
+          }
+        }
       }
 
       &:last-child {
+        .step-item-image {
+          background: #385ac9;
+
+          img {
+            width: 100%;
+            min-height: 110%;
+            object-fit: contain;
+            position: relative;
+            background: #C9CEE1;
+          }
+        }
         .dash-line {
           display: none;
         }
@@ -105,3 +188,4 @@
     }
   }
 }
+

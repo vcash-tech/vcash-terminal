@@ -324,5 +324,7 @@
         "description": "Confirm purchase by entering your email address and phone number."
       }
     ]
-  }
+  },
+  "voucherValue": "Voucher Value",
+  "voucherInstruction": "Slikaj kod ili upiši aktivacioni kod ispod QR koda"
 }

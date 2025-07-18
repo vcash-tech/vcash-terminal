@@ -1,6 +1,7 @@
 import ageDisclaimer from './icons/18plus.png'
 import angleLeft from './icons/angleLeft.svg'
 import arrowRight from './icons/arrowRight.svg'
+import closeIcon from './icons/closeIcon.svg'
 import comingSoon from './icons/coming-soon.svg'
 import comingSoonGaming from './icons/coming-soon-gaming.svg'
 import croIcon from './icons/croIcon.svg'
@@ -22,6 +23,7 @@ export {
     ageDisclaimer,
     angleLeft,
     arrowRight,
+    closeIcon,
     comingSoon,
     comingSoonGaming,
     croIcon,
