@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { NavigateFunction } from 'react-router-dom'
 
 import { printVoucher } from '@/assets/images'
 import Container from '@/components/atoms/container/container'
 import HelpButton from '@/components/atoms/helpButton/helpButton'
+import PrimaryButton from '@/components/atoms/primaryButton/primaryButton'
 import WireButton from '@/components/atoms/wireButton/wireButton'
 import Footer from '@/components/organisms/footer/footer'
 import Header from '@/components/organisms/header/header'
@@ -11,21 +12,17 @@ import HowTo from '@/components/organisms/how-to/how-to'
 import { useTranslate } from '@/i18n/useTranslate'
 
 export default function PaymentSuccessfulTemplate({
-    navigate
+    showHelp,
+    navigate,
+    onPrimaryButtonClick,
 }: {
-    navigate: NavigateFunction
+    showHelp?: boolean
+    navigate?: NavigateFunction
     onPrimaryButtonClick?: () => void
 }) {
     const { t } = useTranslate()
-    const [showHelp, setShowHelp] = useState<boolean>(false)
     const [isModalOpen, setIsModalOpen] = useState(false)
 
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setShowHelp(true)
-        }, 10000)
-        return () => clearTimeout(timer)
-    }, [])
 
     return (
         <Container isFullHeight={true}>
@@ -39,7 +36,7 @@ export default function PaymentSuccessfulTemplate({
                 </div>
 
                 <div className="fallback-wrapper">
-                    {showHelp && (
+                    {showHelp === true ? (
                         <div className="fallback">
                             <div>
                                 <p>{t('paymentSuccessful.fallbackTitle')}</p>
@@ -47,10 +44,15 @@ export default function PaymentSuccessfulTemplate({
                                     {t('paymentSuccessful.voucherUnavailable')}
                                 </p>
                             </div>
-                            <WireButton onClick={() => navigate('/')}>
+                            <WireButton onClick={onPrimaryButtonClick}>
                                 {t('paymentSuccessful.buttonText')}
                             </WireButton>
                         </div>
+                    ) : (
+                        <PrimaryButton
+                                callback={() => navigate}
+                                text={t('voucherGenerated.buttonText')}
+                            />
                     )}
                     <div>
                         {/*<SessionCounter onEndSession={() => navigate('/')} />*/}

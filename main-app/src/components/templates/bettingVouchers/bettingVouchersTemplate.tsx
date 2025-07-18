@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next'
 import { NavigateFunction } from 'react-router-dom'
 
-import { ageDisclaimer } from '@/assets/icons'
+import { ageDisclaimerPng } from '@/assets/icons'
 import {
     betting_balkanBet,
     betting_meridian,
@@ -30,7 +30,7 @@ export default function BettingVoucher({ navigate }: BettingVoucherProps) {
             <div className={`betting-voucher`}>
                 <h1>
                     {t('bettingVouchers.title')}{' '}
-                    <img className="header-ico" src={ageDisclaimer} />
+                    <img className="header-ico" src={ageDisclaimerPng} />
                 </h1>
                 <h2
                     dangerouslySetInnerHTML={{
