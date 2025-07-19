@@ -11,8 +11,9 @@
     h1 {
         font-family: fonts.$body-font;
         font-weight: 600;
-        font-size: 4.2rem;
+        font-size: 4.8rem;
         line-height: 100%;
+        letter-spacing: 0%;
         color: colors.$black-color;
         margin: 13rem 0 0.8rem;
     }
@@ -23,7 +24,7 @@
         font-size: 2.4rem;
         line-height: 150%;
         color: colors.$dark-text-color;
-        margin: 0 0 5.6rem;
+        margin: 0 0 3.9rem;
     }
     
     &__vouchers {
@@ -37,26 +38,26 @@
 
     h4 {
         font-family: fonts.$body-font;
-        font-size: 2.8rem;
-        font-weight: 600;
-        color: #385ac9;
-        margin-top: 3rem;
+        font-size: 4rem;
+        font-weight: 700;
+        color: colors.$white-color;
+        margin: 3.5rem 0 0;
     }
 
     p {
         font-family: fonts.$body-font;
-        color: colors.$dark-text-color;
+        color: colors.$white-color;
         font-size: 1.8rem;
         font-weight: 400;
-        margin-bottom: 4rem;
+        margin-bottom: 3rem;
+        line-height: 130%;
     }
 
     &__pay-bills {
-        width: 100%; // 94.3rem;
-        height: 17.5rem;
         display: flex;
         justify-content: space-between;
-        background-color: colors.$white-color;
+        background-color: #939393;
+        border: 0;
         border-radius: 1.6rem;
         box-shadow: 0rem 0.4rem 2.4rem 0rem rgba(31, 63, 168, 0.21);
         padding: 2.8rem 2.5rem;
@@ -66,9 +67,13 @@
         z-index: 1;
     }
     &__pay-bills__content {
+        text-align: left;
         display: flex;
         flex-direction: column;
         gap: 1.6rem;
+    }
+    &__pay-bills__image {
+        display: none;
     }
 }
 
@@ -82,7 +87,6 @@
     border-radius: 0.5rem;
     z-index: 2;
     text-align: center;
-    height: 15rem;
     width: 21rem;
 
     img {

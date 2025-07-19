@@ -39,6 +39,8 @@ export default function HowTo({ onClose, isModal, isBetting = false }: HowToProp
         useVoucherBetting
     ]
 
+    const howToGroup = isBetting ? 'betting' : 'gaming'
+
     const renderContent = () => {
         return (
             <div className="how-to">
@@ -47,14 +49,14 @@ export default function HowTo({ onClose, isModal, isBetting = false }: HowToProp
                         <img src={closeIcon} alt="close" />
                     </button>
                 )}
-                <h1>{t('howTo.title')}</h1>
+                <h1 className="howToTitle">{t('howTo.title')}</h1>
                 <p className="description">{t('howTo.description')}</p>
                 <div className="steps">
                     {(isBetting ? bettingImages : gamingImages)?.map((step, index) => (
                         <StepItem
                             key={index}
-                            title={t(`howTo.steps.${index}.title`)}
-                            description={t(`howTo.steps.${index}.description`)}
+                            title={t(`howTo.steps.${howToGroup}.${index}.title`)}
+                            description={t(`howTo.steps.${howToGroup}.${index}.description`)}
                             image={step}
                             stepIndex={index + 1}
                         />

@@ -11,9 +11,11 @@ const defaultContextValue: KeyboardContextType = {
     setKeyboardVisible: () => {}
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const KeyboardContext =
     createContext<KeyboardContextType>(defaultContextValue)
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function useKeyboard() {
     const context = useContext(KeyboardContext)
     if (context === undefined) {

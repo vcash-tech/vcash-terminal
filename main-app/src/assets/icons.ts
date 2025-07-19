@@ -1,10 +1,12 @@
 import ageDisclaimerPng from './icons/18plus.png'
 import ageDisclaimer from './icons/ageDisclaimer.svg'
+import ageDisclaimerWhite from './icons/ageDisclaimerWhite.svg'
 import angleLeft from './icons/angleLeft.svg'
 import arrowRight from './icons/arrowRight.svg'
 import closeIcon from './icons/closeIcon.svg'
 import comingSoon from './icons/coming-soon.svg'
 import comingSoonGaming from './icons/coming-soon-gaming.svg'
+import comingSoonOrange from './icons/comingSoonOrange.svg'
 import croIcon from './icons/croIcon.svg'
 import dashLine from './icons/dash-line.svg'
 import deviceIcon from './icons/deviceIcon.svg'
@@ -17,17 +19,20 @@ import sessionExpired from './icons/sessionExpired.svg'
 import ukIcon from './icons/ukIcon.svg'
 import userIcon from './icons/userIcon.svg'
 import usIcon from './icons/usIcon.svg'
+import uskoroOrange from './icons/uskoroOrange.svg'
 import warningIcon from './icons/warningIcon.svg'
 import welcomeGift from './icons/welcomeGift.svg'
 
 export {
     ageDisclaimer,
     ageDisclaimerPng,
+    ageDisclaimerWhite,
     angleLeft,
     arrowRight,
     closeIcon,
     comingSoon,
     comingSoonGaming,
+    comingSoonOrange,
     croIcon,
     dashLine,
     deviceIcon,
@@ -40,6 +45,7 @@ export {
     ukIcon,
     userIcon,
     usIcon,
+    uskoroOrange,
     warningIcon,
     welcomeGift
 }

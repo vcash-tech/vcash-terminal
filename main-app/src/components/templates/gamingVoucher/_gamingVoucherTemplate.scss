@@ -6,6 +6,7 @@
     flex: 1;
     padding: 5rem;
     text-align: center;
+    align-items: center;
 
     h1 {
         font-family: fonts.$body-font;
@@ -22,6 +23,7 @@
         font-size: 2.4rem;
         color: colors.$dark-text-color;
         margin: 0 0 4.3rem;
+        max-width: 80%;
     }
 
     p {

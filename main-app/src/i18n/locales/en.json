@@ -139,7 +139,7 @@
   },
   "service": {
     "title": "Choose your voucher",
-    "subtitle": "Buy credit for betting shops or online gaming services",
+    "subtitle": "",
     "cards": {
       "bet": {
         "title": "Bet Voucher",
@@ -151,8 +151,8 @@
       }
     },
     "payBills": {
-      "title": "Pay bills",
-      "body": "Fast and easy bill payment, no crowds or waiting",
+      "title": "IPS Pay bills",
+      "body": "",
       "simpleScanTitle": "Bill payment",
       "simpleScanBody": "Simply scan and pay"
     }
@@ -160,6 +160,7 @@
   "gamingVouchers": {
     "title": "Gaming Vouchers",
     "description": "Use a VCash <b>multipurpose</b> gaming voucher to purchase PlayStation/Xbox/Steam top-ups.",
+    "availableServices": "Available services",
     "qrInfo": "Scan or visit <span style='color:#1048A3;'>market.vcash.rs</span> for current product prices.",
     "qrInfo2": "Direct product purchases <b>are not available</b>. \nProducts are purchased and activated using a multi-purpose voucher in a selected amount based on the product/service you wish to activate.",
     "cards": {
@@ -306,24 +307,44 @@
   "howTo": {
     "title": "How it works",
     "description": "In 4 steps, activate the voucher and top up your account",
-    "steps": [
-      {
-        "title": "Buy voucher",
-        "description": "Enter cash and complete voucher purchase"
-      },
-      {
-        "title": "Scan QR code",
-        "description": "Scan the QR code below or activate the voucher on"
-      },
-      {
-        "title": "Select Platform",
-        "description": "Select the platform and desired product from the list"
-      },
-      {
-        "title": "Activate Voucher",
-        "description": "Confirm purchase by entering your email address and phone number."
-      }
-    ]
+    "steps": {
+      "betting": [
+        {
+          "title": "Buy a Voucher",
+          "description": "Buy a VCash voucher with cash or card"
+        },
+        {
+          "title": "Scan the QR Code",
+          "description": "Scan the received QR code with your camera or activate the voucher at "
+        },
+        {
+          "title": "Choose a Bookmaker",
+          "description": "Select your preferred bookmaker"
+        },
+        {
+          "title": "Activate the Voucher",
+          "description": "Enter your account ID and desired amount, then confirm activation"
+        }
+      ],
+      "gaming": [
+        {
+          "title": "Buy a Voucher",
+          "description": "Buy a VCash voucher with cash or card"
+        },
+        {
+          "title": "Scan the QR Code",
+          "description": "Scan the received QR code with your camera or activate the voucher at "
+        },
+        {
+          "title": "Choose a Platform",
+          "description": "Select a platform and desired product from the list"
+        },
+        {
+          "title": "Activate the Voucher",
+          "description": "Confirm your purchase by entering your email address and phone number"
+        }
+      ]
+    }
   },
   "voucherValue": "Voucher Value",
   "voucherInstruction": "Slikaj kod ili upiši aktivacioni kod ispod QR koda"

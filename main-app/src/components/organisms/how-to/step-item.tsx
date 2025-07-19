@@ -16,12 +16,12 @@ export default function StepItem({
 }: StepItemProps) {
     return (
         <div className="step-item">
-            <div className="step-item-image">
-                <img src={image} alt={title} />
-            </div>
             <div className="index-container">
                 <img src={dashLine} alt="dash line" className={'dash-line'} />
-            <p className="step-item-index">{stepIndex}</p>
+                <p className="step-item-index">{stepIndex}</p>
+            </div>
+            <div className="step-item-image">
+                <img src={image} alt={title} />
             </div>
             <h2>{title}</h2>
             <p className="step-item-description ">{description}</p>

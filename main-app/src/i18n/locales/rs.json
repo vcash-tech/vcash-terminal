@@ -114,7 +114,7 @@
       "language": "Jezik"
     },
     "footer": {
-      "contactSupport": "Imate pitanje? Pozovite podršku:"
+      "contactSupport": "Imate pitanje? Pozovite podršku od 09h do 23h:"
     },
     "common": {
       "next": "Dalje",
@@ -142,23 +142,23 @@
     "text": "Sve na jednom mestu – brzo, jednostavno i dostupno 24/7. Kupujte gaming vaučere za PlayStation, Xbox i Steam, dopunjujte korisničke naloge kod najvećih kladionica u Srbiji, plaćajte račune i pristupajte brojnim digitalnim uslugama – sve to na jednom mestu, bez čekanja i komplikacija."
   },
   "service": {
-    "title": "Izaberi svoj vaučer",
-    "subtitle": "Kupi kredit za kladionice ili online gaming servise",
+    "title": "Izaberi tip vaučera",
+    "subtitle": "",
     "cards": {
       "bet": {
         "title": "Bet Vaučer",
-        "body": "Za sportske kladionice, kazino i ostale igre na sreću."
+        "body": "Za brzu dopunu svog naloga u vodećim kladionicama u Srbiji"
       },
       "gaming": {
         "title": "Gaming Vaučer",
-        "body": "Kupi vaučer za XBox, Playstation ili Steam prodavnice"
+        "body": "Za kupovinu gift kartica za Playstation, Steam, Xbox i Roblox i druge popularne platforme"
       }
     },
     "payBills": {
       "title": "Plati račune",
-      "body": "Brzo i jednostavno plaćanje računa, bez gužve i čekanja",
-      "simpleScanTitle": "Plaćanje računa",
-      "simpleScanBody": "Jednostavno skeniraj i plati"
+      "body": "",
+      "simpleScanTitle": "IPS Plaćanje računa",
+      "simpleScanBody": "Jednostavno skeniraj i plati račune "
     }
   },
   "gamingVouchers": {
@@ -189,9 +189,9 @@
     "buttonText": "Kupi vaučer"
   },
   "bettingVouchers": {
-    "title": "Betting voučeri",
+    "title": "Bet vaučer",
     "description": "Iskoristi <b>VCash vaučer</b> za brzu dopunu svog naloga u vodećim kladionicama u Srbiji.",
-    "availableServices": "Dostupni servisi",
+    "availableServices": "Dostupne kladionice",
     "qrInfo": "Skenirajte ili posetite <span style='color:#1048A3;'>market.vcash.rs</span> da se informišete o aktuelnim cenama proizvoda.",
     "qrInfo2": "Direktna kupovina proizvoda <b>nije moguća</b>.<br />Proizvodi se kupuju i aktiviraju kupovinom višenamenskog vaučera u odabranoj vrednosti prema proizvodu / servisu koji aktivirate.",
     "cards": {
@@ -288,7 +288,7 @@
     "language": "Jezik"
   },
   "footer": {
-    "contactSupport": "Imate pitanje? Pozovite podršku:"
+    "contactSupport": "Imate pitanje? Pozovite podršku od 09h do 23h:"
   },
   "common": {
     "next": "Dalje",
@@ -313,24 +313,44 @@
   "howTo": {
     "title": "Kako funkcioniše",
     "description": "U 4 koraka, aktiviraj vaučer i dopuni svoj nalog",
-    "steps": [
-      {
-        "title": "Kupi vaučer",
-        "description": "Unesi novac i završi kupovinu vaučera"
-      },
-      {
-        "title": "Skeniraj QR kod",
-        "description": "Skeniraj dobijeni QR kod kamerom ili aktiviraj vaučer na "
-      },
-      {
-        "title": "Izaberi Platformu",
-        "description": "Odaberi platformu i željeni proizvod iz liste"
-      },
-      {
-        "title": "Aktiviraj Vaučer",
-        "description": "Potvrdi kupovinu unosom svoje e-mail adrese i broja telefona."
-      }
-    ]
+    "steps": {
+      "betting": [
+        {
+          "title": "Kupi vaučer",
+          "description": "Kupi VCash vaučer gotovinom ili karticom"
+        },
+        {
+          "title": "Skeniraj QR kod",
+          "description": "Skeniraj dobijeni QR kod kamerom ili aktiviraj vaučer na "
+        },
+        {
+          "title": "Izaberi Kladionicu",
+          "description": "Odaberi željenu kladionicu "
+        },
+        {
+          "title": "Aktiviraj Vaučer",
+          "description": "Unesi svoj ID naloga i željeni iznos, i potvrdi aktivaciju"
+        }
+      ],
+      "gaming": [
+        {
+          "title": "Kupi vaučer",
+          "description": "Kupi VCash vaučer gotovinom ili karticom"
+        },
+        {
+          "title": "Skeniraj QR kod",
+          "description": "Skeniraj dobijeni QR kod kamerom ili aktiviraj vaučer na "
+        },
+        {
+          "title": "Izaberi Platformu",
+          "description": "Odaberi platformu i željeni proizvod iz liste"
+        },
+        {
+          "title": "Aktiviraj Vaučer",
+          "description": "Potvrdi kupovinu unosom svoje e-mail adrese i broja telefona"
+        }
+      ]
+    }
   },
   "voucherValue": "Vrednost vaučera",
   "voucherInstruction":"Slikaj kod ili upiši aktivacioni kod ispod QR koda"
