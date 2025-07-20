@@ -262,28 +262,36 @@ export default function InsertCashTemplate({
 
         try {
             const voucherTypeId = '20' // Replace with actual voucher type ID
-            const voucherData = await TransactionService.CreateVoucher({
+            const createVoucher = await TransactionService.CreateVoucher({
                 voucherTypeId
             })
-            setVoucherData(voucherData)
+            setVoucherData(createVoucher)
+            console.log('Voucher created', voucherData)
 
             // Print the voucher with the new template renderer
-            const printSuccess = await printVoucher(voucherData, voucherTypeId)
+            if (voucherData) {
+                const printSuccess = await printVoucher(voucherData, voucherTypeId)
 
-            // If printing succeeded, automatically proceed to voucher confirmation
-            if (printSuccess) {
-                console.log(
-                    '🎯 Print successful - auto-proceeding to voucher confirmation'
-                )
-                // printed
-                setShowPrintVoucher(false)
-                //setTimeout(() => setShowVoucher(true), 200) // Small delay for UX
+                // If printing succeeded, automatically proceed to voucher confirmation
+                if (printSuccess) {
+                    console.log(
+                        '🎯 Print successful - auto-proceeding to voucher confirmation'
+                    )
+                    // printed
+                    setShowPrintVoucher(false)
+                    //setTimeout(() => setShowVoucher(true), 200) // Small delay for UX
+                } else {
+                    // not printed
+                    setShowPrintVoucher(true)
+                    console.log(
+                        '❌ Print failed - staying on success screen for manual interaction'
+                    )
+                }
             } else {
-                // not printed
-                setShowPrintVoucher(true)
                 console.log(
-                    '❌ Print failed - staying on success screen for manual interaction'
+                    '❌ Voucher create failed - no voucher data available'
                 )
+                setShowPrintVoucher(true)
             }
         } catch (err) {
             // not printed
