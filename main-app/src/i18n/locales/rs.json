@@ -10,7 +10,15 @@
     "backToServices": "Nazad na servise",
     "title": "Upozorenje za kupovinu vaučera 18+",
     "subtitle": "Ovaj vaučer omogućava dopunu naloga kod servisa za klađenje i namenjen je isključivo korisnicima starijim od 18 godina. Kupovinom potvrđujete da ste punoletni i da razumete rizike koji prate klađenje. Igrajte odgovorno.",
-    "continuePurchase": "Da, imam 18+ godina"
+    "continuePurchase": "Da, imam 18+ godina",
+    "warning": "Zabranjeno je učestvovanje maloletnih lica u igrama na sreću!",
+    "bettingWarning1": "Igre na sreću namenjene su samo zabavi punoletnih gradjana",
+    "bettingWarning2": "Učestvovanjem u igrama na sreću osoba se može udaljiti od porodice, prijatelja i uobičajenih aktivnosti vezanih za njen uzrast",
+    "bettingWarning3": "Učestvovanje u igrama na sreću može izazvati zavisnost koju je neophodno lečiti",
+    "finalWarning": "Dalji sadržaj namenjen je osobama starijim od 18 godina. Klikom potvrđujem svoju punoletnost i prihvatam odgovornost za pristup informacijama na narednoj stranici.",
+    "hospital-name": "Specijalna bolnica za bolesti zavisnosti",
+    "hospital-address": "Beograd, Teodora Drajzera 44",
+    "hospital-phones": "Telefoni ustanove:"
   },
   "paymentSuccessful": {
     "title": "Izdavanje voučera",
@@ -353,5 +361,5 @@
     }
   },
   "voucherValue": "Vrednost vaučera",
-  "voucherInstruction":"Slikaj kod ili upiši aktivacioni kod ispod QR koda"
+  "voucherInstruction": "Slikaj kod ili upiši aktivacioni kod ispod QR koda"
 }

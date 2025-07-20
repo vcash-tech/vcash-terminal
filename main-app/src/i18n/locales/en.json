@@ -10,7 +10,15 @@
     "backToServices": "Back to services",
     "title": "18+ Voucher purchase disclaimer",
     "subtitle": "This kiosk provides access to betting services intended for users aged 18 and above only. By proceeding, you confirm that you are of legal age and understand the risks associated with gambling. Please play responsibly.",
-    "continuePurchase": "Yes, I have 18+ years"
+    "continuePurchase": "Yes, I have 18+ years",
+    "warning": "It is forbidden for minors to participate in gambling!",
+    "bettingWarning1": "Gambling services are intended for adults only",
+    "bettingWarning2": "Participation in gambling may lead to isolation from family, friends, and activities associated with their age",
+    "bettingWarning3": "Participation in gambling may lead to addiction which requires treatment",
+    "finalWarning": "The content below is intended for persons over 18 years of age. By clicking, you confirm your majority and accept responsibility for accessing information on the next page.",
+    "hospital-name": "Specialized addiction hospital",
+    "hospital-address": "Beograd, Teodora Drajzera 44",
+    "hospital-phones": "Telefoni ustanove:"
   },
   "paymentSuccessful": {
     "title": "Voucher Printing",
