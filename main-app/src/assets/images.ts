@@ -1,3 +1,4 @@
+import ageDisclaimer from './images/age-disclaimer.png'
 import basketballCard from './images/basketballCard.svg'
 import betting_balkanBet from './images/betting/balkanBet.png'
 import betting_meridian from './images/betting/meridian.png'
@@ -70,6 +71,7 @@ import marketplaceQR from './images/vcash-marketplace.svg'
 import welcomeBackground from './images/welcomeBackground.svg'
 
 export {
+    ageDisclaimer,
     ageDisclaimerBackground,
     background,
     balkanBetLogo,
@@ -139,4 +141,5 @@ export {
     useVoucherGaming,
     viewBackground,
     welcomeBackground,
-    xboxClean}
+    xboxClean
+}
