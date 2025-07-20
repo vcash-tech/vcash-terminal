@@ -1,82 +1,91 @@
-@use "../../../styles/config/colors";
-@use "../../../styles/config/fonts";
-@use "../../../styles/config/media-queries";
+@use '../../../styles/config/colors';
+@use '../../../styles/config/fonts';
+@use '../../../styles/config/media-queries';
 
 .insert-cash {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 8.5rem 0 0;
-  background:  colors.$main-background-color;
-  flex: 1;
-  justify-content: end;
-
-  .demo-wrapper {
-    background: #CED9F9;
-    border-radius: 100rem;
-    margin-bottom: 4.2rem;
-    overflow: hidden;
     display: flex;
-    height: 50rem;
     flex-direction: column;
-    width: 50rem;
-    justify-content: flex-end;
-
-    img {
-      display: flex;
-      flex: 1;
-      min-width: 120%;
-      object-fit: contain;
-    }
-  }
-
-  h1 {
-    font-family: fonts.$body-font;
-    font-weight: 600;
-    font-size: 4.2rem;
-    line-height: 100%;
-    color: colors.$black-color;
-    text-align: center;
-    margin: 0 0 0.8rem;
-  }
-
-  .inserted-amount {
-    font-family: fonts.$body-font;
-    font-weight: 500;
-    font-size: 3.6rem;
-    line-height: 5rem;
-    color: colors.$dark-grey;
-
-    span {
-      font-weight: 700;
-      color: colors.$brand-primary-color;
-    }
-  }
-
-  .primary-button {
-    margin: 40rem 0 10rem;
-  }
-
-}
-
-@include media-queries.media('<=desktop') {
-  .insert-cash {
-    padding: 10rem 5rem;
+    align-items: center;
+    padding: 8.5rem 0 0;
+    background: colors.$main-background-color;
     flex: 1;
-    height: 100%;
-    justify-content: center;
+    justify-content: end;
 
-    .primary-button {
-      margin-top: 10rem;
-    }
+    .demo-wrapper {
+        background: #ced9f9;
+        border-radius: 100rem;
+        margin-bottom: 4.2rem;
+        margin-top: 5rem;
+        overflow: hidden;
+        display: flex;
+        height: 50rem;
+        flex-direction: column;
+        width: 50rem;
+        justify-content: flex-end;
 
-    img {
-      max-width: 65%;
+        img {
+            display: flex;
+            flex: 1;
+            min-width: 120%;
+            object-fit: contain;
+        }
     }
 
     h1 {
-      font-size: 3.6rem;
+        font-family: fonts.$body-font;
+        font-weight: 600;
+        font-size: 4.2rem;
+        line-height: 100%;
+        color: colors.$black-color;
+        text-align: center;
+        margin: 0 0 0.8rem;
     }
 
-  }
+    .inserted-amount {
+        font-family: fonts.$body-font;
+        font-weight: 500;
+        font-size: 3.6rem;
+        line-height: 5rem;
+        color: colors.$dark-grey;
+        text-align: center;
+        margin-top: 10rem;
+
+        span {
+            display: block;
+            margin-top: 3rem;
+            font-size: 4.6rem;
+            font-weight: 700;
+            color: colors.$brand-primary-color;
+
+            .currency {
+                font-size: 3rem;
+                display: inline-block;
+            }
+        }
+    }
+
+    .primary-button {
+        margin: 20rem 0 10rem;
+    }
+}
+
+@include media-queries.media('<=desktop') {
+    .insert-cash {
+        padding: 10rem 5rem;
+        flex: 1;
+        height: 100%;
+        justify-content: center;
+
+        .primary-button {
+            margin-top: 10rem;
+        }
+
+        img {
+            max-width: 65%;
+        }
+
+        h1 {
+            font-size: 3.6rem;
+        }
+    }
 }

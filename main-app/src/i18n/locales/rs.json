@@ -26,16 +26,16 @@
   },
   "paymentSuccessful": {
     "title": "Izdavanje voučera",
-    "subtitle": "Preuzmite Vaš vaučer na poziciji sa slike...",
+    "subtitle": "Preuzmite Vaš vaučer na poziciji sa slike",
     "generatingVoucher": "Vaučer se kreira...",
     "voucherUnavailable": "Klikni i slikaj ili skeniraj voučer na ekranu",
     "buttonText": "Prikaži vaučer",
     "fallbackTitle": "Nisi dobio vaučer?"
   },
   "insertCash": {
-    "title": "Ubacite novac",
+    "title": "Ubacite gotovinu",
     "acceptedNotes": "Terminal prihvata sledeće novčanice: 500, 1000 i 2000 RSD.",
-    "altText": "Ubacite novac",
+    "altText": "Ubacite gotovinu",
     "insertedAmount": "Uneti iznos",
     "noChangeWarning": "Ubacite tačan iznos - terminal ne vraća kusur. Povraćaj novca nakon uplate nije moguć.",
     "confirmPayment": "Potvrdi plaćanje",

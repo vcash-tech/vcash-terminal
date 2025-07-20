@@ -356,8 +356,8 @@ export default function InsertCashTemplate({
                         />
                     </div>
                     <div className="inserted-amount">
-                        {t('insertCash.insertedAmount')}:{' '}
-                        <span>{amount || 0} RSD</span>
+                        {t('insertCash.insertedAmount')}:
+                        <span>{amount || 0} <span className='currency'>RSD</span></span>
                     </div>
                     <PrimaryButton
                         isDisabled={!amount || amount <= 0}

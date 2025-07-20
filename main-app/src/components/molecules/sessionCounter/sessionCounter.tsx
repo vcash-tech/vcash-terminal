@@ -13,7 +13,7 @@ export default function SessionCounter({
     const [timeLeft, setTimeLeft] = useState(15)
 
     const sessionDuration = 15
-    const maxSessionDuration = 60
+    const maxSessionDuration = 30
 
     const extendTime = () => {
         setTimeLeft(timeLeft + sessionDuration)

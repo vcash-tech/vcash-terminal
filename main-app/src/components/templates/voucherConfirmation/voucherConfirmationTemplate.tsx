@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { NavigateFunction } from 'react-router-dom'
 
 import { confirmedIcon } from '@/assets/icons'

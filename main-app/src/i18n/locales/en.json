@@ -27,7 +27,7 @@
   "paymentSuccessful": {
     "title": "Voucher Printing",
     "subtitle": "Take your voucher at the location from the image...",
-    "generatingVoucher": "Generating voucher...",
+    "generatingVoucher": "Generating voucher",
     "buttonText": "View Voucher",
     "fallbackTitle": "Didn't receive your voucher?",
     "voucherUnavailable": "Click below, take a photo or scan the voucher on the screen"
