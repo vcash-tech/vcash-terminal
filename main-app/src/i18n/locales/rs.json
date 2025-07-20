@@ -25,10 +25,10 @@
     "hospital-phones": "Telefoni ustanove:"
   },
   "paymentSuccessful": {
-    "title": "Izdavanje voučera",
+    "title": "Izdavanje vaučera",
     "subtitle": "Preuzmite Vaš vaučer na poziciji sa slike",
     "generatingVoucher": "Vaučer se kreira...",
-    "voucherUnavailable": "Klikni i slikaj ili skeniraj voučer na ekranu",
+    "voucherUnavailable": "Klikni i slikaj ili skeniraj vaučer na ekranu",
     "buttonText": "Prikaži vaučer",
     "fallbackTitle": "Nisi dobio vaučer?"
   },

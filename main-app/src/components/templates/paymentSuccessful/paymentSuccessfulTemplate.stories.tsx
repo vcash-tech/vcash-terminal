@@ -14,13 +14,29 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
+export const Successful: Story = {
   args: {
     navigate: () => { console.log('Navigating to home') },
     showHelp: false,
     onPrimaryButtonClick: () => {
       console.log(`Navigating to page`)
     },
+  },
+  parameters: {
+    backgrounds: {
+      default: "dark",
+      values: [
+        { name: "dark", value: "#333333" },
+      ],
+    },
+  },
+}
+
+export const Failed: Story = {
+  args: {
+    navigate: () => { },
+    showHelp: true,
+    onPrimaryButtonClick: () => {},
   },
   parameters: {
     backgrounds: {
