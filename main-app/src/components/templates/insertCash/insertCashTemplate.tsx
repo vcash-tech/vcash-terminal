@@ -265,13 +265,11 @@ export default function InsertCashTemplate({
             const createVoucher = await TransactionService.CreateVoucher({
                 voucherTypeId
             })
-            console.log('createVoucher', createVoucher)
             setVoucherData(createVoucher)
-            console.log('Voucher data', voucherData)
 
             // Print the voucher with the new template renderer
-            if (voucherData) {
-                const printSuccess = await printVoucher(voucherData, voucherTypeId)
+            if (createVoucher) {
+                const printSuccess = await printVoucher(createVoucher, voucherTypeId)
 
                 // If printing succeeded, automatically proceed to voucher confirmation
                 if (printSuccess) {
