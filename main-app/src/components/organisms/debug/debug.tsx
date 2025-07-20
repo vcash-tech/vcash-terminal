@@ -205,26 +205,22 @@ const Debug = () => {
         window.location.reload()
     }
 
-    const handleGetDeviceTokenDebug = async () => {
-        alert('About to call apiService.getDeviceToken()...')
+    const handleNavigateToAltUrl = () => {
+        const altUrl = import.meta.env.VITE_ALT_URL
 
-        try {
-            const deviceToken = await apiService.getDeviceToken()
-            const localStorageToken = localStorage.getItem(`${Auth.POS}_token`)
+        if (!altUrl || typeof altUrl !== 'string' || altUrl.trim() === '') {
+            alert('VITE_ALT_URL is not set or is empty')
+            return
+        }
 
-            const result = {
-                deviceToken: deviceToken || '(empty)',
-                localStorageToken: localStorageToken || '(empty)',
-                hasDeviceToken: !!deviceToken,
-                hasLocalStorageToken: !!localStorageToken,
-                tokensMatch: deviceToken === localStorageToken
-            }
+        if (!altUrl.startsWith('http://') && !altUrl.startsWith('https://')) {
+            alert('VITE_ALT_URL must begin with http:// or https://')
+            return
+        }
 
-            alert(`Device Token Info:\n${JSON.stringify(result, null, 2)}`)
-        } catch (error) {
-            alert(
-                `Get Device Token error: ${error instanceof Error ? error.message : 'Unknown error'}`
-            )
+        const confirmed = confirm(`Navigate to: ${altUrl}?`)
+        if (confirmed) {
+            window.location.href = altUrl
         }
     }
 
@@ -399,7 +395,7 @@ const Debug = () => {
                         Refresh
                     </button>
                     <button
-                        onClick={handleGetDeviceTokenDebug}
+                        onClick={handleNavigateToAltUrl}
                         style={{
                             marginLeft: '5px',
                             padding: '5px 10px',
@@ -410,7 +406,7 @@ const Debug = () => {
                             fontSize: '12px',
                             cursor: 'pointer'
                         }}>
-                        Get Token
+                        Change env
                     </button>
                     <button
                         onClick={handleOpenSpeedTest}
