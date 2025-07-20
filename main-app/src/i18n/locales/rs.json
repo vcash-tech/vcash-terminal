@@ -270,7 +270,7 @@
   },
   "sessionCounter": {
     "timeLeft": "Vreme prikaza:",
-    "extendTime": "Produži vreme prikaza"
+    "extendTime": "Produži vreme"
   },
   "sessionTimeoutModal": {
     "title": "Istekla je sesija",
@@ -361,5 +361,5 @@
     }
   },
   "voucherValue": "Vrednost vaučera",
-  "voucherInstruction": "Slikaj kod ili upiši aktivacioni kod ispod QR koda"
+  "voucherInstruction": "Skeniraj QR kod ili sacuvaj aktivacioni kod i aktiviraj vaucer putem sajta"
 }

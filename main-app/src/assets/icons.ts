@@ -8,6 +8,7 @@ import closeIcon from './icons/closeIcon.svg'
 import comingSoon from './icons/coming-soon.svg'
 import comingSoonGaming from './icons/coming-soon-gaming.svg'
 import comingSoonOrange from './icons/comingSoonOrange.svg'
+import confirmedIcon from './icons/confimedIcon.svg'
 import croIcon from './icons/croIcon.svg'
 import dashLine from './icons/dash-line.svg'
 import deviceIcon from './icons/deviceIcon.svg'
@@ -20,6 +21,7 @@ import printerUnavailable from './icons/printerUnavailable.svg'
 import redWarningIcon from './icons/redWarningIcon.svg'
 import serbiaLogo from './icons/serbiaLogo.svg'
 import sessionExpired from './icons/sessionExpired.svg'
+import timer from './icons/timer.svg'
 import ukIcon from './icons/ukIcon.svg'
 import userIcon from './icons/userIcon.svg'
 import usIcon from './icons/usIcon.svg'
@@ -38,6 +40,7 @@ export {
     comingSoon,
     comingSoonGaming,
     comingSoonOrange,
+    confirmedIcon,
     croIcon,
     dashLine,
     deviceIcon,
@@ -50,6 +53,7 @@ export {
     redWarningIcon,
     serbiaLogo,
     sessionExpired,
+    timer,
     ukIcon,
     userIcon,
     usIcon,

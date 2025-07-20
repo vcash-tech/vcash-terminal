@@ -2,7 +2,7 @@
 @use '../../../styles/config/media-queries';
 
 .voucher-confirmation {
-    margin-top: 15rem;
+    margin-top: 10rem;
     display: flex;
     flex-direction: column;
     width: 100vw;
@@ -53,15 +53,22 @@
             flex: none;
         }
     }
- .instruction {
-     color: colors.$dark-text-color;
-     width: 80%;
-     text-align: center;
-     font-weight: 600;
-     font-size: 2.4rem;
-     line-height: 150%;
-     margin: 3rem auto 2rem;
- }
+    .instruction {
+        color: colors.$dark-text-color;
+        width: 80%;
+        text-align: center;
+        font-weight: 600;
+        font-size: 2.4rem;
+        line-height: 150%;
+        margin: 3rem auto 2rem;
+
+        span {
+            color: colors.$brand-primary-color;
+        }
+    }
+    .session-counter {
+        margin-top: 5rem;
+    }
 }
 
 @include media-queries.media('<=desktop') {

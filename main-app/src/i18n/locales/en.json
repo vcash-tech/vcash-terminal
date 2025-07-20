@@ -355,5 +355,5 @@
     }
   },
   "voucherValue": "Voucher Value",
-  "voucherInstruction": "Slikaj kod ili upiši aktivacioni kod ispod QR koda"
+  "voucherInstruction": "Scan QR code or save activation code and activate voucher on the website"
 }

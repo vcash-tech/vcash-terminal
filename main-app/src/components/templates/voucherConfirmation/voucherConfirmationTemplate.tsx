@@ -1,17 +1,17 @@
 import { useState } from 'react'
 import { NavigateFunction } from 'react-router-dom'
 
+import { confirmedIcon } from '@/assets/icons'
 import Container from '@/components/atoms/container/container'
 import HalfContainer from '@/components/atoms/container/halfContainer'
 import Divider from '@/components/atoms/divider/divider'
 import FlexWrapper from '@/components/atoms/flexWrapper/flexWrapper'
-import HelpButton from '@/components/atoms/helpButton/helpButton'
 import InvoiceItem from '@/components/atoms/invoice-item/invoice-item'
 import PrimaryButton from '@/components/atoms/primaryButton/primaryButton'
+import SessionCounter from '@/components/molecules/sessionCounter/sessionCounter'
 import VoucherCode from '@/components/molecules/voucherCode/voucherCode'
 import Footer from '@/components/organisms/footer/footer'
-import Header from '@/components/organisms/header/header'
-import HowTo from '@/components/organisms/how-to/how-to'
+import Header from '@/components/organisms/header/header'   
 import { VoucherConfirmation } from '@/data/entities/voucher-confirmation'
 import { useTranslate } from '@/i18n/useTranslate'
 
@@ -22,8 +22,6 @@ export default function VoucherConfirmationTemplate({
     voucherConfirmation: VoucherConfirmation
     navigate: NavigateFunction
 }) {
-    const [isModalOpen, setIsModalOpen] = useState(false)
-
     const { t } = useTranslate()
     const onComplete = () => {
         navigate('/welcome')
@@ -33,6 +31,7 @@ export default function VoucherConfirmationTemplate({
         <Container isFullHeight={true}>
             <Header />
             <div className={'voucher-confirmation'}>
+                <img src={confirmedIcon} alt="Confirmed icon" />
                 <h1>{t('voucherGenerated.title')}</h1>
                 <div className="invoice-content">
                     <FlexWrapper gap={2} justify="space-between">
@@ -62,40 +61,21 @@ export default function VoucherConfirmationTemplate({
                         align="left"
                     />
                     <Divider gap={1} />
-                    {/*<InvoiceItem*/}
-                    {/*    label={t('voucherGenerated.amount')}*/}
-                    {/*    value={voucherConfirmation.amount}*/}
-                    {/*/>*/}
-                    {/*<InvoiceItem*/}
-                    {/*    label={t('voucherGenerated.code')}*/}
-                    {/*    value={voucherConfirmation.voucherCode}*/}
-                    {/*/>*/}
 
-                    <p className={'instruction'}>{t('voucherInstruction')}</p>
+                    <p className={'instruction'}>{t('voucherInstruction')} <span>market.vcash.rs</span> </p>
                     {voucherConfirmation.qrCodeData && (
                         <VoucherCode voucherCode={voucherConfirmation} />
                     )}
                 </div>
-
+                <SessionCounter onEndSession={() => navigate('/')} />
                 <div className={'action-wrapper'}>
                     <PrimaryButton
                         callback={() => onComplete()}
                         text={t('voucherGenerated.buttonText')}
                     />
-                    <div>
-                        {/*<SessionCounter onEndSession={() => navigate('/')} />*/}
-                    </div>
                 </div>
             </div>
             <Footer />
-            {isModalOpen && (
-                <HowTo isModal={true} onClose={() => setIsModalOpen(false)} />
-            )}
-            <HelpButton
-                onPress={() => {
-                    setIsModalOpen(true)
-                }}
-            />
         </Container>
     )
 }
