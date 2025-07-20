@@ -1,4 +1,8 @@
 {
+  "acceptedBills": {
+    "title": "Accepted Bills",
+    "noChangeWarning": "Insert the exact amount - <b>the terminal does not give change</b>. Refund after payment is not possible."
+  },
   "selectPaymentMethod": {
     "backToServices": "Back to services",
     "title": "Select your payment method",

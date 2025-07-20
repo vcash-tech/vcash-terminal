@@ -1,4 +1,8 @@
 {
+  "acceptedBills": {
+    "title": "Prihvaćeni apoeni",
+    "noChangeWarning": "Ubacite tačan iznos - <b>terminal ne vraća kusur</b>. Povraćaj  novca nakon uplate nije moguć."
+  },
   "selectPaymentMethod": {
     "backToServices": "Nazad na servise",
     "title": "Izaberite način plaćanja",

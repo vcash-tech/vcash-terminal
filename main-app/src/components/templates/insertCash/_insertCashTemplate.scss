@@ -40,16 +40,6 @@
     margin: 0 0 0.8rem;
   }
 
-  h2 {
-    font-family: fonts.$body-font;
-    font-weight: 400;
-    font-size: 2.4rem;
-    line-height: 150%;
-    color: colors.$dark-text-color;
-    text-align: center;
-    margin: 0 0 5.6rem;
-  }
-
   .inserted-amount {
     font-family: fonts.$body-font;
     font-weight: 500;
@@ -60,30 +50,6 @@
     span {
       font-weight: 700;
       color: colors.$brand-primary-color;
-    }
-  }
-
-  .info-box {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    padding: 2.4rem;
-    background: rgba(34, 70, 127, 0.04);
-    border-radius: 1.2rem;
-    margin-top: 3.2rem;
-    color: colors.$dark-blue;
-    font-family: fonts.$body-font;
-    font-weight: 500;
-    font-size: 1.8rem;
-    line-height: 2.6rem;
-
-    img {
-      display: inline-block;
-      width: 2.4rem;
-      height: 2.4rem;
-      margin: 0 1.2rem 0 0;
-      vertical-align: middle;
     }
   }
 
@@ -112,8 +78,5 @@
       font-size: 3.6rem;
     }
 
-    h2 {
-      font-size: 2rem;
-    }
   }
 }
