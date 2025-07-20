@@ -6,6 +6,7 @@ import Container from '@/components/atoms/container/container'
 import ErrorNotification from '@/components/atoms/errorNotification/errorNotification'
 import PrimaryButton from '@/components/atoms/primaryButton/primaryButton'
 import AcceptedBills from '@/components/molecules/acceptedBills/acceptedBills'
+import PrintVoucherFallback from '@/components/molecules/printVoucherFallback/printVoucherFallback'
 import Footer from '@/components/organisms/footer/footer'
 import Header from '@/components/organisms/header/header'
 import { VoucherConfirmation } from '@/data/entities/voucher-confirmation'
@@ -41,6 +42,7 @@ export default function InsertCashTemplate({
     const [voucherData, setVoucherData] = useState<VoucherResponse | null>(null)
     const [errorMessage, setErrorMessage] = useState<string>('')
     const [showError, setShowError] = useState<boolean>(false)
+    const [showPaymentFallback, setShowPaymentFallback] = useState<boolean>(false)
 
     // Refs to handle cleanup
     const activateIntervalRef = useRef<number | null>(null)
@@ -281,6 +283,7 @@ export default function InsertCashTemplate({
             } else {
                 // not printed
                 setShowPrintVoucher(true)
+                setShowPaymentFallback(true)
                 console.log(
                     '❌ Print failed - staying on success screen for manual interaction'
                 )
@@ -357,13 +360,20 @@ export default function InsertCashTemplate({
                     </div>
                     <div className="inserted-amount">
                         {t('insertCash.insertedAmount')}:
-                        <span>{amount || 0} <span className='currency'>RSD</span></span>
+                        <span>{amount || 0} <span className=''>RSD</span></span>
                     </div>
                     <PrimaryButton
                         isDisabled={!amount || amount <= 0}
                         text={t('insertCash.confirmPayment')}
                         callback={handleBuy}
                     />
+                    
+                    {showPaymentFallback === true && (
+                        <PrintVoucherFallback onPrimaryButtonClick={() => {
+                            setShowVoucher(true)
+                            setShowPaymentFallback(false)
+                        }} />
+                    )}
                 </div>
                 <Footer />
             </Container>

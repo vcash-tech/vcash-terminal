@@ -54,9 +54,6 @@ export default function PaymentSuccessfulTemplate({
                                 text={t('voucherGenerated.buttonText')}
                             />
                     )}
-                    <div>
-                        {/*<SessionCounter onEndSession={() => navigate('/')} />*/}
-                    </div>
                 </div>
             </div>
             <Footer />
