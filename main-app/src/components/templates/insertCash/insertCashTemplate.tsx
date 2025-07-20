@@ -333,6 +333,8 @@ export default function InsertCashTemplate({
                         terminal: `${voucherData.moneyTransfer.venue?.address}, ${voucherData.moneyTransfer.venue?.city}`,
                         amount: `${voucherData.moneyTransfer.amount.toFixed(2)} ${voucherData.moneyTransfer.currencyCode}`,
                         type: voucherData.moneyTransfer.typeCode,
+                        amountNumber: voucherData.moneyTransfer.amount,
+                        currency: voucherData.moneyTransfer.currencyCode,
                         usage: '???'
                     } as VoucherConfirmation
                 }

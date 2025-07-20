@@ -15,7 +15,9 @@ const meta: Meta<typeof VoucherCode> = {
     args: {
         voucherCode: '123-123-123',
         voucherConfirmation: {
-            amount: '123 RSD',
+            amount: '130023 RSD',
+            amountNumber: 1000,
+            currency: 'RSD'
         } as VoucherConfirmation
     },
     tags: ['autodocs'],
