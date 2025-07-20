@@ -46,8 +46,8 @@ export default function AgeDisclaimerTemplate({
                         <img src={serbiaLogo} height={50} width={50} />
                     </div>
                     <div className="hospital-info">
-                        <p>{t('ageDisclaimer.hospital-name')}</p>
-                        <p>{t('ageDisclaimer.hospital-address')}</p>
+                        <p className="uppercase">{t('ageDisclaimer.hospital-name')}</p>
+                        <p className="uppercase">{t('ageDisclaimer.hospital-address')}</p>
 
                         <div className="hospital-phones">
                             <p>{t('ageDisclaimer.hospital-phones')}</p>

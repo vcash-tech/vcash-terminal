@@ -6,17 +6,17 @@
     display: flex;
     flex-direction: column;
     flex: 1;
+    background-color: colors.$main-background-color;
+    background-image: url('../assets/images/age-disclaimer.png');
+    background-size: 100% auto;
+    background-position: cover;
+    background-repeat: no-repeat;
 
     .age-disclaimer {
         display: flex;
         flex-direction: column;
         align-items: center;
         padding: 17.8rem 0 44rem;
-        background-color: colors.$main-background-color;
-        background-image: url('../assets/images/age-disclaimer.png');
-        background-repeat: no-repeat;
-        background-position: center bottom;
-        background-size: cover;
         flex: 1;
         gap: 3rem;
         padding: 0 10rem;
@@ -126,7 +126,6 @@
                 font-size: 24px;
                 font-weight: 500;
                 line-height: 154%;
-                text-transform: uppercase;
             }
 
             .hospital-phones {
@@ -136,12 +135,14 @@
                 gap: 1rem;
                 display: flex;
                 flex-direction: column;
-                text-transform: inherit;
 
                 .phones {
                     display: flex;
                     gap: 5rem;
                 }
+            }
+            .uppercase {
+                text-transform: uppercase;
             }
         }
 
