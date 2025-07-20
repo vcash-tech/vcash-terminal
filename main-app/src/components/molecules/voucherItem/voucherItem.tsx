@@ -3,6 +3,9 @@ import './_voucherItem.scss'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 
+import { ageDisclaimerWhite } from '@/assets/icons'
+
+
 export interface VoucherItemProps {
     title: string
     subtitle: string
@@ -24,6 +27,9 @@ const VoucherItem: React.FC<VoucherItemProps> = ({
             onClick={onPress}
             className={`voucher-item voucher-item--${variant}`}>
             <div className="voucher-item__text">
+                {variant === 'bet' && (
+                    <img className='age-disclaimer-voucher' src={ageDisclaimerWhite} alt="Age Disclaimer" />
+                )}
                 <h3 className="voucher-item__title">{t(title)}</h3>
                 <p className="voucher-item__subtitle">{t(subtitle)}</p>
             </div>

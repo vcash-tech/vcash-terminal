@@ -32,44 +32,24 @@
     }
 
     .fallback-wrapper {
+        align-items: center;
+        justify-content: center;
         display: flex;
         flex-direction: column;
-        justify-content: flex-end;
-        padding-bottom: 7rem;
-        gap: 7rem;
-        justify-self: flex-end;
-        flex: 1;
-
-        .fallback {
-            background: white;
-            width: 80vw;
-            padding: 4rem 3rem;
-            border-radius: 1rem;
+        .successful-msg {
+            padding: 5rem;
             display: flex;
-            justify-self: flex-end;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5rem;
+            font-family: fonts.$body-font;
+            font-weight: 400;
+            font-size: 2.4rem;
+            line-height: 2.6rem;
+            color: #333839;
 
-            background: linear-gradient(
-                97.98deg,
-                rgba(255, 255, 255, 0.712) 51.72%,
-                rgba(255, 255, 255, 0.656) 77.75%
-            );
-            border: 1px solid rgba(56, 90, 201, 0.8);
-            border-radius: 16px;
-            justify-content: space-between;
-
-            p {
-                color: black;
-                font-size: 1.8rem;
-                font-weight: 500;
-
-                &:first-child {
-                    font-size: 2.4rem;
-                    font-weight: 600;
-                }
-            }
-            .wire-button {
-                font-size: 2rem;
-                padding: 1rem 2rem;
+            img {
+                width: 5rem;
             }
         }
     }

@@ -1,9 +1,15 @@
+import helpIcon from './icons/helpIcon.svg'
+import ageDisclaimer from './images/age-disclaimer.png'
 import basketballCard from './images/basketballCard.svg'
 import betting_balkanBet from './images/betting/balkanBet.png'
 import betting_meridian from './images/betting/meridian.png'
 import betting_merkurXtip from './images/betting/merkurXtip.png'
 import betting_soccerBet from './images/betting/soccerBet.png'
 import bettingServices from './images/bettingServices.png'
+import betVoucher from './images/betVoucher.webp'
+import bill500 from './images/bill500.jpg'
+import bill1000 from './images/bill1000.jpg'
+import bill2000 from './images/bill2000.jpg'
 import cashPayment from './images/cashPayment.svg'
 import casinoCard from './images/casinoCard.png'
 import casinoCard2 from './images/casinoCard2.png'
@@ -20,7 +26,6 @@ import gamingMarketplace from './images/gamingMarketplace.jpg'
 import gamingServices from './images/gamingServices.png'
 import gPay from './images/googlePay.png'
 import hbo from './images/hbo.png'
-import helpIcon from './images/helpIcon.svg'
 import hulu from './images/hulu.png'
 import insertCashImg from './images/insertCash.jpg'
 import insertCashImg2 from './images/insertCash2.jpg'
@@ -30,7 +35,6 @@ import mockupVoucher from './images/mockupVoucher.jpg'
 import ageDisclaimerBackground from './images/optimised/ageDisclaimerBackground.webp'
 import background from './images/optimised/background.webp'
 import balkanBetLogo from './images/optimised/balkanBetLogo.png'
-import betVoucher from './images/optimised/betVoucher.png'
 import cash from './images/optimised/cash.webp'
 import casinoNewCard from './images/optimised/casinoNew.webp'
 import chechLights from './images/optimised/chechLights.webp'
@@ -70,6 +74,7 @@ import marketplaceQR from './images/vcash-marketplace.svg'
 import welcomeBackground from './images/welcomeBackground.svg'
 
 export {
+    ageDisclaimer,
     ageDisclaimerBackground,
     background,
     balkanBetLogo,
@@ -80,6 +85,9 @@ export {
     betting_soccerBet,
     bettingServices,
     betVoucher,
+    bill500,
+    bill1000,
+    bill2000,
     cash,
     cashPayment,
     casinoCard,
@@ -139,4 +147,5 @@ export {
     useVoucherGaming,
     viewBackground,
     welcomeBackground,
-    xboxClean}
+    xboxClean
+}

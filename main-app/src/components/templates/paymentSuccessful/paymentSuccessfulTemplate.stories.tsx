@@ -16,7 +16,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    navigate: () => {},
+    navigate: () => { console.log('Navigating to home') },
     showHelp: false,
     onPrimaryButtonClick: () => {
       console.log(`Navigating to page`)

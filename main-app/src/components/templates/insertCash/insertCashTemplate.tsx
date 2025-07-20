@@ -4,11 +4,10 @@ import { NavigateFunction } from 'react-router-dom'
 
 import Container from '@/components/atoms/container/container'
 import ErrorNotification from '@/components/atoms/errorNotification/errorNotification'
-import HelpButton from '@/components/atoms/helpButton/helpButton'
 import PrimaryButton from '@/components/atoms/primaryButton/primaryButton'
+import AcceptedBills from '@/components/molecules/acceptedBills/acceptedBills'
 import Footer from '@/components/organisms/footer/footer'
 import Header from '@/components/organisms/header/header'
-import HowTo from '@/components/organisms/how-to/how-to'
 import { VoucherConfirmation } from '@/data/entities/voucher-confirmation'
 import { mockedPrinterData, shouldMockPrinter } from '@/helpers/mock.printer'
 import { useTranslate } from '@/i18n/useTranslate'
@@ -18,7 +17,6 @@ import { TransactionService } from '@/services/transactionService'
 import { Auth } from '@/types/common/httpRequest'
 import { VoucherResponse } from '@/types/pos/deposit'
 
-import { infoCircle } from '../../../assets/icons'
 import { insertCashImg } from '../../../assets/images'
 import PaymentSuccessfulTemplate from '../paymentSuccessful/paymentSuccessfulTemplate'
 import VoucherConfirmationTemplate from '../voucherConfirmation/voucherConfirmationTemplate'
@@ -36,7 +34,6 @@ export default function InsertCashTemplate({
     navigate: NavigateFunction
 }) {
     const { t } = useTranslate()
-    const [isModalOpen, setIsModalOpen] = useState(false)
     const [amount, _setAmount] = useState<number>(0)
     const [isVoucherPrinting, setIsVoucherPrinting] = useState<boolean>(false)
     const [showPrintVoucher, setShowPrintVoucher] = useState<boolean>(false)
@@ -351,7 +348,7 @@ export default function InsertCashTemplate({
                 />
                 <div className="insert-cash">
                     <h1>{t('insertCash.title')}</h1>
-                    <h2>{t('insertCash.acceptedNotes')}</h2>
+                    <AcceptedBills />
                     <div className="demo-wrapper">
                         <img
                             src={insertCashImg}
@@ -359,12 +356,8 @@ export default function InsertCashTemplate({
                         />
                     </div>
                     <div className="inserted-amount">
-                        {t('insertCash.insertedAmount')}:{' '}
+                        {t('insertCash.insertedAmount')}:
                         <span>{amount || 0} RSD</span>
-                    </div>
-                    <div className="info-box">
-                        <img src={infoCircle} alt={t('common.info')} />
-                        {t('insertCash.noChangeWarning')}
                     </div>
                     <PrimaryButton
                         isDisabled={!amount || amount <= 0}
@@ -373,17 +366,6 @@ export default function InsertCashTemplate({
                     />
                 </div>
                 <Footer />
-                {isModalOpen && (
-                    <HowTo
-                        isModal={true}
-                        onClose={() => setIsModalOpen(false)}
-                    />
-                )}
-                <HelpButton
-                    onPress={() => {
-                        setIsModalOpen(true)
-                    }}
-                />
             </Container>
         </>
     )
