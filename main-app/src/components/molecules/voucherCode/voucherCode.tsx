@@ -8,6 +8,12 @@ export default function VoucherCode({
     voucherCode: string
     voucherConfirmation: VoucherConfirmation
 }) {
+    const formatAmount = (amount: number) => {
+        return amount.toLocaleString('sr-RS', {
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0
+        })
+    }
     const { t } = useTranslate()
     return (
         <div className="voucher-code">
@@ -30,7 +36,8 @@ export default function VoucherCode({
             <div className={'separator'} />
             <p className={'v-label'}>{t('voucherValue')}</p>
             <p className={'v-amount'}>
-                {voucherConfirmation.amount}
+                {formatAmount(voucherConfirmation.amountNumber)} {
+                    voucherConfirmation.currency}
             </p>
             <div className="separator last-separator"></div>
         </div>
