@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { BrowserRouter } from 'react-router-dom'
 
+import { VoucherConfirmation } from '@/data/entities/voucher-confirmation'
 import { TranslationProvider } from '@/i18n/TranslationProvider'
 
 import VoucherCode from './voucherCode'
@@ -12,17 +13,10 @@ const meta: Meta<typeof VoucherCode> = {
         layout: 'centered'
     },
     args: {
-        voucherCode: {
-            voucherCode: 'XG4L-29TP-8ZRW',
-            date: '27 June, 2025.',
-            time: '16:43',
-            referenceNo: 'TXN-8347192',
-            terminal: 'Xyz Kiosk, 123 Main St, New York, NY',
-            amount: '2000 RSD',
-            type: 'Steam $20 Wallet',
-            usage: 'Redeem on Steam via wallet page',
-            qrCodeData: 'something something'
-        }
+        voucherCode: '123-123-123',
+        voucherConfirmation: {
+            amount: '123 RSD',
+        } as VoucherConfirmation
     },
     tags: ['autodocs'],
     decorators: [

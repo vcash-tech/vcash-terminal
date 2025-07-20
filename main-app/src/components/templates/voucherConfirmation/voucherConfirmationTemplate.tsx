@@ -10,7 +10,7 @@ import PrimaryButton from '@/components/atoms/primaryButton/primaryButton'
 import SessionCounter from '@/components/molecules/sessionCounter/sessionCounter'
 import VoucherCode from '@/components/molecules/voucherCode/voucherCode'
 import Footer from '@/components/organisms/footer/footer'
-import Header from '@/components/organisms/header/header'   
+import Header from '@/components/organisms/header/header'
 import { VoucherConfirmation } from '@/data/entities/voucher-confirmation'
 import { useTranslate } from '@/i18n/useTranslate'
 
@@ -61,9 +61,15 @@ export default function VoucherConfirmationTemplate({
                     />
                     <Divider gap={1} />
 
-                    <p className={'instruction'}>{t('voucherInstruction')} <span>market.vcash.rs</span> </p>
-                    {voucherConfirmation.qrCodeData && (
-                        <VoucherCode voucherCode={voucherConfirmation} />
+                    <p className={'instruction'}>
+                        {t('voucherInstruction')}{' '}
+                        <span>market.vcash.rs</span>{' '}
+                    </p>
+                    {voucherConfirmation.voucherCode && (
+                        <VoucherCode
+                            voucherCode={voucherConfirmation.voucherCode}
+                            voucherConfirmation={voucherConfirmation}
+                        />
                     )}
                 </div>
                 <SessionCounter onEndSession={() => navigate('/')} />
