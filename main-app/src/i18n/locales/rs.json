@@ -36,7 +36,7 @@
     "title": "Ubacite gotovinu",
     "acceptedNotes": "Terminal prihvata sledeće novčanice: 500, 1000 i 2000 RSD.",
     "altText": "Ubacite gotovinu",
-    "insertedAmount": "Uneti iznos",
+    "insertedAmount": "Uplaćen iznos",
     "noChangeWarning": "Ubacite tačan iznos - terminal ne vraća kusur. Povraćaj novca nakon uplate nije moguć.",
     "confirmPayment": "Potvrdi plaćanje",
     "errors": {
@@ -80,7 +80,8 @@
       },
       "buttonText": "Završi",
       "scanToRedeem": "Skenirajte za preuzimanje",
-      "scan": "Skeniraj"
+      "scan": "Skeniraj",
+      "successfulMsg": "Vaučer je uspešno odštampan"
     },
     "code": {
       "voucher": "Vaučer",
@@ -260,7 +261,8 @@
       "3": "Izaberite gde želite da iskoristite vaučer - brzo i jednostavno!"
     },
     "buttonText": "Završi",
-    "code": "Vaučer kod"
+    "code": "Vaučer kod",
+    "successfulMsg": "Vaučer je uspešno odštampan"
   },
   "cashboxFullModal": {
     "title": "Dalja uplata nije moguća",

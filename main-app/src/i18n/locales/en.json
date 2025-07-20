@@ -79,7 +79,8 @@
         "3": "Enter the voucher code above "
       },
       "buttonText": "Finish",
-      "code": "Voucher code"
+      "code": "Voucher code",
+      "successfulMsg": "Your voucher has been issued successfully"
     },
     "code": {
       "voucher": "Voucher",
@@ -257,7 +258,8 @@
       "3": "Enter the voucher code above "
     },
     "buttonText": "Finish",
-    "scanToRedeem": "Scan to Redeem"
+    "scanToRedeem": "Scan to Redeem",
+    "successfulMsg": "Your voucher has been issued successfully"
   },
   "cashboxFullModal": {
     "title": "Kiosk Cash Box Full",

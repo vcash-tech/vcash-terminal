@@ -31,6 +31,29 @@
         margin: 0 0 5.6rem;
     }
 
+    .fallback-wrapper {
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        flex-direction: column;
+        .successful-msg {
+            padding: 5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5rem;
+            font-family: fonts.$body-font;
+            font-weight: 400;
+            font-size: 2.4rem;
+            line-height: 2.6rem;
+            color: #333839;
+
+            img {
+                width: 5rem;
+            }
+        }
+    }
+
     .payment-successful-fallback {
         padding: 4.5rem 0 10rem;
         display: flex;

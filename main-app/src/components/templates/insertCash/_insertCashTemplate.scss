@@ -14,7 +14,7 @@
     .demo-wrapper {
         background: #ced9f9;
         border-radius: 100rem;
-        margin-bottom: 4.2rem;
+        margin-bottom: 1rem;
         margin-top: 5rem;
         overflow: hidden;
         display: flex;
@@ -48,7 +48,7 @@
         line-height: 5rem;
         color: colors.$dark-grey;
         text-align: center;
-        margin-top: 10rem;
+        margin-top: 6rem;
 
         span {
             display: block;
@@ -66,6 +66,7 @@
 
     .primary-button {
         margin: 20rem 0 10rem;
+        padding: 5rem;
     }
 }
 
