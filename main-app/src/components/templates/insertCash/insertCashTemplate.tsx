@@ -265,8 +265,9 @@ export default function InsertCashTemplate({
             const createVoucher = await TransactionService.CreateVoucher({
                 voucherTypeId
             })
+            console.log('createVoucher', createVoucher)
             setVoucherData(createVoucher)
-            console.log('Voucher created', voucherData)
+            console.log('Voucher data', voucherData)
 
             // Print the voucher with the new template renderer
             if (voucherData) {
