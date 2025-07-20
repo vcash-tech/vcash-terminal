@@ -107,6 +107,52 @@ const Debug = () => {
         alert('Debug mode disabled')
     }
 
+    const handleMoneyTransferVoucherDraft = async () => {
+        alert('About to call money transfer voucher draft API...')
+
+        const baseUrl = import.meta.env.VITE_API_URL
+        if (!baseUrl) {
+            alert('VITE_API_URL is not configured')
+            return
+        }
+
+        const token = AuthService.GetToken(Auth.Cashier)
+        if (!token) {
+            alert('No cashier token available. Please authenticate first.')
+            return
+        }
+
+        try {
+            const response = await fetch(
+                `${baseUrl}/cashier-app/money-transfer/voucher/draft`,
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: token
+                    },
+                    body: JSON.stringify({ amount: 500 })
+                }
+            )
+
+            const responseData = await response.json()
+
+            if (!response.ok) {
+                throw new Error(
+                    `HTTP ${response.status}: ${response.statusText}`
+                )
+            }
+
+            alert(
+                `Money Transfer Draft Success: ${JSON.stringify(responseData, null, 2)}`
+            )
+        } catch (error) {
+            alert(
+                `Money Transfer Draft Error: ${error instanceof Error ? error.message : 'Unknown error'}`
+            )
+        }
+    }
+
     const handlePrintDebug = async () => {
         alert('About to call apiService.print() with template URL...')
 
@@ -422,6 +468,22 @@ const Debug = () => {
                         }}>
                         Speed Test
                     </button>
+                    {import.meta.env.VITE_DEBUG_MODE === 'true' && (
+                        <button
+                            onClick={handleMoneyTransferVoucherDraft}
+                            style={{
+                                marginLeft: '5px',
+                                padding: '5px 10px',
+                                background: '#27ae60',
+                                color: 'white',
+                                border: 'none',
+                                borderRadius: '4px',
+                                fontSize: '12px',
+                                cursor: 'pointer'
+                            }}>
+                            Money Transfer
+                        </button>
+                    )}
                 </>
             )}
 
