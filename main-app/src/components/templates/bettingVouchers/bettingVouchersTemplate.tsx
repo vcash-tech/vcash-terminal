@@ -4,9 +4,15 @@ import { NavigateFunction } from 'react-router-dom'
 import { ageDisclaimer } from '@/assets/icons'
 import {
     betting_balkanBet,
-    betting_meridian,
-    betting_merkurXtip,
-    betting_soccerBet
+    betting_maxBetCommingSoon,
+    betting_maxBetUskoro,
+    //betting_meridian,
+    betting_meridianBetCommingSoon,
+    betting_meridianBetUskoro,
+    //betting_merkurXtip,
+    betting_merkurXtipCommingSoon,
+    betting_merkurXtipUskoro,
+    betting_soccerBet,
 } from '@/assets/images'
 import Container from '@/components/atoms/container/container'
 import PrimaryButton from '@/components/atoms/primaryButton/primaryButton'
@@ -14,6 +20,7 @@ import AvailableServices from '@/components/molecules/availableServices/availabl
 import Footer from '@/components/organisms/footer/footer'
 import Header from '@/components/organisms/header/header'
 import HowTo from '@/components/organisms/how-to/how-to'
+import i18n from '@/i18n/i18n'
 
 export type BettingVoucherProps = {
     navigate: NavigateFunction
@@ -21,6 +28,18 @@ export type BettingVoucherProps = {
 
 export default function BettingVoucher({ navigate }: BettingVoucherProps) {
     const { t } = useTranslation()
+
+    const bettingImages = [
+        betting_balkanBet,
+        betting_soccerBet
+    ]
+
+    if (i18n.language === 'en') {
+        bettingImages.push(betting_maxBetCommingSoon, betting_meridianBetCommingSoon, betting_merkurXtipCommingSoon)
+    } else {
+        bettingImages.push(betting_maxBetUskoro, betting_meridianBetUskoro, betting_merkurXtipUskoro)
+    }
+
     return (
         <Container isFullHeight={true}>
             <Header
@@ -39,12 +58,7 @@ export default function BettingVoucher({ navigate }: BettingVoucherProps) {
                 />
                 <AvailableServices
                     title={t('bettingVouchers.availableServices')}
-                    images={[
-                        betting_balkanBet,
-                        betting_soccerBet,
-                        betting_merkurXtip,
-                        betting_meridian
-                    ]}
+                    images={bettingImages}
                 />
                 <HowTo isModal={false} isBetting={true} />
                 <div className="gaming-voucher__primary-button">
