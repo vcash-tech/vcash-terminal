@@ -24,8 +24,11 @@ import VoucherConfirmationTemplate from '../voucherConfirmation/voucherConfirmat
 const VOUCHER_TYPE_MAPPING = {
     STANDARD_VOUCHER: 'Bet Vaučer',
     NON_BETTING_VOUCHER: 'Digital Vaučer',
+    TERMINAL_BETTING_VOUCHER: 'Bet Vaučer',
+
     '10': 'Bet Vaučer',
-    '20': 'Digital Vaučer'
+    '20': 'Digital Vaučer',
+    '30': 'Bet Vaučer'
 } as const
 
 export default function InsertCashTemplate({
@@ -261,7 +264,7 @@ export default function InsertCashTemplate({
         await callDeactivate()
 
         try {
-            const voucherTypeId = '20' // Replace with actual voucher type ID
+            const voucherTypeId = '30' // Replace with actual voucher type ID
             const createVoucher = await TransactionService.CreateVoucher({
                 voucherTypeId
             })
@@ -269,7 +272,10 @@ export default function InsertCashTemplate({
 
             // Print the voucher with the new template renderer
             if (createVoucher) {
-                const printSuccess = await printVoucher(createVoucher, voucherTypeId)
+                const printSuccess = await printVoucher(
+                    createVoucher,
+                    voucherTypeId
+                )
 
                 // If printing succeeded, automatically proceed to voucher confirmation
                 if (printSuccess) {
