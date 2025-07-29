@@ -18,7 +18,7 @@ export default function PaymentSuccessfulTemplate({
     navigate,
     onPrimaryButtonClick,
 }: {
-    showHelp?: boolean
+    showHelp?: unknown
     navigate?: NavigateFunction
     onPrimaryButtonClick?: () => void
 }) {
@@ -26,13 +26,23 @@ export default function PaymentSuccessfulTemplate({
     // const [isModalOpen, setIsModalOpen] = useState(false)
 
     useEffect(() => {
+        // If showHelp is null or undefined, set it to true after 10 seconds
+        if(showHelp === null || showHelp === undefined) {
+            const timer = setTimeout(() => {
+                showHelp = true
+            }, 10000)
+            return () => clearTimeout(timer)
+        }
+
         // if voucher is printed navigate to / after 10 seconds
-        if (!showHelp && navigate) {
+        if (showHelp === false && navigate) {
             const timer = setTimeout(() => {
                 navigate('/')
             }, 10000)
             return () => clearTimeout(timer)
-        }   
+        } 
+        
+        
     }, [showHelp, navigate])
 
 
@@ -48,7 +58,7 @@ export default function PaymentSuccessfulTemplate({
                 </div>
 
                 <div className="fallback-wrapper">
-                    {showHelp === true ? (
+                    {showHelp === true && (
                         <div className="fallback">
                             <div>
                                 <p>{t('paymentSuccessful.fallbackTitle')}</p>
@@ -60,7 +70,8 @@ export default function PaymentSuccessfulTemplate({
                                 {t('paymentSuccessful.buttonText')}
                             </WireButton>
                         </div>
-                    ) : (
+                    )}
+                    {showHelp === false && (
                         <>
                         <div className="successful-msg"><img src={confirmedIcon} alt='Confirm icon' />{t('voucherGenerated.successfulMsg')}</div>
                         <PrimaryButton
