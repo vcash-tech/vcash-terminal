@@ -1,4 +1,4 @@
-import { NavigateFunction } from 'react-router-dom'
+import { NavigateFunction, useLocation } from 'react-router-dom'
 
 import { cash, creditCard } from '@/assets/images'
 import Container from '@/components/atoms/container/container'
@@ -13,6 +13,8 @@ export default function PaymentMethodTerminalTemplate({
     navigate: NavigateFunction
 }) {
     const { t } = useTranslate()
+    const location = useLocation()
+    const prevState = location.state // This is the state object passed from previous navigation
 
     return (
         <Container isFullHeight={true}>
@@ -27,7 +29,8 @@ export default function PaymentMethodTerminalTemplate({
                     <PaymentCard
                         image={cash}
                         text={t('selectPaymentMethod.cashPayment')}
-                        callback={() => navigate('/buy-voucher-cash')}
+                        // get state from the previous navigate
+                        callback={() => navigate('/buy-voucher-cash', { state: { voucherType: prevState?.voucherType || 'gaming' }})}
                     />
                     <PaymentCard
                         image={creditCard}

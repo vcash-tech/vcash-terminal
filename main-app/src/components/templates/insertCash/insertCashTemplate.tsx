@@ -32,9 +32,11 @@ const VOUCHER_TYPE_MAPPING = {
 } as const
 
 export default function InsertCashTemplate({
-    navigate
+    navigate,
+    selectedVoucherType,
 }: {
-    navigate: NavigateFunction
+    navigate: NavigateFunction,
+    selectedVoucherType: string
 }) {
     const { t } = useTranslate()
     const [amount, _setAmount] = useState<number>(0)
@@ -264,7 +266,7 @@ export default function InsertCashTemplate({
         await callDeactivate()
 
         try {
-            const voucherTypeId = '30' // Replace with actual voucher type ID
+            const voucherTypeId = selectedVoucherType // Replace with actual voucher type ID
             const createVoucher = await TransactionService.CreateVoucher({
                 voucherTypeId
             })
