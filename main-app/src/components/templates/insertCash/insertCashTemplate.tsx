@@ -266,7 +266,7 @@ export default function InsertCashTemplate({
         await callDeactivate()
 
         try {
-            const voucherTypeId = selectedVoucherType // Replace with actual voucher type ID
+            const voucherTypeId = selectedVoucherType
             const createVoucher = await TransactionService.CreateVoucher({
                 voucherTypeId
             })
