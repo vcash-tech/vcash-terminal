@@ -17,11 +17,27 @@ function HomePage() {
                 )
                 navigate('/welcome')
             } catch (error) {
-                console.error(
-                    'Failed to create session, redirecting to registration:',
-                    error
-                )
-                navigate('/register')
+                // Check if error requires specific navigation
+                if (
+                    error &&
+                    typeof error === 'object' &&
+                    'requiresNavigation' in error
+                ) {
+                    const navigationError = error as {
+                        requiresNavigation: string
+                    }
+                    console.log(
+                        '🔄 API error requires navigation to:',
+                        navigationError.requiresNavigation
+                    )
+                    navigate(navigationError.requiresNavigation)
+                } else {
+                    console.error(
+                        'Failed to create session, redirecting to registration:',
+                        error
+                    )
+                    navigate('/register')
+                }
             }
         }
 

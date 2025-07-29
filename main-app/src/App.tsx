@@ -1,6 +1,6 @@
 import './styles/app.scss'
 
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import { MemoryRouter as Router, Route, Routes } from 'react-router-dom'
 
 import BettingPage from '@/pages/bettingPage'
 import GamingPage from '@/pages/gamingPage'

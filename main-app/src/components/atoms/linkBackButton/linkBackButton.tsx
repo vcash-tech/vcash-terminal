@@ -1,15 +1,24 @@
-import { angleLeft } from "../../../assets/icons"
+import { useNavigate } from 'react-router-dom'
 
-export default function LinkBackButton({ buttonText, buttonUrl }: { buttonText: string; buttonUrl: string }) {
+import { angleLeft } from '../../../assets/icons'
+
+export default function LinkBackButton({
+    buttonText,
+    buttonUrl
+}: {
+    buttonText: string
+    buttonUrl: string
+}) {
+    const navigate = useNavigate()
+
     const navigateToUrl = () => {
-        window.location.href = buttonUrl
+        navigate(buttonUrl)
     }
 
     return (
         <button className="link-back-button" onClick={navigateToUrl}>
-          <img className="link-back-ico" alt={buttonText} src={angleLeft} />
-          <span className="link-back-text">{buttonText}</span>
+            <img className="link-back-ico" alt={buttonText} src={angleLeft} />
+            <span className="link-back-text">{buttonText}</span>
         </button>
-
     )
 }
