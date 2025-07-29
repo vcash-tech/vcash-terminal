@@ -47,7 +47,7 @@ export default function GamingVoucher({ navigate }: GamingVoucherProps) {
                 <div className="gaming-voucher__primary-button">
                     <PrimaryButton
                         text={t('gamingVouchers.buttonText')}
-                        onPress={() => navigate('/payment-method')}
+                        onPress={() => navigate('/payment-method', { state: { voucherType: 'gaming' } })}
                     />
                 </div>
             </div>
