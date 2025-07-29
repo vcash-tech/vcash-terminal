@@ -41,7 +41,7 @@ export default function InsertCashTemplate({
     const { t } = useTranslate()
     const [amount, _setAmount] = useState<number>(0)
     const [isVoucherPrinting, setIsVoucherPrinting] = useState<boolean>(false)
-    const [showPrintVoucher, setShowPrintVoucher] = useState<boolean>(false)
+    const [showPrintVoucher, setShowPrintVoucher] = useState<unknown>(null)
     const [showVoucher, setShowVoucher] = useState<boolean>(false)
     const [voucherData, setVoucherData] = useState<VoucherResponse | null>(null)
     const [errorMessage, setErrorMessage] = useState<string>('')
