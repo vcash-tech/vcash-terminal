@@ -129,6 +129,8 @@ export default function InsertCashTemplate({
 
                 // if current amount is > 0 and different from previous amount, 
                 // reset the timer dispatch user activity event to reset inactivity timer
+                console.log('Current amount:', amount)
+                console.log('Fetched voucher amount:', response.amount)
                 if (amount > 0 && response.amount > amount) {
                     console.log('Dispatching money-added event to reset inactivity timer')
                     window.dispatchEvent(new Event('money-added'))
