@@ -8,6 +8,7 @@ import PrimaryButton from '@/components/atoms/primaryButton/primaryButton'
 import AcceptedBills from '@/components/molecules/acceptedBills/acceptedBills'
 import Footer from '@/components/organisms/footer/footer'
 import Header from '@/components/organisms/header/header'
+import SessionTimeout from '@/components/organisms/sessionTimeoutModal/sessionTimeout'
 import { VoucherConfirmation } from '@/data/entities/voucher-confirmation'
 import { mockedPrinterData, shouldMockPrinter } from '@/helpers/mock.printer'
 import { useTranslate } from '@/i18n/useTranslate'
@@ -46,6 +47,17 @@ export default function InsertCashTemplate({
     const [voucherData, setVoucherData] = useState<VoucherResponse | null>(null)
     const [errorMessage, setErrorMessage] = useState<string>('')
     const [showError, setShowError] = useState<boolean>(false)
+    const [showAreYouTherePopup, setShowAreYouTherePopup] = useState<boolean>(false)
+
+    useEffect(() => {
+        // Reset inactivity timer on user activity
+        const handleAreYouStillThere = () => setShowAreYouTherePopup(true)
+        window.addEventListener('are-you-still-there', handleAreYouStillThere)
+        console.log('Listening for are-you-still-there event')
+        return () => {
+            window.removeEventListener('are-you-still-there', handleAreYouStillThere)
+        }
+    }, [showAreYouTherePopup])
 
     // Refs to handle cleanup
     const activateIntervalRef = useRef<number | null>(null)
@@ -371,6 +383,7 @@ export default function InsertCashTemplate({
                 onClose={handleErrorClose}
             />
             <Container isFullHeight={true}>
+                <SessionTimeout isOpen={showAreYouTherePopup} onEndSession={() => navigate('/')} onClose={() => { setShowAreYouTherePopup(false)}} />
                 <Header
                     navigationBackText={' '}
                     navigateBackUrl={'/payment-method'}

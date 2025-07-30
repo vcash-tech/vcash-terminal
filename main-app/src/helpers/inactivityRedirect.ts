@@ -20,7 +20,14 @@ export default function useInactivityRedirect(redirectPath = '/welcome') {
                     )
                 ) {
                     // Only redirect if not already on the redirect path or in register/maintenance pages
-                    navigate(redirectPath)
+                    if(currentPath !== '/buy-voucher-cash') {
+                        navigate(redirectPath)
+                    } else {
+                        console.log('Dispatch are-you-still-there event')
+                        window.dispatchEvent(new Event('are-you-still-there'))
+                        resetTimer()
+                    }
+
                 }
             }, INACTIVITY_TIME)
         }

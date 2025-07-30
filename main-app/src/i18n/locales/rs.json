@@ -103,11 +103,6 @@
       "timeLeft": "Preostalo vreme:",
       "extendTime": "Produži vreme"
     },
-    "sessionTimeoutModal": {
-      "title": "Istekla je sesija",
-      "subtitle": "Zbog neaktivnosti, proces je automatski prekinut. Možete započeti ponovo od početka.",
-      "buttonText": "Započni ponovo"
-    },
     "welcome": {
       "title": "Dobro Došli u VCash",
       "text": "Kupovina vaučera i plaćanje računa – brzo, jednostavno i bez čekanja.",
@@ -279,9 +274,9 @@
     "extendTime": "Produži vreme"
   },
   "sessionTimeoutModal": {
-    "title": "Istekla je sesija",
-    "subtitle": "Zbog neaktivnosti, proces je automatski prekinut. Možete započeti ponovo od početka.",
-    "buttonText": "Započni ponovo"
+    "title": "Da li si i dalje tu?",
+    "subtitle": "Nakon što vreme istekne sesija će automatski biti prekinuta usled neaktivnosti.",
+    "buttonText": "Da, tu sam"
   },
   "welcome": {
     "title": "Dobro Došli u VCash",
