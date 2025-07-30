@@ -25,7 +25,7 @@ export default function useInactivityRedirect(redirectPath = '/welcome') {
             }, INACTIVITY_TIME)
         }
 
-        const events = ['mousemove', 'keydown', 'click', 'scroll', 'touchstart']
+        const events = ['mousemove', 'keydown', 'click', 'scroll', 'touchstart', 'money-added']
 
         events.forEach((event) => window.addEventListener(event, resetTimer))
 

@@ -126,6 +126,13 @@ export default function InsertCashTemplate({
         const fetchAmount = async () => {
             try {
                 const response = await TransactionService.GetVoucherAmount()
+
+                // if current amount is > 0 and different from previous amount, 
+                // reset the timer dispatch user activity event to reset inactivity timer
+                if (amount > 0 && response.amount > amount) {
+                    window.dispatchEvent(new Event('money-added'))
+                }
+
                 _setAmount(response.amount)
             } catch (error) {
                 console.error('Error fetching voucher amount:', error)
