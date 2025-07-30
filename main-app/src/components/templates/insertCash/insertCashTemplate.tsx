@@ -152,7 +152,7 @@ export default function InsertCashTemplate({
         return () => {
             clearInterval(amountPollingInterval)
         }
-    }, [])
+    }, [amount])
 
     const createVoucherPrintObject = (
         voucherResponse: VoucherResponse,
