@@ -33,9 +33,9 @@ const VOUCHER_TYPE_MAPPING = {
 
 export default function InsertCashTemplate({
     navigate,
-    selectedVoucherType,
+    selectedVoucherType
 }: {
-    navigate: NavigateFunction,
+    navigate: NavigateFunction
     selectedVoucherType: string
 }) {
     const { t } = useTranslate()
@@ -127,12 +127,14 @@ export default function InsertCashTemplate({
             try {
                 const response = await TransactionService.GetVoucherAmount()
 
-                // if current amount is > 0 and different from previous amount, 
+                // if current amount is > 0 and different from previous amount,
                 // reset the timer dispatch user activity event to reset inactivity timer
                 console.log('Current amount:', amount)
                 console.log('Fetched voucher amount:', response.amount)
                 if (amount > 0 && response.amount > amount) {
-                    console.log('Dispatching money-added event to reset inactivity timer')
+                    console.log(
+                        'Dispatching money-added event to reset inactivity timer'
+                    )
                     window.dispatchEvent(new Event('money-added'))
                 }
 
@@ -147,7 +149,7 @@ export default function InsertCashTemplate({
         fetchAmount()
 
         // Set up 3-second polling
-        const amountPollingInterval = setInterval(fetchAmount, 5000)
+        const amountPollingInterval = setInterval(fetchAmount, 1000)
 
         return () => {
             clearInterval(amountPollingInterval)
