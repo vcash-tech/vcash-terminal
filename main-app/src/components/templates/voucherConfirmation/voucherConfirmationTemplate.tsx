@@ -30,7 +30,7 @@ export default function VoucherConfirmationTemplate({
         <Container isFullHeight={true}>
             <Header />
             <div className={'voucher-confirmation'}>
-                <img src={confirmedIcon} alt="Confirmed icon" />
+                <img src={confirmedIcon} alt="Confirmed icon" className='confirmed-icon' />
                 <h1>{t('voucherGenerated.title')}</h1>
                 <div className="invoice-content">
                     <FlexWrapper gap={2} justify="space-between">

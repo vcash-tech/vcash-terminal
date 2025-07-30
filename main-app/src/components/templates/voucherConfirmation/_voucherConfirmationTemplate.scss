@@ -2,7 +2,6 @@
 @use '../../../styles/config/media-queries';
 
 .voucher-confirmation {
-    margin-top: 10rem;
     display: flex;
     flex-direction: column;
     width: 100vw;
@@ -15,10 +14,20 @@
     gap: 2rem;
     max-height: 100%;
     box-sizing: border-box;
+    height: 100vh;
+    max-height: 1920px;
+    overflow-y: hidden;
 
     h1 {
         text-align: center;
         font-size: 4.2rem;
+        margin-top: 0.5rem;
+    }
+
+    .confirmed-icon {
+        height: 7rem;
+        display: block;
+        margin-top: 7rem;
     }
 
     .invoice-content {
@@ -60,7 +69,7 @@
         font-weight: 600;
         font-size: 2.4rem;
         line-height: 150%;
-        margin: 3rem auto 2rem;
+        margin: 1rem auto 0;
 
         span {
             color: colors.$brand-primary-color;
