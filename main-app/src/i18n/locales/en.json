@@ -102,11 +102,6 @@
       "timeLeft": "Time left:",
       "extendTime": "Extend time"
     },
-    "sessionTimeoutModal": {
-      "title": "Session Timeout",
-      "subtitle": "For your security, the session has expired due to inactivity. Please start again to continue.",
-      "buttonText": "Start again"
-    },
     "welcome": {
       "title": "Welcome to VCash",
       "text": "Buy vouchers, pay bills, or top up digital services in a few taps",
@@ -276,9 +271,9 @@
     "extendTime": "Extend time"
   },
   "sessionTimeoutModal": {
-    "title": "Session Timeout",
-    "subtitle": "For your security, the session has expired due to inactivity. Please start again to continue.",
-    "buttonText": "Start again"
+    "title": "Are you still there?",
+    "subtitle": "After timer expires the session will be automatically terminated due to inactivity.",
+    "buttonText": "Yes, I'm here"
   },
   "welcome": {
     "title": "Welcome to VCash",
