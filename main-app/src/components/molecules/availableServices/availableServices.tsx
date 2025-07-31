@@ -14,7 +14,7 @@ const AvailableServices: React.FC<AvailableServicesProps> = ({
     const { t } = useTranslation()
     return (
       <div className='availableServices'>
-        <h3>{t(title)}:</h3>
+        <h3 dangerouslySetInnerHTML={{ __html: t(title)}} />
         <Marquee >
           {images.map((image) => (
             <div key={image} className='marquee-item'>

@@ -33,6 +33,7 @@ export default function ServiceTemplate({ navigate }: ServiceTemplateProps) {
                             image={item.image}
                             variant={item.variant as 'bet' | 'gaming'}
                             onPress={() => navigate(item.link)}
+                            isCommingSoon={item.isComingSoon}
                         />
                     ))}
                 </div>

@@ -2,7 +2,7 @@
 import { useEffect } from 'react'
 import { NavigateFunction } from 'react-router-dom'
 
-import { confirmedIcon } from '@/assets/icons'
+import { confirmedIcon, printerIco } from '@/assets/icons'
 import { printVoucher } from '@/assets/images'
 import Container from '@/components/atoms/container/container'
 // import HelpButton from '@/components/atoms/helpButton/helpButton'
@@ -80,6 +80,9 @@ export default function PaymentSuccessfulTemplate({
                             />
                         </>
                     )}
+                     {(showHelp === null || showHelp === undefined) && (
+                        <div className="successful-msg"><img src={printerIco} alt='Confirm icon' /><b>{t('voucherGenerated.inProgressMsg')}</b></div>
+                     )}
                 </div>
             </div>
             <Footer />

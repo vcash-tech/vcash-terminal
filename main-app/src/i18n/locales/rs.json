@@ -63,26 +63,6 @@
       "title": "Za više informacija o proizvodu, skenirajte QR kod i posetite VCash aplikaciju",
       "back": "Nazad"
     },
-    "voucherGenerated": {
-      "title": "VCash vaučer je uspešno izdat",
-      "date": "Datum",
-      "time": "Vreme",
-      "referenceNo": "Kod transakcije",
-      "terminal": "Terminal",
-      "amount": "Iznos",
-      "type": "Tip",
-      "usage": "Upotreba",
-      "howToUse": {
-        "title": "Kako da iskoristite vaučer:",
-        "1": "Skenirajte QR kod sa vaučera ili posetite: [LINK] i unesite kod ručno",
-        "2": "Pregledajte listu dostupnih servisa",
-        "3": "Izaberite gde želite da iskoristite vaučer - brzo i jednostavno!"
-      },
-      "buttonText": "Završi",
-      "scanToRedeem": "Skenirajte za preuzimanje",
-      "scan": "Skeniraj",
-      "successfulMsg": "Vaučer je uspešno odštampan"
-    },
     "code": {
       "voucher": "Vaučer",
       "scan": "Skeniraj",
@@ -120,9 +100,6 @@
     "header": {
       "back": "Nazad",
       "language": "Jezik"
-    },
-    "footer": {
-      "contactSupport": "Imate pitanje? Pozovite podršku od 09h do 23h:"
     },
     "common": {
       "next": "Dalje",
@@ -173,7 +150,7 @@
     "title": "Gejming vaučeri",
     "description": "Iskoristi <b>VCash vaučer</b> za kupovinu dopuna na PlayStation, Xbox, Steam i brojnim drugim servisima.",
     "availableServices": "Podržane platforme",
-    "qrInfo": "Skenirajte ili posetite <span style='color:#1048A3;'>market.vcash.rs</span> da se informišete o aktuelnim cenama proizvoda",
+    "qrInfo": "Skenirajte ili posetite <span style='color:#1048A3;'>vcash.rs</span> da se informišete o aktuelnim cenama proizvoda",
     "qrInfo2": "Direktna kupovina proizvoda <b>nije moguća</b>. \nProizvodi se kupuju i aktiviraju kupovinom višenamenskog vaučera u odabranoj vrednosti prema proizvodu / servisu koji aktivirate",
     "cards": {
       "playstation": {
@@ -199,8 +176,8 @@
   "bettingVouchers": {
     "title": "Bet vaučer",
     "description": "Iskoristi <b>VCash vaučer</b> za brzu dopunu svog naloga u vodećim kladionicama u Srbiji.",
-    "availableServices": "Dostupne kladionice",
-    "qrInfo": "Skenirajte ili posetite <span style='color:#1048A3;'>market.vcash.rs</span> da se informišete o aktuelnim cenama proizvoda.",
+    "availableServices": "Ovde ne birate kladionicu!<br />Izbor kladionice i prenos se vrši nakon kupljenog vbaučera",
+    "qrInfo": "Skenirajte ili posetite <span style='color:#1048A3;'>vcash.rs</span> da se informišete o aktuelnim cenama proizvoda.",
     "qrInfo2": "Direktna kupovina proizvoda <b>nije moguća</b>.<br />Proizvodi se kupuju i aktiviraju kupovinom višenamenskog vaučera u odabranoj vrednosti prema proizvodu / servisu koji aktivirate.",
     "cards": {
       "balkanBet": {
@@ -257,7 +234,8 @@
     },
     "buttonText": "Završi",
     "code": "Vaučer kod",
-    "successfulMsg": "Vaučer je uspešno odštampan"
+    "successfulMsg": "Vaučer je uspešno odštampan",
+    "inProgressMsg": "Izdavanje vaučera u toku..."
   },
   "cashboxFullModal": {
     "title": "Dalja uplata nije moguća",
@@ -297,7 +275,7 @@
     "language": "Jezik"
   },
   "footer": {
-    "contactSupport": "Imate pitanje? Pozovite podršku od 09h do 23h:"
+    "contactSupport": "Imate pitanje? Kontaktirajte podršku od 09h do 22h:"
   },
   "common": {
     "next": "Dalje",
@@ -321,7 +299,7 @@
   "comingSoon": "Dolazi uskoro...",
   "howTo": {
     "title": "Kako funkcioniše",
-    "description": "U 4 koraka, aktiviraj vaučer i dopuni svoj nalog",
+    "description": "Iskoristi <b>VCash vaučer</b> za brzu dopunu svog naloga u vodećim kladionicama!<br />U 4 koraka, kupi, izaberi svoju kladionicu, aktiviraj vaučer i dopuni svoj nalog",
     "steps": {
       "betting": [
         {

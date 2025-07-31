@@ -12,6 +12,7 @@ export interface VoucherItemProps {
     image: string
     variant: 'bet' | 'gaming'
     onPress?: () => void
+    isCommingSoon?: boolean
 }
 
 const VoucherItem: React.FC<VoucherItemProps> = ({
@@ -19,13 +20,15 @@ const VoucherItem: React.FC<VoucherItemProps> = ({
     subtitle,
     image,
     variant,
-    onPress = () => {}
+    onPress = () => {},
+    isCommingSoon = false
 }) => {
     const { t } = useTranslation()
     return (
         <button
             onClick={onPress}
-            className={`voucher-item voucher-item--${variant}`}>
+            disabled={isCommingSoon}
+            className={`voucher-item voucher-item--${variant} ${isCommingSoon ? 'coming-soon' : ''}`}>
             <div className="voucher-item__text">
                 {variant === 'bet' && (
                     <img className='age-disclaimer-voucher' src={ageDisclaimerWhite} alt="Age Disclaimer" />

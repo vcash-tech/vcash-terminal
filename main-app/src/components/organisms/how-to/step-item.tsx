@@ -25,7 +25,7 @@ export default function StepItem({
             </div>
             <h2>{title}</h2>
             <p className="step-item-description ">{description}</p>
-            <p className="step-item-description no-margin">{stepIndex == 2 && <span>market.vcash.rs</span>}</p>
+            <p className="step-item-description no-margin">{stepIndex == 2 && <span>vcash.rs</span>}</p>
         </div>
     )
 }

@@ -13,6 +13,7 @@ export const serviceList = [
         subtitle: 'service.cards.gaming.body',
         image: gamingVoucher,
         variant: 'gaming',
-        link: '/gaming'
+        link: '/gaming',
+        isComingSoon: true
     }
 ]

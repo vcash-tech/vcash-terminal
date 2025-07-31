@@ -23,7 +23,7 @@ export default function VoucherCode({
             {voucherCode && (
                 <img
                     className="qr-code"
-                    src={`https://vqr-generator.fly.dev/api/vcash-print?data=https://market.vcash.rs?code=${voucherCode}`}
+                    src={`https://vqr-generator.fly.dev/api/vcash-print?data=https://voucher.vcash.rs?code=${voucherCode}`}
                     alt="QR Code"
                 />
             )}
