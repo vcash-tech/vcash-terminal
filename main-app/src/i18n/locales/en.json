@@ -173,7 +173,7 @@
   "bettingVouchers": {
     "title": "Betting Vouchers",
     "description": "Use a <b>multi-purpose</b> VCash voucher to add credit to your account.",
-    "availableServices": "Available services",
+    "availableServices": "Here you do not choose a bookmaker!<br />The bookmaker selection and transfer are done after purchasing the voucher.",
     "qrInfo": "Scan or visit <span style='color:#1048A3;'>vcash.rs</span> to check current product prices.",
     "qrInfo2": "Direct purchase of products is <b>not available</b>.<br />Products are purchased and activated by buying a multi-purpose voucher in a selected value based on the product/service you wish to activate.",
     "cards": {
