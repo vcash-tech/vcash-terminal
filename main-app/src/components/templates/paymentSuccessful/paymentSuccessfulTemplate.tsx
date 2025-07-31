@@ -24,6 +24,11 @@ export default function PaymentSuccessfulTemplate({
 }) {
     const { t } = useTranslate()
     // const [isModalOpen, setIsModalOpen] = useState(false)
+    const navigateToHome = () => {
+        if (navigate) {
+            navigate('/')
+        }
+    }
 
     useEffect(() => {
         // If showHelp is null or undefined, set it to true after 10 seconds
@@ -75,11 +80,7 @@ export default function PaymentSuccessfulTemplate({
                         <>
                         <div className="successful-msg"><img src={confirmedIcon} alt='Confirm icon' />{t('voucherGenerated.successfulMsg')}</div>
                         <PrimaryButton
-                                callback={() => () => {
-                                    if (navigate) {
-                                        navigate('/')
-                                    }
-                                }}
+                                callback={navigateToHome}
                                 text={t('voucherGenerated.buttonText')}
                             />
                         </>
