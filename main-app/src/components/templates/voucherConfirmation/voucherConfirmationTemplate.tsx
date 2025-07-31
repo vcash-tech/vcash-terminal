@@ -63,7 +63,7 @@ export default function VoucherConfirmationTemplate({
 
                     <p className={'instruction'}>
                         {t('voucherInstruction')}{' '}
-                        <span>market.vcash.rs</span>{' '}
+                        <span>vcash.rs</span>{' '}
                     </p>
                     {voucherConfirmation.voucherCode && (
                         <VoucherCode
