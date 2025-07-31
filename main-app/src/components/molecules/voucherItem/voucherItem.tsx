@@ -3,7 +3,8 @@ import './_voucherItem.scss'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { ageDisclaimerWhite } from '@/assets/icons'
+import { ageDisclaimerWhite, comingSoonOrange, uskoroOrange } from '@/assets/icons'
+import i18n from '@/i18n/i18n'
 
 
 export interface VoucherItemProps {
@@ -29,6 +30,11 @@ const VoucherItem: React.FC<VoucherItemProps> = ({
             onClick={onPress}
             disabled={isCommingSoon}
             className={`voucher-item voucher-item--${variant} ${isCommingSoon ? 'coming-soon' : ''}`}>
+            {isCommingSoon && (
+                <span className="coming-soon-badge">
+                    <img src={i18n.language === 'en' ? comingSoonOrange : uskoroOrange} />
+                </span>
+            )}
             <div className="voucher-item__text">
                 {variant === 'bet' && (
                     <img className='age-disclaimer-voucher' src={ageDisclaimerWhite} alt="Age Disclaimer" />

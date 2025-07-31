@@ -81,7 +81,7 @@ export default function PaymentSuccessfulTemplate({
                         </>
                     )}
                      {(showHelp === null || showHelp === undefined) && (
-                        <div className="successful-msg"><img src={printerIco} alt='Confirm icon' /><b>{t('voucherGenerated.inProgressMsg')}</b></div>
+                        <div className="successful-msg marginOn"><img src={printerIco} alt='Printer icon' />{t('voucherGenerated.inProgressMsg')}</div>
                      )}
                 </div>
             </div>
