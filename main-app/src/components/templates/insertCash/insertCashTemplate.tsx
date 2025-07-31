@@ -343,6 +343,9 @@ export default function InsertCashTemplate({
         } catch (err) {
             // not printed
             setShowPrintVoucher(true)
+            if (!voucherData?.moneyTransfer?.voucherCode) {
+                setShouldShowVoucherError(true)
+            }
             console.error('🔍 DEBUG: Error in handleBuy:', err)
             console.log('🔍 DEBUG: voucherData after error:', voucherData)
         }
