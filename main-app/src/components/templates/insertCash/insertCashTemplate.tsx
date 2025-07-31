@@ -9,6 +9,7 @@ import AcceptedBills from '@/components/molecules/acceptedBills/acceptedBills'
 import Footer from '@/components/organisms/footer/footer'
 import Header from '@/components/organisms/header/header'
 import SessionTimeout from '@/components/organisms/sessionTimeoutModal/sessionTimeout'
+import VoucherErrorTemplate from '@/components/templates/voucherDataError/VoucherErrorTemplate'
 import { VoucherConfirmation } from '@/data/entities/voucher-confirmation'
 import { mockedPrinterData, shouldMockPrinter } from '@/helpers/mock.printer'
 import { useTranslate } from '@/i18n/useTranslate'
@@ -21,7 +22,6 @@ import { VoucherResponse } from '@/types/pos/deposit'
 import { insertCashImg } from '../../../assets/images'
 import PaymentSuccessfulTemplate from '../paymentSuccessful/paymentSuccessfulTemplate'
 import VoucherConfirmationTemplate from '../voucherConfirmation/voucherConfirmationTemplate'
-import VoucherErrorTemplate from '@/components/templates/voucherDataError/VoucherErrorTemplate'
 
 const VOUCHER_TYPE_MAPPING = {
     STANDARD_VOUCHER: 'Bet Vaučer',
@@ -297,7 +297,7 @@ export default function InsertCashTemplate({
                 voucherTypeId
             })
 
-            if (!createVoucher) {
+            if (!createVoucher || !createVoucher?.moneyTransfer?.voucherCode) {
                 console.log(
                     '❌ Voucher create failed - no voucher data available'
                 )
