@@ -75,7 +75,11 @@ export default function PaymentSuccessfulTemplate({
                         <>
                         <div className="successful-msg"><img src={confirmedIcon} alt='Confirm icon' />{t('voucherGenerated.successfulMsg')}</div>
                         <PrimaryButton
-                                callback={() => navigate}
+                                callback={() => () => {
+                                    if (navigate) {
+                                        navigate('/')
+                                    }
+                                }}
                                 text={t('voucherGenerated.buttonText')}
                             />
                         </>
