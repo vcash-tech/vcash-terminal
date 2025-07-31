@@ -51,7 +51,7 @@ export default function VoucherErrorTemplate({
                             </p>
                         </div>
                         <WireButton onClick={onPrimaryButtonClick}>
-                            069 888 55 58
+                            062 111 5 111
                         </WireButton>
                     </div>
                 </div>

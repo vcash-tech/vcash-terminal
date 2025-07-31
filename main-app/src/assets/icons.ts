@@ -17,6 +17,7 @@ import flagRS from './icons/flagRS.svg'
 import hospitalLogo from './icons/hospitalLogo.svg'
 import infoCircle from './icons/infoCircle.svg'
 import paymentsIcon from './icons/paymentsIcon.svg'
+import printerIco from './icons/printerIco.svg'
 import printerUnavailable from './icons/printerUnavailable.svg'
 import redWarningIcon from './icons/redWarningIcon.svg'
 import serbiaLogo from './icons/serbiaLogo.svg'
@@ -49,6 +50,7 @@ export {
     hospitalLogo,
     infoCircle,
     paymentsIcon,
+    printerIco,
     printerUnavailable,
     redWarningIcon,
     serbiaLogo,

@@ -56,11 +56,11 @@ export default function BettingVoucher({ navigate }: BettingVoucherProps) {
                         __html: t('bettingVouchers.description')
                     }}
                 />
+                <HowTo isModal={false} isBetting={true} />
                 <AvailableServices
                     title={t('bettingVouchers.availableServices')}
                     images={bettingImages}
                 />
-                <HowTo isModal={false} isBetting={true} />
                 <div className="gaming-voucher__primary-button">
                     <PrimaryButton
                         text={t('bettingVouchers.buttonText')}

@@ -48,3 +48,19 @@ export const Failed: Story = {
   },
 }
 
+export const InProgress: Story = {
+  args: {
+    navigate: () => { },
+    showHelp: null,
+    onPrimaryButtonClick: () => {},
+  },
+  parameters: {
+    backgrounds: {
+      default: "dark",
+      values: [
+        { name: "dark", value: "#333333" },
+      ],
+    },
+  },
+}
+

@@ -63,25 +63,6 @@
       "title": "For more details about the product, scan the QR code to visit our marketplace app",
       "back": "Back"
     },
-    "voucherGenerated": {
-      "title": "Your voucher is ready!",
-      "date": "Date",
-      "time": "Time",
-      "referenceNo": "Reference No",
-      "terminal": "Terminal",
-      "amount": "Amount",
-      "type": "Type",
-      "usage": "Usage",
-      "howToUse": {
-        "title": "How to use:",
-        "1": "Go to [LINK]",
-        "2": "Log into your account",
-        "3": "Enter the voucher code above "
-      },
-      "buttonText": "Finish",
-      "code": "Voucher code",
-      "successfulMsg": "Your voucher has been issued successfully"
-    },
     "code": {
       "voucher": "Voucher",
       "scan": "Scan",
@@ -116,9 +97,6 @@
     "header": {
       "back": "Back",
       "language": "Language"
-    },
-    "footer": {
-      "contactSupport": "Contact support:"
     },
     "common": {
       "next": "Next",
@@ -254,7 +232,8 @@
     },
     "buttonText": "Finish",
     "scanToRedeem": "Scan to Redeem",
-    "successfulMsg": "Your voucher has been issued successfully"
+    "successfulMsg": "Your voucher has been issued successfully",
+    "inProgressMsg": "Your voucher is being generated, please wait..."
   },
   "cashboxFullModal": {
     "title": "Kiosk Cash Box Full",
@@ -291,7 +270,7 @@
     "language": "Language"
   },
   "footer": {
-    "contactSupport": "Contact support:"
+    "contactSupport": "Have a question? Contact support from 09:00 to 22:00:"
   },
   "common": {
     "next": "Next",
@@ -315,7 +294,7 @@
   "comingSoon": "Coming soon...",
   "howTo": {
     "title": "How it works",
-    "description": "In 4 steps, activate the voucher and top up your account",
+    "description": "Use a <b>VCash voucher</b> to quickly top up your account at leading bookmakers!<br />In 4 steps, buy, choose your bookmaker, activate the voucher, and top up your account",
     "steps": {
       "betting": [
         {

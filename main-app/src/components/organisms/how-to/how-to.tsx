@@ -50,7 +50,7 @@ export default function HowTo({ onClose, isModal, isBetting = false }: HowToProp
                     </button>
                 )}
                 <h1 className="howToTitle">{t('howTo.title')}</h1>
-                <p className="description">{t('howTo.description')}</p>
+                <p className="description" dangerouslySetInnerHTML={{__html: t('howTo.description')}} />
                 <div className="steps">
                     {(isBetting ? bettingImages : gamingImages)?.map((step, index) => (
                         <StepItem
