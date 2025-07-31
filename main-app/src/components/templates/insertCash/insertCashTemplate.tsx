@@ -353,6 +353,14 @@ export default function InsertCashTemplate({
         setErrorMessage('')
     }
 
+    if (shouldShowVoucherError) {
+        return (
+            <VoucherErrorTemplate
+                navigate={navigate}
+            />
+        )
+    }
+
     if (isVoucherPrinting && !showVoucher) {
         return (
             <PaymentSuccessfulTemplate
@@ -394,14 +402,6 @@ export default function InsertCashTemplate({
                         usage: '???'
                     } as VoucherConfirmation
                 }
-                navigate={navigate}
-            />
-        )
-    }
-
-    if (shouldShowVoucherError) {
-        return (
-            <VoucherErrorTemplate
                 navigate={navigate}
             />
         )
