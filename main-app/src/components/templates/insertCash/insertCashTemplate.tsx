@@ -21,6 +21,7 @@ import { VoucherResponse } from '@/types/pos/deposit'
 import { insertCashImg } from '../../../assets/images'
 import PaymentSuccessfulTemplate from '../paymentSuccessful/paymentSuccessfulTemplate'
 import VoucherConfirmationTemplate from '../voucherConfirmation/voucherConfirmationTemplate'
+import VoucherErrorTemplate from '@/components/templates/voucherDataError/VoucherErrorTemplate'
 
 const VOUCHER_TYPE_MAPPING = {
     STANDARD_VOUCHER: 'Bet Vaučer',
@@ -48,6 +49,7 @@ export default function InsertCashTemplate({
     const [errorMessage, setErrorMessage] = useState<string>('')
     const [showError, setShowError] = useState<boolean>(false)
     const [showAreYouTherePopup, setShowAreYouTherePopup] = useState<boolean>(false)
+    const [shouldShowVoucherError, setShouldShowVoucherError] = useState<boolean>(false)
 
     useEffect(() => {
         // Reset inactivity timer on user activity
@@ -294,7 +296,18 @@ export default function InsertCashTemplate({
             const createVoucher = await TransactionService.CreateVoucher({
                 voucherTypeId
             })
+
+            if (!createVoucher) {
+                console.log(
+                    '❌ Voucher create failed - no voucher data available'
+                )
+
+                setShouldShowVoucherError(true)
+                return
+            }
+
             setVoucherData(createVoucher)
+            console.log('🔍 DEBUG: voucherData set to:', createVoucher)
 
             // Print the voucher with the new template renderer
             if (createVoucher) {
@@ -302,6 +315,7 @@ export default function InsertCashTemplate({
                     createVoucher,
                     voucherTypeId
                 )
+                console.log('🔍 DEBUG: Print success:', printSuccess)
 
                 // If printing succeeded, automatically proceed to voucher confirmation
                 if (printSuccess) {
@@ -317,17 +331,20 @@ export default function InsertCashTemplate({
                     console.log(
                         '❌ Print failed - staying on success screen for manual interaction'
                     )
+                    console.log('🔍 DEBUG: voucherData after print failure:', voucherData)
                 }
             } else {
                 console.log(
                     '❌ Voucher create failed - no voucher data available'
                 )
+                setShouldShowVoucherError(true)
                 setShowPrintVoucher(true)
             }
         } catch (err) {
             // not printed
             setShowPrintVoucher(true)
-            console.error(err)
+            console.error('🔍 DEBUG: Error in handleBuy:', err)
+            console.log('🔍 DEBUG: voucherData after error:', voucherData)
         }
     }
 
@@ -341,12 +358,19 @@ export default function InsertCashTemplate({
             <PaymentSuccessfulTemplate
                 showHelp={showPrintVoucher}
                 navigate={navigate}
-                onPrimaryButtonClick={() => setShowVoucher(true)}
+                onPrimaryButtonClick={() => {
+                    console.log('🔍 DEBUG: Show Voucher clicked')
+                    console.log('🔍 DEBUG: voucherData available:', !!voucherData)
+                    console.log('🔍 DEBUG: voucherData content:', voucherData)
+                    setShowVoucher(true)
+                }}
             />
         )
     }
 
     if (showVoucher && voucherData) {
+        console.log('🔍 DEBUG: Rendering VoucherConfirmationTemplate')
+        console.log('🔍 DEBUG: voucherData for template:', voucherData)
         return (
             <VoucherConfirmationTemplate
                 voucherConfirmation={
@@ -370,6 +394,14 @@ export default function InsertCashTemplate({
                         usage: '???'
                     } as VoucherConfirmation
                 }
+                navigate={navigate}
+            />
+        )
+    }
+
+    if (shouldShowVoucherError) {
+        return (
+            <VoucherErrorTemplate
                 navigate={navigate}
             />
         )

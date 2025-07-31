@@ -362,5 +362,11 @@
     }
   },
   "voucherValue": "Vrednost vaučera",
-  "voucherInstruction": "Skeniraj QR kod ili sacuvaj aktivacioni kod i aktiviraj vaucer putem sajta"
+  "voucherInstruction": "Skeniraj QR kod ili sacuvaj aktivacioni kod i aktiviraj vaucer putem sajta",
+  "voucherError": {
+    "title": "Došlo je do greške",
+    "subtitle": "Vaučer nije kreiran, molimo pozovite podršku",
+    "supportTitle": "Pozovi podršku",
+    "supportText": "VCash tim će vam pomoći da dobijete vaučer u vrednosti novca koji ste uneli"
+  }
 }

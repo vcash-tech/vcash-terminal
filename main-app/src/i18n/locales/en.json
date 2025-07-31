@@ -356,5 +356,11 @@
     }
   },
   "voucherValue": "Voucher Value",
-  "voucherInstruction": "Scan QR code or save activation code and activate voucher on the website"
+  "voucherInstruction": "Scan QR code or save activation code and activate voucher on the website",
+  "voucherError": {
+    "title": "Something went wrong",
+    "subtitle": "Voucher was not created, please contact support",
+    "supportTitle": "Call Support",
+    "supportText": "VCash team will help you to get your voucher for the amount you've inserted"
+  }
 }
