@@ -17,11 +17,27 @@ export default function WelcomePage() {
                 await POSService.createSession()
                 console.log('✅ Session verified successfully on welcome page')
             } catch (error) {
-                console.error(
-                    'Failed to create session on welcome page, redirecting to registration:',
-                    error
-                )
-                navigate('/register')
+                // Check if error requires specific navigation
+                if (
+                    error &&
+                    typeof error === 'object' &&
+                    'requiresNavigation' in error
+                ) {
+                    const navigationError = error as {
+                        requiresNavigation: string
+                    }
+                    console.log(
+                        '🔄 API error requires navigation to:',
+                        navigationError.requiresNavigation
+                    )
+                    navigate(navigationError.requiresNavigation)
+                } else {
+                    console.error(
+                        'Failed to create session on welcome page, redirecting to registration:',
+                        error
+                    )
+                    navigate('/register')
+                }
             }
         }
 

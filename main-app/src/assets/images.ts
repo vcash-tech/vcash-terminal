@@ -1,5 +1,21 @@
+import helpIcon from './icons/helpIcon.svg'
+import ageDisclaimer from './images/age-disclaimer.png'
 import basketballCard from './images/basketballCard.svg'
+import betting_balkanBet from './images/betting/balkanBet.png'
+import betting_maxBetCommingSoon from './images/betting/comming-soon/maxbet-coming-soon.png'
+import betting_maxBetUskoro from './images/betting/comming-soon/maxbet-uskoro.png'
+import betting_meridianBetCommingSoon from './images/betting/comming-soon/meridianbet-coming-soon.png'
+import betting_meridianBetUskoro from './images/betting/comming-soon/meridianbet-uskoro.png'
+import betting_merkurXtipCommingSoon from './images/betting/comming-soon/merkur-x-tip-coming-soon.png'
+import betting_merkurXtipUskoro from './images/betting/comming-soon/merkur-x-tip-uskoro.png'
+import betting_meridian from './images/betting/meridian.png'
+import betting_merkurXtip from './images/betting/merkurXtip.png'
+import betting_soccerBet from './images/betting/soccerBet.png'
 import bettingServices from './images/bettingServices.png'
+import betVoucher from './images/betVoucher.webp'
+import bill500 from './images/bill500.jpg'
+import bill1000 from './images/bill1000.jpg'
+import bill2000 from './images/bill2000.jpg'
 import cashPayment from './images/cashPayment.svg'
 import casinoCard from './images/casinoCard.png'
 import casinoCard2 from './images/casinoCard2.png'
@@ -8,16 +24,23 @@ import digitalServices from './images/digitalServices.png'
 import disney from './images/disney.png'
 import eaPlay from './images/eaPlay.png'
 import f1Card from './images/f1Card.png'
+import gaming_josServisaUskoro from './images/gaming/josServisaUskoro.png'
+import gaming_playstation from './images/gaming/playStation.png'
+import gaming_steam from './images/gaming/steam.png'
+import gaming_xbox from './images/gaming/xbox.png'
+import gamingMarketplace from './images/gamingMarketplace.jpg'
 import gamingServices from './images/gamingServices.png'
 import gPay from './images/googlePay.png'
 import hbo from './images/hbo.png'
 import hulu from './images/hulu.png'
 import insertCashImg from './images/insertCash.jpg'
+import insertCashImg2 from './images/insertCash2.jpg'
+import izaberiPlatformu from './images/izaberiPlatformuBetting.jpg'
 import marketplace from './images/marketplace.png'
+import mockupVoucher from './images/mockupVoucher.jpg'
 import ageDisclaimerBackground from './images/optimised/ageDisclaimerBackground.webp'
 import background from './images/optimised/background.webp'
 import balkanBetLogo from './images/optimised/balkanBetLogo.png'
-import betVoucher from './images/optimised/betVoucher.png'
 import cash from './images/optimised/cash.webp'
 import casinoNewCard from './images/optimised/casinoNew.webp'
 import chechLights from './images/optimised/chechLights.webp'
@@ -51,16 +74,32 @@ import printVoucher from './images/printVoucher.jpg'
 import sockerCard from './images/sockerCard.svg'
 import test from './images/test.png'
 import tickets from './images/tickets.png'
+import useVoucherBetting from './images/useVoucherBetting.jpg'
+import useVoucherGaming from './images/useVoucherGaming.jpg'
 import marketplaceQR from './images/vcash-marketplace.svg'
 import welcomeBackground from './images/welcomeBackground.svg'
 
 export {
+    ageDisclaimer,
     ageDisclaimerBackground,
     background,
     balkanBetLogo,
     basketballCard,
+    betting_balkanBet,
+    betting_maxBetCommingSoon,
+    betting_maxBetUskoro,
+    betting_meridian,
+    betting_meridianBetCommingSoon,
+    betting_meridianBetUskoro,
+    betting_merkurXtip,
+    betting_merkurXtipCommingSoon,
+    betting_merkurXtipUskoro,
+    betting_soccerBet,
     bettingServices,
     betVoucher,
+    bill500,
+    bill1000,
+    bill2000,
     cash,
     cashPayment,
     casinoCard,
@@ -77,19 +116,28 @@ export {
     emailInputBackground,
     f1Card,
     footballCard,
+    gaming_josServisaUskoro,
+    gaming_playstation,
+    gaming_steam,
+    gaming_xbox,
+    gamingMarketplace,
     gamingServices,
     gamingVoucher,
     gPay,
     hbo,
+    helpIcon,
     homeBackground,
     hulu,
     insertCashImg,
+    insertCashImg2,
+    izaberiPlatformu,
     logoWhite,
     marketplace,
     marketplaceQR,
     maxBetLogo,
     meridianBetLogo,
     merkurXTipLogo,
+    mockupVoucher,
     nbaCard,
     paymentCardBackground,
     paymentMethodBackground,
@@ -107,6 +155,8 @@ export {
     tennisNewCard,
     test,
     tickets,
+    useVoucherBetting,
+    useVoucherGaming,
     viewBackground,
     welcomeBackground,
     xboxClean

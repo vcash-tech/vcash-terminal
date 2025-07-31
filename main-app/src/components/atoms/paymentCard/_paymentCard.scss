@@ -26,19 +26,23 @@
     text-align: left;
     font-family: fonts.$body-font;
     font-weight: 600;
-    font-size: 3.6rem;
+    font-size: 3.5rem;
     line-height: 150%;
     letter-spacing: -1.5px;
     color: colors.$dark-text-color;
     padding: 0 0 42px;
+
+    span {
+      color: colors.$white-color;
+    }
   }
 
   .card-image {
     flex-shrink: 0;
     display: flex;
     align-items: flex-end;
-    margin-left: 40px;
-    width: 380px;
+    margin-left: 0;
+    width: 34rem;
     height: 300px;
     justify-content: flex-end;
 
@@ -72,9 +76,10 @@
   &.coming-soon {
     position: relative;
     cursor: default;
+    background: #939393;
 
     &:hover, &:active {
-      background-color: colors.$white-color;
+      background-color: #939393;
       box-shadow: -3px 4px 14.4px 0 #0F20432B;
 
       .card-text:default {
@@ -87,12 +92,16 @@
       position: absolute;
       top: 0;
       right: 0;
-      width: 22rem;
-      height: 15rem;
-      background: url('../assets/icons/coming-soon.svg') no-repeat center center;
+      width: 44.6rem;
+      height: 30.7rem;
+      background: url('../assets/icons/uskoroOrangeCard.svg') no-repeat center center;
       background-size: 100% auto;
       z-index: 2;
       
+    }
+
+    &.en::after {
+      background: url('../assets/icons/comingSoonOrangeCard.svg') no-repeat center center;
     }
   }
 }

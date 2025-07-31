@@ -1,24 +1,36 @@
-@use "../../../styles/config/colors";
-@use "../../../styles/config/fonts";
+@use '../../../styles/config/colors';
+@use '../../../styles/config/fonts';
 
 .session-counter {
-  display: flex;
-  flex-direction: row;
-  flex: 1;
-  justify-content: center;
-  align-items: center;
-  gap: 5.2rem;
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    gap: 5.2rem;
 
-  .time-left {
-    font-family: fonts.$body-font;
-    color: #25292A;
-    font-weight: 500;
-    font-size: 3.2rem;
-    line-height: 3.8rem;
-    min-width: 22rem;
+    .time-left {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 1rem;
 
-    span {
-      color: #C63D46;
+        p {
+            color: #25292a;
+            text-align: center;
+            font-size: 18px;
+            font-weight: 500;
+            margin: 1rem 0;
+
+            span {
+                color: #c63d46;
+            }
+        }
+
+        .wire-button {
+            padding: 1.6rem 3.2rem;
+            font-size: 18px;
+            font-weight: 500;
+        }
     }
-  }
 }

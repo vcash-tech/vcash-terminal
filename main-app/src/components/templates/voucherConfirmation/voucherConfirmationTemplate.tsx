@@ -1,5 +1,6 @@
 import { NavigateFunction } from 'react-router-dom'
 
+import { confirmedIcon } from '@/assets/icons'
 import Container from '@/components/atoms/container/container'
 import HalfContainer from '@/components/atoms/container/halfContainer'
 import Divider from '@/components/atoms/divider/divider'
@@ -29,6 +30,7 @@ export default function VoucherConfirmationTemplate({
         <Container isFullHeight={true}>
             <Header />
             <div className={'voucher-confirmation'}>
+                <img src={confirmedIcon} alt="Confirmed icon" className='confirmed-icon' />
                 <h1>{t('voucherGenerated.title')}</h1>
                 <div className="invoice-content">
                     <FlexWrapper gap={2} justify="space-between">
@@ -58,29 +60,25 @@ export default function VoucherConfirmationTemplate({
                         align="left"
                     />
                     <Divider gap={1} />
-                    <InvoiceItem
-                        label={t('voucherGenerated.amount')}
-                        value={voucherConfirmation.amount}
-                    />
-                    <InvoiceItem
-                        label={t('voucherGenerated.code')}
-                        value={voucherConfirmation.voucherCode}
-                    />
 
-                    {voucherConfirmation.qrCodeData && (
-                        <VoucherCode voucherCode={voucherConfirmation} />
+                    <p className={'instruction'}>
+                        {t('voucherInstruction')}{' '}
+                        <span>vcash.rs</span>{' '}
+                    </p>
+                    {voucherConfirmation.voucherCode && (
+                        <VoucherCode
+                            voucherCode={voucherConfirmation.voucherCode}
+                            voucherConfirmation={voucherConfirmation}
+                        />
                     )}
                 </div>
-
-                <div className={'action-wrapper'}>        
+                <SessionCounter onEndSession={() => navigate('/')} />
+                <div className={'action-wrapper'}>
                     <PrimaryButton
                         callback={() => onComplete()}
                         text={t('voucherGenerated.buttonText')}
                     />
-                    <div>
-                    <SessionCounter onEndSession={() => navigate('/')} />
-                </div></div>
-            
+                </div>
             </div>
             <Footer />
         </Container>

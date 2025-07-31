@@ -1,0 +1,213 @@
+@use '../../../styles/config/colors';
+@use '../../../styles/config/fonts';
+
+.backdrop {
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 998;
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: flex-end;
+  background-color: #00000090;
+
+  .action-wrapper {
+    background: #e6ecff;
+    width: 100%;
+    justify-content: center;
+    display: flex;
+    padding: 4rem 2rem 14rem 2rem;
+
+    .primary-button {
+      width: 50vw;
+    }
+  }
+}
+
+.how-to {
+  display: flex;
+  box-sizing: border-box;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #e6ecff;
+  min-height: 40vh;
+  width: 100%;
+  border-top: 1rem;
+  padding: 3rem 0;
+  margin: 3rem 0;
+  position: relative;
+  border: 1px solid #B6BDD4;
+  border-radius: 1.6rem;
+  background-color: #fff;
+
+  h1.howToTitle {
+    font-family: fonts.$body-font;
+    font-weight: 600;
+    font-size: 4.8rem;
+    line-height: 100%;
+    color: colors.$black-color;
+    margin: 0 0 2rem;
+  }
+
+  .close-btn {
+    position: absolute;
+    top: 5rem;
+    right: 5rem;
+    cursor: pointer;
+  }
+
+  p.description {
+    font-size: 24px;
+    display: block;
+    align-items: center;
+    text-align: center;
+    color: #333839;
+    line-height: 150%;;
+    margin: 2rem 0;
+  }
+
+  .steps {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    text-align: center;
+    justify-items: center;
+    margin-top: 2rem;
+    box-sizing: border-box;
+
+    .step-item {
+      display: flex;
+      box-sizing: border-box;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 0 2rem 2rem;
+      max-width: 23.5rem;
+      align-self: flex-start;
+      position: relative;
+
+      h2 {
+        font-family: fonts.$body-font;
+        font-weight: 600;
+        font-size: 2.1rem;
+        text-align: center;
+        letter-spacing: 0;
+        line-height: 100%;;
+        color: #231F20;
+        margin: 2rem 0;
+        max-width: 100%;;
+      }
+
+      .index-container {
+        position: relative;
+        margin: 0 0 2rem;
+
+
+        .dash-line {
+          position: absolute;
+          bottom: 2rem;
+          right: -17.5rem;
+        }
+
+        .step-item-index {
+          width: 50px;
+          height: 50px;
+          background: #385ac9;
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-weight: 600;
+          font-size: 24px;
+          color: #fff;
+          box-shadow: 0 4px 4px rgba(0, 0, 0, 0.15);
+          margin: 0;
+        }
+      }
+
+      .step-item-image {
+        width: 100%;
+        height: 280px;
+        margin: 2rem 0;
+        border-radius: 1rem;
+        overflow: hidden;
+
+        img {
+          object-fit: cover;
+          height: 100%;
+          width: 100%;
+        }
+      }
+
+      .step-item-description {
+        font-family: fonts.$body-font;
+        font-size: 1.8rem;
+        line-height: 150%;
+        text-align: center;
+        color: #333839;
+        margin: 0;
+
+        span {
+          color: #385AC9;
+          display: inline-block;
+          font-weight: 600;
+        }
+
+        &.no-margin {
+          padding-bottom: 0;
+          margin-bottom: 0;
+        }
+
+        &:last-child {
+          margin-top: 0;
+        }
+      }
+
+      &:first-child {
+        .step-item-image {
+          img {
+            object-fit: cover;
+            height: 100%;
+            width: 130%;
+          }
+        }
+      }
+
+      &:nth-child(2) {
+        .step-item-image {
+          img {
+            object-fit: cover;
+            position: relative;
+            height: 110%;
+            width: 100%;
+          }
+        }
+      }
+
+      &:last-child {
+        .step-item-image {
+          background: #385ac9;
+
+          img {
+            width: 100%;
+            min-height: 110%;
+            object-fit: contain;
+            position: relative;
+            background: #C9CEE1;
+          }
+        }
+        .dash-line {
+          display: none;
+        }
+      }
+    }
+  }
+}
+

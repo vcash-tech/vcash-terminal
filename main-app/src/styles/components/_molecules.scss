@@ -1,3 +1,4 @@
+@use '../../components/molecules/availableServices/availableServices';
 @use '../../components/molecules/paymentFailedOptions/paymentFailedOptions';
 @use '../../components/molecules/welcomeBanner/welcomeBanner';
 @use '../../components/molecules/serviceListItem/serviceListItem';
@@ -12,3 +13,5 @@
 @use '../../components/molecules/gamingVoucherItem/gamingVoucherItem';
 @use '../../components/molecules/bettingVoucherItem/bettingVoucherItem';
 @use '../../components/molecules/voucherCode/voucherCode';
+@use '../../components/molecules/acceptedBills/acceptedBills';
+@use '../../components/molecules/printVoucherFallback/printVoucherFallback';

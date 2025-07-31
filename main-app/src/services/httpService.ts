@@ -104,12 +104,12 @@ export class HttpService {
                                 '❌ Failed to recreate session after 401:',
                                 sessionError
                             )
-                            // Redirect to registration if session creation fails
-                            window.location.href = '/register'
+                            // Throw error that components can catch and handle navigation
                             throw {
                                 status: 401,
                                 statusText: 'Session Recreation Failed',
-                                text: 'Failed to recreate session, redirecting to registration'
+                                text: 'Failed to recreate session, redirecting to registration',
+                                requiresNavigation: '/register'
                             }
                         }
                     }

@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
+import { NavigateFunction } from 'react-router-dom'
 
 import GamingVoucherTemplate from './gamingVoucherTemplate'
 
@@ -16,6 +17,9 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
+    args: {
+        navigate: (() => {}) as NavigateFunction
+    },
     parameters: {
         backgrounds: {
             default: 'light',

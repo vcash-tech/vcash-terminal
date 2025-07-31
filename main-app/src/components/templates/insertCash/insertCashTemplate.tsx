@@ -5,8 +5,11 @@ import { NavigateFunction } from 'react-router-dom'
 import Container from '@/components/atoms/container/container'
 import ErrorNotification from '@/components/atoms/errorNotification/errorNotification'
 import PrimaryButton from '@/components/atoms/primaryButton/primaryButton'
+import AcceptedBills from '@/components/molecules/acceptedBills/acceptedBills'
 import Footer from '@/components/organisms/footer/footer'
 import Header from '@/components/organisms/header/header'
+import SessionTimeout from '@/components/organisms/sessionTimeoutModal/sessionTimeout'
+import VoucherErrorTemplate from '@/components/templates/voucherDataError/VoucherErrorTemplate'
 import { VoucherConfirmation } from '@/data/entities/voucher-confirmation'
 import { mockedPrinterData, shouldMockPrinter } from '@/helpers/mock.printer'
 import { useTranslate } from '@/i18n/useTranslate'
@@ -16,7 +19,6 @@ import { TransactionService } from '@/services/transactionService'
 import { Auth } from '@/types/common/httpRequest'
 import { VoucherResponse } from '@/types/pos/deposit'
 
-import { infoCircle } from '../../../assets/icons'
 import { insertCashImg } from '../../../assets/images'
 import PaymentSuccessfulTemplate from '../paymentSuccessful/paymentSuccessfulTemplate'
 import VoucherConfirmationTemplate from '../voucherConfirmation/voucherConfirmationTemplate'
@@ -24,23 +26,40 @@ import VoucherConfirmationTemplate from '../voucherConfirmation/voucherConfirmat
 const VOUCHER_TYPE_MAPPING = {
     STANDARD_VOUCHER: 'Bet Vaučer',
     NON_BETTING_VOUCHER: 'Digital Vaučer',
+    TERMINAL_BETTING_VOUCHER: 'Bet Vaučer',
+
     '10': 'Bet Vaučer',
-    '20': 'Digital Vaučer'
+    '20': 'Digital Vaučer',
+    '30': 'Bet Vaučer'
 } as const
 
 export default function InsertCashTemplate({
-    navigate
+    navigate,
+    selectedVoucherType
 }: {
     navigate: NavigateFunction
+    selectedVoucherType: string
 }) {
     const { t } = useTranslate()
-
     const [amount, _setAmount] = useState<number>(0)
     const [isVoucherPrinting, setIsVoucherPrinting] = useState<boolean>(false)
+    const [showPrintVoucher, setShowPrintVoucher] = useState<unknown>(null)
     const [showVoucher, setShowVoucher] = useState<boolean>(false)
     const [voucherData, setVoucherData] = useState<VoucherResponse | null>(null)
     const [errorMessage, setErrorMessage] = useState<string>('')
     const [showError, setShowError] = useState<boolean>(false)
+    const [showAreYouTherePopup, setShowAreYouTherePopup] = useState<boolean>(false)
+    const [shouldShowVoucherError, setShouldShowVoucherError] = useState<boolean>(false)
+
+    useEffect(() => {
+        // Reset inactivity timer on user activity
+        const handleAreYouStillThere = () => setShowAreYouTherePopup(true)
+        window.addEventListener('are-you-still-there', handleAreYouStillThere)
+        console.log('Listening for are-you-still-there event')
+        return () => {
+            window.removeEventListener('are-you-still-there', handleAreYouStillThere)
+        }
+    }, [showAreYouTherePopup])
 
     // Refs to handle cleanup
     const activateIntervalRef = useRef<number | null>(null)
@@ -121,6 +140,18 @@ export default function InsertCashTemplate({
         const fetchAmount = async () => {
             try {
                 const response = await TransactionService.GetVoucherAmount()
+
+                // if current amount is > 0 and different from previous amount,
+                // reset the timer dispatch user activity event to reset inactivity timer
+                console.log('Current amount:', amount)
+                console.log('Fetched voucher amount:', response.amount)
+                if (amount > 0 && response.amount > amount) {
+                    console.log(
+                        'Dispatching money-added event to reset inactivity timer'
+                    )
+                    window.dispatchEvent(new Event('money-added'))
+                }
+
                 _setAmount(response.amount)
             } catch (error) {
                 console.error('Error fetching voucher amount:', error)
@@ -132,12 +163,12 @@ export default function InsertCashTemplate({
         fetchAmount()
 
         // Set up 3-second polling
-        const amountPollingInterval = setInterval(fetchAmount, 5000)
+        const amountPollingInterval = setInterval(fetchAmount, 1000)
 
         return () => {
             clearInterval(amountPollingInterval)
         }
-    }, [])
+    }, [amount])
 
     const createVoucherPrintObject = (
         voucherResponse: VoucherResponse,
@@ -165,7 +196,7 @@ export default function InsertCashTemplate({
             ] || VOUCHER_TYPE_MAPPING['20'] // Default fallback
 
         return {
-            url: `https://market.vcash.rs/?code=${moneyTransfer.voucherCode}`,
+            url: `https://voucher.vcash.rs/?code=${moneyTransfer.voucherCode}`,
             voucherCode: moneyTransfer.voucherCode || '---',
             publicCode: moneyTransfer.moneyTransferCode,
             venueName: moneyTransfer.venue?.name || 'VCash Terminal',
@@ -261,28 +292,59 @@ export default function InsertCashTemplate({
         await callDeactivate()
 
         try {
-            const voucherTypeId = '20' // Replace with actual voucher type ID
-            const voucherData = await TransactionService.CreateVoucher({
+            const voucherTypeId = selectedVoucherType
+            const createVoucher = await TransactionService.CreateVoucher({
                 voucherTypeId
             })
-            setVoucherData(voucherData)
+
+            if (!createVoucher || !createVoucher?.moneyTransfer?.voucherCode) {
+                console.log(
+                    '❌ Voucher create failed - no voucher data available'
+                )
+
+                setShouldShowVoucherError(true)
+                return
+            }
+
+            setVoucherData(createVoucher)
+            console.log('🔍 DEBUG: voucherData set to:', createVoucher)
 
             // Print the voucher with the new template renderer
-            const printSuccess = await printVoucher(voucherData, voucherTypeId)
-
-            // If printing succeeded, automatically proceed to voucher confirmation
-            if (printSuccess) {
-                console.log(
-                    '🎯 Print successful - auto-proceeding to voucher confirmation'
+            if (createVoucher) {
+                const printSuccess = await printVoucher(
+                    createVoucher,
+                    voucherTypeId
                 )
-                setTimeout(() => setShowVoucher(true), 200) // Small delay for UX
+                console.log('🔍 DEBUG: Print success:', printSuccess)
+
+                // If printing succeeded, automatically proceed to voucher confirmation
+                if (printSuccess) {
+                    console.log(
+                        '🎯 Print successful - auto-proceeding to voucher confirmation'
+                    )
+                    // printed
+                    setShowPrintVoucher(false)
+                    //setTimeout(() => setShowVoucher(true), 200) // Small delay for UX
+                } else {
+                    // not printed
+                    setShowPrintVoucher(true)
+                    console.log(
+                        '❌ Print failed - staying on success screen for manual interaction'
+                    )
+                    console.log('🔍 DEBUG: voucherData after print failure:', voucherData)
+                }
             } else {
                 console.log(
-                    '❌ Print failed - staying on success screen for manual interaction'
+                    '❌ Voucher create failed - no voucher data available'
                 )
+                setShouldShowVoucherError(true)
+                setShowPrintVoucher(true)
             }
         } catch (err) {
-            console.error(err)
+            // not printed
+            setShowPrintVoucher(true)
+            console.error('🔍 DEBUG: Error in handleBuy:', err)
+            console.log('🔍 DEBUG: voucherData after error:', voucherData)
         }
     }
 
@@ -291,7 +353,32 @@ export default function InsertCashTemplate({
         setErrorMessage('')
     }
 
+    if (shouldShowVoucherError) {
+        return (
+            <VoucherErrorTemplate
+                navigate={navigate}
+            />
+        )
+    }
+
+    if (isVoucherPrinting && !showVoucher) {
+        return (
+            <PaymentSuccessfulTemplate
+                showHelp={showPrintVoucher}
+                navigate={navigate}
+                onPrimaryButtonClick={() => {
+                    console.log('🔍 DEBUG: Show Voucher clicked')
+                    console.log('🔍 DEBUG: voucherData available:', !!voucherData)
+                    console.log('🔍 DEBUG: voucherData content:', voucherData)
+                    setShowVoucher(true)
+                }}
+            />
+        )
+    }
+
     if (showVoucher && voucherData) {
+        console.log('🔍 DEBUG: Rendering VoucherConfirmationTemplate')
+        console.log('🔍 DEBUG: voucherData for template:', voucherData)
         return (
             <VoucherConfirmationTemplate
                 voucherConfirmation={
@@ -310,19 +397,12 @@ export default function InsertCashTemplate({
                         terminal: `${voucherData.moneyTransfer.venue?.address}, ${voucherData.moneyTransfer.venue?.city}`,
                         amount: `${voucherData.moneyTransfer.amount.toFixed(2)} ${voucherData.moneyTransfer.currencyCode}`,
                         type: voucherData.moneyTransfer.typeCode,
+                        amountNumber: voucherData.moneyTransfer.amount,
+                        currency: voucherData.moneyTransfer.currencyCode,
                         usage: '???'
                     } as VoucherConfirmation
                 }
                 navigate={navigate}
-            />
-        )
-    }
-
-    if (isVoucherPrinting) {
-        return (
-            <PaymentSuccessfulTemplate
-                onPrimaryButtonClick={() => setShowVoucher(true)}
-                navigate={() => navigate('/')}
             />
         )
     }
@@ -335,13 +415,14 @@ export default function InsertCashTemplate({
                 onClose={handleErrorClose}
             />
             <Container isFullHeight={true}>
+                <SessionTimeout isOpen={showAreYouTherePopup} onEndSession={() => navigate('/')} onClose={() => { setShowAreYouTherePopup(false)}} />
                 <Header
                     navigationBackText={' '}
                     navigateBackUrl={'/payment-method'}
                 />
                 <div className="insert-cash">
                     <h1>{t('insertCash.title')}</h1>
-                    <h2>{t('insertCash.acceptedNotes')}</h2>
+                    <AcceptedBills />
                     <div className="demo-wrapper">
                         <img
                             src={insertCashImg}
@@ -349,12 +430,8 @@ export default function InsertCashTemplate({
                         />
                     </div>
                     <div className="inserted-amount">
-                        {t('insertCash.insertedAmount')}:{' '}
+                        {t('insertCash.insertedAmount')}:
                         <span>{amount || 0} RSD</span>
-                    </div>
-                    <div className="info-box">
-                        <img src={infoCircle} alt={t('common.info')} />
-                        {t('insertCash.noChangeWarning')}
                     </div>
                     <PrimaryButton
                         isDisabled={!amount || amount <= 0}

@@ -1,19 +1,19 @@
-import { useState } from 'react'
-
 import { sessionExpired } from '@/assets/icons'
 import IconHeading from '@/components/atoms/iconHeading/iconHeading'
 import PrimaryButton from '@/components/atoms/primaryButton/primaryButton'
+import SessionCounter from '@/components/molecules/sessionCounter/sessionCounter'
 import { useTranslate } from '@/i18n/useTranslate'
 
 export type PrinterUnavailableModalProps = {
-    isOpen: boolean
+    isOpen: boolean,
+    onEndSession: () => void
+    onClose: () => void
 }
 
-export default function SessionTimeout({ isOpen }: PrinterUnavailableModalProps) {
+export default function SessionTimeout({ isOpen, onEndSession, onClose }: PrinterUnavailableModalProps) {
     const { t } = useTranslate()
-    const [open, setOpen] = useState(isOpen)
 
-    if (!open) {
+    if (!isOpen) {
         return <></>
     }
 
@@ -22,7 +22,8 @@ export default function SessionTimeout({ isOpen }: PrinterUnavailableModalProps)
             <div className="modal-content">
                 <IconHeading heading={t('sessionTimeoutModal.title')} icon={sessionExpired} />
                 <p>{t('sessionTimeoutModal.subtitle')}</p>
-                <PrimaryButton text={t('sessionTimeoutModal.buttonText')} callback={() => { setOpen(false) }} />
+                <SessionCounter onEndSession={onEndSession} />
+                <PrimaryButton text={t('sessionTimeoutModal.buttonText')} callback={onClose} />
             </div>
         </div>
     )

@@ -24,22 +24,31 @@
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
-        padding: 2.8rem 2.5rem;
+        padding: 7.5rem 0 3rem 3rem;
+        position: relative;
+
+        .age-disclaimer-voucher {
+            position: absolute;
+            width: 5.6rem;
+            height: 5.6rem;
+            top: 1.5rem;
+            left: 3rem;
+        }
     }
 
     .voucher-item__title {
         text-align: left;
-        font-size: 3.6rem;
-        font-weight: 600;
-        margin: 0 0 0.8rem 0;
+        font-size: 4rem;
+        font-weight: 700;
+        margin: 0 0 1rem 0;
         color: colors.$white-color;
         font-family: fonts.$body-font;
     }
 
     .voucher-item__subtitle {
         text-align: left;
-        font-size: 2rem;
-        font-weight: 300;
+        font-size: 1.8rem;
+        font-weight: 400;
         margin: 0;
         color: colors.$white-color;
         font-family: fonts.$body-font;

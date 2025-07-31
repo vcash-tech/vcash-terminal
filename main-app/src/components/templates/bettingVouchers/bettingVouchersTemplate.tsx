@@ -1,15 +1,26 @@
-import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { NavigateFunction } from 'react-router-dom'
 
 import { ageDisclaimer } from '@/assets/icons'
-import { qrCode } from '@/assets/images'
+import {
+    betting_balkanBet,
+    betting_maxBetCommingSoon,
+    betting_maxBetUskoro,
+    //betting_meridian,
+    betting_meridianBetCommingSoon,
+    betting_meridianBetUskoro,
+    //betting_merkurXtip,
+    betting_merkurXtipCommingSoon,
+    betting_merkurXtipUskoro,
+    betting_soccerBet,
+} from '@/assets/images'
 import Container from '@/components/atoms/container/container'
 import PrimaryButton from '@/components/atoms/primaryButton/primaryButton'
-import BettingVoucherItem from '@/components/molecules/bettingVoucherItem/bettingVoucherItem'
+import AvailableServices from '@/components/molecules/availableServices/availableServices'
 import Footer from '@/components/organisms/footer/footer'
 import Header from '@/components/organisms/header/header'
-import { bettingVoucherCards } from '@/data/mocks/bettingVoucher.mock'
+import HowTo from '@/components/organisms/how-to/how-to'
+import i18n from '@/i18n/i18n'
 
 export type BettingVoucherProps = {
     navigate: NavigateFunction
@@ -17,16 +28,16 @@ export type BettingVoucherProps = {
 
 export default function BettingVoucher({ navigate }: BettingVoucherProps) {
     const { t } = useTranslation()
-    const [shouldNotify, setShouldNotify] = useState(false)
 
-        const showNotification = () => {
-        if (shouldNotify === true) {
-            return
-        }
-        setShouldNotify(true)
-        setTimeout(() => {
-            setShouldNotify(false)
-        }, 5000)
+    const bettingImages = [
+        betting_balkanBet,
+        betting_soccerBet
+    ]
+
+    if (i18n.language === 'en') {
+        bettingImages.push(betting_maxBetCommingSoon, betting_meridianBetCommingSoon, betting_merkurXtipCommingSoon)
+    } else {
+        bettingImages.push(betting_maxBetUskoro, betting_meridianBetUskoro, betting_merkurXtipUskoro)
     }
 
     return (
@@ -35,8 +46,7 @@ export default function BettingVoucher({ navigate }: BettingVoucherProps) {
                 navigateBackUrl={'/digital-services'}
                 navigationBackText={' '} //t('digitalServices.backToServices')}
             />
-            <div 
-                className={`betting-voucher`}>
+            <div className={`betting-voucher`}>
                 <h1>
                     {t('bettingVouchers.title')}{' '}
                     <img className="header-ico" src={ageDisclaimer} />
@@ -46,36 +56,15 @@ export default function BettingVoucher({ navigate }: BettingVoucherProps) {
                         __html: t('bettingVouchers.description')
                     }}
                 />
-                <div className={`betting-voucher__qr-box ${shouldNotify ? 'active-notification' : ''}`}>
-                    <div className="betting-voucher__qr-image-wrapper">
-                        <img src={qrCode} alt="QR Code" />
-                    </div>
-                    <div className="betting-voucher__qr-content">
-                        <span
-                            dangerouslySetInnerHTML={{
-                                __html: t('bettingVouchers.qrInfo')
-                            }}
-                            className="betting-voucher__qr-title"
-                        />
-
-                        <p
-                            className="betting-voucher__qr-desc"
-                            style={{ whiteSpace: 'pre-line' }}
-                            dangerouslySetInnerHTML={{
-                                __html: t('bettingVouchers.qrInfo2')
-                            }}
-                        />
-                    </div>
-                </div>
-                <div className="betting-voucher__cards-grid">
-                    {bettingVoucherCards.map((card, idx) => (
-                        <BettingVoucherItem key={idx} {...card} onPress={showNotification} />
-                    ))}
-                </div>
+                <HowTo isModal={false} isBetting={true} />
+                <AvailableServices
+                    title={t('bettingVouchers.availableServices')}
+                    images={bettingImages}
+                />
                 <div className="gaming-voucher__primary-button">
                     <PrimaryButton
                         text={t('bettingVouchers.buttonText')}
-                        onPress={() => navigate('/payment-method')}
+                        onPress={() => navigate('/payment-method', { state: { voucherType: 'betting' } })}
                     />
                 </div>
             </div>

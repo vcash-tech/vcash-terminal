@@ -1,4 +1,8 @@
 {
+  "acceptedBills": {
+    "title": "Accepted Bills",
+    "noChangeWarning": "Insert the exact amount - <b>the terminal does not give change</b>. Refund after payment is not possible."
+  },
   "selectPaymentMethod": {
     "backToServices": "Back to services",
     "title": "Select your payment method",
@@ -10,12 +14,20 @@
     "backToServices": "Back to services",
     "title": "18+ Voucher purchase disclaimer",
     "subtitle": "This kiosk provides access to betting services intended for users aged 18 and above only. By proceeding, you confirm that you are of legal age and understand the risks associated with gambling. Please play responsibly.",
-    "continuePurchase": "Yes, I have 18+ years"
+    "continuePurchase": "Yes, I have 18+ years",
+    "warning": "It is forbidden for minors to participate in gambling!",
+    "bettingWarning1": "Gambling services are intended for adults only",
+    "bettingWarning2": "Participation in gambling may lead to isolation from family, friends, and activities associated with their age",
+    "bettingWarning3": "Participation in gambling may lead to addiction which requires treatment",
+    "finalWarning": "The content below is intended for persons over 18 years of age. By clicking, you confirm your majority and accept responsibility for accessing information on the next page.",
+    "hospital-name": "Specialized addiction hospital",
+    "hospital-address": "Beograd, Teodora Drajzera 44",
+    "hospital-phones": "Telefoni ustanove:"
   },
   "paymentSuccessful": {
     "title": "Voucher Printing",
     "subtitle": "Take your voucher at the location from the image...",
-    "generatingVoucher": "Generating voucher...",
+    "generatingVoucher": "Generating voucher",
     "buttonText": "View Voucher",
     "fallbackTitle": "Didn't receive your voucher?",
     "voucherUnavailable": "Click below, take a photo or scan the voucher on the screen"
@@ -51,24 +63,6 @@
       "title": "For more details about the product, scan the QR code to visit our marketplace app",
       "back": "Back"
     },
-    "voucherGenerated": {
-      "title": "Your voucher is ready!",
-      "date": "Date",
-      "time": "Time",
-      "referenceNo": "Reference No",
-      "terminal": "Terminal",
-      "amount": "Amount",
-      "type": "Type",
-      "usage": "Usage",
-      "howToUse": {
-        "title": "How to use:",
-        "1": "Go to [LINK]",
-        "2": "Log into your account",
-        "3": "Enter the voucher code above "
-      },
-      "buttonText": "Finish",
-      "code": "Voucher code"
-    },
     "code": {
       "voucher": "Voucher",
       "scan": "Scan",
@@ -89,11 +83,6 @@
       "timeLeft": "Time left:",
       "extendTime": "Extend time"
     },
-    "sessionTimeoutModal": {
-      "title": "Session Timeout",
-      "subtitle": "For your security, the session has expired due to inactivity. Please start again to continue.",
-      "buttonText": "Start again"
-    },
     "welcome": {
       "title": "Welcome to VCash",
       "text": "Buy vouchers, pay bills, or top up digital services in a few taps",
@@ -108,9 +97,6 @@
     "header": {
       "back": "Back",
       "language": "Language"
-    },
-    "footer": {
-      "contactSupport": "Contact support:"
     },
     "common": {
       "next": "Next",
@@ -139,7 +125,7 @@
   },
   "service": {
     "title": "Choose your voucher",
-    "subtitle": "Buy credit for betting shops or online gaming services",
+    "subtitle": "",
     "cards": {
       "bet": {
         "title": "Bet Voucher",
@@ -151,8 +137,8 @@
       }
     },
     "payBills": {
-      "title": "Pay bills",
-      "body": "Fast and easy bill payment, no crowds or waiting",
+      "title": "IPS Pay bills",
+      "body": "",
       "simpleScanTitle": "Bill payment",
       "simpleScanBody": "Simply scan and pay"
     }
@@ -160,7 +146,8 @@
   "gamingVouchers": {
     "title": "Gaming Vouchers",
     "description": "Use a VCash <b>multipurpose</b> gaming voucher to purchase PlayStation/Xbox/Steam top-ups.",
-    "qrInfo": "Scan or visit <span style='color:#1048A3;'>market.vcash.rs</span> for current product prices.",
+    "availableServices": "Available services",
+    "qrInfo": "Scan or visit <span style='color:#1048A3;'>vcash.rs</span> for current product prices.",
     "qrInfo2": "Direct product purchases <b>are not available</b>. \nProducts are purchased and activated using a multi-purpose voucher in a selected amount based on the product/service you wish to activate.",
     "cards": {
       "playstation": {
@@ -181,12 +168,13 @@
       }
     },
     "priceFrom": "<span style='color: #000000; font-weight: 400;'>From</span> $25 - $150",
-    "buttonText": "Buy Multi-Purpose Voucher"
+    "buttonText": "Buy Voucher"
   },
   "bettingVouchers": {
     "title": "Betting Vouchers",
     "description": "Use a <b>multi-purpose</b> VCash voucher to add credit to your account.",
-    "qrInfo": "Scan or visit <span style='color:#1048A3;'>market.vcash.rs</span> to check current product prices.",
+    "availableServices": "Here you do not choose a bookmaker!<br />The bookmaker selection and transfer are done after purchasing the voucher.",
+    "qrInfo": "Scan or visit <span style='color:#1048A3;'>vcash.rs</span> to check current product prices.",
     "qrInfo2": "Direct purchase of products is <b>not available</b>.<br />Products are purchased and activated by buying a multi-purpose voucher in a selected value based on the product/service you wish to activate.",
     "cards": {
       "balkanBet": {
@@ -215,7 +203,7 @@
       }
     },
     "priceFrom": "<span style='color: #000000; font-weight: 400;'>From</span> $25 - $150",
-    "buttonText": "Buy Multi-Purpose Voucher"
+    "buttonText": "Buy Voucher"
   },
   "digitalServices": {
     "backToServices": "Back to service selection",
@@ -243,7 +231,9 @@
       "3": "Enter the voucher code above "
     },
     "buttonText": "Finish",
-    "scanToRedeem": "Scan to Redeem"
+    "scanToRedeem": "Scan to Redeem",
+    "successfulMsg": "Your voucher has been issued successfully",
+    "inProgressMsg": "Your voucher is being generated, please wait..."
   },
   "cashboxFullModal": {
     "title": "Kiosk Cash Box Full",
@@ -260,9 +250,9 @@
     "extendTime": "Extend time"
   },
   "sessionTimeoutModal": {
-    "title": "Session Timeout",
-    "subtitle": "For your security, the session has expired due to inactivity. Please start again to continue.",
-    "buttonText": "Start again"
+    "title": "Are you still there?",
+    "subtitle": "After timer expires the session will be automatically terminated due to inactivity.",
+    "buttonText": "Yes, I'm here"
   },
   "welcome": {
     "title": "Welcome to VCash",
@@ -280,7 +270,7 @@
     "language": "Language"
   },
   "footer": {
-    "contactSupport": "Contact support:"
+    "contactSupport": "Have a question? Contact support from 09:00 to 22:00:"
   },
   "common": {
     "next": "Next",
@@ -301,5 +291,55 @@
     "continue": "Continue",
     "tryAgain": "Try Again"
   },
-  "comingSoon": "Coming soon..."
+  "comingSoon": "Coming soon...",
+  "howTo": {
+    "title": "How it works",
+    "description": "Use a <b>VCash voucher</b> to quickly top up your account at leading bookmakers!<br />In 4 steps, buy, choose your bookmaker, activate the voucher, and top up your account",
+    "steps": {
+      "betting": [
+        {
+          "title": "Buy a Voucher",
+          "description": "Buy a VCash voucher with cash or card"
+        },
+        {
+          "title": "Scan the QR Code",
+          "description": "Scan the received QR code with your camera or activate the voucher at "
+        },
+        {
+          "title": "Choose a Bookmaker",
+          "description": "Select your preferred bookmaker"
+        },
+        {
+          "title": "Activate the Voucher",
+          "description": "Enter your account ID and desired amount, then confirm activation"
+        }
+      ],
+      "gaming": [
+        {
+          "title": "Buy a Voucher",
+          "description": "Buy a VCash voucher with cash or card"
+        },
+        {
+          "title": "Scan the QR Code",
+          "description": "Scan the received QR code with your camera or activate the voucher at "
+        },
+        {
+          "title": "Choose a Platform",
+          "description": "Select a platform and desired product from the list"
+        },
+        {
+          "title": "Activate the Voucher",
+          "description": "Confirm your purchase by entering your email address and phone number"
+        }
+      ]
+    }
+  },
+  "voucherValue": "Voucher Value",
+  "voucherInstruction": "Scan QR code or save activation code and activate voucher on the website",
+  "voucherError": {
+    "title": "Something went wrong",
+    "subtitle": "Voucher was not created, please contact support",
+    "supportTitle": "Call Support",
+    "supportText": "VCash team will help you to get your voucher for the amount you've inserted"
+  }
 }
