@@ -56,7 +56,7 @@ setupConsoleOverride()
 
 registerSW({
     onNeedRefresh() {
-        console.log('⚙️ Service worker update available, reloading app...')
+        console.log('⚙️ Service worker update available, reloading app... test')
         window.location.reload()
     }
 })
