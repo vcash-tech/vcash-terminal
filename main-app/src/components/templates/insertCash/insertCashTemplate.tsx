@@ -308,9 +308,8 @@ export default function InsertCashTemplate({
 
             setVoucherData(createVoucher)
             console.log('🔍 DEBUG: voucherData set to:', createVoucher)
-
             // Print the voucher with the new template renderer
-            if (createVoucher) {
+            if (createVoucher && voucherData?.moneyTransfer?.voucherCode) {
                 const printSuccess = await printVoucher(
                     createVoucher,
                     voucherTypeId
