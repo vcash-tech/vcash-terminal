@@ -176,7 +176,7 @@
   "bettingVouchers": {
     "title": "Bet vaučer",
     "description": "Iskoristi <b>VCash vaučer</b> za brzu dopunu svog naloga u vodećim kladionicama u Srbiji.",
-    "availableServices": "Ovde ne birate kladionicu!<br />Izbor kladionice i prenos se vrši nakon kupljenog vaučera.<br />Trenutno dostupne kladionice su:",
+    "availableServices": "Izbor kladionice i prenos se vrši nakon kupljenog vaučera.<br /><br />Trenutno dostupne kladionice su:",
     "qrInfo": "Skenirajte ili posetite <span style='color:#1048A3;'>vcash.rs</span> da se informišete o aktuelnim cenama proizvoda.",
     "qrInfo2": "Direktna kupovina proizvoda <b>nije moguća</b>.<br />Proizvodi se kupuju i aktiviraju kupovinom višenamenskog vaučera u odabranoj vrednosti prema proizvodu / servisu koji aktivirate.",
     "cards": {
