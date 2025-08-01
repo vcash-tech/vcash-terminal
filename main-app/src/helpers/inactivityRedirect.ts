@@ -15,13 +15,15 @@ export default function useInactivityRedirect(redirectPath = '/welcome') {
                 const currentPath = window.location.pathname
                 if (
                     currentPath !== redirectPath &&
-                    !['/register', '/', '/under-maintenance'].includes(
+                    !['/register', '/under-maintenance'].includes(
                         currentPath
                     )
                 ) {
                     // Only redirect if not already on the redirect path or in register/maintenance pages
                     if(currentPath !== '/buy-voucher-cash') {
-                        navigate(redirectPath)
+                        // hard redirect to avoid issues with service worker that works only on browser reload, redirect, ...
+                        window.location.href = redirectPath
+                        // navigate(redirectPath)
                     } else {
                         console.log('Dispatch are-you-still-there event')
                         window.dispatchEvent(new Event('are-you-still-there'))
