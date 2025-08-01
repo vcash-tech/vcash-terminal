@@ -14,7 +14,6 @@ export default function useInactivityRedirect(redirectPath = '/welcome') {
                 // Get current location at timeout time, not when effect was created
                 const currentPath = window.location.pathname
                 if (
-                    currentPath !== redirectPath &&
                     !['/register', '/under-maintenance'].includes(
                         currentPath
                     )
