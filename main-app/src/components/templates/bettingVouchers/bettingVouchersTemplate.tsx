@@ -4,12 +4,12 @@ import { NavigateFunction } from 'react-router-dom'
 import { ageDisclaimer } from '@/assets/icons'
 import {
     betting_balkanBet,
+    betting_merkurXtip,
     //betting_maxBetCommingSoon,
     //betting_maxBetUskoro,
     //betting_meridian,
     //betting_meridianBetCommingSoon,
     //betting_meridianBetUskoro,
-    //betting_merkurXtip,
     //betting_merkurXtipCommingSoon,
     //betting_merkurXtipUskoro,
     betting_soccerBet,
@@ -32,10 +32,10 @@ export default function BettingVoucher({ navigate }: BettingVoucherProps) {
     const bettingImages = [
         betting_balkanBet,
         betting_soccerBet,
+        betting_merkurXtip,
         betting_balkanBet,
         betting_soccerBet,
-        betting_balkanBet,
-        betting_soccerBet
+        betting_merkurXtip
     ]
 
     // if (i18n.language === 'en') {
