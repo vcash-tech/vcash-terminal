@@ -37,19 +37,8 @@ export default defineConfig(() => {
                     icons: []
                 },
                 workbox: {
-                    runtimeCaching: [
-                        {
-                            urlPattern: /\.(?:png|jpg|jpeg|svg|gif|webp)$/,
-                            handler: 'CacheFirst',
-                            options: {
-                                cacheName: 'images-cache',
-                                expiration: {
-                                    maxEntries: 100,
-                                    maxAgeSeconds: 60 * 60 * 24 * 30 // 30 days
-                                }
-                            }
-                        }
-                    ]
+                    globPatterns: ['**/*.{js,css,html,png,jpg,jpeg,svg,webp}'],
+                    cleanupOutdatedCaches: true,
                 }
             })
         ],
