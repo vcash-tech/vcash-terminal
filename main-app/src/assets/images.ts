@@ -11,7 +11,6 @@ import betting_merkurXtipUskoro from './images/betting/comming-soon/merkur-x-tip
 import betting_meridian from './images/betting/meridian.png'
 import betting_merkurXtip from './images/betting/merkurXtip.png'
 import betting_soccerBet from './images/betting/soccerBet.png'
-import bettingServices from './images/bettingServices.png'
 import betVoucher from './images/betVoucher.webp'
 import bill500 from './images/bill500.jpg'
 import bill1000 from './images/bill1000.jpg'
@@ -20,7 +19,6 @@ import cashPayment from './images/cashPayment.svg'
 import casinoCard from './images/casinoCard.png'
 import casinoCard2 from './images/casinoCard2.png'
 import creditCardPayment from './images/creditCardPayment.svg'
-import digitalServices from './images/digitalServices.png'
 import disney from './images/disney.png'
 import eaPlay from './images/eaPlay.png'
 import f1Card from './images/f1Card.png'
@@ -95,7 +93,6 @@ export {
     betting_merkurXtipCommingSoon,
     betting_merkurXtipUskoro,
     betting_soccerBet,
-    bettingServices,
     betVoucher,
     bill500,
     bill1000,
@@ -109,7 +106,6 @@ export {
     comingSoonBackground,
     creditCard,
     creditCardPayment,
-    digitalServices,
     disney,
     eaPlay,
     emailCompleted,
