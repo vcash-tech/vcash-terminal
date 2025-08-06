@@ -21,8 +21,15 @@ export default function useInactivityRedirect(redirectPath = '/welcome') {
                     // Only redirect if not already on the redirect path or in register/maintenance pages
                     if(currentPath !== '/buy-voucher-cash') {
                         // hard redirect to avoid issues with service worker that works only on browser reload, redirect, ...
-                        window.location.href = redirectPath
-                        // navigate(redirectPath)
+                        const now = new Date()
+                        const minutes = now.getMinutes()
+                        
+                        // hard redirecty every 15 min
+                        if (minutes % 15 === 0 && navigator.onLine) {
+                            window.location.href = redirectPath
+                        } else {
+                            navigate(redirectPath)
+                        }
                     } else {
                         console.log('Dispatch are-you-still-there event')
                         window.dispatchEvent(new Event('are-you-still-there'))
