@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { NavigateFunction } from 'react-router-dom'
+import { BrowserRouter, NavigateFunction } from 'react-router-dom'
 
 import GamingVoucherTemplate from './gamingVoucherTemplate'
 
@@ -25,5 +25,12 @@ export const Default: Story = {
             default: 'light',
             values: [{ name: 'dark', value: '#333333' }]
         }
-    }
+    },
+    decorators: [
+        (Story) => (
+            <BrowserRouter>
+                <Story />
+            </BrowserRouter>
+        ),
+    ],
 }

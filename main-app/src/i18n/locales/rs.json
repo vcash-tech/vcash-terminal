@@ -69,11 +69,6 @@
       "siteLink": "ili na sajtu vcash.rs <strong>AKTIVIRAJ VAUČER</strong>",
       "activationCode": "Aktivacioni kod"
     },
-    "cashboxFullModal": {
-      "title": "Dalja uplata nije moguća",
-      "subtitle": "Trenutno nije moguće nastaviti sa uplatom gotovine. Možete izdati vaučer za iznos koji ste do sada ubacili.",
-      "buttonText": "Generiši vaučer"
-    },
     "printerUnavailableModal": {
       "title": "Preuzmite svoj vaučer",
       "subtitle": "Vaš vaučer je spreman. Možete ga preuzeti skeniranjem QR koda sa ekrana ili slanjem na email.",
@@ -236,6 +231,16 @@
     "code": "Vaučer kod",
     "successfulMsg": "Vaučer je uspešno izdat.",
     "inProgressMsg": "Izdavanje vaučera u toku..."
+  },
+  "alertModal": {
+    "supportTitle": "Pozovi podršku",
+    "supportText": "VCash tim će vam odgovoriti na sva pitanja i pomoći da rešite novonastali problem.",
+    "errors": {
+      "offlineTitle": "Nema internet konekcije",
+      "offlineMessage": "Molimo sačekajte da se terminal ponovo poveže na internet.",
+      "printerErrorTitle": "Greška štampača",
+      "printerErrorMessage": "Došlo je do greške prilikom štampanja vaučera. Molimo pokušajte ponovo ili kontaktirajte podršku."
+    }
   },
   "cashboxFullModal": {
     "title": "Dalja uplata nije moguća",

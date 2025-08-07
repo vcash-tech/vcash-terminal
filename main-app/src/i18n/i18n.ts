@@ -25,7 +25,7 @@ i18n
   .init({
     resources,
     lng: storedLanguage, // Use stored language preference
-    fallbackLng: 'en',
+    fallbackLng: 'sr',
     interpolation: {
       escapeValue: false // react already safes from xss
     },

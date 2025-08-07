@@ -1,0 +1,105 @@
+@use '../../../styles/config/colors';
+
+.alert-modal {
+    background: rgba(0, 0, 0, 0.3);
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 998;
+    backdrop-filter: blur(5px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .modal-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4rem;
+        flex: 1;
+        justify-content: space-evenly;
+        margin: auto 7vw;
+        background: colors.$white-color;
+        border-radius: 12px;
+        width: 82vw;
+        padding: 10rem 4rem 4rem;
+
+        .primary-button {
+          width: 100%;
+        }
+
+        p {
+            font-weight: 500;
+            font-size: 2.4rem;
+            line-height: 3.8rem;
+            text-align: center;
+            color: #25292A;
+            margin: 2rem 0 10rem;
+        }
+
+        .support-wrapper {
+            display: flex;
+            flex-direction: column;
+            justify-self: flex-end;
+            flex: 1;
+            align-items: center;
+            justify-content: flex-end;
+            margin-bottom: 0rem;
+            width: 100%;
+
+            .support-content {
+                background: white;
+                width: 100%;
+                padding: 4rem 3rem;
+                border-radius: 1rem;
+                display: flex;
+                flex: 1;
+
+                background: linear-gradient(
+                                97.98deg,
+                                rgba(255, 255, 255, 0.712) 51.72%,
+                                rgba(255, 255, 255, 0.656) 77.75%
+                );
+                border: 1px solid rgba(56, 90, 201, 0.8);
+                border-radius: 16px;
+                justify-content: space-between;
+
+                p {
+                    margin: 0;
+                    text-align: left;
+                    color: black;
+                    font-size: 1.8rem;
+                    font-weight: 500;
+                    line-height: 1.6;
+
+                    &:first-child {
+                        font-size: 2.4rem;
+                        font-weight: 600;
+                    }
+                }
+
+                .support-contact {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    min-width: fit-content;
+
+                    border: 2px solid colors.$brand-primary-color;
+                    border-radius: 0.8rem;
+
+                    font-weight: 600;
+                    line-height: 3.6rem;
+                    text-align: center;
+                    letter-spacing: 0.01em;
+                    font-size: 2rem;
+                    padding: 2rem 4rem;
+                    margin: 0 0 0 2rem;
+
+                    color: colors.$brand-primary-color;
+                }
+            }
+        }
+    }
+}

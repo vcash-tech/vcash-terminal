@@ -6,6 +6,7 @@ import Container from '@/components/atoms/container/container'
 import ErrorNotification from '@/components/atoms/errorNotification/errorNotification'
 import PrimaryButton from '@/components/atoms/primaryButton/primaryButton'
 import AcceptedBills from '@/components/molecules/acceptedBills/acceptedBills'
+import AlertModal from '@/components/organisms/alertModal/alertModal'
 import Footer from '@/components/organisms/footer/footer'
 import Header from '@/components/organisms/header/header'
 import SessionTimeout from '@/components/organisms/sessionTimeoutModal/sessionTimeout'
@@ -50,6 +51,32 @@ export default function InsertCashTemplate({
     const [showError, setShowError] = useState<boolean>(false)
     const [showAreYouTherePopup, setShowAreYouTherePopup] = useState<boolean>(false)
     const [shouldShowVoucherError, setShouldShowVoucherError] = useState<boolean>(false)
+
+    // check if terminal is online
+    const [isOnline, setIsOnline] = useState<boolean>(navigator.onLine)
+    useEffect(() => {
+        const handleOnline = () => {
+            console.log('🔗 Terminal is online')
+            setIsOnline(true)
+        }
+
+        const handleOffline = () => {
+            console.log('🔗 Terminal is offline')
+            setIsOnline(false)
+        }
+
+        window.addEventListener('online', handleOnline)
+        window.addEventListener('offline', handleOffline)
+
+        // Initial check
+        setIsOnline(navigator.onLine)
+
+        return () => {
+            window.removeEventListener('online', handleOnline)
+            window.removeEventListener('offline', handleOffline)
+        }
+    }, [])
+
 
     useEffect(() => {
         // Reset inactivity timer on user activity
@@ -416,6 +443,17 @@ export default function InsertCashTemplate({
                 isVisible={showError}
                 onClose={handleErrorClose}
             />
+
+            {
+                isOnline === false && (
+                    <AlertModal
+                        title={t('alertModal.errors.offlineTitle')}
+                        message={t('alertModal.errors.offlineMessage')}
+                        displaySupport={true}
+                    />
+                )
+            }
+
             <Container isFullHeight={true}>
                 <SessionTimeout isOpen={showAreYouTherePopup} onEndSession={() => navigate('/')} onClose={() => { setShowAreYouTherePopup(false)}} />
                 <Header

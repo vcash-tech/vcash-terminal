@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react"
+import { BrowserRouter } from "react-router-dom"
 
 import PaymentMethodTerminalTemplate from "./paymentMethodTerminalTemplate"
 
@@ -26,5 +27,12 @@ export const Default: Story = {
       ],
     },
   },
+  decorators: [
+      (Story) => (
+          <BrowserRouter>
+              <Story />
+          </BrowserRouter>
+      ),
+  ],
 }
 
