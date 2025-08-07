@@ -51,6 +51,7 @@ export default function InsertCashTemplate({
     const [showError, setShowError] = useState<boolean>(false)
     const [showAreYouTherePopup, setShowAreYouTherePopup] = useState<boolean>(false)
     const [shouldShowVoucherError, setShouldShowVoucherError] = useState<boolean>(false)
+    const [voucherRecreateAttempts, setVoucherRecreateAttempts] = useState<number>(0)
 
     // check if terminal is online
     const [isOnline, setIsOnline] = useState<boolean>(navigator.onLine)
@@ -328,11 +329,12 @@ export default function InsertCashTemplate({
                 console.log(
                     '❌ Voucher create failed - no voucher data available'
                 )
-
+                setVoucherRecreateAttempts(voucherRecreateAttempts + 1)
                 setShouldShowVoucherError(true)
                 return
             }
-
+            
+            setVoucherRecreateAttempts(0)
             setVoucherData(createVoucher)
             console.log('🔍 DEBUG: voucherData set to:', createVoucher)
             // Print the voucher with the new template renderer
@@ -385,7 +387,10 @@ export default function InsertCashTemplate({
     if (shouldShowVoucherError) {
         return (
             <VoucherErrorTemplate
+                isOnline={isOnline}
                 navigate={navigate}
+                onTryAgain={() => { handleBuy()}}
+                voucherRecreateAttempts={voucherRecreateAttempts}
             />
         )
     }
@@ -397,7 +402,6 @@ export default function InsertCashTemplate({
                 navigate={navigate}
                 onPrimaryButtonClick={() => {
                     console.log('🔍 DEBUG: Show Voucher clicked')
-                    console.log('🔍 DEBUG: voucherData available:', !!voucherData)
                     console.log('🔍 DEBUG: voucherData content:', voucherData)
                     setShowVoucher(true)
                 }}
