@@ -1,8 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { BrowserRouter } from 'react-router-dom'
 
-import { withTranslationDemo } from '@/i18n/storybook/TranslationDecorator'
-
 import EmailInputTemplate from './emailInputTemplate'
 
 const meta = {
@@ -12,6 +10,21 @@ const meta = {
         layout: 'centered'
     },
     tags: ['autodocs'],
+} satisfies Meta<typeof EmailInputTemplate>
+
+export default meta
+type Story = StoryObj<typeof meta>
+
+export const Default: Story = {
+    args: {
+        onComplete: () => console.log('Email input completed'),
+    },
+    parameters: {
+        backgrounds: {
+            default: 'dark',
+            values: [{ name: 'dark', value: '#333333' }]
+        }
+    },
     decorators: [
         (Story) => (
             <BrowserRouter>
@@ -19,28 +32,4 @@ const meta = {
             </BrowserRouter>
         )
     ]
-} satisfies Meta<typeof EmailInputTemplate>
-
-export default meta
-type Story = StoryObj<typeof meta>
-
-export const Default: Story = {
-    args: {},
-    parameters: {
-        backgrounds: {
-            default: 'dark',
-            values: [{ name: 'dark', value: '#333333' }]
-        }
-    }
-}
-
-export const WithTranslationDemo: Story = {
-    args: {},
-    parameters: {
-        backgrounds: {
-            default: 'dark',
-            values: [{ name: 'dark', value: '#333333' }]
-        }
-    },
-    decorators: [withTranslationDemo]
 }

@@ -69,11 +69,6 @@
       "siteLink": "or go to site vcash.rs and <strong>ACTIVATE VOUCHER</strong>",
       "activationCode": "Activation Code"
     },
-    "cashboxFullModal": {
-      "title": "Kiosk Cash Box Full",
-      "subtitle": "The cash deposit limit has been reached. You can generate a voucher for the amount you've inserted so far.",
-      "issueVoucher": "Issue Voucher"
-    },
     "printerUnavailableModal": {
       "title": "Printer Unavailable",
       "subtitle": "You can still redeem your voucher - just scan the QR code below or send it to your email",
@@ -234,6 +229,16 @@
     "scanToRedeem": "Scan to Redeem",
     "successfulMsg": "Your voucher has been issued successfully",
     "inProgressMsg": "Your voucher is being generated, please wait..."
+  },
+  "alertModal": {
+    "supportTitle": "Call Support",
+    "supportText": "VCash team will answer all your questions and help you resolve any issues.",
+    "errors": {
+      "offlineTitle": "No Internet Connection",
+      "offlineMessage": "Please wait for terminal to reconnect to the internet.",
+      "printerErrorTitle": "Printer Error",
+      "printerErrorMessage": "An error occurred while printing the voucher. Please try again or contact support."
+    }
   },
   "cashboxFullModal": {
     "title": "Kiosk Cash Box Full",

@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react"
+import { BrowserRouter } from "react-router-dom"
 
 import AgeDisclaimerTemplate from "./ageDisclaimerTemplate"
 
@@ -15,7 +16,9 @@ export default meta
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  args: {},
+  args: {
+    navigate: () => console.log("Navigation triggered")
+  },
   parameters: {
     backgrounds: {
       default: "dark",
@@ -24,5 +27,12 @@ export const Default: Story = {
       ],
     },
   },
+  decorators: [
+    (Story) => (
+      <BrowserRouter>
+        <Story />
+      </BrowserRouter>
+    ),
+  ],
 }
 

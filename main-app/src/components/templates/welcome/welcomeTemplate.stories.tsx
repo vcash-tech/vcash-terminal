@@ -17,15 +17,7 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Inactive: Story = {
-    name: 'Inactive State',
-    args: {
-        navigate: () => {}
-    }
-}
-
-export const Active: Story = {
-    name: 'Active State',
+export const Default: Story = {
     args: {
         navigate: () => {}
     }

@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
+import { BrowserRouter } from 'react-router-dom'
 
 import BettingVoucherTemplate from './bettingVouchersTemplate'
 
@@ -24,5 +25,12 @@ export const Default: Story = {
             default: 'light',
             values: [{ name: 'dark', value: '#333333' }]
         }
-    }
+    },
+    decorators: [
+        (Story) => (
+            <BrowserRouter>
+                <Story />
+            </BrowserRouter>
+        )
+    ]
 }
