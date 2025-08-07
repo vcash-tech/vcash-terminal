@@ -226,6 +226,7 @@
       "3": "Enter the voucher code above "
     },
     "buttonText": "Finish",
+    "tryAgain": "Try Again",
     "scanToRedeem": "Scan to Redeem",
     "successfulMsg": "Your voucher has been issued successfully",
     "inProgressMsg": "Your voucher is being generated, please wait..."

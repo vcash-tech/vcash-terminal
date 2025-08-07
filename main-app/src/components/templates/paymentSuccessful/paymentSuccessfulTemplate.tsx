@@ -1,5 +1,5 @@
 // import { useState } from 'react'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { NavigateFunction } from 'react-router-dom'
 
 import { confirmedIcon, printerIco } from '@/assets/icons'
@@ -30,17 +30,19 @@ export default function PaymentSuccessfulTemplate({
         }
     }
 
+    const [showHelpMessage, setShowHelpMessage] = useState<unknown>(showHelp)
+
     useEffect(() => {
         // If showHelp is null or undefined, set it to true after 10 seconds
-        if(showHelp === null || showHelp === undefined) {
+        if(showHelpMessage === null || showHelpMessage === undefined) {
             const timer = setTimeout(() => {
-                showHelp = true
+                setShowHelpMessage(true)
             }, 10000)
             return () => clearTimeout(timer)
         }
 
         // if voucher is printed navigate to / after 10 seconds
-        if (showHelp === false && navigate) {
+        if (showHelpMessage === false && navigate) {
             const timer = setTimeout(() => {
                 navigate('/')
             }, 10000)
@@ -48,7 +50,7 @@ export default function PaymentSuccessfulTemplate({
         } 
         
         
-    }, [showHelp, navigate])
+    }, [showHelpMessage, navigate])
 
 
     return (
@@ -63,7 +65,7 @@ export default function PaymentSuccessfulTemplate({
                 </div>
 
                 <div className="fallback-wrapper">
-                    {showHelp === true && (
+                    {showHelpMessage === true && (
                         <div className="fallback">
                             <div>
                                 <p>{t('paymentSuccessful.fallbackTitle')}</p>
@@ -76,7 +78,7 @@ export default function PaymentSuccessfulTemplate({
                             </WireButton>
                         </div>
                     )}
-                    {showHelp === false && (
+                    {showHelpMessage === false && (
                         <>
                         <div className="successful-msg"><img src={confirmedIcon} alt='Confirm icon' />{t('voucherGenerated.successfulMsg')}</div>
                         <PrimaryButton
@@ -85,7 +87,7 @@ export default function PaymentSuccessfulTemplate({
                             />
                         </>
                     )}
-                     {(showHelp === null || showHelp === undefined) && (
+                     {(showHelpMessage === null || showHelpMessage === undefined) && (
                         <div className="successful-msg marginOn"><img src={printerIco} alt='Printer icon' />{t('voucherGenerated.inProgressMsg')}</div>
                      )}
                 </div>

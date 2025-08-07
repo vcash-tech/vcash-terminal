@@ -1,34 +1,63 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { NavigateFunction } from 'react-router-dom'
 
 import { printVoucher } from '@/assets/images'
 import Container from '@/components/atoms/container/container'
 import PrimaryButton from '@/components/atoms/primaryButton/primaryButton'
 import WireButton from '@/components/atoms/wireButton/wireButton'
+import AlertModal from '@/components/organisms/alertModal/alertModal'
 import Footer from '@/components/organisms/footer/footer'
 import Header from '@/components/organisms/header/header'
+import SessionTimeout from '@/components/organisms/sessionTimeoutModal/sessionTimeout'
 import { useTranslate } from '@/i18n/useTranslate'
 
 export default function VoucherErrorTemplate({
+    isOnline,
     navigate,
-    onPrimaryButtonClick
+    onTryAgain,
+    voucherRecreateAttempts = 0
 }: {
-    navigate?: NavigateFunction
-    onPrimaryButtonClick?: () => void
+    isOnline: boolean
+    navigate: NavigateFunction
+    onTryAgain?: () => void
+    voucherRecreateAttempts?: number
 }) {
     const { t } = useTranslate()
+    const [showAreYouTherePopup, setShowAreYouTherePopup] = useState<boolean>(false)
+
+    // TODO: Refactor this here and in parent component
+    useEffect(() => {
+        // Reset inactivity timer on user activity
+        const handleAreYouStillThere = () => setShowAreYouTherePopup(true)
+        window.addEventListener('are-you-still-there', handleAreYouStillThere)
+        console.log('Listening for are-you-still-there event')
+        return () => {
+            window.removeEventListener('are-you-still-there', handleAreYouStillThere)
+        }
+    }, [showAreYouTherePopup])
 
     useEffect(() => {
         const timer = setTimeout(() => {
-            if (navigate) {
+            if (isOnline) {
                 navigate('/')
             }
-        }, 15000)
+        }, voucherRecreateAttempts > 2 ? 15000 : 30000)
         return () => clearTimeout(timer)
-    }, [navigate])
+    }, [navigate, voucherRecreateAttempts, isOnline])
 
     return (
+        <>
+        {
+            isOnline === false && (
+                <AlertModal
+                    title={t('alertModal.errors.offlineTitle')}
+                    message={t('alertModal.errors.offlineMessage')}
+                    displaySupport={true}
+                />
+            )
+        }
         <Container isFullHeight={true}>
+            <SessionTimeout isOpen={showAreYouTherePopup} onEndSession={() => navigate('/')} onClose={() => { setShowAreYouTherePopup(false)}} />
             <Header />
             <div className="voucher-error">
                 <h1>{t('voucherError.title')}</h1>
@@ -50,21 +79,24 @@ export default function VoucherErrorTemplate({
                                 {t('voucherError.supportText')}
                             </p>
                         </div>
-                        <WireButton onClick={onPrimaryButtonClick}>
+                        <WireButton>
                             062 111 5 111
                         </WireButton>
                     </div>
                 </div>
                 <PrimaryButton
                     callback={() => {
-                        if (navigate) {
-                            navigate('/')
-                        }
+                        if(voucherRecreateAttempts <= 2) {
+                            onTryAgain?.()
+                            return
+                        } 
+                        navigate('/')
                     }}
-                    text={t('voucherGenerated.buttonText')}
+                    text={t(voucherRecreateAttempts <= 2 ? 'voucherGenerated.tryAgain' : 'voucherGenerated.buttonText')}
                 />
             </div>
             <Footer />
         </Container>
+        </>
     )
 }
