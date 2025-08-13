@@ -42,7 +42,6 @@ export default function useInactivityRedirect(redirectPath = '/welcome') {
                         window.dispatchEvent(new Event('are-you-still-there'))
                         resetTimer()
                     }
-
                 }
             }, INACTIVITY_TIME)
         }
