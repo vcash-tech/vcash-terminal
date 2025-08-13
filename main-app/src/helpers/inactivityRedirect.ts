@@ -1,8 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import i18n from '@/i18n/i18n'
-
 const INACTIVITY_TIME = 1 * 60 * 1000 // 1 minute in milliseconds
 
 export default function useInactivityRedirect(redirectPath = '/welcome') {
@@ -22,10 +20,6 @@ export default function useInactivityRedirect(redirectPath = '/welcome') {
                         currentPath
                     )
                 ) {
-                    // return i18nextLng to sr if it was changed
-                    if (localStorage.getItem('i18nextLng') !== 'rs' || localStorage.getItem('vcash_language_preference') !== 'rs') {
-                        i18n.changeLanguage('rs')
-                    }
                     // Only redirect if not already on the redirect path or in register/maintenance pages
                     if(currentPath !== '/buy-voucher-cash') {
                         // hard redirect to avoid issues with service worker that works only on browser reload, redirect, ...
