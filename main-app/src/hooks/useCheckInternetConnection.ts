@@ -56,10 +56,8 @@ export const useCheckInternetConnection = ({
       })
 
       if (response.ok) {
-        // setIsOnline(true)
-        // setError(null)
-        setIsOnline(false)
-        setError(`Health check failed with status: ${response.status}`)
+        setIsOnline(true)
+        setError(null)
       } else {
         setIsOnline(false)
         setError(`Health check failed with status: ${response.status}`)
