@@ -50,10 +50,16 @@ export default function InsertCashTemplate({
     const [voucherData, setVoucherData] = useState<VoucherResponse | null>(null)
     const [errorMessage, setErrorMessage] = useState<string>('')
     const [showError, setShowError] = useState<boolean>(false)
-    const [showAreYouTherePopup, setShowAreYouTherePopup] = useState<boolean>(false)
-    const [shouldShowVoucherError, setShouldShowVoucherError] = useState<boolean>(false)
-    const [voucherRecreateAttempts, setVoucherRecreateAttempts] = useState<number>(0)
-    const { isOnline } = useCheckInternetConnection({ shouldCheck: true , continuous: true })
+    const [showAreYouTherePopup, setShowAreYouTherePopup] =
+        useState<boolean>(false)
+    const [shouldShowVoucherError, setShouldShowVoucherError] =
+        useState<boolean>(false)
+    const [voucherRecreateAttempts, setVoucherRecreateAttempts] =
+        useState<number>(0)
+    const { isOnline } = useCheckInternetConnection({
+        shouldCheck: true,
+        continuous: true
+    })
 
     useEffect(() => {
         // Reset inactivity timer on user activity
@@ -61,7 +67,10 @@ export default function InsertCashTemplate({
         window.addEventListener('are-you-still-there', handleAreYouStillThere)
         console.log('Listening for are-you-still-there event')
         return () => {
-            window.removeEventListener('are-you-still-there', handleAreYouStillThere)
+            window.removeEventListener(
+                'are-you-still-there',
+                handleAreYouStillThere
+            )
         }
     }, [showAreYouTherePopup])
 
@@ -248,7 +257,7 @@ export default function InsertCashTemplate({
             )
 
             // Construct the print URL
-            const printUrl = `${templateRendererUrl}/terminal_voucher?rotate=180&data=${base64Data}&type=bmp`
+            const printUrl = `${templateRendererUrl}/terminal_voucher?rotate=180&data=${encodeURIComponent(base64Data)}&type=bmp`
 
             console.log('Printing voucher with URL:', printUrl)
 
@@ -309,7 +318,7 @@ export default function InsertCashTemplate({
                 setShouldShowVoucherError(true)
                 return
             }
-            
+
             setVoucherRecreateAttempts(0)
             setVoucherData(createVoucher)
             console.log('🔍 DEBUG: voucherData set to:', createVoucher)
@@ -335,7 +344,10 @@ export default function InsertCashTemplate({
                     console.log(
                         '❌ Print failed - staying on success screen for manual interaction'
                     )
-                    console.log('🔍 DEBUG: voucherData after print failure:', voucherData)
+                    console.log(
+                        '🔍 DEBUG: voucherData after print failure:',
+                        voucherData
+                    )
                 }
             } else {
                 console.log(
@@ -365,7 +377,9 @@ export default function InsertCashTemplate({
             <VoucherErrorTemplate
                 isOnline={isOnline}
                 navigate={navigate}
-                onTryAgain={() => { handleBuy()}}
+                onTryAgain={() => {
+                    handleBuy()
+                }}
                 voucherRecreateAttempts={voucherRecreateAttempts}
             />
         )
@@ -424,18 +438,22 @@ export default function InsertCashTemplate({
                 onClose={handleErrorClose}
             />
 
-            {
-                isOnline === false && (
-                    <AlertModal
-                        title={t('alertModal.errors.offlineTitle')}
-                        message={t('alertModal.errors.offlineMessage')}
-                        displaySupport={true}
-                    />
-                )
-            }
+            {isOnline === false && (
+                <AlertModal
+                    title={t('alertModal.errors.offlineTitle')}
+                    message={t('alertModal.errors.offlineMessage')}
+                    displaySupport={true}
+                />
+            )}
 
             <Container isFullHeight={true}>
-                <SessionTimeout isOpen={showAreYouTherePopup} onEndSession={() => navigate('/')} onClose={() => { setShowAreYouTherePopup(false)}} />
+                <SessionTimeout
+                    isOpen={showAreYouTherePopup}
+                    onEndSession={() => navigate('/')}
+                    onClose={() => {
+                        setShowAreYouTherePopup(false)
+                    }}
+                />
                 <Header
                     navigationBackText={' '}
                     navigateBackUrl={'/payment-method'}
