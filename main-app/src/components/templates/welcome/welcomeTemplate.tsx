@@ -24,10 +24,10 @@ export default function Welcome({ navigate }: { navigate: NavigateFunction }) {
             return () => clearTimeout(timer)
         }
     }, [isAnimating])
-
+    
     return (
         <Container style={{ gap: 0 }} isFullHeight={true}>
-            <Header isWelcome={true} />
+            <Header isWelcome={true} shouldResetLanguage={true} />
             <div
                 className={`screen-saver-content`}
                 style={{ maxHeight: height }}>
