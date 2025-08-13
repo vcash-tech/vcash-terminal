@@ -13,6 +13,7 @@ import SessionTimeout from '@/components/organisms/sessionTimeoutModal/sessionTi
 import VoucherErrorTemplate from '@/components/templates/voucherDataError/VoucherErrorTemplate'
 import { VoucherConfirmation } from '@/data/entities/voucher-confirmation'
 import { mockedPrinterData, shouldMockPrinter } from '@/helpers/mock.printer'
+import { useCheckInternetConnection } from '@/hooks/useCheckInternetConnection'
 import { useTranslate } from '@/i18n/useTranslate'
 import { apiService } from '@/services/apiService'
 import { AuthService } from '@/services/authService'
@@ -52,32 +53,7 @@ export default function InsertCashTemplate({
     const [showAreYouTherePopup, setShowAreYouTherePopup] = useState<boolean>(false)
     const [shouldShowVoucherError, setShouldShowVoucherError] = useState<boolean>(false)
     const [voucherRecreateAttempts, setVoucherRecreateAttempts] = useState<number>(0)
-
-    // check if terminal is online
-    const [isOnline, setIsOnline] = useState<boolean>(navigator.onLine)
-    useEffect(() => {
-        const handleOnline = () => {
-            console.log('🔗 Terminal is online')
-            setIsOnline(true)
-        }
-
-        const handleOffline = () => {
-            console.log('🔗 Terminal is offline')
-            setIsOnline(false)
-        }
-
-        window.addEventListener('online', handleOnline)
-        window.addEventListener('offline', handleOffline)
-
-        // Initial check
-        setIsOnline(navigator.onLine)
-
-        return () => {
-            window.removeEventListener('online', handleOnline)
-            window.removeEventListener('offline', handleOffline)
-        }
-    }, [])
-
+    const { isOnline } = useCheckInternetConnection({ shouldCheck: true , continuous: true })
 
     useEffect(() => {
         // Reset inactivity timer on user activity
