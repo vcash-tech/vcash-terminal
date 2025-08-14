@@ -366,6 +366,7 @@ export default function InsertCashTemplate({
                 isOnline={isOnline}
                 navigate={navigate}
                 onTryAgain={() => { handleBuy()}}
+                isVoucherPrinting={isVoucherPrinting}
                 voucherRecreateAttempts={voucherRecreateAttempts}
             />
         )

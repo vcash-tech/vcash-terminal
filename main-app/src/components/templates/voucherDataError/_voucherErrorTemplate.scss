@@ -66,9 +66,9 @@
             justify-self: flex-end;
 
             background: linear-gradient(
-                            97.98deg,
-                            rgba(255, 255, 255, 0.712) 51.72%,
-                            rgba(255, 255, 255, 0.656) 77.75%
+                97.98deg,
+                rgba(255, 255, 255, 0.712) 51.72%,
+                rgba(255, 255, 255, 0.656) 77.75%
             );
             border: 1px solid rgba(56, 90, 201, 0.8);
             border-radius: 16px;
@@ -90,8 +90,6 @@
                 padding: 1rem 2rem;
             }
         }
-
-
     }
 
     .primary-button {
@@ -107,9 +105,9 @@
         justify-content: flex-start;
 
         background: linear-gradient(
-                        97.98deg,
-                        rgba(255, 255, 255, 0.712) 51.72%,
-                        rgba(255, 255, 255, 0.656) 77.75%
+            97.98deg,
+            rgba(255, 255, 255, 0.712) 51.72%,
+            rgba(255, 255, 255, 0.656) 77.75%
         );
         border: 1px solid rgba(56, 90, 201, 0.8);
         border-radius: 16px;
@@ -126,7 +124,6 @@
         .session-counter {
             flex: none;
         }
-
     }
     .support-text {
         max-width: 50rem;
@@ -151,5 +148,12 @@
             opacity: 0.8;
             filter: grayscale(100%);
         }
+    }
+
+    .voucher-progress-info {
+        height: 2rem;
+        color: colors.$dark-text-color;
+        position: relative;
+        top: 2rem;
     }
 }
