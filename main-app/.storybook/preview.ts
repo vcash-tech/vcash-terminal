@@ -6,6 +6,7 @@ import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport'
 import type { Preview } from '@storybook/react'
 
 import { withKeyboardProvider } from '../src/stories/decorators/withKeyboardProvider'
+import { withNavigationProvider } from '../src/stories/decorators/withNavigationProvider'
 import { WithI18n } from './i18nDecorator'
 
 // Custom viewport for 1080x1920 size
@@ -20,7 +21,7 @@ const customViewports = {
 }
 
 const preview: Preview = {
-    decorators: [WithI18n, withKeyboardProvider],
+    decorators: [WithI18n, withKeyboardProvider, withNavigationProvider],
     parameters: {
         controls: {
             matchers: {
