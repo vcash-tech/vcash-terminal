@@ -377,9 +377,8 @@ export default function InsertCashTemplate({
             <VoucherErrorTemplate
                 isOnline={isOnline}
                 navigate={navigate}
-                onTryAgain={() => {
-                    handleBuy()
-                }}
+                onTryAgain={() => { handleBuy()}}
+                isVoucherPrinting={isVoucherPrinting}
                 voucherRecreateAttempts={voucherRecreateAttempts}
             />
         )

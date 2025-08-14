@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react"
 import VoucherErrorTemplate from "./VoucherErrorTemplate"
 
 const meta = {
-  title: "4. Templates/Voucher Data Error",
+  title: "4. Templates/Voucher Error Template",
   component: VoucherErrorTemplate,
   parameters: {
     layout: "centered",
@@ -16,6 +16,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
+    isOnline: true,
     navigate: () => { console.log('Navigating to home') },
     onTryAgain: () => {
       console.log(`Navigating to page`)
