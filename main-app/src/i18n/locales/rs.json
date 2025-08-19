@@ -265,7 +265,21 @@
   "welcome": {
     "title": "Dobro Došli u VCash",
     "text": "Kupovina vaučera i plaćanje računa – brzo, jednostavno i bez čekanja.",
-    "getStarted": "Započni"
+    "getStarted": "Započni",
+    "dark": {
+      "betting": {
+        "title": "Bet Vaučer",
+        "subtitle": "Dopuni svoj nalog u omiljenoj kladionici"
+      },
+      "gaming": {
+        "title": "Digital Vaučer",
+        "subtitle": "Dopuni svoj nalog na omiljenoj gaming platformi"
+      },
+      "ips": {
+        "title": "IPS Plaćanje računa",
+        "subtitle": "Brzo i jednostavno plaćanje račun, bez gužve i čekanja."
+      }
+    }
   },
   "emailInput": {
     "title": "Pošalji vaučer na email",

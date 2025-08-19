@@ -75,6 +75,22 @@ import tickets from './images/tickets.png'
 import useVoucherBetting from './images/useVoucherBetting.jpg'
 import useVoucherGaming from './images/useVoucherGaming.jpg'
 import marketplaceQR from './images/vcash-marketplace.svg'
+import welcome_betting_balkanBet from './images/welcome/betting/balkanBet.png'
+import welcome_betting_maxBet from './images/welcome/betting/maxBet.png'
+import welcome_betting_meridianBet from './images/welcome/betting/meridianBet.png'
+import welcome_betting_merkurXtip from './images/welcome/betting/merkurXtip.png'
+import welcome_betting_soccerBet from './images/welcome/betting/soccerBet.png'
+import welcome_gaming_playStation from './images/welcome/gaming/playStation.png'
+import welcome_gaming_roblox from './images/welcome/gaming/roblox.png'
+import welcome_gaming_steam from './images/welcome/gaming/steam.png'
+import welcome_gaming_xBox from './images/welcome/gaming/xBox.png'
+import welcome_ips_katastar from './images/welcome/ips/katastar.png'
+import welcome_ips_komunalije from './images/welcome/ips/komunalije.png'
+import welcome_ips_mup from './images/welcome/ips/mup.png'
+import welcome_ips_struja from './images/welcome/ips/struja.png'
+import welcome_ips_telefon from './images/welcome/ips/telefon.png'
+import uskoroGreenLarge from './images/welcome/uskoroLarge.png'
+import uskoroGreenSmall from './images/welcome/uskoroSmall.png'
 import welcomeBackground from './images/welcomeBackground.svg'
 
 export {
@@ -153,7 +169,22 @@ export {
     tickets,
     useVoucherBetting,
     useVoucherGaming,
+    uskoroGreenLarge,
+    uskoroGreenSmall,
     viewBackground,
+    welcome_betting_balkanBet,
+    welcome_betting_maxBet,
+    welcome_betting_meridianBet,
+    welcome_betting_merkurXtip,
+    welcome_betting_soccerBet,
+    welcome_gaming_playStation,
+    welcome_gaming_roblox,
+    welcome_gaming_steam,
+    welcome_gaming_xBox,
+    welcome_ips_katastar,
+    welcome_ips_komunalije,
+    welcome_ips_mup,
+    welcome_ips_struja,
+    welcome_ips_telefon,
     welcomeBackground,
-    xboxClean
-}
+    xboxClean}
