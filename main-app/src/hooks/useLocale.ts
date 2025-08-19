@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom'
 
 import { LanguageService } from '@/services/languageService'
 
-import { useNavigationContext } from './useNavigationContext'
+import { useNavigationContext } from './useNavigationHook'
 
 interface UseLocaleReturn {
   currentLanguage: string

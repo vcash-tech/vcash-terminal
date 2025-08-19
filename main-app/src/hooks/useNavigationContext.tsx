@@ -1,23 +1,13 @@
-import { createContext, ReactNode,useCallback, useContext, useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 
-interface NavigationContextType {
-  startUrl: string | null
-  isStartSet: boolean
-  setStartIfEligible: () => void
-  goBackToStart: (options?: { clearAfter?: boolean; replace?: boolean }) => void
-  clearStart: () => void
-}
-
-const NavigationContext = createContext<NavigationContextType | undefined>(undefined)
-
-const STORAGE_KEY = 'navigation.startUrl'
-const DEFAULT_ALLOWED_START_PATHS = ['/welcome', '/welcome-with-services']
-
-interface NavigationProviderProps {
-  children: ReactNode
-  allowedStartPaths?: string[]
-}
+import { 
+  DEFAULT_ALLOWED_START_PATHS,
+  NavigationContext,
+  NavigationContextType, 
+  NavigationProviderProps, 
+  STORAGE_KEY
+} from './navigationConstants'
 
 export function NavigationProvider({ 
   children, 
@@ -76,12 +66,4 @@ export function NavigationProvider({
       {children}
     </NavigationContext.Provider>
   )
-}
-
-export function useNavigationContext(): NavigationContextType {
-  const context = useContext(NavigationContext)
-  if (context === undefined) {
-    throw new Error('useNavigationContext must be used within a NavigationProvider')
-  }
-  return context
 }

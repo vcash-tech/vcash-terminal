@@ -9,7 +9,7 @@ import PrimaryButton from '@/components/atoms/primaryButton/primaryButton'
 import Footer from '@/components/organisms/footer/footer'
 import Header from '@/components/organisms/header/header'
 import { DeviceTokenSteps } from '@/data/enums/deviceTokenSteps'
-import { useNavigationContext } from '@/hooks/useNavigationContext'
+import { useNavigationContext } from '@/hooks/useNavigationHook'
 import { useTranslate } from '@/i18n/useTranslate'
 
 const BRAND_NAME = import.meta.env.VITE_BRAND_NAME

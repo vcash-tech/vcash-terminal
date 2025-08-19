@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import { useNavigationContext } from '@/hooks/useNavigationContext'
+import { useNavigationContext } from '@/hooks/useNavigationHook'
 
 const INACTIVITY_TIME = 1 * 60 * 1000 // 1 minute in milliseconds
 

@@ -13,18 +13,19 @@ import AvailableServices from '@/components/molecules/availableServices/availabl
 import Footer from '@/components/organisms/footer/footer'
 import Header from '@/components/organisms/header/header'
 import HowTo from '@/components/organisms/how-to/how-to'
+import { useNavigationContext } from '@/hooks/useNavigationHook'
 
 export type GamingVoucherProps = {
     navigate: NavigateFunction
 }
 export default function GamingVoucher({ navigate }: GamingVoucherProps) {
     const { t } = useTranslation()
-
+    const { startUrl } = useNavigationContext()
     return (
         <Container isFullHeight={true}>
             <Header
                 navigationBackText={' '}
-                navigateBackUrl={'/digital-services'}
+                navigateBackUrl={startUrl === '/welcome' ? "/digital-services" : startUrl ?? '/welcome'}
             />
             <div className="gaming-voucher">
                 <h1>{t('gamingVouchers.title')}</h1>

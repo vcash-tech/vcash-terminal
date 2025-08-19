@@ -12,7 +12,7 @@ import VoucherCode from '@/components/molecules/voucherCode/voucherCode'
 import Footer from '@/components/organisms/footer/footer'
 import Header from '@/components/organisms/header/header'
 import { VoucherConfirmation } from '@/data/entities/voucher-confirmation'
-import { useNavigationContext } from '@/hooks/useNavigationContext'
+import { useNavigationContext } from '@/hooks/useNavigationHook'
 import { useTranslate } from '@/i18n/useTranslate'
 
 export default function VoucherConfirmationTemplate({

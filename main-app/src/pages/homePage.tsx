@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import Welcome from '@/components/templates/welcome/welcomeTemplate'
-import { useNavigationContext } from '@/hooks/useNavigationContext'
+import { useNavigationContext } from '@/hooks/useNavigationHook'
 import { POSService } from '@/services/posService'
 
 function HomePage() {

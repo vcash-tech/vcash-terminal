@@ -2,12 +2,13 @@ import './styles/app.scss'
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
+import { useNavigationContext } from '@/hooks/useNavigationHook'
 import BettingPage from '@/pages/bettingPage'
 import GamingPage from '@/pages/gamingPage'
 
 import { KeyboardProvider } from './context/KeyboardContext'
 import useInactivityRedirect from './helpers/inactivityRedirect'
-import { NavigationProvider , useNavigationContext } from './hooks/useNavigationContext'
+import { NavigationProvider } from './hooks/useNavigationContext'
 import { TranslationProvider } from './i18n/TranslationProvider'
 import DigitalServicesPage from './pages/digitalSevicesPage'
 import DisclaimerPage from './pages/disclaimerPage'

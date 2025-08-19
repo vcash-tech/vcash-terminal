@@ -4,6 +4,7 @@ import Container from '@/components/atoms/container/container'
 import PrimaryButton from '@/components/atoms/primaryButton/primaryButton'
 import Footer from '@/components/organisms/footer/footer'
 import Header from '@/components/organisms/header/header'
+import { useNavigationContext } from '@/hooks/useNavigationHook'
 import { useTranslate } from '@/i18n/useTranslate'
 
 import {
@@ -20,11 +21,12 @@ export default function AgeDisclaimerTemplate({
     navigate: NavigateFunction
 }) {
     const { t } = useTranslate()
+    const { startUrl } = useNavigationContext()
 
     return (
         <Container isFullHeight={true}>
             <Header
-                navigateBackUrl="/digital-services"
+                navigateBackUrl={startUrl === '/welcome' ? "/digital-services" : startUrl ?? '/welcome'}
                 navigationBackText={' '}
             />
             <div className="age-disclaimer-wrapper">
