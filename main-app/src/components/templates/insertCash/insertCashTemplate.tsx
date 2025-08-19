@@ -48,8 +48,10 @@ export default function InsertCashTemplate({
     const [voucherData, setVoucherData] = useState<VoucherResponse | null>(null)
     const [errorMessage, setErrorMessage] = useState<string>('')
     const [showError, setShowError] = useState<boolean>(false)
-    const [showAreYouTherePopup, setShowAreYouTherePopup] = useState<boolean>(false)
-    const [shouldShowVoucherError, setShouldShowVoucherError] = useState<boolean>(false)
+    const [showAreYouTherePopup, setShowAreYouTherePopup] =
+        useState<boolean>(false)
+    const [shouldShowVoucherError, setShouldShowVoucherError] =
+        useState<boolean>(false)
 
     useEffect(() => {
         // Reset inactivity timer on user activity
@@ -57,7 +59,10 @@ export default function InsertCashTemplate({
         window.addEventListener('are-you-still-there', handleAreYouStillThere)
         console.log('Listening for are-you-still-there event')
         return () => {
-            window.removeEventListener('are-you-still-there', handleAreYouStillThere)
+            window.removeEventListener(
+                'are-you-still-there',
+                handleAreYouStillThere
+            )
         }
     }, [showAreYouTherePopup])
 
@@ -244,7 +249,7 @@ export default function InsertCashTemplate({
             )
 
             // Construct the print URL
-            const printUrl = `${templateRendererUrl}/terminal_voucher?rotate=180&data=${base64Data}&type=bmp`
+            const printUrl = `${templateRendererUrl}/terminal_voucher?rotate=180&data=${encodeURIComponent(base64Data)}&type=bmp`
 
             console.log('Printing voucher with URL:', printUrl)
 
@@ -330,7 +335,10 @@ export default function InsertCashTemplate({
                     console.log(
                         '❌ Print failed - staying on success screen for manual interaction'
                     )
-                    console.log('🔍 DEBUG: voucherData after print failure:', voucherData)
+                    console.log(
+                        '🔍 DEBUG: voucherData after print failure:',
+                        voucherData
+                    )
                 }
             } else {
                 console.log(
@@ -356,11 +364,7 @@ export default function InsertCashTemplate({
     }
 
     if (shouldShowVoucherError) {
-        return (
-            <VoucherErrorTemplate
-                navigate={navigate}
-            />
-        )
+        return <VoucherErrorTemplate navigate={navigate} />
     }
 
     if (isVoucherPrinting && !showVoucher) {
@@ -370,7 +374,10 @@ export default function InsertCashTemplate({
                 navigate={navigate}
                 onPrimaryButtonClick={() => {
                     console.log('🔍 DEBUG: Show Voucher clicked')
-                    console.log('🔍 DEBUG: voucherData available:', !!voucherData)
+                    console.log(
+                        '🔍 DEBUG: voucherData available:',
+                        !!voucherData
+                    )
                     console.log('🔍 DEBUG: voucherData content:', voucherData)
                     setShowVoucher(true)
                 }}
@@ -417,7 +424,13 @@ export default function InsertCashTemplate({
                 onClose={handleErrorClose}
             />
             <Container isFullHeight={true}>
-                <SessionTimeout isOpen={showAreYouTherePopup} onEndSession={() => navigate('/')} onClose={() => { setShowAreYouTherePopup(false)}} />
+                <SessionTimeout
+                    isOpen={showAreYouTherePopup}
+                    onEndSession={() => navigate('/')}
+                    onClose={() => {
+                        setShowAreYouTherePopup(false)
+                    }}
+                />
                 <Header
                     navigationBackText={' '}
                     navigateBackUrl={'/payment-method'}
