@@ -1,4 +1,4 @@
-import { createContext, ReactNode,useCallback, useContext, useState } from 'react'
+import { createContext, ReactNode,useCallback, useContext, useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 
 interface NavigationContextType {
@@ -62,6 +62,14 @@ export function NavigationProvider({
     goBackToStart,
     clearStart
   }
+
+  useEffect(() => {
+    const currentPath = location.pathname
+    if (allowedStartPaths.includes(currentPath)) {
+      localStorage.setItem(STORAGE_KEY, currentPath)
+      setStartUrl(currentPath)
+    }
+  }, [location.pathname, allowedStartPaths, startUrl])
 
   return (
     <NavigationContext.Provider value={contextValue}>
