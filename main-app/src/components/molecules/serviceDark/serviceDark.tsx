@@ -3,7 +3,7 @@ import Marquee from "react-fast-marquee"
 import { useTranslation } from 'react-i18next'
 
 import { ageDisclaimerPng, checkBoxNotSelected, checkBoxSelected } from '@/assets/icons'
-import { uskoroGreenLarge, uskoroGreenSmall } from '@/assets/images'
+import { comingSoonLarge, uskoroGreenLarge, uskoroGreenSmall } from '@/assets/images'
 import i18n from '@/i18n/i18n'
 
 export interface serviceDarkProps {
@@ -37,7 +37,7 @@ const ServicesDark: React.FC<serviceDarkProps> = ({
     return (
       <button disabled={!!isCommingSoon} className={`service-dark ${type} ${isSelected ? 'selected' : ''}`} onClick={onClick}>
         {!isCommingSoon && <img className="checkbox-selected" src={isSelected ? checkBoxSelected : checkBoxNotSelected } alt="select" />}
-        {isCommingSoon && (<img className='coming-soon-large' src={i18n.language === 'en' ? uskoroGreenLarge : uskoroGreenLarge } />)}
+        {isCommingSoon && (<img className='coming-soon-large' src={i18n.language === 'en' ? comingSoonLarge : uskoroGreenLarge } />)}
         <h3>
           {t(title)}
           {hasAgeDisclamer && (
