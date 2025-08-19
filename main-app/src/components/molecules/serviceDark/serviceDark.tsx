@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Marquee from "react-fast-marquee"
 import { useTranslation } from 'react-i18next'
 
@@ -13,7 +13,8 @@ export interface serviceDarkProps {
     isCommingSoon: boolean
     hasAgeDisclamer: boolean
     images: serviceImage[],
-    type: string
+    type: string,
+    onClick: () => void
 }
 
 export interface serviceImage {
@@ -28,14 +29,14 @@ const ServicesDark: React.FC<serviceDarkProps> = ({
     isSelected = false,
     isCommingSoon = false,
     hasAgeDisclamer = false,
-    images
+    images,
+    onClick
 }) => {
     const { t } = useTranslation()
-    const [isCheckBoxSelected, setCheckBoxSelected] = useState(isSelected)
 
     return (
-      <button disabled={!!isCommingSoon} className={`service-dark ${type} ${isCheckBoxSelected ? 'selected' : ''}`} onClick={() => setCheckBoxSelected(!isCheckBoxSelected)}>
-        {!isCommingSoon && <img className="checkbox-selected" src={isCheckBoxSelected ? checkBoxSelected : checkBoxNotSelected } alt="select" />}
+      <button disabled={!!isCommingSoon} className={`service-dark ${type} ${isSelected ? 'selected' : ''}`} onClick={onClick}>
+        {!isCommingSoon && <img className="checkbox-selected" src={isSelected ? checkBoxSelected : checkBoxNotSelected } alt="select" />}
         {isCommingSoon && (<img className='coming-soon-large' src={i18n.language === 'en' ? uskoroGreenLarge : uskoroGreenLarge } />)}
         <h3>
           {t(title)}

@@ -267,6 +267,8 @@
     "text": "Kupovina vaučera i plaćanje računa – brzo, jednostavno i bez čekanja.",
     "getStarted": "Započni",
     "dark": {
+      "title": "Izaberi željenu uslugu:",
+      "buttonText": "Nastavi",
       "betting": {
         "title": "Bet Vaučer",
         "subtitle": "Dopuni svoj nalog u omiljenoj kladionici"

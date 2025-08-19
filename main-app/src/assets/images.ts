@@ -34,6 +34,7 @@ import hulu from './images/hulu.png'
 import insertCashImg from './images/insertCash.jpg'
 import insertCashImg2 from './images/insertCash2.jpg'
 import izaberiPlatformu from './images/izaberiPlatformuBetting.jpg'
+import logoBlue from './images/logoBlue.svg'
 import marketplace from './images/marketplace.png'
 import mockupVoucher from './images/mockupVoucher.jpg'
 import ageDisclaimerBackground from './images/optimised/ageDisclaimerBackground.webp'
@@ -143,6 +144,7 @@ export {
     insertCashImg,
     insertCashImg2,
     izaberiPlatformu,
+    logoBlue,
     logoWhite,
     marketplace,
     marketplaceQR,

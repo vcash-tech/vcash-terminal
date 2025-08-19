@@ -1,0 +1,48 @@
+@use '../../../styles/config/colors';
+@use '../../../styles/config/fonts';
+
+.welcome-with-services {
+    min-height: 100vh;
+    background: url('../assets/images/welcome/background.png'), linear-gradient(180deg, #020B29, #244EDB, #061958);
+    background-size: cover;
+    
+    .header.welcome-no-border {
+        background-color: transparent;
+        
+        .language-button {
+            background: rgba(255,255,255,0.19);
+
+            &.active {
+                background-color: transparent;
+            }
+        }
+    }
+
+    .container {
+        background: transparent;
+        display: 'flex';
+        justify-content: center;
+        align-items: center;
+        padding: 0 4rem;
+        
+        .vcash-logo {
+            margin: 5.5rem 0 6rem;
+            object-fit: contain;
+        }
+
+        h1 {
+            font-family: fonts.$font-urbanist;
+            font-size: 4.8rem;
+            font-weight: 700;
+            color: colors.$white-color;
+            margin: 0 0 6rem;
+        }
+
+        .primary-button {
+            margin-top: 5rem;
+            min-width: 70rem;
+        }
+
+    }
+    
+}

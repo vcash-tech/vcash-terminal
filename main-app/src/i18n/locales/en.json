@@ -265,17 +265,19 @@
     "text": "Buy vouchers, pay bills, or top up digital services in a few taps",
     "getStarted": "Get started",
     "dark": {
+      "title": "Choose your desired service:",
+      "buttonText": "Continue",
       "betting": {
         "title": "Betting Voucher",
-        "subtitle": "Easily top up your favorite betting account"
+        "subtitle": "Top up your account at your favorite betting site"
       },
       "gaming": {
         "title": "Digital Voucher",
-        "subtitle": "Recharge your account on any gaming platform you love"
+        "subtitle": "Top up your account on your favorite gaming platform"
       },
       "ips": {
         "title": "IPS Bill Payment",
-        "subtitle": "Pay your bills quickly and hassle-free, no lines, no waiting"
+        "subtitle": "Fast and easy bill payments, without crowds or waiting."
       }
     }
   },
