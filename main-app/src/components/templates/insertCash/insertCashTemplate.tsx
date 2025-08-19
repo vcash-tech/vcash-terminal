@@ -1,4 +1,4 @@
-import { format } from 'date-fns'
+import { addDays, endOfDay, format } from 'date-fns'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { NavigateFunction } from 'react-router-dom'
 
@@ -194,6 +194,10 @@ export default function InsertCashTemplate({
             new Date(moneyTransfer.date),
             'dd.MM.yyyy. HH:mm'
         )
+        const expiry = format(
+            endOfDay(addDays(new Date(moneyTransfer.date), 30)),
+            'dd.MM.yyyy. HH:mm'
+        )
         const currentTime = format(new Date(), 'dd.MM.yyyy. HH:mm')
 
         // Format amount
@@ -218,6 +222,7 @@ export default function InsertCashTemplate({
             amount: formattedAmount,
             currencyCode: moneyTransfer.currencyCode,
             createdAt,
+            expiry,
             currentTime,
             voucherType
         }
@@ -377,7 +382,9 @@ export default function InsertCashTemplate({
             <VoucherErrorTemplate
                 isOnline={isOnline}
                 navigate={navigate}
-                onTryAgain={() => { handleBuy()}}
+                onTryAgain={() => {
+                    handleBuy()
+                }}
                 isVoucherPrinting={isVoucherPrinting}
                 voucherRecreateAttempts={voucherRecreateAttempts}
             />
