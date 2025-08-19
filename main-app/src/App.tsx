@@ -7,6 +7,7 @@ import GamingPage from '@/pages/gamingPage'
 
 import { KeyboardProvider } from './context/KeyboardContext'
 import useInactivityRedirect from './helpers/inactivityRedirect'
+import { NavigationProvider , useNavigationContext } from './hooks/useNavigationContext'
 import { TranslationProvider } from './i18n/TranslationProvider'
 import DigitalServicesPage from './pages/digitalSevicesPage'
 import DisclaimerPage from './pages/disclaimerPage'
@@ -18,9 +19,11 @@ import UnderMaintenacePage from './pages/UnderMaintenance'
 import WelcomePage from './pages/welcomePage'
 
 function Layout() {
-    useInactivityRedirect('/welcome')
+    const { startUrl } = useNavigationContext()
+
+    useInactivityRedirect(startUrl ?? '/welcome')
     return (
-        <>
+        <NavigationProvider>
             <Routes>
                 <Route path="/welcome" element={<WelcomePage />} />
                 <Route path="/register" element={<RegisterPage />} />
@@ -39,7 +42,7 @@ function Layout() {
                     element={<UnderMaintenacePage />}
                 />
             </Routes>
-        </>
+        </NavigationProvider>
     )
 }
 

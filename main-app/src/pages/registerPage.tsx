@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import RegisterTemplate from '@/components/templates/register/registerTemplate'
 import { DeviceTokenSteps } from '@/data/enums/deviceTokenSteps'
 import { getErrorInfo } from '@/helpers/getErrorInfo'
+import { useNavigationContext } from '@/hooks/useNavigationContext'
 import { apiService } from '@/services/apiService'
 import { AuthService } from '@/services/authService'
 import { deviceTokenService } from '@/services/deviceTokenService'
@@ -16,6 +17,7 @@ function RegisterPage() {
     const [stepper, setStepper] = useState<DeviceTokenSteps>(
         DeviceTokenSteps.getCode
     )
+    const { startUrl } = useNavigationContext()
     const stepperRef = useRef<DeviceTokenSteps>(stepper)
 
     const [_loader, setLoader] = useState<boolean>(false)
@@ -107,7 +109,7 @@ function RegisterPage() {
                     console.log(
                         '✅ Session created successfully - redirecting to welcome from register page'
                     )
-                    navigate('/welcome')
+                    navigate(startUrl ?? '/welcome')
                     return // Exit early if successful
                 } catch (error) {
                     console.error(
@@ -164,7 +166,7 @@ function RegisterPage() {
         }
 
         checkTokenAndCredentials()
-    }, [navigate, handleRegisterDevice])
+    }, [navigate, handleRegisterDevice, startUrl])
 
     const onRegister = useCallback(() => {
         handleRegisterDevice(agentEmail, deviceName)

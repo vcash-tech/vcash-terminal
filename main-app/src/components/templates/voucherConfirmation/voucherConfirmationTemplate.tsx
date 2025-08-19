@@ -12,6 +12,7 @@ import VoucherCode from '@/components/molecules/voucherCode/voucherCode'
 import Footer from '@/components/organisms/footer/footer'
 import Header from '@/components/organisms/header/header'
 import { VoucherConfirmation } from '@/data/entities/voucher-confirmation'
+import { useNavigationContext } from '@/hooks/useNavigationContext'
 import { useTranslate } from '@/i18n/useTranslate'
 
 export default function VoucherConfirmationTemplate({
@@ -23,8 +24,9 @@ export default function VoucherConfirmationTemplate({
 }) {
     const { t } = useTranslate()
     const onComplete = () => {
-        navigate('/welcome')
+        navigate(startUrl ?? '/welcome')
     }
+    const { startUrl } = useNavigationContext()
 
     return (
         <Container isFullHeight={true}>
@@ -72,7 +74,7 @@ export default function VoucherConfirmationTemplate({
                         />
                     )}
                 </div>
-                <SessionCounter onEndSession={() => navigate('/')} />
+                <SessionCounter onEndSession={() => navigate(startUrl ?? '/')} />
                 <div className={'action-wrapper'}>
                     <PrimaryButton
                         callback={() => onComplete()}

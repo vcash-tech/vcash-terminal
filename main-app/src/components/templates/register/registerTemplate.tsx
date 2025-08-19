@@ -9,6 +9,7 @@ import PrimaryButton from '@/components/atoms/primaryButton/primaryButton'
 import Footer from '@/components/organisms/footer/footer'
 import Header from '@/components/organisms/header/header'
 import { DeviceTokenSteps } from '@/data/enums/deviceTokenSteps'
+import { useNavigationContext } from '@/hooks/useNavigationContext'
 import { useTranslate } from '@/i18n/useTranslate'
 
 const BRAND_NAME = import.meta.env.VITE_BRAND_NAME
@@ -42,16 +43,18 @@ export default function RegisterTemplate({
     const [deviceName, setDeviceName] = useState(device)
     const [isFocused, setIsFocused] = useState(false)
 
+    const { startUrl } = useNavigationContext()
+
     // Auto-navigate to welcome after 5 seconds on successful registration
     useEffect(() => {
         if (stepper === DeviceTokenSteps.gotToken) {
             const timer = setTimeout(() => {
-                navigate('/welcome')
+                navigate(startUrl ?? '/welcome')
             }, 5000)
 
             return () => clearTimeout(timer)
         }
-    }, [stepper, navigate])
+    }, [stepper, navigate, startUrl])
 
     return (
         <Container isFullHeight={true}>
