@@ -23,11 +23,7 @@ export default function ServiceTemplate({ navigate }: ServiceTemplateProps) {
         <Container isFullHeight={true}>
             <Header
                 navigationBackText=" "
-                navigateBackUrl={
-                    startUrl === '/welcome'
-                        ? '/digital-services'
-                        : (startUrl ?? '/welcome')
-                }
+                navigateBackUrl={startUrl ?? '/welcome'}
             />
             <div className="service-template">
                 <div className="service-template__vouchers">

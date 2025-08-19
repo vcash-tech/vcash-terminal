@@ -25,7 +25,7 @@ export function NavigationProvider({
     if (allowedStartPaths.includes(currentPath) && !startUrl) {
       const newStartUrl = currentPath
       localStorage.setItem(STORAGE_KEY, newStartUrl)
-      setStartUrl(newStartUrl)
+      setStartUrl(newStartUrl ?? '/welcome')
     }
   }, [location.pathname, allowedStartPaths, startUrl])
 
