@@ -1,11 +1,12 @@
 import { NavigateFunction } from 'react-router-dom'
 
-import { comingSoonOrange,uskoroOrange } from '@/assets/icons'
+import { comingSoonOrange, uskoroOrange } from '@/assets/icons'
 import Container from '@/components/atoms/container/container'
 import VoucherItem from '@/components/molecules/voucherItem/voucherItem'
 import Footer from '@/components/organisms/footer/footer'
 import Header from '@/components/organisms/header/header'
 import { serviceList } from '@/data/mocks/service.mock'
+import { useNavigationContext } from '@/hooks/useNavigationHook'
 import i18n from '@/i18n/i18n'
 import { useTranslate } from '@/i18n/useTranslate'
 
@@ -16,10 +17,14 @@ export type ServiceTemplateProps = {
 }
 export default function ServiceTemplate({ navigate }: ServiceTemplateProps) {
     const { t } = useTranslate()
+    const { startUrl } = useNavigationContext()
 
     return (
         <Container isFullHeight={true}>
-            <Header navigationBackText=' ' navigateBackUrl='/' />
+            <Header
+                navigationBackText=" "
+                navigateBackUrl={startUrl ?? '/welcome'}
+            />
             <div className="service-template">
                 <div className="service-template__vouchers">
                     <h1>{t('service.title')}</h1>
@@ -42,7 +47,13 @@ export default function ServiceTemplate({ navigate }: ServiceTemplateProps) {
                 <h2>{t('service.payBills.body')}</h2>
                 <button className="service-template__pay-bills">
                     <span className="coming-soon-badge">
-                        <img src={i18n.language === 'en' ? comingSoonOrange : uskoroOrange} />
+                        <img
+                            src={
+                                i18n.language === 'en'
+                                    ? comingSoonOrange
+                                    : uskoroOrange
+                            }
+                        />
                     </span>
                     <div className="service-template__pay-bills__content">
                         <h4>{t('service.payBills.simpleScanTitle')}</h4>

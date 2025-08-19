@@ -16,8 +16,8 @@ const AvailableServices: React.FC<AvailableServicesProps> = ({
       <div className='availableServices'>
         <h3 dangerouslySetInnerHTML={{ __html: t(title)}} />
         <Marquee >
-          {images.map((image) => (
-            <div key={image} className='marquee-item'>
+          {images.map((image, idx) => (
+            <div key={image + idx} className='marquee-item'>
               <img src={image} alt={t(title)} />
             </div>
           ))}

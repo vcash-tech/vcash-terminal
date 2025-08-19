@@ -263,7 +263,23 @@
   "welcome": {
     "title": "Welcome to VCash",
     "text": "Buy vouchers, pay bills, or top up digital services in a few taps",
-    "getStarted": "Get started"
+    "getStarted": "Get started",
+    "dark": {
+      "title": "Choose your desired service:",
+      "buttonText": "Continue",
+      "betting": {
+        "title": "Betting Voucher",
+        "subtitle": "Top up your account at your favorite betting site"
+      },
+      "gaming": {
+        "title": "Digital Voucher",
+        "subtitle": "Top up your account on your favorite gaming platform"
+      },
+      "ips": {
+        "title": "IPS Bill Payment",
+        "subtitle": "Fast and easy bill payments, without crowds or waiting."
+      }
+    }
   },
   "emailInput": {
     "title": "Send voucher via email",

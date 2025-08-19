@@ -27,8 +27,6 @@ const isDev = import.meta.env.DEV === true
 // Set this to true to use mock responses in development mode
 const useMockApi = import.meta.env.VITE_SHOULD_MOCK_API === 'true' && isDev
 
-console.log('useMockApi', useMockApi, import.meta.env.VITE_SHOULD_MOCK_API)
-
 export class POSService {
     // Device Registration
     static async generateDeviceCodeEmail(

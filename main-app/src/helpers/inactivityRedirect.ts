@@ -1,10 +1,13 @@
 import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
+import { useNavigationContext } from '@/hooks/useNavigationHook'
+
 const INACTIVITY_TIME = 1 * 60 * 1000 // 1 minute in milliseconds
 
-export default function useInactivityRedirect(redirectPath = '/welcome') {
+export default function useInactivityRedirect(redirectPath?: string) {
     const navigate = useNavigate()
+    const { startUrl } = useNavigationContext()
     const timer = useRef<ReturnType<typeof setTimeout> | null>(null)
     const [currentCycle, setCurrentCycle] = useState(0)
 
@@ -26,16 +29,16 @@ export default function useInactivityRedirect(redirectPath = '/welcome') {
                         
                         // hard redirecty every 15 cycles
                         if (refreshCycle >= 15 && navigator.onLine) {
-                            console.log(`HARD redirect to ${redirectPath} in cycle ${refreshCycle}`)
+                            console.log(`HARD redirect to ${redirectPath ?? startUrl ?? '/welcome'} in cycle ${refreshCycle}`)
                             localStorage.setItem('refreshCycle', '0')
                             setCurrentCycle(0)
-                            window.location.href = redirectPath
+                            window.location.href = redirectPath ?? startUrl ?? '/welcome'
                         } else {
                             const currentRefreshCycle = refreshCycle + 1
-                            console.log(`SOFT redirect to ${redirectPath} in cycle ${currentRefreshCycle}`)
+                            console.log(`SOFT redirect to ${redirectPath ?? startUrl ?? '/welcome'} in cycle ${currentRefreshCycle}`)
                             localStorage.setItem('refreshCycle', currentRefreshCycle.toString())
                             setCurrentCycle(currentRefreshCycle)
-                            navigate(redirectPath)
+                            navigate(redirectPath ?? startUrl ?? '/welcome')
                         }
                     } else {
                         console.log('Dispatch are-you-still-there event')
@@ -56,5 +59,5 @@ export default function useInactivityRedirect(redirectPath = '/welcome') {
             events.forEach((event) => window.removeEventListener(event, resetTimer))
             if (timer.current) clearTimeout(timer.current)
         }
-    }, [navigate, redirectPath, currentCycle]) // Include dependencies but not location
+    }, [navigate, redirectPath, currentCycle, startUrl]) // Include dependencies but not location
 }

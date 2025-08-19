@@ -1,0 +1,112 @@
+@use '../../../styles/config/fonts';
+
+.service-dark {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items: left;
+
+    padding: 0;
+    border: 4px solid rgba(255,255,255,0.45);
+    border-radius: 1.6rem;
+    width: 100vw;
+    max-width: 100%;
+    margin-bottom: 3.5rem;
+    position: relative;
+    background: transparent;
+    padding-bottom: 3.5rem;
+
+    &.betting {
+        background-image: url('../assets/images/welcome/betting.png');
+    }
+
+    &.gaming {
+        background-image: url('../assets/images/welcome/gaming.png');
+    }
+
+    &.ips {
+        background-image: url('../assets/images/welcome/ips.png');
+    }
+
+    &.selected {
+        background-color: rgba(255,255,255,0.1);
+        border-color: #36C6FF;
+    }
+
+    .coming-soon-large {
+        position: absolute;
+        top: -1px;
+        right: 0;
+        width: 18.5rem;
+        height: auto;
+    }
+
+    .checkbox-selected {
+        width: 5rem;
+        height: 5rem;
+        position: absolute;
+        right: 1.8rem;
+        top: 1.8rem;
+    }
+
+    h3 {
+        font-size: 4.7rem;
+        font-weight: 800;
+        font-family: fonts.$font-urbanist;
+        margin: 4.5rem 0 2rem 7rem;
+        text-align: left;
+        color: #fff;
+        position: relative;
+
+        .age-disclaimer {
+            position: absolute;
+            width: 5rem;
+            height: 5rem;
+            margin: 0.5rem 2rem;
+        }
+    }
+
+    p {
+        font-family: fonts.$font-urbanist;
+        margin: 0 0 3.5rem 7rem;
+        text-align: left;
+        font-weight: 600;
+        font-size: 2.4rem;
+        line-height: 180%;
+    }
+
+    .marquee-item {
+        display: inline-block;
+        margin-right: 2rem;
+        position: relative;
+        border: 1px solid transparent;
+        border-radius: 1.2rem;
+
+        img {
+            max-width: 20rem;
+            height: auto;            
+        }
+        &.coming-soon { 
+            position: relative;
+            img {
+                opacity: 0.7;
+            }
+
+            .coming-soon-banner {
+                position: absolute;
+                top: 0;
+                right: 0;
+                width: 7.2rem;
+                opacity: 1;
+                z-index: 2;
+            }
+        }
+
+        .coming-soon {
+            position: absolute;
+            top: 0; 
+            right: 0;
+            
+        }
+    }
+}

@@ -4,6 +4,8 @@ import ageDisclaimerWhite from './icons/ageDisclaimerWhite.svg'
 import angleLeft from './icons/angleLeft.svg'
 import arrowRight from './icons/arrowRight.svg'
 import bettingWarning from './icons/betttingWarning.svg'
+import checkBoxNotSelected from './icons/checkBoxNotSelected.png'
+import checkBoxSelected from './icons/checkBoxSelected.png'
 import closeIcon from './icons/closeIcon.svg'
 import comingSoon from './icons/coming-soon.svg'
 import comingSoonGaming from './icons/coming-soon-gaming.svg'
@@ -37,6 +39,8 @@ export {
     angleLeft,
     arrowRight,
     bettingWarning,
+    checkBoxNotSelected,
+    checkBoxSelected,
     closeIcon,
     comingSoon,
     comingSoonGaming,

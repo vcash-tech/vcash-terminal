@@ -5,6 +5,7 @@ import Container from '@/components/atoms/container/container'
 import PaymentCard from '@/components/atoms/paymentCard/paymentCard'
 import Footer from '@/components/organisms/footer/footer'
 import Header from '@/components/organisms/header/header'
+import { useNavigationContext } from '@/hooks/useNavigationHook'
 import { useTranslate } from '@/i18n/useTranslate'
 
 export default function PaymentMethodTerminalTemplate({
@@ -15,11 +16,12 @@ export default function PaymentMethodTerminalTemplate({
     const { t } = useTranslate()
     const location = useLocation()
     const prevState = location.state // This is the state object passed from previous navigation
+    const { startUrl } = useNavigationContext()
 
     return (
         <Container isFullHeight={true}>
             <Header
-                navigateBackUrl="/digital-services"
+                navigateBackUrl={startUrl === '/welcome' ? "/digital-services" : startUrl ?? '/welcome'}
                 navigationBackText={' '}
             />
             <div className="payment-method-terminal">

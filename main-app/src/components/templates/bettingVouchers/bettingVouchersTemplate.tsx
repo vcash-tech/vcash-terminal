@@ -20,6 +20,7 @@ import AvailableServices from '@/components/molecules/availableServices/availabl
 import Footer from '@/components/organisms/footer/footer'
 import Header from '@/components/organisms/header/header'
 import HowTo from '@/components/organisms/how-to/how-to'
+import { useNavigationContext } from '@/hooks/useNavigationHook'
 //import i18n from '@/i18n/i18n'
 
 export type BettingVoucherProps = {
@@ -28,6 +29,7 @@ export type BettingVoucherProps = {
 
 export default function BettingVoucher({ navigate }: BettingVoucherProps) {
     const { t } = useTranslation()
+    const { startUrl } = useNavigationContext()
 
     const bettingImages = [
         betting_balkanBet,
@@ -47,7 +49,7 @@ export default function BettingVoucher({ navigate }: BettingVoucherProps) {
     return (
         <Container isFullHeight={true}>
             <Header
-                navigateBackUrl={'/digital-services'}
+                navigateBackUrl={startUrl === '/welcome' ? "/digital-services" : startUrl ?? '/welcome'}
                 navigationBackText={' '} //t('digitalServices.backToServices')}
             />
             <div className={`betting-voucher`}>

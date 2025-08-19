@@ -1,23 +1,20 @@
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import Welcome from '@/components/templates/welcome/welcomeTemplate'
-import { useNavigationContext } from '@/hooks/useNavigationHook'
+import WelcomeWithServices from '@/components/templates/welcomeWithServicesTemplate/welcomeWithServicesTemplate'
 import { POSService } from '@/services/posService'
 
-function HomePage() {
+export default function WelcomeWithServicesPage() {
     const navigate = useNavigate()
-    const { startUrl } = useNavigationContext()
 
     useEffect(() => {
-        const createSession = async () => {
+        const ensureSession = async () => {
             try {
-                console.log('Attempting to create session...')
-                await POSService.createSession()
                 console.log(
-                    '✅ Session created successfully - redirecting to welcome'
+                    'Welcome page - attempting to create/verify session...'
                 )
-                navigate(startUrl ?? '/welcome')
+                await POSService.createSession()
+                console.log('✅ Session verified successfully on welcome page')
             } catch (error) {
                 // Check if error requires specific navigation
                 if (
@@ -35,7 +32,7 @@ function HomePage() {
                     navigate(navigationError.requiresNavigation)
                 } else {
                     console.error(
-                        'Failed to create session, redirecting to registration:',
+                        'Failed to create session on welcome page, redirecting to registration:',
                         error
                     )
                     navigate('/register')
@@ -43,11 +40,12 @@ function HomePage() {
             }
         }
 
-        // Always try to create session on home page load
-        createSession()
-    }, [navigate, startUrl])
+        ensureSession()
+    }, [navigate])
 
-    return <Welcome navigate={navigate} />
+    return (
+        <div className="welcome-page">
+            <WelcomeWithServices navigate={navigate} />
+        </div>
+    )
 }
-
-export default HomePage

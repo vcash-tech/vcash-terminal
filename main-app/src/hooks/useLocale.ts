@@ -4,6 +4,8 @@ import { useLocation } from 'react-router-dom'
 
 import { LanguageService } from '@/services/languageService'
 
+import { useNavigationContext } from './useNavigationHook'
+
 interface UseLocaleReturn {
   currentLanguage: string
   changeLanguage: (language: string) => Promise<void>
@@ -21,9 +23,10 @@ export function useLocale(): UseLocaleReturn {
   const location = useLocation()
   const [isLoading, setIsLoading] = useState(false)
   const [currentLanguage, setCurrentLanguage] = useState<string>(i18n.language)
+  const { startUrl } = useNavigationContext()
 
   // Check if user is on welcome page/template
-  const isWelcomePage = location.pathname === '/' || location.pathname === '/welcome'
+  const isWelcomePage = location.pathname === '/' || location.pathname === startUrl // '/welcome'
 
   /**
    * Change language and persist to localStorage
