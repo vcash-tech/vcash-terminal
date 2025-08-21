@@ -3,7 +3,7 @@ import Marquee from "react-fast-marquee"
 import { useTranslation } from 'react-i18next'
 
 import { ageDisclaimerPng, checkBoxNotSelected, checkBoxSelected } from '@/assets/icons'
-import { comingSoonLarge, uskoroGreenLarge, uskoroGreenSmall } from '@/assets/images'
+import { comingSoonLarge, comingSoonSmall, uskoroGreenLarge, uskoroGreenSmall } from '@/assets/images'
 import i18n from '@/i18n/i18n'
 
 export interface serviceDarkProps {
@@ -48,7 +48,7 @@ const ServicesDark: React.FC<serviceDarkProps> = ({
         <Marquee >
           {images.map((image, idx) => (
             <div key={idx} className={`marquee-item ${image.isCommingSoon ? 'coming-soon' : ''}`}>
-              {image.isCommingSoon && (<img className='coming-soon-banner' src={i18n.language === 'en' ? uskoroGreenSmall : uskoroGreenSmall } />)}
+              {image.isCommingSoon && (<img className='coming-soon-banner' src={i18n.language === 'en' ? comingSoonSmall : uskoroGreenSmall } />)}
               <img src={image.src} alt={t(title)} />
             </div>
           ))}
