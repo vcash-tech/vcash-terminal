@@ -47,6 +47,11 @@ export const useCheckInternetConnection = ({
     setError(null)
 
     try {
+      // Set up timeout for the fetch request
+      const timeoutId = setTimeout(() => {
+        abortController.abort()
+      }, 5000) // dismiss after 5 seconds
+
       const response = await fetch(HEALTH_CHECK_URL, {
         method: 'GET',
         signal: abortController.signal,
@@ -54,6 +59,8 @@ export const useCheckInternetConnection = ({
           'Cache-Control': 'no-cache',
         },
       })
+
+      clearTimeout(timeoutId)
 
       if (response.ok) {
         setIsOnline(true)
