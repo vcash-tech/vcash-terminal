@@ -398,6 +398,10 @@ export default function InsertCashTemplate({
                 navigate={navigate}
                 onPrimaryButtonClick={() => {
                     console.log('🔍 DEBUG: Show Voucher clicked')
+                    console.log(
+                        '🔍 DEBUG: voucherData available:',
+                        !!voucherData
+                    )
                     console.log('🔍 DEBUG: voucherData content:', voucherData)
                     setShowVoucher(true)
                 }}
