@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react'
-import { BrowserRouter } from 'react-router-dom'
 
 import InsertCashTemplate from './insertCashTemplate'
 
@@ -12,14 +11,7 @@ const meta: Meta<typeof InsertCashTemplate> = {
     args: {
         navigate: () => {}
     },
-    tags: ['autodocs'],
-    decorators: [
-        (Story) => (
-            <BrowserRouter>
-                <Story />
-            </BrowserRouter>
-        )
-    ]
+    tags: ['autodocs']
 } satisfies Meta<typeof InsertCashTemplate>
 
 export default meta

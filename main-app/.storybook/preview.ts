@@ -1,11 +1,12 @@
 import '../src/styles/app.scss'
-import '../src/styles/storybook.scss'
 import '../src/i18n/i18n' // Import i18n configuration
+import '../src/styles/storybook.scss'
 
 import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport'
 import type { Preview } from '@storybook/react'
 
 import { withKeyboardProvider } from '../src/stories/decorators/withKeyboardProvider'
+import { withNavigationContext } from '../src/stories/decorators/withNavigationContext'
 import { withNavigationProvider } from '../src/stories/decorators/withNavigationProvider'
 import { WithI18n } from './i18nDecorator'
 
@@ -21,7 +22,12 @@ const customViewports = {
 }
 
 const preview: Preview = {
-    decorators: [WithI18n, withKeyboardProvider, withNavigationProvider],
+    decorators: [
+        WithI18n,
+        withKeyboardProvider,
+        withNavigationContext,
+        withNavigationProvider
+    ],
     parameters: {
         controls: {
             matchers: {
