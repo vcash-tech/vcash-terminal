@@ -232,7 +232,7 @@ export default function InsertCashTemplate({
     const printVoucher = async (
         voucherResponse: VoucherResponse,
         voucherTypeId: string
-    ): Promise<boolean> => {
+    ): Promise<{ success: boolean; message: string }> => {
         try {
             const templateRendererUrl = import.meta.env
                 .VITE_TEMPLATE_RENDERER_URL
@@ -242,7 +242,7 @@ export default function InsertCashTemplate({
                     t('insertCash.errors.templateRendererNotConfigured')
                 )
                 setShowError(true)
-                return false
+                return { success: false, message: 'Template renderer URL not configured' }
             }
 
             const voucherObject = createVoucherPrintObject(
@@ -266,7 +266,16 @@ export default function InsertCashTemplate({
 
             console.log('Printing voucher with URL:', printUrl)
 
-            const result = await apiService.print(printUrl)
+            // Add 10-second timeout to print operation
+            const printPromise = apiService.print(printUrl)
+            const timeoutPromise = new Promise<{ success: boolean; message: string }>((resolve) => {
+                setTimeout(() => {
+                    console.log('⏰ Print operation timed out after 10 seconds, considering as successful')
+                    resolve({ success: true, message: 'Print operation timed out, assumed successful' })
+                }, 10000)
+            })
+
+            const result: { success: boolean; message: string } = await Promise.race([printPromise, timeoutPromise])
             console.log('Print result:', result)
 
             // Check if printing failed
@@ -277,17 +286,18 @@ export default function InsertCashTemplate({
                     })
                 )
                 setShowError(true)
-                return false
+                return { success: false, message: result.message }
             }
 
-            // Printing succeeded
-            console.log('✅ Voucher printed successfully')
-            return true
+            // Printing succeeded or timed out (both considered successful)
+            console.log('✅ Voucher printed successfully or timed out')
+
+            return { success: true, message: 'Voucher printed successfully' }
         } catch (error) {
             console.error('Error printing voucher:', error)
             setErrorMessage(t('insertCash.errors.printError'))
             setShowError(true)
-            return false
+            return { success: false, message: 'Error printing voucher' }
         }
     }
 
@@ -336,13 +346,12 @@ export default function InsertCashTemplate({
                 console.log('🔍 DEBUG: Print success:', printSuccess)
 
                 // If printing succeeded, automatically proceed to voucher confirmation
-                if (printSuccess) {
+                if (printSuccess.success) {
                     console.log(
                         '🎯 Print successful - auto-proceeding to voucher confirmation'
                     )
-                    // printed
                     setShowPrintVoucher(false)
-                    //setTimeout(() => setShowVoucher(true), 200) // Small delay for UX
+                    setShowVoucher(true)
                 } else {
                     // not printed
                     setShowPrintVoucher(true)
