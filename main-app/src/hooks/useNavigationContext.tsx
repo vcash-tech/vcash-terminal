@@ -6,7 +6,8 @@ import {
   NavigationContext,
   NavigationContextType, 
   NavigationProviderProps, 
-  STORAGE_KEY
+  SESSION_ID,
+  STORAGE_KEY,
 } from './navigationConstants'
 
 export function NavigationProvider({ 
@@ -19,6 +20,11 @@ export function NavigationProvider({
   const [startUrl, setStartUrl] = useState<string | null>(() => {
     return localStorage.getItem(STORAGE_KEY) ?? '/welcome'
   })
+  
+  const [_sessionId, setSessionId] = useState<string | null>(() => {
+    // fetch sessionId from localStorage or generate a new one
+    return localStorage.getItem(SESSION_ID) ?? crypto.randomUUID()
+  })
 
   const setStartIfEligible = useCallback(() => {
     const currentPath = location.pathname
@@ -26,12 +32,19 @@ export function NavigationProvider({
       const newStartUrl = currentPath
       localStorage.setItem(STORAGE_KEY, newStartUrl)
       setStartUrl(newStartUrl ?? '/welcome')
+      
+      const newSessionId = crypto.randomUUID()
+      localStorage.setItem(SESSION_ID, newSessionId)
+      setSessionId(newSessionId)
     }
   }, [location.pathname, allowedStartPaths, startUrl])
 
   const clearStart = useCallback(() => {
     localStorage.removeItem(STORAGE_KEY)
     setStartUrl('/welcome')
+
+    localStorage.removeItem(SESSION_ID)
+    setSessionId(crypto.randomUUID())
   }, [])
 
   const goBackToStart = useCallback((options: { clearAfter?: boolean; replace?: boolean } = {}) => {
@@ -43,6 +56,7 @@ export function NavigationProvider({
         clearStart()
       }
     }
+
   }, [startUrl, navigate, clearStart])
 
   const contextValue: NavigationContextType = {
@@ -58,6 +72,9 @@ export function NavigationProvider({
     if (allowedStartPaths.includes(currentPath)) {
       localStorage.setItem(STORAGE_KEY, currentPath)
       setStartUrl(currentPath)
+      const newSessionId = crypto.randomUUID()
+      localStorage.setItem(SESSION_ID, newSessionId)
+      setSessionId(newSessionId)
     }
   }, [location.pathname, allowedStartPaths, startUrl])
 

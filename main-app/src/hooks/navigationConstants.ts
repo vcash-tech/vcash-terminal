@@ -7,7 +7,7 @@ export interface NavigationContextType {
   goBackToStart: (options?: { clearAfter?: boolean; replace?: boolean }) => void
   clearStart: () => void
 }
-
+export const SESSION_ID = 'navigation.sessionId'
 export const STORAGE_KEY = 'navigation.startUrl'
 export const DEFAULT_ALLOWED_START_PATHS = ['/welcome', '/welcome-with-services']
 
