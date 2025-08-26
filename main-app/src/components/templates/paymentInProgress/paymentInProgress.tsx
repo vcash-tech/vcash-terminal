@@ -59,6 +59,7 @@ export default function PaymentInProgress() {
             return
         }
 
+        setCurrentStep(VoucherPurchaseStep.VOUCHER_ERROR)
         setIsPrinted(false)
         // not printed
         console.log(
