@@ -45,7 +45,8 @@
       "cashAcceptorError": "Neuspešna aktivacija prijemnika gotovine.",
       "templateRendererNotConfigured": "Template renderer nije konfigurisan.",
       "printFailed": "Štampanje neuspešno: {{message}}",
-      "printError": "Neuspešno štampanje vaučera."
+      "printError": "Neuspešno štampanje vaučera.",
+      "voucherCreatedFailed": "Vaučer nije kreiran - nije dostupan podatak o vaučeru."
     }
   },
   "home": {
@@ -227,7 +228,7 @@
       "2": "Pregledajte listu dostupnih servisa",
       "3": "Izaberite gde želite da iskoristite vaučer - brzo i jednostavno!"
     },
-    "buttonText": "Završi",
+    "btnFinish": "Završi",
     "tryAgain": "Pokušaj ponovo",
     "code": "Vaučer kod",
     "successfulMsg": "Vaučer je uspešno izdat.",

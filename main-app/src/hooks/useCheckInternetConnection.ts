@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 
+import { apiTimeOut } from '@/helpers/apiWithStrictTimeout'
+
 export interface UseCheckInternetConnectionProps {
   /** Whether to start checking internet connection */
   shouldCheck: boolean
@@ -47,28 +49,24 @@ export const useCheckInternetConnection = ({
     setError(null)
 
     try {
-      // Set up timeout for the fetch request
-      const timeoutId = setTimeout(() => {
-        abortController.abort()
-      }, 5000) // dismiss after 5 seconds
-
-      const response = await fetch(HEALTH_CHECK_URL, {
-        method: 'GET',
-        signal: abortController.signal,
-        headers: {
-          'Cache-Control': 'no-cache',
-        },
-      })
-
-      clearTimeout(timeoutId)
-
-      if (response.ok) {
-        setIsOnline(true)
-        setError(null)
-      } else {
-        setIsOnline(false)
-        setError(`Health check failed with status: ${response.status}`)
-      }
+        apiTimeOut(
+            fetch(HEALTH_CHECK_URL, {
+                method: 'GET',
+                signal: abortController.signal,
+                headers: {
+                    'Cache-Control': 'no-cache'
+                }
+            }),
+            5
+        ).then((response) => {
+            if (response) {
+                setIsOnline(true)
+                setError(null)
+            } else {
+                setIsOnline(false)
+                setError('Request timed out')
+            }
+        })
     } catch (err) {
       if (err instanceof Error && err.name === 'AbortError') {
         return

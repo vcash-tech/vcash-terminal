@@ -9,7 +9,6 @@ import AcceptedBills from '@/components/molecules/acceptedBills/acceptedBills'
 import AlertModal from '@/components/organisms/alertModal/alertModal'
 import Footer from '@/components/organisms/footer/footer'
 import Header from '@/components/organisms/header/header'
-import SessionTimeout from '@/components/organisms/sessionTimeoutModal/sessionTimeout'
 import VoucherErrorTemplate from '@/components/templates/voucherDataError/VoucherErrorTemplate'
 import { VoucherConfirmation } from '@/data/entities/voucher-confirmation'
 import { mockedPrinterData, shouldMockPrinter } from '@/helpers/mock.printer'
@@ -242,7 +241,10 @@ export default function InsertCashTemplate({
                     t('insertCash.errors.templateRendererNotConfigured')
                 )
                 setShowError(true)
-                return { success: false, message: 'Template renderer URL not configured' }
+                return {
+                    success: false,
+                    message: 'Template renderer URL not configured'
+                }
             }
 
             const voucherObject = createVoucherPrintObject(
@@ -268,14 +270,23 @@ export default function InsertCashTemplate({
 
             // Add 10-second timeout to print operation
             const printPromise = apiService.print(printUrl)
-            const timeoutPromise = new Promise<{ success: boolean; message: string }>((resolve) => {
+            const timeoutPromise = new Promise<{
+                success: boolean
+                message: string
+            }>((resolve) => {
                 setTimeout(() => {
-                    console.log('⏰ Print operation timed out after 10 seconds, considering as successful')
-                    resolve({ success: true, message: 'Print operation timed out, assumed successful' })
+                    console.log(
+                        '⏰ Print operation timed out after 10 seconds, considering as successful'
+                    )
+                    resolve({
+                        success: true,
+                        message: 'Print operation timed out, assumed successful'
+                    })
                 }, 10000)
             })
 
-            const result: { success: boolean; message: string } = await Promise.race([printPromise, timeoutPromise])
+            const result: { success: boolean; message: string } =
+                await Promise.race([printPromise, timeoutPromise])
             console.log('Print result:', result)
 
             // Check if printing failed
@@ -389,12 +400,10 @@ export default function InsertCashTemplate({
     if (shouldShowVoucherError) {
         return (
             <VoucherErrorTemplate
-                isOnline={isOnline}
                 navigate={navigate}
                 onTryAgain={() => {
                     handleBuy()
                 }}
-                isVoucherPrinting={isVoucherPrinting}
                 voucherRecreateAttempts={voucherRecreateAttempts}
             />
         )
@@ -466,13 +475,6 @@ export default function InsertCashTemplate({
             )}
 
             <Container isFullHeight={true}>
-                <SessionTimeout
-                    isOpen={showAreYouTherePopup}
-                    onEndSession={() => navigate('/')}
-                    onClose={() => {
-                        setShowAreYouTherePopup(false)
-                    }}
-                />
                 <Header
                     navigationBackText={' '}
                     navigateBackUrl={'/payment-method'}

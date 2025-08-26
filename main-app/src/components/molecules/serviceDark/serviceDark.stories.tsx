@@ -28,20 +28,20 @@ export const Betting: Story = {
         title: 'welcome.dark.betting.title',
         subtitle: 'welcome.dark.betting.subtitle',
         type: 'betting',
-        hasAgeDisclamer: true,
-        isCommingSoon: false,
+        hasAgeDisclaimer: true,
+        isComingSoon: false,
         isSelected: true,
         images: [
-            {src: welcome_betting_soccerBet, isCommingSoon: false},
-            {src: welcome_betting_balkanBet, isCommingSoon: false},
-            {src: welcome_betting_merkurXtip, isCommingSoon: false},
-            {src: welcome_betting_maxBet, isCommingSoon: true},
-            {src: welcome_betting_meridianBet, isCommingSoon: true},
-            {src: welcome_betting_soccerBet, isCommingSoon: false},
-            {src: welcome_betting_balkanBet, isCommingSoon: false},
-            {src: welcome_betting_merkurXtip, isCommingSoon: false},
-            {src: welcome_betting_maxBet, isCommingSoon: true},
-            {src: welcome_betting_meridianBet, isCommingSoon: true}
+            {src: welcome_betting_soccerBet, isComingSoon: false},
+            {src: welcome_betting_balkanBet, isComingSoon: false},
+            {src: welcome_betting_merkurXtip, isComingSoon: false},
+            {src: welcome_betting_maxBet, isComingSoon: true},
+            {src: welcome_betting_meridianBet, isComingSoon: true},
+            {src: welcome_betting_soccerBet, isComingSoon: false},
+            {src: welcome_betting_balkanBet, isComingSoon: false},
+            {src: welcome_betting_merkurXtip, isComingSoon: false},
+            {src: welcome_betting_maxBet, isComingSoon: true},
+            {src: welcome_betting_meridianBet, isComingSoon: true}
         ]
     } as serviceDarkProps
 }
@@ -51,18 +51,18 @@ export const Gaming: Story = {
         title: 'welcome.dark.gaming.title',
         subtitle: 'welcome.dark.gaming.subtitle',
         type: 'gaming',
-        hasAgeDisclamer: false,
-        isCommingSoon: true,
+        hasAgeDisclaimer: false,
+        isComingSoon: true,
         isSelected: false,
         images: [
-            {src: welcome_gaming_playStation, isCommingSoon: false},
-            {src: welcome_gaming_steam, isCommingSoon: false},
-            {src: welcome_gaming_xBox, isCommingSoon: false},
-            {src: welcome_gaming_roblox, isCommingSoon: false},
-            {src: welcome_gaming_playStation, isCommingSoon: false},
-            {src: welcome_gaming_steam, isCommingSoon: false},
-            {src: welcome_gaming_xBox, isCommingSoon: false},
-            {src: welcome_gaming_roblox, isCommingSoon: false}
+            {src: welcome_gaming_playStation, isComingSoon: false},
+            {src: welcome_gaming_steam, isComingSoon: false},
+            {src: welcome_gaming_xBox, isComingSoon: false},
+            {src: welcome_gaming_roblox, isComingSoon: false},
+            {src: welcome_gaming_playStation, isComingSoon: false},
+            {src: welcome_gaming_steam, isComingSoon: false},
+            {src: welcome_gaming_xBox, isComingSoon: false},
+            {src: welcome_gaming_roblox, isComingSoon: false}
         ]
     } as serviceDarkProps
 }
@@ -72,20 +72,20 @@ export const IPS: Story = {
         title: 'welcome.dark.ips.title',
         subtitle: 'welcome.dark.ips.subtitle',
         type: 'ips',
-        hasAgeDisclamer: false,
-        isCommingSoon: true,
+        hasAgeDisclaimer: false,
+        isComingSoon: true,
         isSelected: false,
         images: [
-            {src: welcome_ips_struja, isCommingSoon: false},
-            {src: welcome_ips_telefon, isCommingSoon: false},
-            {src: welcome_ips_komunalije, isCommingSoon: false},
-            {src: welcome_ips_mup, isCommingSoon: false},
-            {src: welcome_ips_katastar, isCommingSoon: false},
-            {src: welcome_ips_struja, isCommingSoon: false},
-            {src: welcome_ips_telefon, isCommingSoon: false},
-            {src: welcome_ips_komunalije, isCommingSoon: false},
-            {src: welcome_ips_mup, isCommingSoon: false},
-            {src: welcome_ips_katastar, isCommingSoon: false}
+            {src: welcome_ips_struja, isComingSoon: false},
+            {src: welcome_ips_telefon, isComingSoon: false},
+            {src: welcome_ips_komunalije, isComingSoon: false},
+            {src: welcome_ips_mup, isComingSoon: false},
+            {src: welcome_ips_katastar, isComingSoon: false},
+            {src: welcome_ips_struja, isComingSoon: false},
+            {src: welcome_ips_telefon, isComingSoon: false},
+            {src: welcome_ips_komunalije, isComingSoon: false},
+            {src: welcome_ips_mup, isComingSoon: false},
+            {src: welcome_ips_katastar, isComingSoon: false}
         ]
     } as serviceDarkProps
 }

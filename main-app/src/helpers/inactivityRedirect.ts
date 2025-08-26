@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { useNavigationContext } from '@/hooks/useNavigationHook'
+import { useOrder } from '@/providers'
 
 const INACTIVITY_TIME = 1 * 60 * 1000 // 1 minute in milliseconds
 
@@ -10,6 +11,7 @@ export default function useInactivityRedirect(redirectPath?: string) {
     const { startUrl } = useNavigationContext()
     const timer = useRef<ReturnType<typeof setTimeout> | null>(null)
     const [currentCycle, setCurrentCycle] = useState(0)
+    const { setShouldShowAreYouThere } = useOrder()
 
     useEffect(() => {
         const refreshCycle: number = Number(localStorage.getItem('refreshCycle')) || 0
@@ -42,6 +44,7 @@ export default function useInactivityRedirect(redirectPath?: string) {
                         }
                     } else {
                         console.log('Dispatch are-you-still-there event')
+                        setShouldShowAreYouThere(true)
                         window.dispatchEvent(new Event('are-you-still-there'))
                         resetTimer()
                     }
@@ -59,5 +62,5 @@ export default function useInactivityRedirect(redirectPath?: string) {
             events.forEach((event) => window.removeEventListener(event, resetTimer))
             if (timer.current) clearTimeout(timer.current)
         }
-    }, [navigate, redirectPath, currentCycle, startUrl]) // Include dependencies but not location
+    }, [navigate, redirectPath, currentCycle, startUrl, setShouldShowAreYouThere]) // Include dependencies but not location
 }

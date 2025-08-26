@@ -9,8 +9,6 @@ import InvoiceItem from '@/components/atoms/invoice-item/invoice-item'
 import PrimaryButton from '@/components/atoms/primaryButton/primaryButton'
 import SessionCounter from '@/components/molecules/sessionCounter/sessionCounter'
 import VoucherCode from '@/components/molecules/voucherCode/voucherCode'
-import Footer from '@/components/organisms/footer/footer'
-import Header from '@/components/organisms/header/header'
 import { VoucherConfirmation } from '@/data/entities/voucher-confirmation'
 import { useNavigationContext } from '@/hooks/useNavigationHook'
 import { useTranslate } from '@/i18n/useTranslate'
@@ -30,59 +28,62 @@ export default function VoucherConfirmationTemplate({
 
     return (
         <Container isFullHeight={true}>
-            <Header />
             <div className={'voucher-confirmation'}>
-                <img src={confirmedIcon} alt="Confirmed icon" className='confirmed-icon' />
+                <img
+                    src={confirmedIcon}
+                    alt="Confirmed icon"
+                    className="confirmed-icon"
+                />
                 <h1>{t('voucherGenerated.title')}</h1>
                 <div className="invoice-content">
                     <FlexWrapper gap={2} justify="space-between">
                         <HalfContainer>
                             <InvoiceItem
                                 label={t('voucherGenerated.date')}
-                                value={voucherConfirmation.date}
+                                value={voucherConfirmation?.date}
                                 align="left"
                             />
                         </HalfContainer>
                         <HalfContainer>
                             <InvoiceItem
                                 label={t('voucherGenerated.time')}
-                                value={voucherConfirmation.time}
+                                value={voucherConfirmation?.time}
                                 align="right"
                             />
                         </HalfContainer>
                     </FlexWrapper>
                     <InvoiceItem
                         label={t('voucherGenerated.referenceNo')}
-                        value={voucherConfirmation.referenceNo}
+                        value={voucherConfirmation?.referenceNo}
                         align="left"
                     />
                     <InvoiceItem
                         label={t('voucherGenerated.terminal')}
-                        value={voucherConfirmation.terminal}
+                        value={voucherConfirmation?.terminal}
                         align="left"
                     />
                     <Divider gap={1} />
 
                     <p className={'instruction'}>
-                        {t('voucherInstruction')}{' '}
-                        <span>vcash.rs</span>{' '}
+                        {t('voucherInstruction')} <span>vcash.rs</span>{' '}
                     </p>
-                    {voucherConfirmation.voucherCode && (
+                    {voucherConfirmation?.voucherCode && (
                         <VoucherCode
-                            voucherCode={voucherConfirmation.voucherCode}
+                            voucherCode={voucherConfirmation?.voucherCode}
                             voucherConfirmation={voucherConfirmation}
                         />
                     )}
                 </div>
-                <SessionCounter onEndSession={() => navigate(startUrl ?? '/')} />
+                <SessionCounter
+                    onEndSession={() => navigate(startUrl ?? '/')}
+                />
                 <div className={'action-wrapper'}>
                     <PrimaryButton
                         callback={() => onComplete()}
-                        text={t('voucherGenerated.buttonText')}
+                        text={t('voucherGenerated.btnFinish')}
                     />
                 </div>
             </div>
-            <Footer />
         </Container>
     )
 }

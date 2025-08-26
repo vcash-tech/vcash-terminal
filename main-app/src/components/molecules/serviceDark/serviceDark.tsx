@@ -1,5 +1,5 @@
 import React from 'react'
-import Marquee from "react-fast-marquee"
+import Marquee from 'react-fast-marquee'
 import { useTranslation } from 'react-i18next'
 
 import { ageDisclaimerPng, checkBoxNotSelected, checkBoxSelected } from '@/assets/icons'
@@ -10,16 +10,16 @@ export interface serviceDarkProps {
     title: string
     subtitle: string
     isSelected: boolean
-    isCommingSoon: boolean
-    hasAgeDisclamer: boolean
-    images: serviceImage[],
-    type: string,
+    isComingSoon: boolean
+    hasAgeDisclaimer: boolean
+    images: serviceImage[]
+    type: string
     onClick: () => void
 }
 
 export interface serviceImage {
-  src: string,
-  isCommingSoon: boolean
+    src: string
+    isComingSoon: boolean
 }
 
 const ServicesDark: React.FC<serviceDarkProps> = ({
@@ -27,33 +27,66 @@ const ServicesDark: React.FC<serviceDarkProps> = ({
     subtitle,
     type,
     isSelected = false,
-    isCommingSoon = false,
-    hasAgeDisclamer = false,
+    isComingSoon = false,
+    hasAgeDisclaimer = false,
     images,
     onClick
 }) => {
     const { t } = useTranslation()
 
     return (
-      <button disabled={!!isCommingSoon} className={`service-dark ${type} ${isSelected ? 'selected' : ''}`} onClick={onClick}>
-        {!isCommingSoon && <img className="checkbox-selected" src={isSelected ? checkBoxSelected : checkBoxNotSelected } alt="select" />}
-        {isCommingSoon && (<img className='coming-soon-large' src={i18n.language === 'en' ? comingSoonLarge : uskoroGreenLarge } />)}
-        <h3>
-          {t(title)}
-          {hasAgeDisclamer && (
-            <img className="age-disclaimer" src={ageDisclaimerPng} alt="Age disclaimer" />
-          )}
-        </h3>
-        <p dangerouslySetInnerHTML={{ __html: t(subtitle)}} />
-        <Marquee >
-          {images.map((image, idx) => (
-            <div key={idx} className={`marquee-item ${image.isCommingSoon ? 'coming-soon' : ''}`}>
-              {image.isCommingSoon && (<img className='coming-soon-banner' src={i18n.language === 'en' ? comingSoonSmall : uskoroGreenSmall } />)}
-              <img src={image.src} alt={t(title)} />
-            </div>
-          ))}
-        </Marquee>
-      </button>
+        <button
+            disabled={!!isComingSoon}
+            className={`service-dark ${type} ${isSelected ? 'selected' : ''}`}
+            onClick={onClick}>
+            {!isComingSoon && (
+                <img
+                    className="checkbox-selected"
+                    src={isSelected ? checkBoxSelected : checkBoxNotSelected}
+                    alt="select"
+                />
+            )}
+            {isComingSoon && (
+                <img
+                    className="coming-soon-large"
+                    src={
+                        i18n.language === 'en'
+                            ? comingSoonLarge
+                            : uskoroGreenLarge
+                    }
+                />
+            )}
+            <h3>
+                {t(title)}
+                {hasAgeDisclaimer && (
+                    <img
+                        className="age-disclaimer"
+                        src={ageDisclaimerPng}
+                        alt="Age disclaimer"
+                    />
+                )}
+            </h3>
+            <p dangerouslySetInnerHTML={{ __html: t(subtitle) }} />
+            <Marquee>
+                {images.map((image, idx) => (
+                    <div
+                        key={idx}
+                        className={`marquee-item ${image.isComingSoon ? 'coming-soon' : ''}`}>
+                        {image.isComingSoon && (
+                            <img
+                                className="coming-soon-banner"
+                                src={
+                                    i18n.language === 'en'
+                                        ? comingSoonSmall
+                                        : uskoroGreenSmall
+                                }
+                            />
+                        )}
+                        <img src={image.src} alt={t(title)} />
+                    </div>
+                ))}
+            </Marquee>
+        </button>
     )
 }
 

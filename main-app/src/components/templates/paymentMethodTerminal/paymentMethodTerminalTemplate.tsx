@@ -5,8 +5,10 @@ import Container from '@/components/atoms/container/container'
 import PaymentCard from '@/components/atoms/paymentCard/paymentCard'
 import Footer from '@/components/organisms/footer/footer'
 import Header from '@/components/organisms/header/header'
+import { VoucherPurchaseStep } from '@/data/enums/voucherPurchaseSteps'
 import { useNavigationContext } from '@/hooks/useNavigationHook'
 import { useTranslate } from '@/i18n/useTranslate'
+import { useOrder } from '@/providers'
 
 export default function PaymentMethodTerminalTemplate({
     navigate
@@ -17,11 +19,16 @@ export default function PaymentMethodTerminalTemplate({
     const location = useLocation()
     const prevState = location.state // This is the state object passed from previous navigation
     const { startUrl } = useNavigationContext()
+    const { setPaymentMethod, setCurrentStep } = useOrder()
 
     return (
         <Container isFullHeight={true}>
             <Header
-                navigateBackUrl={startUrl === '/welcome' ? "/digital-services" : startUrl ?? '/welcome'}
+                navigateBackUrl={
+                    startUrl === '/welcome'
+                        ? '/digital-services'
+                        : (startUrl ?? '/welcome')
+                }
                 navigationBackText={' '}
             />
             <div className="payment-method-terminal">
@@ -32,12 +39,24 @@ export default function PaymentMethodTerminalTemplate({
                         image={cash}
                         text={t('selectPaymentMethod.cashPayment')}
                         // get state from the previous navigate
-                        callback={() => navigate('/buy-voucher-cash', { state: { voucherType: prevState?.voucherType || 'gaming' }})}
+                        callback={() => {
+                            setPaymentMethod('cash')
+                            setCurrentStep(VoucherPurchaseStep.INSERT_CASH)
+                            navigate('/buy-voucher-cash', {
+                                state: {
+                                    voucherType:
+                                        prevState?.voucherType || 'gaming'
+                                }
+                            })
+                        }}
                     />
                     <PaymentCard
                         image={creditCard}
                         text={t('selectPaymentMethod.cardPayment')}
-                        callback={() => console.log('Card payment selected')}
+                        callback={() => {
+                            // TODO: Implemenet Card Payment
+                            console.log('Card payment selected')
+                        }}
                         isDisabled={true}
                     />
                 </div>

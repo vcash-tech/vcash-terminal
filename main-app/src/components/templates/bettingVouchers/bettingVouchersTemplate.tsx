@@ -5,12 +5,12 @@ import { ageDisclaimer } from '@/assets/icons'
 import {
     betting_balkanBet,
     betting_merkurXtip,
-    //betting_maxBetCommingSoon,
+    //betting_maxBetComingSoon,
     //betting_maxBetUskoro,
     //betting_meridian,
-    //betting_meridianBetCommingSoon,
+    //betting_meridianBetComingSoon,
     //betting_meridianBetUskoro,
-    //betting_merkurXtipCommingSoon,
+    //betting_merkurXtipComingSoon,
     //betting_merkurXtipUskoro,
     betting_soccerBet,
 } from '@/assets/images'
@@ -41,7 +41,7 @@ export default function BettingVoucher({ navigate }: BettingVoucherProps) {
     ]
 
     // if (i18n.language === 'en') {
-    //     bettingImages.push(betting_maxBetCommingSoon, betting_meridianBetCommingSoon, betting_merkurXtipCommingSoon)
+    //     bettingImages.push(betting_maxBetComingSoon, betting_meridianBetComingSoon, betting_merkurXtipComingSoon)
     // } else {
     //     bettingImages.push(betting_maxBetUskoro, betting_meridianBetUskoro, betting_merkurXtipUskoro)
     // }
