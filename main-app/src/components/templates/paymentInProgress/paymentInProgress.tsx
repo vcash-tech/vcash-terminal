@@ -72,7 +72,7 @@ export default function PaymentInProgress() {
             case VoucherPurchaseStep.INSERT_CASH:
                 return (
                     <InsertingCash
-                        amount={amount || 1}
+                        amount={amount || 0}
                         onProcessPayment={() => {
                             // call to buyVoucher
                             onBuyVoucher({
@@ -161,7 +161,6 @@ export default function PaymentInProgress() {
                                     onPrintVoucher(voucherData)
                             })
                         }}
-                        // isVoucherPrinting={isVoucherPrinting}
                         voucherRecreateAttempts={voucherRecreateAttempts}
                     />
                 )

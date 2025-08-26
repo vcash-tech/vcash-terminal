@@ -1,10 +1,11 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { NavigateFunction } from 'react-router-dom'
 
 import { printVoucher } from '@/assets/images'
 import Container from '@/components/atoms/container/container'
 import PrimaryButton from '@/components/atoms/primaryButton/primaryButton'
 import WireButton from '@/components/atoms/wireButton/wireButton'
+import { useNavigationContext } from '@/hooks'
 import { useTranslate } from '@/i18n/useTranslate'
 
 export default function VoucherErrorTemplate({
@@ -19,30 +20,24 @@ export default function VoucherErrorTemplate({
     const { t } = useTranslate()
     const [isWaitingVoucher, setIsWaitingVoucher] =
         useState<boolean>(false)
+    const [currentAttempt, setCurrentAttempt] = useState<number>(0)
 
-    // const { isOnline } = useCheckInternetConnection({ shouldCheck: true })
-    // const { startUrl } = useNavigationContext()
+    const { startUrl } = useNavigationContext()
 
-    // useEffect(() => {
-    //     const timer = setTimeout(
-    //         () => {
-    //             if (isOnline) {
-    //                 navigate(startUrl ?? '/welcome')
-    //             }
-    //             setIsWaitingVoucher(false)
-    //         },
-    //         voucherRecreateAttempts > 2 ? 15000 : 30000
-    //     )
-    //     return () => {
-    //         clearTimeout(timer)
-    //     }
-    // }, [navigate, voucherRecreateAttempts, isOnline, startUrl])
+    useEffect(() => {
+        setIsWaitingVoucher(currentAttempt !== voucherRecreateAttempts)
+        if (currentAttempt !== voucherRecreateAttempts) {
+            setCurrentAttempt(voucherRecreateAttempts)
+        }
+    }, [currentAttempt, voucherRecreateAttempts])
 
     return (
         <>
             <Container isFullHeight={true}>
                 <div className="voucher-error">
-                    <h1>{t('voucherError.title')}</h1>
+                    <h1>
+                        {t('voucherError.title')}
+                    </h1>
                     <h2>{t('voucherError.subtitle')}</h2>
 
                     <div className="demo-wrapper">
@@ -67,15 +62,16 @@ export default function VoucherErrorTemplate({
                     <PrimaryButton
                         isDisabled={isWaitingVoucher}
                         callback={() => {
-                            if (voucherRecreateAttempts <= 2) {
-                                setIsWaitingVoucher(true)
+                            if (voucherRecreateAttempts < 3) {
                                 onTryAgain?.()
+                                setIsWaitingVoucher(true)
                                 return
                             }
-                            navigate('/')
+                            setIsWaitingVoucher(false)
+                            navigate(startUrl ?? '/welcome')
                         }}
                         text={t(
-                            voucherRecreateAttempts <= 2
+                            voucherRecreateAttempts < 3
                                 ? 'voucherGenerated.tryAgain'
                                 : 'voucherGenerated.btnFinish'
                         )}
