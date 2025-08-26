@@ -69,40 +69,6 @@ export default function PaymentInProgress() {
 
     const renderStepContent = () => {
         switch (state.currentStep) {
-            case VoucherPurchaseStep.INSERT_CASH:
-                return (
-                    <InsertingCash
-                        amount={amount || 0}
-                        onProcessPayment={() => {
-                            // call to buyVoucher
-                            onBuyVoucher({
-                                activateRef: activateIntervalRef,
-                                selectedVoucherType: state.voucherType,
-                                setVoucherRecreateAttempts,
-                                voucherRecreateAttempts,
-                                onError: () => {
-                                    setError(error)
-                                    setCurrentStep(
-                                        VoucherPurchaseStep.VOUCHER_ERROR
-                                    )
-                                    setVoucherRecreateAttempts(
-                                        voucherRecreateAttempts + 1
-                                    )
-                                },
-                                onSuccess: (voucherData) => {
-                                    setVoucherData(voucherData)
-                                    setVoucherRecreateAttempts(0)
-                                    setCurrentStep(
-                                        VoucherPurchaseStep.PRINT_VOUCHER
-                                    )
-                                },
-                                onPrintVoucher: (voucherData) =>
-                                    onPrintVoucher(voucherData)
-                            })
-                        }}
-                    />
-                )
-
             case VoucherPurchaseStep.PRINT_VOUCHER:
                 if (!voucherData && error) {
                     setCurrentStep(VoucherPurchaseStep.VOUCHER_ERROR)
@@ -206,7 +172,36 @@ export default function PaymentInProgress() {
                 )
 
             default:
-                return <div>Payment in progress {state.currentStep}</div>
+                return <InsertingCash
+                    amount={amount || 0}
+                    onProcessPayment={() => {
+                        // call to buyVoucher
+                        onBuyVoucher({
+                            activateRef: activateIntervalRef,
+                            selectedVoucherType: state.voucherType,
+                            setVoucherRecreateAttempts,
+                            voucherRecreateAttempts,
+                            onError: () => {
+                                setError(error)
+                                setCurrentStep(
+                                    VoucherPurchaseStep.VOUCHER_ERROR
+                                )
+                                setVoucherRecreateAttempts(
+                                    voucherRecreateAttempts + 1
+                                )
+                            },
+                            onSuccess: (voucherData) => {
+                                setVoucherData(voucherData)
+                                setVoucherRecreateAttempts(0)
+                                setCurrentStep(
+                                    VoucherPurchaseStep.PRINT_VOUCHER
+                                )
+                            },
+                            onPrintVoucher: (voucherData) =>
+                                onPrintVoucher(voucherData)
+                        })
+                    }}
+                />
         }
     }
 
