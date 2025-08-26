@@ -59,7 +59,6 @@ export default function PaymentInProgress() {
             return
         }
 
-        setCurrentStep(VoucherPurchaseStep.VOUCHER_ERROR)
         setIsPrinted(false)
         // not printed
         console.log(
@@ -176,6 +175,7 @@ export default function PaymentInProgress() {
                 return <InsertingCash
                     amount={amount || 0}
                     onProcessPayment={() => {
+                        setCurrentStep(VoucherPurchaseStep.PRINT_VOUCHER)
                         // call to buyVoucher
                         onBuyVoucher({
                             activateRef: activateIntervalRef,
