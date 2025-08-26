@@ -170,6 +170,7 @@ export default function PaymentInProgress() {
                 return <InsertingCash
                     amount={amount || 0}
                     onProcessPayment={() => {
+                        setCurrentStep(VoucherPurchaseStep.PRINT_VOUCHER)
                         // call to buyVoucher
                         onBuyVoucher({
                             activateRef: activateIntervalRef,
