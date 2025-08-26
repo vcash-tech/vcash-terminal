@@ -12,7 +12,6 @@ import VoucherErrorTemplate from '@/components/templates/voucherDataError/Vouche
 import { VoucherConfirmation } from '@/data/entities/voucher-confirmation'
 import { VoucherPurchaseStep } from '@/data/enums/voucherPurchaseSteps'
 import { apiTimeOut } from '@/helpers/apiWithStrictTimeout'
-import { useTranslate } from '@/i18n/useTranslate'
 import { useOrder } from '@/providers'
 import { TransactionService } from '@/services/transactionService'
 import { VoucherResponse } from '@/types/pos/deposit'
@@ -27,7 +26,6 @@ import {
 import InsertingCash from './components/insertingCash'
 
 export default function PaymentInProgress() {
-    const { t } = useTranslate()
     const { setCurrentStep, state } = useOrder()
     const [amount, _setAmount] = useState<number>(0)
     const [error, setError] = useState<PaymentActivationError | string | null>(
@@ -270,15 +268,12 @@ export default function PaymentInProgress() {
     return (
         <>
             <ErrorNotification
-                message={t(`insertCash.errors.${error}`)}
+                message={error ?? ''}
                 isVisible={error !== null}
                 onClose={() => setError(null)}
             />
             <Container isFullHeight={true}>
-                <Header
-                    navigationBackText={' '}
-                    navigateBackUrl={'/payment-method'}
-                />
+                <Header />
                 {renderStepContent()}
                 <Footer />
             </Container>
