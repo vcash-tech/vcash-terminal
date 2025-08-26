@@ -273,7 +273,16 @@ export default function PaymentInProgress() {
                 onClose={() => setError(null)}
             />
             <Container isFullHeight={true}>
-                <Header />
+                {amount === 0 &&
+                state.currentStep === VoucherPurchaseStep.INSERT_CASH ? (
+                    <Header
+                        navigateBackUrl={'/payment-method'}
+                        navigationBackText={' '}
+                    />
+                ) : (
+                    <Header />
+                )}
+
                 {renderStepContent()}
                 <Footer />
             </Container>
