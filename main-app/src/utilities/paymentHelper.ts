@@ -2,12 +2,13 @@
 import { addDays, endOfDay, format } from 'date-fns'
 import { RefObject } from 'react'
 
+import { VoucherType } from '@/providers'
 import { apiService } from '@/services/apiService'
 import { AuthService } from '@/services/authService'
 import { TransactionService } from '@/services/transactionService'
 import { Auth } from '@/types/common/httpRequest'
 import { VoucherResponse } from '@/types/pos/deposit'
-import { VOUCHER_TYPE_MAPPING } from '@/utilities/paymentTypeHelper'
+import { getPaymentType, VOUCHER_TYPE_MAPPING } from '@/utilities/paymentTypeHelper'
 
 export type PaymentActivationError = 'cashAcceptorError' | 'authRequired'
 
@@ -186,7 +187,7 @@ export const printVoucher = async (
 
 export type BuyVoucherParams = {
     activateRef: RefObject<number | null>
-    selectedVoucherType: string | null
+    selectedVoucherType: VoucherType | null
     voucherRecreateAttempts: number
     setVoucherRecreateAttempts: (attempts: number) => void
     onError: (error: string) => void
@@ -212,7 +213,7 @@ export const onBuyVoucher = async ({
 
     try {
         const createVoucher = await TransactionService.CreateVoucher({
-            voucherTypeId: selectedVoucherType ?? '20'
+            voucherTypeId: getPaymentType(selectedVoucherType)
         })
 
         if (!createVoucher || !createVoucher?.moneyTransfer?.voucherCode) {
