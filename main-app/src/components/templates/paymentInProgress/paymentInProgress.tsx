@@ -70,11 +70,6 @@ export default function PaymentInProgress() {
     const renderStepContent = () => {
         switch (state.currentStep) {
             case VoucherPurchaseStep.PRINT_VOUCHER:
-                if (!voucherData && error) {
-                    setCurrentStep(VoucherPurchaseStep.VOUCHER_ERROR)
-
-                    return
-                }
                 return (
                     <PaymentComplete
                         navigate={navigate}
