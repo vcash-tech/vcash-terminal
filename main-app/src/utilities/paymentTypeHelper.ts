@@ -1,6 +1,6 @@
 import { VoucherType } from '@/providers'
 
-export const getPaymentType = (voucherType: VoucherType): string => {
+export const getPaymentType = (voucherType: VoucherType | null): string => {
     switch (voucherType) {
         case 'betting':
             return '30'
