@@ -45,7 +45,8 @@
       "cashAcceptorError": "Failed to activate cash acceptor.",
       "templateRendererNotConfigured": "Template renderer not configured.",
       "printFailed": "Printing failed: {{message}}",
-      "printError": "Failed to print voucher."
+      "printError": "Failed to print voucher.",
+      "voucherCreatedFailed": "Voucher create failed - no voucher data available."
     }
   },
   "home": {
@@ -225,7 +226,7 @@
       "2": "Log into your account",
       "3": "Enter the voucher code above "
     },
-    "buttonText": "Finish",
+    "btnFinish": "Finish",
     "tryAgain": "Try Again",
     "scanToRedeem": "Scan to Redeem",
     "successfulMsg": "Your voucher has been issued successfully",

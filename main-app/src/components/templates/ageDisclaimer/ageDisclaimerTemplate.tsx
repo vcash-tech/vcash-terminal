@@ -11,7 +11,6 @@ import {
     ageDisclaimerWhite,
     bettingWarning,
     hospitalLogo,
-    redWarningIcon,
     serbiaLogo
 } from '../../../assets/icons'
 
@@ -60,7 +59,6 @@ export default function AgeDisclaimerTemplate({
                         </div>
                     </div>
                     <div className="final-warning">
-                        <img src={redWarningIcon} />
                         <p>{t('ageDisclaimer.finalWarning')}</p>
                     </div>
                 </div>

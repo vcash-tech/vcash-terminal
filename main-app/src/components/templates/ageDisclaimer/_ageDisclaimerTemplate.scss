@@ -155,11 +155,12 @@
 
             p {
                 color: #c63d46;
-                text-align: justify;
                 font-family: fonts.$body-font;
                 font-size: 18px;
                 font-weight: 700;
                 line-height: 137%;
+                max-width: 900px;
+                text-align: center;
             }
         }
     }

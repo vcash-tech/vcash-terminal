@@ -8,6 +8,7 @@ import type { Preview } from '@storybook/react'
 import { withKeyboardProvider } from '../src/stories/decorators/withKeyboardProvider'
 import { withNavigationContext } from '../src/stories/decorators/withNavigationContext'
 import { withNavigationProvider } from '../src/stories/decorators/withNavigationProvider'
+import { withOrderProvider } from '../src/stories/decorators/withOrderProvider'
 import { WithI18n } from './i18nDecorator'
 
 // Custom viewport for 1080x1920 size
@@ -26,7 +27,8 @@ const preview: Preview = {
         WithI18n,
         withKeyboardProvider,
         withNavigationContext,
-        withNavigationProvider
+        withNavigationProvider,
+        withOrderProvider
     ],
     parameters: {
         controls: {

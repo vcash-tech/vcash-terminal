@@ -2,11 +2,11 @@ import helpIcon from './icons/helpIcon.svg'
 import ageDisclaimer from './images/age-disclaimer.png'
 import basketballCard from './images/basketballCard.svg'
 import betting_balkanBet from './images/betting/balkanBet.png'
-import betting_maxBetCommingSoon from './images/betting/comming-soon/maxbet-coming-soon.png'
+import betting_maxBetComingSoon from './images/betting/comming-soon/maxbet-coming-soon.png'
 import betting_maxBetUskoro from './images/betting/comming-soon/maxbet-uskoro.png'
-import betting_meridianBetCommingSoon from './images/betting/comming-soon/meridianbet-coming-soon.png'
+import betting_meridianBetComingSoon from './images/betting/comming-soon/meridianbet-coming-soon.png'
 import betting_meridianBetUskoro from './images/betting/comming-soon/meridianbet-uskoro.png'
-import betting_merkurXtipCommingSoon from './images/betting/comming-soon/merkur-x-tip-coming-soon.png'
+import betting_merkurXtipComingSoon from './images/betting/comming-soon/merkur-x-tip-coming-soon.png'
 import betting_merkurXtipUskoro from './images/betting/comming-soon/merkur-x-tip-uskoro.png'
 import betting_meridian from './images/betting/meridian.png'
 import betting_merkurXtip from './images/betting/merkurXtip.png'
@@ -103,13 +103,13 @@ export {
     balkanBetLogo,
     basketballCard,
     betting_balkanBet,
-    betting_maxBetCommingSoon,
+    betting_maxBetComingSoon,
     betting_maxBetUskoro,
     betting_meridian,
-    betting_meridianBetCommingSoon,
+    betting_meridianBetComingSoon,
     betting_meridianBetUskoro,
     betting_merkurXtip,
-    betting_merkurXtipCommingSoon,
+    betting_merkurXtipComingSoon,
     betting_merkurXtipUskoro,
     betting_soccerBet,
     betVoucher,

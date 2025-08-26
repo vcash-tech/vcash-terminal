@@ -75,12 +75,13 @@ export class POSService {
     }
 
     // Session creation - creates session token if needed
-    static async createSession(): Promise<void> {
+    static async createSession(): Promise<string|null> {
         try {
             // Check if we already have a valid session token
             if (AuthService.HasToken(Auth.Cashier)) {
                 console.log('✅ Session token already exists')
-                return
+
+                return AuthService.GetToken(Auth.Cashier)
             }
 
             console.log('Creating new session token...')
@@ -108,6 +109,9 @@ export class POSService {
             // Save the session token
             AuthService.SetToken(Auth.Cashier, response.accessToken)
             console.log('✅ Session token created successfully')
+
+            return response.accessToken
+
         } catch (error) {
             console.error('❌ Error creating session token:', error)
             // Clear any partial session token
