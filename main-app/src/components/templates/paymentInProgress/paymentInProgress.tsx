@@ -165,37 +165,39 @@ export default function PaymentInProgress() {
                 )
 
             default:
-                return <InsertingCash
-                    amount={amount || 0}
-                    onProcessPayment={() => {
-                        setCurrentStep(VoucherPurchaseStep.PRINT_VOUCHER)
-                        // call to buyVoucher
-                        onBuyVoucher({
-                            activateRef: activateIntervalRef,
-                            selectedVoucherType: state.voucherType,
-                            setVoucherRecreateAttempts,
-                            voucherRecreateAttempts,
-                            onError: () => {
-                                setError(error)
-                                setCurrentStep(
-                                    VoucherPurchaseStep.VOUCHER_ERROR
-                                )
-                                setVoucherRecreateAttempts(
-                                    voucherRecreateAttempts + 1
-                                )
-                            },
-                            onSuccess: (voucherData) => {
-                                setVoucherData(voucherData)
-                                setVoucherRecreateAttempts(0)
-                                setCurrentStep(
-                                    VoucherPurchaseStep.PRINT_VOUCHER
-                                )
-                            },
-                            onPrintVoucher: (voucherData) =>
-                                onPrintVoucher(voucherData)
-                        })
-                    }}
-                />
+                return (
+                    <InsertingCash
+                        amount={amount || 0}
+                        onProcessPayment={() => {
+                            setCurrentStep(VoucherPurchaseStep.PRINT_VOUCHER)
+                            // call to buyVoucher
+                            onBuyVoucher({
+                                activateRef: activateIntervalRef,
+                                selectedVoucherType: state.voucherType,
+                                setVoucherRecreateAttempts,
+                                voucherRecreateAttempts,
+                                onError: () => {
+                                    setError(error)
+                                    setCurrentStep(
+                                        VoucherPurchaseStep.VOUCHER_ERROR
+                                    )
+                                    setVoucherRecreateAttempts(
+                                        voucherRecreateAttempts + 1
+                                    )
+                                },
+                                onSuccess: (voucherData) => {
+                                    setVoucherData(voucherData)
+                                    setVoucherRecreateAttempts(0)
+                                    setCurrentStep(
+                                        VoucherPurchaseStep.PRINT_VOUCHER
+                                    )
+                                },
+                                onPrintVoucher: (voucherData) =>
+                                    onPrintVoucher(voucherData)
+                            })
+                        }}
+                    />
+                )
         }
     }
 
@@ -227,7 +229,7 @@ export default function PaymentInProgress() {
         fetchAmount()
 
         // Set up 3-second polling
-        const amountPollingInterval = setInterval(fetchAmount, 1000)
+        const amountPollingInterval = setInterval(fetchAmount, 3000)
 
         return () => {
             clearInterval(amountPollingInterval)

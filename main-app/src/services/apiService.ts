@@ -358,6 +358,11 @@ class ApiService {
      */
     private async localPrint(imageUrl: string): Promise<ApiResponse> {
         console.log(`Local print: mock print for ${imageUrl}`)
+        window.open(
+            imageUrl.replace('rotate=180', 'rotate=0'),
+            '_blank',
+            'popup=yes,width=400,height=1200'
+        )
         return {
             success: true,
             message: 'Print successful (local mode)',

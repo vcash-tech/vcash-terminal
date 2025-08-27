@@ -190,18 +190,18 @@ const Debug = () => {
         }
     }
 
-    const handleGetCredentialsDebug = async () => {
-        alert('About to call apiService.getCredentials()...')
+    // const handleGetCredentialsDebug = async () => {
+    //     alert('About to call apiService.getCredentials()...')
 
-        try {
-            const response = await apiService.getCredentials()
-            alert(`Credentials response: ${JSON.stringify(response, null, 2)}`)
-        } catch (error) {
-            alert(
-                `Credentials error: ${error instanceof Error ? error.message : 'Unknown error'}`
-            )
-        }
-    }
+    //     try {
+    //         const response = await apiService.getCredentials()
+    //         alert(`Credentials response: ${JSON.stringify(response, null, 2)}`)
+    //     } catch (error) {
+    //         alert(
+    //             `Credentials error: ${error instanceof Error ? error.message : 'Unknown error'}`
+    //         )
+    //     }
+    // }
 
     const handleResetDeviceRegistration = async () => {
         const confirmed = confirm(
@@ -398,7 +398,7 @@ const Debug = () => {
                         }}>
                         Debug Print
                     </button>
-                    <button
+                    {/* <button
                         onClick={handleGetCredentialsDebug}
                         style={{
                             marginLeft: '5px',
@@ -411,7 +411,7 @@ const Debug = () => {
                             cursor: 'pointer'
                         }}>
                         Debug Credentials
-                    </button>
+                    </button> */}
                     <button
                         onClick={handleResetDeviceRegistration}
                         style={{

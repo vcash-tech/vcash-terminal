@@ -175,7 +175,7 @@ export default function InsertCashTemplate({
         fetchAmount()
 
         // Set up 3-second polling
-        const amountPollingInterval = setInterval(fetchAmount, 1000)
+        const amountPollingInterval = setInterval(fetchAmount, 3000)
 
         return () => {
             clearInterval(amountPollingInterval)
@@ -276,11 +276,11 @@ export default function InsertCashTemplate({
             }>((resolve) => {
                 setTimeout(() => {
                     console.log(
-                        '⏰ Print operation timed out after 10 seconds, considering as successful'
+                        '⏰ Print operation timed out after 10 seconds, assuming it failed'
                     )
                     resolve({
-                        success: true,
-                        message: 'Print operation timed out, assumed successful'
+                        success: false,
+                        message: 'Print operation timed out, assumed failed'
                     })
                 }, 10000)
             })
