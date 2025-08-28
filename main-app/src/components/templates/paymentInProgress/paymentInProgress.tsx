@@ -229,7 +229,7 @@ export default function PaymentInProgress() {
                 } else {
                     setIsMoneyPending(false)
                 }
-                if (amount > 0 && response.amount > amount) {
+                if (response.amount > amount) {
                     console.log(
                         'Dispatching money-added event to reset inactivity timer'
                     )
