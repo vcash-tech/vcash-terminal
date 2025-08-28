@@ -27,63 +27,59 @@ export default function VoucherConfirmationTemplate({
     const { startUrl } = useNavigationContext()
 
     return (
-        <Container isFullHeight={true}>
-            <div className={'voucher-confirmation'}>
-                <img
-                    src={confirmedIcon}
-                    alt="Confirmed icon"
-                    className="confirmed-icon"
-                />
-                <h1>{t('voucherGenerated.title')}</h1>
-                <div className="invoice-content">
-                    <FlexWrapper gap={2} justify="space-between">
-                        <HalfContainer>
-                            <InvoiceItem
-                                label={t('voucherGenerated.date')}
-                                value={voucherConfirmation?.date}
-                                align="left"
-                            />
-                        </HalfContainer>
-                        <HalfContainer>
-                            <InvoiceItem
-                                label={t('voucherGenerated.time')}
-                                value={voucherConfirmation?.time}
-                                align="right"
-                            />
-                        </HalfContainer>
-                    </FlexWrapper>
-                    <InvoiceItem
-                        label={t('voucherGenerated.referenceNo')}
-                        value={voucherConfirmation?.referenceNo}
-                        align="left"
-                    />
-                    <InvoiceItem
-                        label={t('voucherGenerated.terminal')}
-                        value={voucherConfirmation?.terminal}
-                        align="left"
-                    />
-                    <Divider gap={1} />
-
-                    <p className={'instruction'}>
-                        {t('voucherInstruction')} <span>vcash.rs</span>{' '}
-                    </p>
-                    {voucherConfirmation?.voucherCode && (
-                        <VoucherCode
-                            voucherCode={voucherConfirmation?.voucherCode}
-                            voucherConfirmation={voucherConfirmation}
+        <div className={'voucher-confirmation'}>
+            <img
+                src={confirmedIcon}
+                alt="Confirmed icon"
+                className="confirmed-icon"
+            />
+            <h1>{t('voucherGenerated.title')}</h1>
+            <div className="invoice-content">
+                <FlexWrapper gap={2} justify="space-between">
+                    <HalfContainer>
+                        <InvoiceItem
+                            label={t('voucherGenerated.date')}
+                            value={voucherConfirmation?.date}
+                            align="left"
                         />
-                    )}
-                </div>
-                <SessionCounter
-                    onEndSession={() => navigate(startUrl ?? '/')}
+                    </HalfContainer>
+                    <HalfContainer>
+                        <InvoiceItem
+                            label={t('voucherGenerated.time')}
+                            value={voucherConfirmation?.time}
+                            align="right"
+                        />
+                    </HalfContainer>
+                </FlexWrapper>
+                <InvoiceItem
+                    label={t('voucherGenerated.referenceNo')}
+                    value={voucherConfirmation?.referenceNo}
+                    align="left"
                 />
-                <div className={'action-wrapper'}>
-                    <PrimaryButton
-                        callback={() => onComplete()}
-                        text={t('voucherGenerated.btnFinish')}
+                <InvoiceItem
+                    label={t('voucherGenerated.terminal')}
+                    value={voucherConfirmation?.terminal}
+                    align="left"
+                />
+                <Divider gap={1} />
+
+                <p className={'instruction'}>
+                    {t('voucherInstruction')} <span>vcash.rs</span>{' '}
+                </p>
+                {voucherConfirmation?.voucherCode && (
+                    <VoucherCode
+                        voucherCode={voucherConfirmation?.voucherCode}
+                        voucherConfirmation={voucherConfirmation}
                     />
-                </div>
+                )}
             </div>
-        </Container>
+            <SessionCounter onEndSession={() => navigate(startUrl ?? '/')} />
+            <div className={'action-wrapper'}>
+                <PrimaryButton
+                    callback={() => onComplete()}
+                    text={t('voucherGenerated.btnFinish')}
+                />
+            </div>
+        </div>
     )
 }
