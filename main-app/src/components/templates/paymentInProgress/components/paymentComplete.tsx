@@ -31,7 +31,7 @@ export default function PaymentComplete({
     useEffect(() => {
         setTimeout(() => {
             setTimeoutPassed(true)
-        }, 10000)
+        }, 15000)
     }, [])
 
     useEffect(() => {

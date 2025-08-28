@@ -41,10 +41,16 @@ export default function PaymentInProgress() {
     const navigate = useNavigate()
 
     useEffect(() => {
+        let timeoutRef: number | null = null
         if (isPrinted) {
-            setTimeout(() => {
+            timeoutRef = window.setTimeout(() => {
                 navigate('/welcome')
             }, 5000)
+        }
+        return () => {
+            if (timeoutRef) {
+                clearTimeout(timeoutRef)
+            }
         }
     }, [isPrinted, navigate])
 
