@@ -6,7 +6,6 @@ import PaymentCard from '@/components/atoms/paymentCard/paymentCard'
 import Footer from '@/components/organisms/footer/footer'
 import Header from '@/components/organisms/header/header'
 import { VoucherPurchaseStep } from '@/data/enums/voucherPurchaseSteps'
-import { useNavigationContext } from '@/hooks/useNavigationHook'
 import { useTranslate } from '@/i18n/useTranslate'
 import { useOrder } from '@/providers'
 
@@ -18,19 +17,11 @@ export default function PaymentMethodTerminalTemplate({
     const { t } = useTranslate()
     const location = useLocation()
     const prevState = location.state // This is the state object passed from previous navigation
-    const { startUrl } = useNavigationContext()
     const { setPaymentMethod, setCurrentStep } = useOrder()
 
     return (
         <Container isFullHeight={true}>
-            <Header
-                navigateBackUrl={
-                    startUrl === '/welcome'
-                        ? '/digital-services'
-                        : (startUrl ?? '/welcome')
-                }
-                navigationBackText={' '}
-            />
+            <Header navigateBackUrl={'/welcome'} navigationBackText={' '} />
             <div className="payment-method-terminal">
                 <h1>{t('selectPaymentMethod.title')}</h1>
                 <h2>{t('selectPaymentMethod.subtitle')}</h2>

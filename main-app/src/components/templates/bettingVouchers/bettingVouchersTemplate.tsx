@@ -12,7 +12,7 @@ import {
     //betting_meridianBetUskoro,
     //betting_merkurXtipComingSoon,
     //betting_merkurXtipUskoro,
-    betting_soccerBet,
+    betting_soccerBet
 } from '@/assets/images'
 import Container from '@/components/atoms/container/container'
 import PrimaryButton from '@/components/atoms/primaryButton/primaryButton'
@@ -20,7 +20,6 @@ import AvailableServices from '@/components/molecules/availableServices/availabl
 import Footer from '@/components/organisms/footer/footer'
 import Header from '@/components/organisms/header/header'
 import HowTo from '@/components/organisms/how-to/how-to'
-import { useNavigationContext } from '@/hooks/useNavigationHook'
 //import i18n from '@/i18n/i18n'
 
 export type BettingVoucherProps = {
@@ -29,7 +28,6 @@ export type BettingVoucherProps = {
 
 export default function BettingVoucher({ navigate }: BettingVoucherProps) {
     const { t } = useTranslation()
-    const { startUrl } = useNavigationContext()
 
     const bettingImages = [
         betting_balkanBet,
@@ -49,7 +47,7 @@ export default function BettingVoucher({ navigate }: BettingVoucherProps) {
     return (
         <Container isFullHeight={true}>
             <Header
-                navigateBackUrl={startUrl === '/welcome' ? "/digital-services" : startUrl ?? '/welcome'}
+                navigateBackUrl={'/welcome'}
                 navigationBackText={' '} //t('digitalServices.backToServices')}
             />
             <div className={`betting-voucher`}>
@@ -70,7 +68,11 @@ export default function BettingVoucher({ navigate }: BettingVoucherProps) {
                 <div className="gaming-voucher__primary-button">
                     <PrimaryButton
                         text={t('bettingVouchers.buttonText')}
-                        onPress={() => navigate('/payment-method', { state: { voucherType: 'betting' } })}
+                        onPress={() =>
+                            navigate('/payment-method', {
+                                state: { voucherType: 'betting' }
+                            })
+                        }
                     />
                 </div>
             </div>

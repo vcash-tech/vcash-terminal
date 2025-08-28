@@ -7,7 +7,7 @@ import { isHomePage } from '@/utilities/navigationHelper'
 
 export default function NoInternetModal() {
     const { t } = useTranslate()
-    const { isOnline } = useCheckInternetConnection({ shouldCheck: true })
+    const { isOnline, isMoneyPending } = useCheckInternetConnection()
     const { pathname } = useLocation()
 
     if (isHomePage(pathname) || isOnline) {
@@ -15,10 +15,16 @@ export default function NoInternetModal() {
     }
 
     return (
-        <AlertModal
-            title={t('alertModal.errors.offlineTitle')}
-            message={t('alertModal.errors.offlineMessage')}
-            displaySupport={true}
-        />
+        <div>
+            <AlertModal
+                title={t('alertModal.errors.offlineTitle')}
+                message={
+                    isMoneyPending
+                        ? t('alertModal.errors.offlineMessageMoneyPending')
+                        : t('alertModal.errors.offlineMessage')
+                }
+                displaySupport={true}
+            />
+        </div>
     )
 }

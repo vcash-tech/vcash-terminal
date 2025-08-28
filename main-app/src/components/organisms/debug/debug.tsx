@@ -1,8 +1,8 @@
 import { useState } from 'react'
 
-import { apiService } from '@/services/apiService'
 import { AuthService } from '@/services/authService'
 import { Auth } from '@/types/common/httpRequest'
+import { apiService } from '@/services/apiService'
 
 const Debug = () => {
     // Runtime debug mode state
@@ -203,72 +203,72 @@ const Debug = () => {
     //     }
     // }
 
-    const handleResetDeviceRegistration = async () => {
-        const confirmed = confirm(
-            'Are you sure you want to reset device registration? This will clear all tokens and require re-registration.'
-        )
+    // const handleResetDeviceRegistration = async () => {
+    //     const confirmed = confirm(
+    //         'Are you sure you want to reset device registration? This will clear all tokens and require re-registration.'
+    //     )
 
-        if (!confirmed) return
+    //     if (!confirmed) return
 
-        alert('Resetting device registration...')
+    //     alert('Resetting device registration...')
 
-        try {
-            // Try clearing with "token-reset" to ensure it overwrites
-            const resetTokenResponse =
-                await apiService.saveDeviceToken('token-reset')
+    //     try {
+    //         // Try clearing with "token-reset" to ensure it overwrites
+    //         const resetTokenResponse =
+    //             await apiService.saveDeviceToken('token-reset')
 
-            // Show the API response
-            alert(
-                `Reset Token API Response: ${JSON.stringify(resetTokenResponse, null, 2)}`
-            )
+    //         // Show the API response
+    //         alert(
+    //             `Reset Token API Response: ${JSON.stringify(resetTokenResponse, null, 2)}`
+    //         )
 
-            // Also try with empty string
-            const emptyTokenResponse = await apiService.saveDeviceToken('')
+    //         // Also try with empty string
+    //         const emptyTokenResponse = await apiService.saveDeviceToken('')
 
-            // Show the empty token API response
-            alert(
-                `Empty Token API Response: ${JSON.stringify(emptyTokenResponse, null, 2)}`
-            )
+    //         // Show the empty token API response
+    //         alert(
+    //             `Empty Token API Response: ${JSON.stringify(emptyTokenResponse, null, 2)}`
+    //         )
 
-            // Clear localStorage tokens
-            AuthService.DeleteToken(Auth.POS)
-            AuthService.DeleteToken(Auth.Cashier)
+    //         // Clear localStorage tokens
+    //         AuthService.DeleteToken(Auth.POS)
+    //         AuthService.DeleteToken(Auth.Cashier)
 
-            // Verify the token was actually cleared by checking what's stored
-            const verifyToken = await apiService.getDeviceToken()
+    //         // Verify the token was actually cleared by checking what's stored
+    //         const verifyToken = await apiService.getDeviceToken()
 
-            alert(
-                `Device registration reset completed!\nStored token after reset: "${verifyToken}"\nPlease refresh the page.`
-            )
-        } catch (error) {
-            alert(
-                `Reset error: ${error instanceof Error ? error.message : 'Unknown error'}`
-            )
-        }
-    }
+    //         alert(
+    //             `Device registration reset completed!\nStored token after reset: "${verifyToken}"\nPlease refresh the page.`
+    //         )
+    //     } catch (error) {
+    //         alert(
+    //             `Reset error: ${error instanceof Error ? error.message : 'Unknown error'}`
+    //         )
+    //     }
+    // }
 
     const handleRefreshPage = () => {
         window.location.reload()
     }
 
-    const handleNavigateToAltUrl = () => {
-        const altUrl = import.meta.env.VITE_ALT_URL
+    // const handleNavigateToAltUrl = () => {
+    //     const altUrl = import.meta.env.VITE_ALT_URL
 
-        if (!altUrl || typeof altUrl !== 'string' || altUrl.trim() === '') {
-            alert('VITE_ALT_URL is not set or is empty')
-            return
-        }
+    //     if (!altUrl || typeof altUrl !== 'string' || altUrl.trim() === '') {
+    //         alert('VITE_ALT_URL is not set or is empty')
+    //         return
+    //     }
 
-        if (!altUrl.startsWith('http://') && !altUrl.startsWith('https://')) {
-            alert('VITE_ALT_URL must begin with http:// or https://')
-            return
-        }
+    //     if (!altUrl.startsWith('http://') && !altUrl.startsWith('https://')) {
+    //         alert('VITE_ALT_URL must begin with http:// or https://')
+    //         return
+    //     }
 
-        const confirmed = confirm(`Navigate to: ${altUrl}?`)
-        if (confirmed) {
-            window.location.href = altUrl
-        }
-    }
+    //     const confirmed = confirm(`Navigate to: ${altUrl}?`)
+    //     if (confirmed) {
+    //         window.location.href = altUrl
+    //     }
+    // }
 
     const handleOpenSpeedTest = () => {
         setIsSpeedTestOpen(true)
@@ -399,20 +399,6 @@ const Debug = () => {
                         Debug Print
                     </button>
                     {/* <button
-                        onClick={handleGetCredentialsDebug}
-                        style={{
-                            marginLeft: '5px',
-                            padding: '5px 10px',
-                            background: '#4ecdc4',
-                            color: 'white',
-                            border: 'none',
-                            borderRadius: '4px',
-                            fontSize: '12px',
-                            cursor: 'pointer'
-                        }}>
-                        Debug Credentials
-                    </button> */}
-                    <button
                         onClick={handleResetDeviceRegistration}
                         style={{
                             marginLeft: '5px',
@@ -425,7 +411,7 @@ const Debug = () => {
                             cursor: 'pointer'
                         }}>
                         Reset Device
-                    </button>
+                    </button> */}
                     <button
                         onClick={handleRefreshPage}
                         style={{
@@ -440,7 +426,7 @@ const Debug = () => {
                         }}>
                         Refresh
                     </button>
-                    <button
+                    {/* <button
                         onClick={handleNavigateToAltUrl}
                         style={{
                             marginLeft: '5px',
@@ -453,7 +439,7 @@ const Debug = () => {
                             cursor: 'pointer'
                         }}>
                         Change env
-                    </button>
+                    </button> */}
                     <button
                         onClick={handleOpenSpeedTest}
                         style={{

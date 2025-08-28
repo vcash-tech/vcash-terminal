@@ -11,40 +11,34 @@ import { useTranslate } from '@/i18n/useTranslate'
 export type PaymentCompleteProps = {
     navigate: NavigateFunction
     onPrimaryButtonClick: () => void
-    hasPrintingError?: boolean
-    showHelp?: unknown
-    isCompleted?: boolean
+    hasPrintingError: boolean
+    isPrintCompleted?: boolean
 }
 
 export default function PaymentComplete({
     navigate,
     onPrimaryButtonClick,
     hasPrintingError,
-    isCompleted,
-    showHelp
+    isPrintCompleted
 }: PaymentCompleteProps) {
     const { t } = useTranslate()
     const { startUrl } = useNavigationContext()
 
-    const [showHelpMessage, setShowHelpMessage] = useState<unknown>(showHelp)
+    const [showHelpMessage, setShowHelpMessage] = useState<boolean | null>(null)
+
+    const [timeoutPassed, setTimeoutPassed] = useState<boolean>(false)
 
     useEffect(() => {
-        // If showHelp is null or undefined, set it to true after 10 seconds
-        if (showHelpMessage === null || showHelpMessage === undefined) {
-            const timer = setTimeout(() => {
-                setShowHelpMessage(true)
-            }, 10000)
-            return () => clearTimeout(timer)
-        }
+        setTimeout(() => {
+            setTimeoutPassed(true)
+        }, 10000)
+    }, [])
 
-        // if voucher is printed navigate to / after 10 seconds
-        if (showHelpMessage === false && navigate) {
-            const timer = setTimeout(() => {
-                navigate('/')
-            }, 10000)
-            return () => clearTimeout(timer)
+    useEffect(() => {
+        if (timeoutPassed && !isPrintCompleted) {
+            setShowHelpMessage(true)
         }
-    }, [showHelpMessage, navigate])
+    }, [timeoutPassed, isPrintCompleted])
 
     const renderError = () => {
         return (
@@ -87,13 +81,12 @@ export default function PaymentComplete({
     }
 
     const renderStatus = () => {
-        if (!hasPrintingError && isCompleted === true) {
+        if (!hasPrintingError && isPrintCompleted === true) {
             return renderSuccess()
         }
 
         if (hasPrintingError || showHelpMessage) {
             return renderError()
-
         }
 
         return renderInProgress()

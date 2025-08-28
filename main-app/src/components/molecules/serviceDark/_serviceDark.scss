@@ -7,14 +7,14 @@
     align-items: left;
 
     padding: 0;
-    border: 4px solid rgba(255,255,255,0.45);
+    border: 4px solid rgba(255, 255, 255, 0.45);
     border-radius: 1.6rem;
     width: 100vw;
     max-width: 100%;
     margin-bottom: 3.5rem;
     position: relative;
     background: transparent;
-    padding-bottom: 3.5rem;
+    padding-bottom: 2.5rem;
 
     &.betting {
         background-image: url('../assets/images/welcome/betting.png');
@@ -29,8 +29,8 @@
     }
 
     &.selected {
-        background-color: rgba(255,255,255,0.1);
-        border-color: #36C6FF;
+        background-color: rgba(255, 255, 255, 0.1);
+        border-color: #36c6ff;
     }
 
     .coming-soon-large {
@@ -42,8 +42,8 @@
     }
 
     .checkbox-selected {
-        width: 5rem;
-        height: 5rem;
+        width: 10rem;
+        height: 10rem;
         position: absolute;
         right: 1.8rem;
         top: 1.8rem;
@@ -53,7 +53,7 @@
         font-size: 4.7rem;
         font-weight: 800;
         font-family: fonts.$font-urbanist;
-        margin: 4.5rem 0 2rem 7rem;
+        margin: 4.5rem 0 1rem 7rem;
         text-align: left;
         color: #fff;
         position: relative;
@@ -84,9 +84,11 @@
 
         img {
             max-width: 20rem;
-            height: auto;            
+            height: auto;
+            // height: 12rem;
+            // object-fit: cover;
         }
-        &.coming-soon { 
+        &.coming-soon {
             position: relative;
             img {
                 opacity: 0.7;
@@ -104,9 +106,29 @@
 
         .coming-soon {
             position: absolute;
-            top: 0; 
+            top: 0;
             right: 0;
-            
+        }
+    }
+    .action-container {
+        padding: 2.5rem 0 0 0;
+    }
+    .action {
+        background: #ffffff88;
+        border-radius: 1.6rem;
+        color:black;
+        padding: 1.6rem 3.2rem;
+        margin: 0 7rem;
+        text-transform: uppercase;
+        font-family: Urbanist;
+        font-weight: 700;
+        font-style: Bold;
+        font-size: 2.5rem;
+
+        &.selected {
+            background: #0AAD59;
+            opacity: 1;
+            color:white;
         }
     }
 }

@@ -11,7 +11,7 @@ import VoucherConfirmationTemplate from '@/components/templates/voucherConfirmat
 import VoucherErrorTemplate from '@/components/templates/voucherDataError/VoucherErrorTemplate'
 import { VoucherConfirmation } from '@/data/entities/voucher-confirmation'
 import { VoucherPurchaseStep } from '@/data/enums/voucherPurchaseSteps'
-import { apiTimeOut } from '@/helpers/apiWithStrictTimeout'
+import { useCheckInternetConnection } from '@/hooks'
 import { useOrder } from '@/providers'
 import { TransactionService } from '@/services/transactionService'
 import { VoucherResponse } from '@/types/pos/deposit'
@@ -26,6 +26,7 @@ import {
 import InsertingCash from './components/insertingCash'
 
 export default function PaymentInProgress() {
+    const { isOnline, setIsMoneyPending } = useCheckInternetConnection()
     const { setCurrentStep, state } = useOrder()
     const [amount, _setAmount] = useState<number>(0)
     const [error, setError] = useState<PaymentActivationError | string | null>(
@@ -34,10 +35,18 @@ export default function PaymentInProgress() {
     const [voucherRecreateAttempts, setVoucherRecreateAttempts] =
         useState<number>(0)
     const [voucherData, setVoucherData] = useState<VoucherResponse | null>(null)
-    const [isPrinted, setIsPrinted] = useState<boolean | null>(null)
-    const isMountedRef = useRef<boolean>(true)
-    const activateIntervalRef = useRef<number | null>(null)
+    const [isPrinted, setIsPrinted] = useState<boolean>(false)
+    const [hasPrintingError, setHasPrintingError] = useState<boolean>(false)
+    const acceptorIntervalRef = useRef<number | null>(null)
     const navigate = useNavigate()
+
+    useEffect(() => {
+        if (isPrinted) {
+            setTimeout(() => {
+                navigate('/welcome')
+            }, 5000)
+        }
+    }, [isPrinted, navigate])
 
     const onPrintVoucher = async (voucherData: VoucherResponse) => {
         const printResult = await printVoucher(
@@ -58,6 +67,7 @@ export default function PaymentInProgress() {
         }
 
         setIsPrinted(false)
+        setHasPrintingError(true)
         // not printed
         console.log(
             '❌ Print failed - staying on success screen for manual interaction'
@@ -71,7 +81,8 @@ export default function PaymentInProgress() {
                 return (
                     <PaymentComplete
                         navigate={navigate}
-                        isCompleted={isPrinted || false}
+                        isPrintCompleted={isPrinted}
+                        hasPrintingError={hasPrintingError}
                         onPrimaryButtonClick={() => {
                             console.log('🔍 DEBUG: Show Voucher clicked')
                             console.log(
@@ -96,7 +107,6 @@ export default function PaymentInProgress() {
                         navigate={navigate}
                         onTryAgain={() => {
                             onBuyVoucher({
-                                activateRef: activateIntervalRef,
                                 selectedVoucherType: state.voucherType,
                                 setVoucherRecreateAttempts,
                                 voucherRecreateAttempts,
@@ -172,7 +182,6 @@ export default function PaymentInProgress() {
                             setCurrentStep(VoucherPurchaseStep.PRINT_VOUCHER)
                             // call to buyVoucher
                             onBuyVoucher({
-                                activateRef: activateIntervalRef,
                                 selectedVoucherType: state.voucherType,
                                 setVoucherRecreateAttempts,
                                 voucherRecreateAttempts,
@@ -209,8 +218,11 @@ export default function PaymentInProgress() {
 
                 // if the current amount is > 0 and different from the previous amount,
                 // reset the timer dispatch user activity event to reset inactivity timer
-                console.log('Current amount:', amount)
-                console.log('Fetched voucher amount:', response.amount)
+                if (response.amount > 0) {
+                    setIsMoneyPending(true)
+                } else {
+                    setIsMoneyPending(false)
+                }
                 if (amount > 0 && response.amount > amount) {
                     console.log(
                         'Dispatching money-added event to reset inactivity timer'
@@ -234,38 +246,51 @@ export default function PaymentInProgress() {
         return () => {
             clearInterval(amountPollingInterval)
         }
-    }, [amount])
+    }, [amount, setIsMoneyPending])
 
     useEffect(() => {
-        console.log('useEffect za aktivaciju')
-        const startActivation = async () => {
-            await activatePaymentSession((activationError) => {
-                setError(activationError)
-            })
-
-            if (isMountedRef.current) {
-                apiTimeOut(
-                    activatePaymentSession((activationError) => {
-                        setError(activationError)
-                    }),
-                    5
-                )
+        if (!isOnline) {
+            if (acceptorIntervalRef.current) {
+                clearInterval(acceptorIntervalRef.current)
+                acceptorIntervalRef.current = null
+                deactivatePaymentSession()
             }
+            return
         }
 
-        startActivation()
+        if (state.currentStep !== VoucherPurchaseStep.INSERT_CASH) {
+            if (acceptorIntervalRef.current) {
+                clearInterval(acceptorIntervalRef.current)
+                acceptorIntervalRef.current = null
+                deactivatePaymentSession()
+            }
+            return
+        } else {
+            if (acceptorIntervalRef.current == null && isOnline) {
+                activatePaymentSession((activationError) => {
+                    setError(activationError)
+                })
+                acceptorIntervalRef.current = window.setInterval(async () => {
+                    if (!acceptorIntervalRef.current) {
+                        return
+                    }
+                    await activatePaymentSession((activationError) => {
+                        setError(activationError)
+                    })
+                }, 5000)
+            }
+        }
 
         return () => {
-            isMountedRef.current = false
-
-            if (activateIntervalRef.current) {
-                clearInterval(activateIntervalRef.current)
-                activateIntervalRef.current = null
+            if (acceptorIntervalRef.current) {
+                clearInterval(acceptorIntervalRef.current)
+                acceptorIntervalRef.current = null
             }
-
             deactivatePaymentSession()
         }
-    }, [])
+    }, [state, isOnline, setIsMoneyPending])
+
+    useEffect(() => () => setIsMoneyPending(false), [])
 
     return (
         <>

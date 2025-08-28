@@ -18,8 +18,7 @@ export default function VoucherErrorTemplate({
     voucherRecreateAttempts?: number
 }) {
     const { t } = useTranslate()
-    const [isWaitingVoucher, setIsWaitingVoucher] =
-        useState<boolean>(false)
+    const [isWaitingVoucher, setIsWaitingVoucher] = useState<boolean>(false)
     const [currentAttempt, setCurrentAttempt] = useState<number>(0)
 
     const { startUrl } = useNavigationContext()
@@ -33,55 +32,51 @@ export default function VoucherErrorTemplate({
 
     return (
         <>
-            <Container isFullHeight={true}>
-                <div className="voucher-error">
-                    <h1>
-                        {t('voucherError.title')}
-                    </h1>
-                    <h2>{t('voucherError.subtitle')}</h2>
+            <div className="voucher-error">
+                <h1>{t('voucherError.title')}</h1>
+                <h2>{t('voucherError.subtitle')}</h2>
 
-                    <div className="demo-wrapper">
-                        <img
-                            src={printVoucher}
-                            alt={t('insertCash.altText')}
-                            className="demo-error-illustration"
-                        />
-                    </div>
-
-                    <div className="fallback-wrapper">
-                        <div className="fallback">
-                            <div>
-                                <p>{t('voucherError.supportTitle')}</p>
-                                <p className="support-text">
-                                    {t('voucherError.supportText')}
-                                </p>
-                            </div>
-                            <WireButton>062 111 5 111</WireButton>
-                        </div>
-                    </div>
-                    <PrimaryButton
-                        isDisabled={isWaitingVoucher}
-                        callback={() => {
-                            if (voucherRecreateAttempts < 3) {
-                                onTryAgain?.()
-                                setIsWaitingVoucher(true)
-                                return
-                            }
-                            setIsWaitingVoucher(false)
-                            navigate(startUrl ?? '/welcome')
-                        }}
-                        text={t(
-                            voucherRecreateAttempts < 3
-                                ? 'voucherGenerated.tryAgain'
-                                : 'voucherGenerated.btnFinish'
-                        )}
+                <div className="demo-wrapper">
+                    <img
+                        src={printVoucher}
+                        alt={t('insertCash.altText')}
+                        className="demo-error-illustration"
                     />
-                    <span className="voucher-progress-info">
+                </div>
+
+                <div className="fallback-wrapper">
+                    <div className="fallback">
+                        <div>
+                            <p>{t('voucherError.supportTitle')}</p>
+                            <p className="support-text">
+                                {t('voucherError.supportText')}
+                            </p>
+                        </div>
+                        <WireButton>062 111 5 111</WireButton>
+                    </div>
+                </div>
+                <PrimaryButton
+                    isDisabled={isWaitingVoucher}
+                    callback={() => {
+                        if (voucherRecreateAttempts < 3) {
+                            onTryAgain?.()
+                            setIsWaitingVoucher(true)
+                            return
+                        }
+                        setIsWaitingVoucher(false)
+                        navigate(startUrl ?? '/welcome')
+                    }}
+                    text={t(
+                        voucherRecreateAttempts < 3
+                            ? 'voucherGenerated.tryAgain'
+                            : 'voucherGenerated.btnFinish'
+                    )}
+                />
+                {/* <span className="voucher-progress-info">
                         {isWaitingVoucher &&
                             t('voucherGenerated.inProgressMsg')}
-                    </span>
-                </div>
-            </Container>
+                    </span> */}
+            </div>
         </>
     )
 }

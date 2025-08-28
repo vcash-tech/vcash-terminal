@@ -38,7 +38,7 @@ export default defineConfig(() => {
                 },
                 workbox: {
                     globPatterns: ['**/*.{js,css,html,png,jpg,jpeg,svg,webp}'],
-                    cleanupOutdatedCaches: true,
+                    cleanupOutdatedCaches: true
                 }
             })
         ],
@@ -46,16 +46,17 @@ export default defineConfig(() => {
             alias: {
                 '@': path.resolve(__dirname, './src')
             }
+        },
+        server: {
+            allowedHosts: ['localhost', 'irreal.eu.ngrok.io']
+            //     proxy: {
+            //         // Proxy all API requests to backend server
+            //         '^/auth/.*': {
+            //             target: apiUrl,
+            //             changeOrigin: true,
+            //             secure: false
+            //         }
+            //     }
         }
-        // server: {
-        //     proxy: {
-        //         // Proxy all API requests to backend server
-        //         '^/auth/.*': {
-        //             target: apiUrl,
-        //             changeOrigin: true,
-        //             secure: false
-        //         }
-        //     }
-        // }
     }
 })

@@ -238,8 +238,9 @@
     "supportTitle": "Pozovi podršku",
     "supportText": "VCash tim će vam odgovoriti na sva pitanja i pomoći da rešite novonastali problem.",
     "errors": {
-      "offlineTitle": "Nema internet konekcije",
-      "offlineMessage": "Molimo sačekajte da se terminal ponovo poveže na internet.",
+      "offlineTitle": "Privremeni prekid veze",
+      "offlineMessage": "Molimo vas za strpljenje dok se terminal ponovo poveže na internet.",
+      "offlineMessageMoneyPending": "Ne brinite - evidentirali smo da ste ubacili novac. Terminal trenutno nema vezu i ne može da izda vaučer. Molimo vas za strpljenje, veza će se uskoro ponovo uspostaviti. Ako se to ne desi u narednih par minuta, pozovite korisničku podršku.",
       "printerErrorTitle": "Greška štampača",
       "printerErrorMessage": "Došlo je do greške prilikom štampanja vaučera. Molimo pokušajte ponovo ili kontaktirajte podršku."
     }
@@ -269,6 +270,8 @@
     "getStarted": "Započni",
     "dark": {
       "title": "Izaberi željenu uslugu:",
+      "comingSoon": "Uskoro dostupno",
+      "betCta": "Dopuni nalog",
       "buttonText": "Nastavi",
       "betting": {
         "title": "Bet Vaučer",
@@ -298,7 +301,8 @@
     "language": "Jezik"
   },
   "footer": {
-    "contactSupport": "Imate pitanje? Kontaktirajte podršku od 09h do 22h:"
+    "contactSupport": "Imate pitanje ili je potrebna podrška? Kontaktirajte nas na:",
+    "contactSupport2": "ili"
   },
   "common": {
     "next": "Dalje",

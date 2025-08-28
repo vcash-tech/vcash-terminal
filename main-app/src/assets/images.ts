@@ -92,6 +92,7 @@ import welcome_ips_komunalije from './images/welcome/ips/komunalije.png'
 import welcome_ips_mup from './images/welcome/ips/mup.png'
 import welcome_ips_struja from './images/welcome/ips/struja.png'
 import welcome_ips_telefon from './images/welcome/ips/telefon.png'
+import pointingHand from './images/welcome/pointingHand.gif'
 import uskoroGreenLarge from './images/welcome/uskoroLarge.png'
 import uskoroGreenSmall from './images/welcome/uskoroSmall.png'
 import welcomeBackground from './images/welcomeBackground.svg'
@@ -162,6 +163,7 @@ export {
     playStationCard,
     playstationCard,
     playstationClean,
+    pointingHand,
     printVoucher,
     ps,
     qrCode,
@@ -193,4 +195,5 @@ export {
     welcome_ips_struja,
     welcome_ips_telefon,
     welcomeBackground,
-    xboxClean}
+    xboxClean
+}

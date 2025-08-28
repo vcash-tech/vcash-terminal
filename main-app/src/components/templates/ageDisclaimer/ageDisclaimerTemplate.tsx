@@ -4,7 +4,6 @@ import Container from '@/components/atoms/container/container'
 import PrimaryButton from '@/components/atoms/primaryButton/primaryButton'
 import Footer from '@/components/organisms/footer/footer'
 import Header from '@/components/organisms/header/header'
-import { useNavigationContext } from '@/hooks/useNavigationHook'
 import { useTranslate } from '@/i18n/useTranslate'
 
 import {
@@ -20,14 +19,10 @@ export default function AgeDisclaimerTemplate({
     navigate: NavigateFunction
 }) {
     const { t } = useTranslate()
-    const { startUrl } = useNavigationContext()
 
     return (
         <Container isFullHeight={true}>
-            <Header
-                navigateBackUrl={startUrl === '/welcome' ? "/digital-services" : startUrl ?? '/welcome'}
-                navigationBackText={' '}
-            />
+            <Header navigateBackUrl={'/welcome'} navigationBackText={' '} />
             <div className="age-disclaimer-wrapper">
                 <div className="age-disclaimer">
                     <div className="warning">
@@ -47,8 +42,12 @@ export default function AgeDisclaimerTemplate({
                         <img src={serbiaLogo} height={50} width={50} />
                     </div>
                     <div className="hospital-info">
-                        <p className="uppercase">{t('ageDisclaimer.hospital-name')}</p>
-                        <p className="uppercase">{t('ageDisclaimer.hospital-address')}</p>
+                        <p className="uppercase">
+                            {t('ageDisclaimer.hospital-name')}
+                        </p>
+                        <p className="uppercase">
+                            {t('ageDisclaimer.hospital-address')}
+                        </p>
 
                         <div className="hospital-phones">
                             <p>{t('ageDisclaimer.hospital-phones')}</p>

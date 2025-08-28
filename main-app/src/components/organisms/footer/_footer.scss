@@ -3,6 +3,7 @@
 
 .footer {
     max-height: 86px;
+    min-height: 86px;
     display: flex;
     flex: 1;
     flex-direction: row;
@@ -33,5 +34,9 @@
         span {
             color: colors.$dark-text-color;
         }
+    }
+
+    .email {
+        text-decoration: underline;
     }
 }

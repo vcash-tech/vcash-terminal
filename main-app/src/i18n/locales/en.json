@@ -237,7 +237,8 @@
     "supportText": "VCash team will answer all your questions and help you resolve any issues.",
     "errors": {
       "offlineTitle": "No Internet Connection",
-      "offlineMessage": "Please wait for terminal to reconnect to the internet.",
+      "offlineMessage": "Please wait while the terminal reconnects to the internet.",
+      "offlineMessageMoneyPending": "Don't worry - we've recorded your deposit. The terminal is currently offline and cannot issue a voucher. Please wait, the connection will soon be restored. If it doesn't happen in a few minutes, call customer support.",
       "printerErrorTitle": "Printer Error",
       "printerErrorMessage": "An error occurred while printing the voucher. Please try again or contact support."
     }
@@ -268,6 +269,8 @@
     "dark": {
       "title": "Choose your desired service:",
       "buttonText": "Continue",
+      "comingSoon": "Coming soon",
+      "betCta": "Top up your account",
       "betting": {
         "title": "Betting Voucher",
         "subtitle": "Top up your account at your favorite betting site"
@@ -293,7 +296,8 @@
     "language": "Language"
   },
   "footer": {
-    "contactSupport": "Have a question? Contact support from 09:00 to 22:00:"
+    "contactSupport": "Have a question? Contact support:",
+    "contactSupport2": "or"
   },
   "common": {
     "next": "Next",

@@ -2,8 +2,14 @@ import React from 'react'
 import Marquee from 'react-fast-marquee'
 import { useTranslation } from 'react-i18next'
 
-import { ageDisclaimerPng, checkBoxNotSelected, checkBoxSelected } from '@/assets/icons'
-import { comingSoonLarge, comingSoonSmall, uskoroGreenLarge, uskoroGreenSmall } from '@/assets/images'
+import { ageDisclaimerWhiteFilled } from '@/assets/icons'
+import {
+    comingSoonLarge,
+    comingSoonSmall,
+    pointingHand,
+    uskoroGreenLarge,
+    uskoroGreenSmall
+} from '@/assets/images'
 import i18n from '@/i18n/i18n'
 
 export interface serviceDarkProps {
@@ -42,18 +48,8 @@ const ServicesDark: React.FC<serviceDarkProps> = ({
             {!isComingSoon && (
                 <img
                     className="checkbox-selected"
-                    src={isSelected ? checkBoxSelected : checkBoxNotSelected}
+                    src={pointingHand}
                     alt="select"
-                />
-            )}
-            {isComingSoon && (
-                <img
-                    className="coming-soon-large"
-                    src={
-                        i18n.language === 'en'
-                            ? comingSoonLarge
-                            : uskoroGreenLarge
-                    }
                 />
             )}
             <h3>
@@ -61,7 +57,7 @@ const ServicesDark: React.FC<serviceDarkProps> = ({
                 {hasAgeDisclaimer && (
                     <img
                         className="age-disclaimer"
-                        src={ageDisclaimerPng}
+                        src={ageDisclaimerWhiteFilled}
                         alt="Age disclaimer"
                     />
                 )}
@@ -86,6 +82,15 @@ const ServicesDark: React.FC<serviceDarkProps> = ({
                     </div>
                 ))}
             </Marquee>
+            <div className="action-container">
+                <div className={`action ${isSelected ? 'selected' : ''}`}>
+                    {t(
+                        isComingSoon
+                            ? 'welcome.dark.comingSoon'
+                            : 'welcome.dark.betCta'
+                    )}
+                </div>
+            </div>
         </button>
     )
 }

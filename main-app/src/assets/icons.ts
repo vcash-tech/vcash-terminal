@@ -1,4 +1,5 @@
 import ageDisclaimerPng from './icons/18plus.png'
+import ageDisclaimerWhiteFilled from './icons/18plusWhite.png'
 import ageDisclaimer from './icons/ageDisclaimer.svg'
 import ageDisclaimerWhite from './icons/ageDisclaimerWhite.svg'
 import angleLeft from './icons/angleLeft.svg'
@@ -34,8 +35,8 @@ import welcomeGift from './icons/welcomeGift.svg'
 
 export {
     ageDisclaimer,
-    ageDisclaimerPng,
     ageDisclaimerWhite,
+    ageDisclaimerWhiteFilled,
     angleLeft,
     arrowRight,
     bettingWarning,

@@ -1,6 +1,5 @@
 // old callActivate
 import { addDays, endOfDay, format } from 'date-fns'
-import { RefObject } from 'react'
 
 import { VoucherType } from '@/providers'
 import { apiService } from '@/services/apiService'
@@ -8,7 +7,10 @@ import { AuthService } from '@/services/authService'
 import { TransactionService } from '@/services/transactionService'
 import { Auth } from '@/types/common/httpRequest'
 import { VoucherResponse } from '@/types/pos/deposit'
-import { getPaymentType, VOUCHER_TYPE_MAPPING } from '@/utilities/paymentTypeHelper'
+import {
+    getPaymentType,
+    VOUCHER_TYPE_MAPPING
+} from '@/utilities/paymentTypeHelper'
 
 export type PaymentActivationError = 'cashAcceptorError' | 'authRequired'
 
@@ -142,24 +144,28 @@ export const printVoucher = async (
         console.log('Printing voucher with URL:', printUrl)
 
         // Add 10-second timeout to print operation
+        let timeoutRef: number | null = null
         const printPromise = apiService.print(printUrl)
         const timeoutPromise = new Promise<{
             success: boolean
             message: string
         }>((resolve) => {
-            setTimeout(() => {
+            timeoutRef = window.setTimeout(() => {
                 console.log(
-                    '⏰ Print operation timed out after 10 seconds, considering as successful'
+                    '⏰ Print operation timed out after 10 seconds, assuming failed'
                 )
                 resolve({
-                    success: true,
-                    message: 'Print operation timed out, assumed successful'
+                    success: false,
+                    message: 'Print operation timed out, assumed failed'
                 })
             }, 10000)
         })
 
         const result: { success: boolean; message: string } =
             await Promise.race([printPromise, timeoutPromise])
+        if (timeoutRef) {
+            clearTimeout(timeoutRef)
+        }
         console.log('Print result:', result)
 
         // Check if printing failed
@@ -186,7 +192,6 @@ export const printVoucher = async (
 }
 
 export type BuyVoucherParams = {
-    activateRef: RefObject<number | null>
     selectedVoucherType: VoucherType | null
     voucherRecreateAttempts: number
     setVoucherRecreateAttempts: (attempts: number) => void
@@ -196,7 +201,6 @@ export type BuyVoucherParams = {
 }
 
 export const onBuyVoucher = async ({
-    activateRef,
     selectedVoucherType,
     setVoucherRecreateAttempts,
     voucherRecreateAttempts,
@@ -204,14 +208,13 @@ export const onBuyVoucher = async ({
     onSuccess,
     onPrintVoucher
 }: BuyVoucherParams) => {
-    // Clear an interval and deactivate before proceeding
-    if (activateRef.current) {
-        clearInterval(activateRef.current)
-        activateRef.current = null
-    }
-    await deactivatePaymentSession()
-
     try {
+        // await new Promise((resolve) => setTimeout(resolve, 1500))
+        // if (voucherRecreateAttempts < 5) {
+        //     setVoucherRecreateAttempts(voucherRecreateAttempts + 1)
+        //     onError('voucherCreatedFailed')
+        //     return
+        // }
         const createVoucher = await TransactionService.CreateVoucher({
             voucherTypeId: getPaymentType(selectedVoucherType)
         })

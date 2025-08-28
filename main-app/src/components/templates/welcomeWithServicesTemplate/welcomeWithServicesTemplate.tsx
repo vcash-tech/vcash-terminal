@@ -20,12 +20,10 @@ import {
     welcome_ips_telefon
 } from '@/assets/images'
 import Container from '@/components/atoms/container/container'
-import PrimaryButton from '@/components/atoms/primaryButton/primaryButton'
 import ServicesDark from '@/components/molecules/serviceDark/serviceDark'
 import Footer from '@/components/organisms/footer/footer'
 import Header from '@/components/organisms/header/header'
 import { VoucherPurchaseStep } from '@/data/enums/voucherPurchaseSteps'
-import { useCheckInternetConnection } from '@/hooks/useCheckInternetConnection'
 import { useOrder } from '@/providers'
 
 export default function WelcomeWithServices({
@@ -34,12 +32,18 @@ export default function WelcomeWithServices({
     navigate: NavigateFunction
 }) {
     const { t } = useTranslation()
-    const { isOnline } = useCheckInternetConnection({ shouldCheck: true })
     const { setVoucherType, setCurrentStep, state } = useOrder()
+
+    const { resetOrder } = useOrder()
 
     useEffect(() => {
         setVoucherType(null)
     }, [setVoucherType])
+
+    useEffect(() => {
+        console.log('resetting order')
+        resetOrder()
+    }, [resetOrder])
 
     return (
         <Container style={{ gap: 0 }} isFullHeight={true}>
@@ -57,7 +61,7 @@ export default function WelcomeWithServices({
                         type="betting"
                         hasAgeDisclaimer={true}
                         isComingSoon={false}
-                        isSelected={state.voucherType === 'betting'}
+                        isSelected={true}
                         images={[
                             {
                                 src: welcome_betting_soccerBet,
@@ -105,6 +109,7 @@ export default function WelcomeWithServices({
                             setCurrentStep(
                                 VoucherPurchaseStep.SELECT_PAYMENT_METHOD
                             )
+                            navigate('/disclaimer')
                         }}
                     />
 
@@ -175,7 +180,7 @@ export default function WelcomeWithServices({
                         }}
                     />
 
-                    <PrimaryButton
+                    {/* <PrimaryButton
                         isDisabled={!state.voucherType}
                         text={t('welcome.dark.buttonText')}
                         callback={() => {
@@ -190,7 +195,7 @@ export default function WelcomeWithServices({
                                 navigate('/gaming')
                         }}
                         inverted={true}
-                    />
+                    /> */}
                 </div>
                 <Footer isWelcome={true} />
             </div>

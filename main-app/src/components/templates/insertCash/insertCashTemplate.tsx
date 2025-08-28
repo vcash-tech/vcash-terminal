@@ -12,7 +12,7 @@ import Header from '@/components/organisms/header/header'
 import VoucherErrorTemplate from '@/components/templates/voucherDataError/VoucherErrorTemplate'
 import { VoucherConfirmation } from '@/data/entities/voucher-confirmation'
 import { mockedPrinterData, shouldMockPrinter } from '@/helpers/mock.printer'
-import { useCheckInternetConnection } from '@/hooks/useCheckInternetConnection'
+import { useCheckInternetConnection } from '@/hooks'
 import { useTranslate } from '@/i18n/useTranslate'
 import { apiService } from '@/services/apiService'
 import { AuthService } from '@/services/authService'
@@ -55,10 +55,7 @@ export default function InsertCashTemplate({
         useState<boolean>(false)
     const [voucherRecreateAttempts, setVoucherRecreateAttempts] =
         useState<number>(0)
-    const { isOnline } = useCheckInternetConnection({
-        shouldCheck: true,
-        continuous: true
-    })
+    const { isOnline, setIsMoneyPending } = useCheckInternetConnection()
 
     useEffect(() => {
         // Reset inactivity timer on user activity
@@ -155,8 +152,12 @@ export default function InsertCashTemplate({
 
                 // if current amount is > 0 and different from previous amount,
                 // reset the timer dispatch user activity event to reset inactivity timer
-                console.log('Current amount:', amount)
-                console.log('Fetched voucher amount:', response.amount)
+                if (response.amount > 0) {
+                    setIsMoneyPending(true)
+                } else {
+                    setIsMoneyPending(false)
+                }
+
                 if (amount > 0 && response.amount > amount) {
                     console.log(
                         'Dispatching money-added event to reset inactivity timer'
@@ -180,7 +181,7 @@ export default function InsertCashTemplate({
         return () => {
             clearInterval(amountPollingInterval)
         }
-    }, [amount])
+    }, [amount, setIsMoneyPending])
 
     const createVoucherPrintObject = (
         voucherResponse: VoucherResponse,

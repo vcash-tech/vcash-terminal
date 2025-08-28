@@ -8,14 +8,12 @@ import PrimaryButton from '@/components/atoms/primaryButton/primaryButton'
 import Footer from '@/components/organisms/footer/footer'
 import Header from '@/components/organisms/header/header'
 import HomeCards from '@/components/organisms/homeCards/homeCards'
-import { useCheckInternetConnection } from '@/hooks/useCheckInternetConnection'
 import { useWindowSize } from '@/hooks/useWindowSize'
 
 export default function Welcome({ navigate }: { navigate: NavigateFunction }) {
     const [isAnimating, setIsAnimating] = useState(false)
     const { height } = useWindowSize()
     const { t } = useTranslation()
-    const { isOnline } = useCheckInternetConnection({ shouldCheck: true })
 
     // Handle animation state when transitioning between modes
     useEffect(() => {
@@ -46,11 +44,7 @@ export default function Welcome({ navigate }: { navigate: NavigateFunction }) {
                     <PrimaryButton
                         text={t('home.welcome.getStarted')}
                         callback={() => {
-                            if (!isOnline) {
-                             console.log('No internet connection, welcomePage:start')   
-                            }
-                            
-                            navigate('/digital-services')    
+                            navigate('/digital-services')
                         }}
                         inverted={true}
                     />

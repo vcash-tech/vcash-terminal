@@ -1,4 +1,4 @@
-import { ReactNode, useCallback, useReducer } from 'react'
+import { ReactNode, useCallback, useEffect, useReducer } from 'react'
 
 import { VoucherPurchaseStep } from '@/data/enums/voucherPurchaseSteps'
 import { OrderContext, orderReducer } from '@/providers/orderContext'
@@ -20,10 +20,47 @@ export function OrderProvider({
     children,
     initialSessionId
 }: OrderProviderProps) {
-    const [state, dispatch] = useReducer(orderReducer, {
-        ...initialOrderState,
-        sessionId: initialSessionId || null
-    })
+    const ORDER_STORAGE_KEY = 'vcash_order_state'
+
+    const [state, dispatch] = useReducer(
+        orderReducer,
+        initialOrderState,
+        (base) => {
+            const initial: OrderState = {
+                ...base,
+                sessionId: initialSessionId || null
+            }
+
+            if (typeof window === 'undefined') return initial
+
+            try {
+                const raw = window.localStorage.getItem(ORDER_STORAGE_KEY)
+                if (!raw) return initial
+                const persisted = JSON.parse(raw)
+                return { ...initial, ...persisted }
+            } catch {
+                return initial
+            }
+        }
+    )
+
+    useEffect(() => {
+        if (typeof window === 'undefined') return
+        try {
+            window.localStorage.setItem(
+                ORDER_STORAGE_KEY,
+                JSON.stringify(state)
+            )
+        } catch {
+            // noop
+        }
+    }, [state])
+
+    useEffect(() => {
+        if (initialSessionId && !state.sessionId) {
+            dispatch({ type: 'SET_SESSION_ID', payload: initialSessionId })
+        }
+    }, [initialSessionId, state.sessionId])
 
     const setCurrentStep = useCallback((step: VoucherPurchaseStep) => {
         dispatch({ type: 'SET_CURRENT_STEP', payload: step })
