@@ -77,7 +77,7 @@ export default function WelcomeWithServices({
                             },
                             {
                                 src: welcome_betting_maxBet,
-                                isComingSoon: true
+                                isComingSoon: false
                             },
                             {
                                 src: welcome_betting_meridianBet,
@@ -97,7 +97,7 @@ export default function WelcomeWithServices({
                             },
                             {
                                 src: welcome_betting_maxBet,
-                                isComingSoon: true
+                                isComingSoon: false
                             },
                             {
                                 src: welcome_betting_meridianBet,
