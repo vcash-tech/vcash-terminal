@@ -37,7 +37,6 @@ import insertCashImg2 from './images/insertCash2.jpg'
 import izaberiPlatformu from './images/izaberiPlatformuBetting.jpg'
 import logoBlue from './images/logoBlue.svg'
 import marketplace from './images/marketplace.png'
-import maxBetLogo from './images/maxBetLogo.svg'
 import mockupVoucher from './images/mockupVoucher.jpg'
 import ageDisclaimerBackground from './images/optimised/ageDisclaimerBackground.webp'
 import background from './images/optimised/background.webp'
@@ -155,7 +154,6 @@ export {
     logoWhite,
     marketplace,
     marketplaceQR,
-    maxBetLogo,
     meridianBetLogo,
     merkurXTipLogo,
     mockupVoucher,
