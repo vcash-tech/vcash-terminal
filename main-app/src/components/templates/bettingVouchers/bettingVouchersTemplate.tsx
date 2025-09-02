@@ -5,14 +5,14 @@ import { ageDisclaimer } from '@/assets/icons'
 import {
     betting_balkanBet,
     betting_merkurXtip,
-    //betting_maxBetComingSoon,
-    //betting_maxBetUskoro,
     //betting_meridian,
     //betting_meridianBetComingSoon,
     //betting_meridianBetUskoro,
     //betting_merkurXtipComingSoon,
     //betting_merkurXtipUskoro,
-    betting_soccerBet
+    betting_soccerBet,
+    //betting_maxBetComingSoon,
+    betting_maxBet
 } from '@/assets/images'
 import Container from '@/components/atoms/container/container'
 import PrimaryButton from '@/components/atoms/primaryButton/primaryButton'
@@ -33,9 +33,11 @@ export default function BettingVoucher({ navigate }: BettingVoucherProps) {
         betting_balkanBet,
         betting_soccerBet,
         betting_merkurXtip,
+        betting_maxBet,
         betting_balkanBet,
         betting_soccerBet,
-        betting_merkurXtip
+        betting_merkurXtip,
+        betting_maxBet
     ]
 
     // if (i18n.language === 'en') {

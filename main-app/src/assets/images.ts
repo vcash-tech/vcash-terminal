@@ -2,6 +2,7 @@ import helpIcon from './icons/helpIcon.svg'
 import ageDisclaimer from './images/age-disclaimer.png'
 import basketballCard from './images/basketballCard.svg'
 import betting_balkanBet from './images/betting/balkanBet.png'
+import betting_maxBet from './images/betting/betting_maxbet.svg'
 import betting_maxBetComingSoon from './images/betting/comming-soon/maxbet-coming-soon.png'
 import betting_maxBetUskoro from './images/betting/comming-soon/maxbet-uskoro.png'
 import betting_meridianBetComingSoon from './images/betting/comming-soon/meridianbet-coming-soon.png'
@@ -36,6 +37,7 @@ import insertCashImg2 from './images/insertCash2.jpg'
 import izaberiPlatformu from './images/izaberiPlatformuBetting.jpg'
 import logoBlue from './images/logoBlue.svg'
 import marketplace from './images/marketplace.png'
+import maxBetLogo from './images/maxBetLogo.svg'
 import mockupVoucher from './images/mockupVoucher.jpg'
 import ageDisclaimerBackground from './images/optimised/ageDisclaimerBackground.webp'
 import background from './images/optimised/background.webp'
@@ -51,7 +53,6 @@ import footballCard from './images/optimised/footballCard.webp'
 import gamingVoucher from './images/optimised/gamingVoucher.webp'
 import homeBackground from './images/optimised/home-background.webp'
 import logoWhite from './images/optimised/logoWhite.webp'
-import maxBetLogo from './images/optimised/maxBetLogo.png'
 import meridianBetLogo from './images/optimised/meridianBetLogo.png'
 import merkurXTipLogo from './images/optimised/merkurXTipLogo.png'
 import nbaCard from './images/optimised/nbaCard.webp'
@@ -104,6 +105,7 @@ export {
     balkanBetLogo,
     basketballCard,
     betting_balkanBet,
+    betting_maxBet,
     betting_maxBetComingSoon,
     betting_maxBetUskoro,
     betting_meridian,
