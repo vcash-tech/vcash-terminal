@@ -87,29 +87,34 @@ export function InternetConnectionProvider({
         setError(null)
 
         try {
-            apiTimeOut(
-                fetch(HEALTH_CHECK_URL, {
-                    method: 'GET',
-                    signal: abortController.signal,
-                    headers: {
-                        'Cache-Control': 'no-cache'
-                    }
-                }),
-                5
-            )
-                .then((response) => {
-                    if (response) {
-                        setIsOnline(true)
-                        setError(null)
-                    } else {
+            if (
+                window.location.pathname !== '/welcome-with-services' &&
+                window.location.pathname !== '/welcome'
+            ) {
+                apiTimeOut(
+                    fetch(HEALTH_CHECK_URL, {
+                        method: 'GET',
+                        signal: abortController.signal,
+                        headers: {
+                            'Cache-Control': 'no-cache'
+                        }
+                    }),
+                    5
+                )
+                    .then((response) => {
+                        if (response) {
+                            setIsOnline(true)
+                            setError(null)
+                        } else {
+                            setIsOnline(false)
+                            setError('Request timed out')
+                        }
+                    })
+                    .catch(() => {
                         setIsOnline(false)
-                        setError('Request timed out')
-                    }
-                })
-                .catch(() => {
-                    setIsOnline(false)
-                    setError('Request failed')
-                })
+                        setError('Request failed')
+                    })
+            }
         } catch (err) {
             if (err instanceof Error && err.name === 'AbortError') {
                 return
