@@ -39,6 +39,7 @@
     "insertedAmount": "Uplaćen iznos",
     "noChangeWarning": "Ubacite tačan iznos - terminal ne vraća kusur. Povraćaj novca nakon uplate nije moguć.",
     "confirmPayment": "Potvrdi plaćanje",
+    "progressText": "{{amount}} RSD preostalo do maksimalnog iznosa vaučera",
     "errors": {
       "authRequired": "Potrebna je autentifikacija.",
       "activationFailed": "Aktivacija neuspešna: {{message}}",

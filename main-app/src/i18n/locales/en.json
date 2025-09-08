@@ -39,6 +39,7 @@
     "insertedAmount": "Inserted Amount",
     "noChangeWarning": "The machine does not return change. Refunds are not available.",
     "confirmPayment": "Confirm Payment",
+    "progressText": "{{amount}} RSD remaining to the maximum voucher amount",
     "errors": {
       "authRequired": "Authentication required.",
       "activationFailed": "Activation failed: {{message}}",
