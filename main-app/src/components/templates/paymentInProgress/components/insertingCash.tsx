@@ -25,6 +25,15 @@ export default function InsertingCash({
             <div className="inserted-amount">
                 {t('insertCash.insertedAmount')}:<span>{amount || 0} RSD</span>
             </div>
+            {amount > 80000 ? (
+                <div
+                    className="progress-to-full"
+                    data-progress-text={t('insertCash.progressText', {
+                        amount: 100000 - amount
+                    })}>
+                    <progress value={amount} max={100000} />
+                </div>
+            ) : null}
             <PrimaryButton
                 isDisabled={!amount || amount <= 0}
                 text={t('insertCash.confirmPayment')}
