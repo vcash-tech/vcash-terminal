@@ -68,6 +68,58 @@
         margin: 20rem 0 10rem;
         padding: 5rem;
     }
+
+    .progress-to-full {
+        margin-top: 4rem;
+        width: 100%;
+        max-width: 60rem; // Match the approximate width of the amount text
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        
+        progress {
+            width: 100%;
+            height: 2.2rem; // Make it taller than default
+            border: none;
+            border-radius: 0.6rem;
+            background: #e0e0e0; // Light gray background
+            overflow: hidden;
+            box-shadow: inset 0 0.2rem 0.4rem rgba(0, 0, 0, 0.1);
+            
+            // Webkit browsers (Chrome, Safari, Edge)
+            &::-webkit-progress-bar {
+                background: #e0e0e0;
+                border-radius: 0.6rem;
+                box-shadow: inset 0 0.2rem 0.4rem rgba(0, 0, 0, 0.1);
+            }
+            
+            &::-webkit-progress-value {
+                border-radius: 0.6rem;
+                background: colors.$brand-primary-color; // Always blue
+                box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.2);
+                transition: all 0.3s ease;
+            }
+            
+            // Firefox
+            &::-moz-progress-bar {
+                border-radius: 0.6rem;
+                background: colors.$brand-primary-color; // Always blue
+                box-shadow: 0 0.2rem 0.4rem rgba(0, 0, 0, 0.2);
+                transition: all 0.3s ease;
+            }
+        }
+        
+        // Add a subtle label below the progress bar
+        &::after {
+            content: attr(data-progress-text);
+            font-family: fonts.$body-font;
+            font-size: 2.8rem;
+            font-weight: 500;
+            color: colors.$dark-grey;
+            margin-top: 1rem;
+            text-align: center;
+        }
+    }
 }
 
 @include media-queries.media('<=desktop') {
@@ -87,6 +139,19 @@
 
         h1 {
             font-size: 3.6rem;
+        }
+        
+        .progress-to-full {
+            max-width: 50rem; // Slightly smaller on mobile
+            margin-top: 3rem;
+            
+            progress {
+                height: 1rem; // Slightly thinner on mobile
+            }
+            
+            &::after {
+                font-size: 2rem; // Smaller text on mobile
+            }
         }
     }
 }

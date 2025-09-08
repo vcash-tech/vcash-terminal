@@ -25,8 +25,8 @@ import UnderMaintenacePage from './pages/UnderMaintenance'
 import WelcomeWithServicesPage from './pages/welcomeWithServicesPage'
 
 function Layout() {
-    const { startUrl } = useNavigationContext()
-    useInactivityRedirect(startUrl ?? '/welcome')
+    // const { startUrl } = useNavigationContext()
+    // useInactivityRedirect(startUrl ?? '/welcome')
 
     return (
         <Routes>
