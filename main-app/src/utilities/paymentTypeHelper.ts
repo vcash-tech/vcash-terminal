@@ -3,7 +3,7 @@ import { VoucherType } from '@/providers'
 export const getPaymentType = (voucherType: VoucherType | null): string => {
     switch (voucherType) {
         case 'betting':
-            return '30'
+            return '20' // TODO!! temporary workaround to test gaming vouchers without implementing the proper payment type value
         case 'gaming':
             return '20'
         case 'ips':
