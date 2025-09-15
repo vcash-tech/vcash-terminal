@@ -94,7 +94,9 @@
     }
 
     .progress-to-full {
-        margin-top: 4rem;
+        position: absolute;
+        transform: translateX(-50%);
+        margin: auto;
         width: 100%;
         max-width: 60rem; // Match the approximate width of the amount text
         display: flex;
@@ -165,6 +167,7 @@
             font-size: 3.6rem;
         }
         
+
         .progress-to-full {
             max-width: 50rem; // Slightly smaller on mobile
             margin-top: 3rem;
