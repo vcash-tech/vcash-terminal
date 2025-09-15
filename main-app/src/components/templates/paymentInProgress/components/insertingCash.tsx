@@ -26,12 +26,14 @@ export default function InsertingCash({
                 {t('insertCash.insertedAmount')}:<span>{amount || 0} RSD</span>
             </div>
             {amount > 80000 ? (
-                <div
-                    className="progress-to-full"
-                    data-progress-text={t('insertCash.progressText', {
-                        amount: 100000 - amount
-                    })}>
-                    <progress value={amount} max={100000} />
+                <div className="progress-to-full-wrapper">
+                    <div
+                        className="progress-to-full"
+                        data-progress-text={t('insertCash.progressText', {
+                            amount: 100000 - amount
+                        })}>
+                        <progress value={amount} max={100000} />
+                    </div>
                 </div>
             ) : null}
             <PrimaryButton
