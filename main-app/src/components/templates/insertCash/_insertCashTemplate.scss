@@ -2,6 +2,28 @@
 @use '../../../styles/config/fonts';
 @use '../../../styles/config/media-queries';
 
+.warning-message-wrapper {
+    position:relative;
+    width:100%;
+
+}
+.warning-message {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    &.relative {
+    width:80%;
+        top:40px;
+        position: absolute;
+        left:50%;
+        transform: translateX(-50%);
+    }
+    font-size: 3.6rem;
+    background-color: orange;
+    text-align: center;
+}
+
 .insert-cash {
     display: flex;
     flex-direction: column;
@@ -40,6 +62,8 @@
         text-align: center;
         margin: 0 0 0.8rem;
     }
+    
+
 
     .inserted-amount {
         font-family: fonts.$body-font;
