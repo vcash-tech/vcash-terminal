@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { NavigateFunction } from 'react-router-dom'
 
+import { warningIcon } from '@/assets/icons'
 import { confirmedIcon, printerIco } from '@/assets/icons'
 import { printVoucher } from '@/assets/images'
 import PrimaryButton from '@/components/atoms/primaryButton/primaryButton'
@@ -73,10 +74,21 @@ export default function PaymentComplete({
 
     const renderInProgress = () => {
         return (
-            <div className="successful-msg marginOn">
-                <img src={printerIco} alt="Printer icon" />
-                {t('voucherGenerated.inProgressMsg')}
-            </div>
+            <>
+                <div className="warning-message-wrapper">
+                    <div className="warning-message">
+                        <img src={warningIcon} alt="Warning icon" />
+                        <div>
+                            Upozorenje: sačekajte da Vaučer potpuno izađe.
+                            <br></br>Ne izvlačite tokom štampe!
+                        </div>
+                    </div>
+                </div>
+                <div className="successful-msg marginOn">
+                    <img src={printerIco} alt="Printer icon" />
+                    {t('voucherGenerated.inProgressMsg')}
+                </div>
+            </>
         )
     }
 

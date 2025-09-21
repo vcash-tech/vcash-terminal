@@ -1,3 +1,4 @@
+import { warningIcon } from '@/assets/icons'
 import { insertCashImg } from '@/assets/images'
 import PrimaryButton from '@/components/atoms/primaryButton/primaryButton'
 import AcceptedBills from '@/components/molecules/acceptedBills/acceptedBills'
