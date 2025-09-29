@@ -4,15 +4,15 @@ import { NavigateFunction } from 'react-router-dom'
 import { ageDisclaimer } from '@/assets/icons'
 import {
     betting_balkanBet,
+    //betting_maxBetComingSoon,
+    betting_maxBet,
     betting_merkurXtip,
     //betting_meridian,
     //betting_meridianBetComingSoon,
     //betting_meridianBetUskoro,
     //betting_merkurXtipComingSoon,
     //betting_merkurXtipUskoro,
-    betting_soccerBet,
-    //betting_maxBetComingSoon,
-    betting_maxBet
+    betting_soccerBet
 } from '@/assets/images'
 import Container from '@/components/atoms/container/container'
 import PrimaryButton from '@/components/atoms/primaryButton/primaryButton'
