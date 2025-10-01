@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { NavigateFunction, useLocation } from 'react-router-dom'
 
 import { cash, creditCard } from '@/assets/images'
@@ -18,6 +19,25 @@ export default function PaymentMethodTerminalTemplate({
     const location = useLocation()
     const prevState = location.state // This is the state object passed from previous navigation
     const { setPaymentMethod, setCurrentStep } = useOrder()
+
+    useEffect(() => {
+        console.log('wtf', prevState)
+        if (prevState?.voucherType === 'betting') {
+            console.log('wtf2', prevState)
+            setPaymentMethod('cash')
+            setCurrentStep(VoucherPurchaseStep.INSERT_CASH)
+            navigate('/buy-voucher-cash', {
+                state: {
+                    voucherType: prevState?.voucherType || 'gaming'
+                }
+            })
+        }
+    }, [prevState, setPaymentMethod, setCurrentStep, navigate])
+
+    // Don't render the payment selection if we're auto-navigating for betting vouchers
+    if (prevState?.voucherType === 'betting') {
+        return null
+    }
 
     return (
         <Container isFullHeight={true}>

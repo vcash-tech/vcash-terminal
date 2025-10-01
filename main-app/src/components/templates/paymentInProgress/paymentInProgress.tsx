@@ -309,7 +309,7 @@ export default function PaymentInProgress() {
                 {amount === 0 &&
                 state.currentStep === VoucherPurchaseStep.INSERT_CASH ? (
                     <Header
-                        navigateBackUrl={'/payment-method'}
+                        navigateBackUrl={'/betting'}
                         navigationBackText={' '}
                     />
                 ) : (
