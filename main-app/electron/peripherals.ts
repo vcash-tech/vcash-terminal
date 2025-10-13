@@ -6,7 +6,8 @@ const baseUrl = 'http://localhost:3001'
 const apiRoutes = {
     print: '/api/v1/printer/print-image',
     activate: '/api/v1/bill-acceptor/activate',
-    deactivate: '/api/v1/bill-acceptor/deactivate'
+    deactivate: '/api/v1/bill-acceptor/deactivate',
+    scan: '/api/v1/qr-scanner/start'
 }
 
 export type apiResponse = {
@@ -72,4 +73,17 @@ export async function executeDeactivate(): Promise<void> {
     if (!resp.ok) {
         throw new Error('Failed to deactivate')
     }
+}
+
+export async function executeScan(): Promise<unknown> {
+    const resp = await fetch(`${baseUrl}${apiRoutes.scan}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    if (!resp.ok) {
+        throw new Error('Failed to scan')
+    }
+    return await resp.json()
 }

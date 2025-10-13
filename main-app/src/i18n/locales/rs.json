@@ -40,6 +40,7 @@
     "noChangeWarning": "Ubacite tačan iznos - terminal ne vraća kusur. Povraćaj novca nakon uplate nije moguć.",
     "confirmPayment": "Potvrdi plaćanje",
     "progressText": "{{amount}} RSD preostalo do maksimalnog iznosa vaučera",
+    "usePreviousVoucher": "Koristi prethodni vaučer",
     "errors": {
       "authRequired": "Potrebna je autentifikacija.",
       "activationFailed": "Aktivacija neuspešna: {{message}}",
@@ -374,5 +375,12 @@
     "subtitle": "Vaučer nije kreiran, molimo pozovite podršku",
     "supportTitle": "Pozovi podršku",
     "supportText": "VCash tim će vam pomoći da dobijete vaučer u vrednosti novca koji ste uneli"
+  },
+  "voucherScannerModal": {
+    "title": "Skeniraj Vaučer",
+    "description": "Skener je sada aktivan. Molimo skenirajte postojeći vaučer da biste nastavili.",
+    "instruction": "Postavite vaučer unutar okvira",
+    "scannerImageAlt": "Skener aktivan",
+    "cancelButton": "Otkaži"
   }
 }
