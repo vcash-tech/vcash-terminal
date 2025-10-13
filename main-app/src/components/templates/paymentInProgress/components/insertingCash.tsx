@@ -1,4 +1,3 @@
-import { warningIcon } from '@/assets/icons'
 import { insertCashImg } from '@/assets/images'
 import PrimaryButton from '@/components/atoms/primaryButton/primaryButton'
 import AcceptedBills from '@/components/molecules/acceptedBills/acceptedBills'
@@ -7,11 +6,13 @@ import { useTranslate } from '@/i18n/useTranslate'
 export type InsertingCashProps = {
     amount: number
     onProcessPayment: () => void
+    onUsePreviousVoucher: () => void
 }
 
 export default function InsertingCash({
     amount,
-    onProcessPayment
+    onProcessPayment,
+    onUsePreviousVoucher
 }: InsertingCashProps) {
     const { t } = useTranslate()
 
@@ -36,11 +37,17 @@ export default function InsertingCash({
                     </div>
                 </div>
             ) : null}
-            <PrimaryButton
-                isDisabled={!amount || amount <= 0}
-                text={t('insertCash.confirmPayment')}
-                callback={onProcessPayment}
-            />
+            <div className="buttons-wrapper">
+                <PrimaryButton
+                    isDisabled={!amount || amount <= 0}
+                    text={t('insertCash.confirmPayment')}
+                    callback={onProcessPayment}
+                />
+                <PrimaryButton
+                    text={t('insertCash.usePreviousVoucher')}
+                    callback={onUsePreviousVoucher}
+                />
+            </div>
         </div>
     )
 }

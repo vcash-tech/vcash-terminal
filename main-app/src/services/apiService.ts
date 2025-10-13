@@ -45,6 +45,33 @@ interface CredentialsResponse {
     timestamp: string
 }
 
+interface QrScannerSuccessResponse {
+    success: true
+    status: string
+    message: string
+    operation: string
+    data: {
+        content: string
+        length: number
+        scan_duration_ms: number
+    }
+    device_type: string
+    timestamp: string
+}
+
+interface QrScannerErrorResponse {
+    error: string
+    message: string
+    timestamp: string
+}
+
+class QrScannerTimeoutError extends Error {
+    constructor(message: string) {
+        super(message)
+        this.name = 'QrScannerTimeoutError'
+    }
+}
+
 type ApiMode = 'http' | 'local'
 
 class ApiService {
@@ -304,6 +331,73 @@ class ApiService {
     }
 
     /**
+     * HTTP implementation for QR scanner
+     */
+    private async httpStartQrScanner(signal?: AbortSignal): Promise<string> {
+        try {
+            const response = await fetch(
+                `${this.baseUrl}/api/v1/qr-scanner/start`,
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    signal
+                }
+            )
+
+            if (response.ok) {
+                const data: QrScannerSuccessResponse = await response.json()
+                return data.data.content
+            } else {
+                const errorData: QrScannerErrorResponse = await response.json()
+
+                // Map HTTP status codes to meaningful error messages
+                switch (response.status) {
+                    case 408:
+                        throw new QrScannerTimeoutError(
+                            'Scan timeout - no QR code detected within 20 seconds'
+                        )
+                    case 409:
+                        throw new Error('Scan already in progress')
+                    case 500:
+                        throw new Error('QR scanner error')
+                    case 503:
+                        throw new Error('QR scanner service not available')
+                    default:
+                        throw new Error(
+                            errorData.message || 'Unknown QR scanner error'
+                        )
+                }
+            }
+        } catch (error) {
+            if (error instanceof Error) {
+                throw error
+            }
+            console.error('HTTP QR scanner error:', error)
+            throw new Error('Failed to start QR scanner')
+        }
+    }
+
+    private async httpStopQrScanner(): Promise<void> {
+        try {
+            const response = await fetch(
+                `${this.baseUrl}/api/v1/qr-scanner/stop`,
+                {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' }
+                }
+            )
+            if (!response.ok) {
+                throw new Error('Failed to stop QR scanner')
+            }
+        } catch (error) {
+            console.error('HTTP stopQR scanner error:', error)
+            throw new Error('Failed to stop QR scanner')
+        }
+    }
+
+    /**
      * Local implementation for saveDeviceToken
      * Persists token to localStorage
      */
@@ -392,6 +486,33 @@ class ApiService {
         // Does nothing in local mode
     }
 
+    /**
+     * Local implementation for QR scanner
+     * Simulates a 2-second scan delay and returns mock data
+     */
+    private async localStartQrScanner(signal?: AbortSignal): Promise<string> {
+        console.log('Local QR scanner: starting mock scan...')
+
+        // Simulate 2-second scan delay with abort support
+        await new Promise((resolve, reject) => {
+            const timeoutId = setTimeout(resolve, 2000)
+
+            if (signal) {
+                signal.addEventListener('abort', () => {
+                    clearTimeout(timeoutId)
+                    reject(new Error('QR scan aborted'))
+                })
+            }
+        })
+
+        const mockContent = 'https://market.vcash.rs?code=123-456-789'
+        console.log(
+            `Local QR scanner: mock scan completed with content: ${mockContent}`
+        )
+
+        return mockContent
+    }
+
     // Public API methods that route to appropriate implementation
 
     async print(imageUrl: string): Promise<ApiResponse> {
@@ -442,6 +563,33 @@ class ApiService {
         }
         return this.localGetCredentials()
     }
+
+    async startQrScanner(signal?: AbortSignal): Promise<string> {
+        while (true) {
+            try {
+                if (this.isHttpMode()) {
+                    return await this.httpStartQrScanner(signal)
+                } else {
+                    return await this.localStartQrScanner(signal)
+                }
+            } catch (error) {
+                // If it's a timeout error, retry the scan
+                if (error instanceof QrScannerTimeoutError) {
+                    console.log('QR scan timeout, retrying...')
+                    continue
+                }
+                // For all other errors, throw immediately
+                throw error
+            }
+        }
+    }
+
+    async stopQrScanner(): Promise<void> {
+        if (this.isHttpMode()) {
+            return this.httpStopQrScanner()
+        }
+        return Promise.resolve()
+    }
 }
 
 // Create singleton instance
@@ -454,3 +602,4 @@ if (import.meta.env.DEV) {
 
 // Export types for external use
 export type { ActivateApiResponse, ApiMode, ApiResponse, DeviceCredentials }
+export { QrScannerTimeoutError }

@@ -39,6 +39,7 @@
     "insertedAmount": "Inserted Amount",
     "noChangeWarning": "The machine does not return change. Refunds are not available.",
     "confirmPayment": "Confirm Payment",
+    "usePreviousVoucher": "Use previous voucher",
     "progressText": "{{amount}} RSD remaining to the maximum voucher amount",
     "errors": {
       "authRequired": "Authentication required.",
@@ -369,5 +370,12 @@
     "subtitle": "Voucher was not created, please contact support",
     "supportTitle": "Call Support",
     "supportText": "VCash team will help you to get your voucher for the amount you've inserted"
+  },
+  "voucherScannerModal": {
+    "title": "Scan Your Voucher",
+    "description": "Scanner is now active. Please scan your existing voucher to continue.",
+    "instruction": "Position your voucher within the frame",
+    "scannerImageAlt": "Scanner active",
+    "cancelButton": "Cancel"
   }
 }

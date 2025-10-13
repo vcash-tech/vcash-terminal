@@ -6,6 +6,7 @@ import Container from '@/components/atoms/container/container'
 import ErrorNotification from '@/components/atoms/errorNotification/errorNotification'
 import Footer from '@/components/organisms/footer/footer'
 import Header from '@/components/organisms/header/header'
+import VoucherScannerModal from '@/components/organisms/voucherScannerModal/voucherScannerModal'
 import PaymentComplete from '@/components/templates/paymentInProgress/components/paymentComplete'
 import VoucherConfirmationTemplate from '@/components/templates/voucherConfirmation/voucherConfirmationTemplate'
 import VoucherErrorTemplate from '@/components/templates/voucherDataError/VoucherErrorTemplate'
@@ -37,6 +38,8 @@ export default function PaymentInProgress() {
     const [voucherData, setVoucherData] = useState<VoucherResponse | null>(null)
     const [isPrinted, setIsPrinted] = useState<boolean>(false)
     const [hasPrintingError, setHasPrintingError] = useState<boolean>(false)
+    const [isVoucherScannerOpen, setIsVoucherScannerOpen] =
+        useState<boolean>(false)
     const acceptorIntervalRef = useRef<number | null>(null)
     const navigate = useNavigate()
 
@@ -211,6 +214,10 @@ export default function PaymentInProgress() {
                                     onPrintVoucher(voucherData)
                             })
                         }}
+                        onUsePreviousVoucher={() => {
+                            console.log('🔍 DEBUG: Use previous voucher')
+                            setIsVoucherScannerOpen(true)
+                        }}
                     />
                 )
         }
@@ -319,6 +326,10 @@ export default function PaymentInProgress() {
                 {renderStepContent()}
                 <Footer />
             </Container>
+            <VoucherScannerModal
+                isOpen={isVoucherScannerOpen}
+                onClose={() => setIsVoucherScannerOpen(false)}
+            />
         </>
     )
 }

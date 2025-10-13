@@ -1,0 +1,130 @@
+@use '../../../styles/config/colors';
+
+.voucher-scanner-modal {
+    background: rgba(0, 0, 0, 0.3);
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 998;
+    backdrop-filter: blur(5px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .modal-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 3rem;
+        flex: 1;
+        justify-content: space-evenly;
+        margin: auto 7vw;
+        background: colors.$white-color;
+        border-radius: 12px;
+        width: 82vw;
+        padding: 6rem 4rem 4rem;
+
+        .primary-button {
+            width: 100%;
+        }
+
+        .scanner-description {
+            font-weight: 500;
+            font-size: 2.4rem;
+            line-height: 3.8rem;
+            text-align: center;
+            color: #25292A;
+            margin: 0;
+        }
+
+        .scanner-image-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 300px;
+
+            .scanner-image {
+                width: 100%;
+                height: auto;
+                border-radius: 8px;
+            }
+
+            .scanner-overlay {
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                .scanner-frame {
+                    width: 80%;
+                    height: 80%;
+                    border: 3px solid colors.$brand-primary-color;
+                    border-radius: 8px;
+                    position: relative;
+                    animation: scannerPulse 2s ease-in-out infinite;
+
+                    &::before,
+                    &::after {
+                        content: '';
+                        position: absolute;
+                        width: 20px;
+                        height: 20px;
+                        border: 3px solid colors.$brand-primary-color;
+                    }
+
+                    &::before {
+                        top: -3px;
+                        left: -3px;
+                        border-right: none;
+                        border-bottom: none;
+                    }
+
+                    &::after {
+                        bottom: -3px;
+                        right: -3px;
+                        border-left: none;
+                        border-top: none;
+                    }
+                }
+            }
+        }
+
+        .scanner-instruction {
+            font-weight: 600;
+            font-size: 2rem;
+            line-height: 3rem;
+            text-align: center;
+            color: colors.$brand-primary-color;
+            margin: 0;
+            animation: instructionBlink 1.5s ease-in-out infinite;
+        }
+    }
+}
+
+@keyframes scannerPulse {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.7;
+        transform: scale(1.05);
+    }
+}
+
+@keyframes instructionBlink {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.6;
+    }
+}
