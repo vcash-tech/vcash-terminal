@@ -6,6 +6,7 @@ import {
     logoBlue,
     welcome_betting_balkanBet,
     welcome_betting_maxBet,
+    welcome_betting_meridianBet,
     welcome_betting_merkurXtip,
     welcome_betting_soccerBet,
     welcome_gaming_playStation,
@@ -79,6 +80,10 @@ export default function WelcomeWithServices({
                                 isComingSoon: false
                             },
                             {
+                                src: welcome_betting_meridianBet,
+                                isComingSoon: false
+                            },
+                            {
                                 src: welcome_betting_soccerBet,
                                 isComingSoon: false
                             },
@@ -92,6 +97,10 @@ export default function WelcomeWithServices({
                             },
                             {
                                 src: welcome_betting_maxBet,
+                                isComingSoon: false
+                            },
+                            {
+                                src: welcome_betting_meridianBet,
                                 isComingSoon: false
                             }
                         ]}

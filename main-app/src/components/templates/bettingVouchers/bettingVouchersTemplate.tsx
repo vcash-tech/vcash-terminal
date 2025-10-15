@@ -6,8 +6,8 @@ import {
     betting_balkanBet,
     //betting_maxBetComingSoon,
     betting_maxBet,
+    betting_meridian,
     betting_merkurXtip,
-    //betting_meridian,
     //betting_meridianBetComingSoon,
     //betting_meridianBetUskoro,
     //betting_merkurXtipComingSoon,
@@ -34,10 +34,12 @@ export default function BettingVoucher({ navigate }: BettingVoucherProps) {
         betting_soccerBet,
         betting_merkurXtip,
         betting_maxBet,
+        betting_meridian,
         betting_balkanBet,
         betting_soccerBet,
         betting_merkurXtip,
-        betting_maxBet
+        betting_maxBet,
+        betting_meridian
     ]
 
     // if (i18n.language === 'en') {
