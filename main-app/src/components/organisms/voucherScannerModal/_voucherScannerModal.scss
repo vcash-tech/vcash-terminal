@@ -209,9 +209,12 @@
                         touch-action: manipulation;
                         user-select: none;
 
-                        &:hover, &:active {
-                            background: colors.$brand-primary-color;
-                            color: colors.$white-color;
+
+                        &:focus, &:focus-visible {
+                            outline: none !important;
+                            background: colors.$white-color !important;
+                            color: colors.$brand-primary-color !important;
+                            border-color: colors.$brand-primary-color !important;
                         }
 
                         &.backspace, &.clear {

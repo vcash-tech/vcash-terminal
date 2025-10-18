@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 
 import PrimaryButton from '@/components/atoms/primaryButton/primaryButton'
 import { useTranslate } from '@/i18n/useTranslate'
@@ -41,19 +41,39 @@ export default function VoucherScannerModal({
     }
 
     // Handle numeric input
-    const handleNumericInput = (digit: string) => {
+    const handleNumericInput = (
+        digit: string,
+        event?: React.MouseEvent<HTMLButtonElement>
+    ) => {
         if (manualCode.replace(/\D/g, '').length < 9) {
             const newCode = manualCode.replace(/\D/g, '') + digit
             setManualCode(formatCode(newCode))
         }
+        // Remove focus from button to prevent highlighting
+        if (event?.currentTarget) {
+            event.currentTarget.blur()
+        }
     }
 
     // Handle backspace
-    const handleBackspace = () => {
+    const handleBackspace = (event?: React.MouseEvent<HTMLButtonElement>) => {
         const digits = manualCode.replace(/\D/g, '')
         if (digits.length > 0) {
             const newDigits = digits.slice(0, -1)
             setManualCode(formatCode(newDigits))
+        }
+        // Remove focus from button to prevent highlighting
+        if (event?.currentTarget) {
+            event.currentTarget.blur()
+        }
+    }
+
+    // Handle clear
+    const handleClear = (event?: React.MouseEvent<HTMLButtonElement>) => {
+        setManualCode('')
+        // Remove focus from button to prevent highlighting
+        if (event?.currentTarget) {
+            event.currentTarget.blur()
         }
     }
 
@@ -174,8 +194,10 @@ export default function VoucherScannerModal({
                                 <button
                                     key={num}
                                     className="keyboard-key"
-                                    onClick={() =>
-                                        handleNumericInput(num.toString())
+                                    tabIndex={-1}
+                                    onMouseDown={(e) => e.preventDefault()}
+                                    onClick={(e) =>
+                                        handleNumericInput(num.toString(), e)
                                     }>
                                     {num}
                                 </button>
@@ -186,8 +208,10 @@ export default function VoucherScannerModal({
                                 <button
                                     key={num}
                                     className="keyboard-key"
-                                    onClick={() =>
-                                        handleNumericInput(num.toString())
+                                    tabIndex={-1}
+                                    onMouseDown={(e) => e.preventDefault()}
+                                    onClick={(e) =>
+                                        handleNumericInput(num.toString(), e)
                                     }>
                                     {num}
                                 </button>
@@ -198,8 +222,10 @@ export default function VoucherScannerModal({
                                 <button
                                     key={num}
                                     className="keyboard-key"
-                                    onClick={() =>
-                                        handleNumericInput(num.toString())
+                                    tabIndex={-1}
+                                    onMouseDown={(e) => e.preventDefault()}
+                                    onClick={(e) =>
+                                        handleNumericInput(num.toString(), e)
                                     }>
                                     {num}
                                 </button>
@@ -208,17 +234,23 @@ export default function VoucherScannerModal({
                         <div className="keyboard-row">
                             <button
                                 className="keyboard-key backspace"
+                                tabIndex={-1}
+                                onMouseDown={(e) => e.preventDefault()}
                                 onClick={handleBackspace}>
                                 ⌫
                             </button>
                             <button
                                 className="keyboard-key"
-                                onClick={() => handleNumericInput('0')}>
+                                tabIndex={-1}
+                                onMouseDown={(e) => e.preventDefault()}
+                                onClick={(e) => handleNumericInput('0', e)}>
                                 0
                             </button>
                             <button
                                 className="keyboard-key clear"
-                                onClick={() => setManualCode('')}>
+                                tabIndex={-1}
+                                onMouseDown={(e) => e.preventDefault()}
+                                onClick={handleClear}>
                                 C
                             </button>
                         </div>

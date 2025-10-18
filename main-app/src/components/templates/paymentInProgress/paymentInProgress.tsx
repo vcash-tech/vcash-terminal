@@ -39,7 +39,7 @@ export default function PaymentInProgress() {
     const [isPrinted, setIsPrinted] = useState<boolean>(false)
     const [hasPrintingError, setHasPrintingError] = useState<boolean>(false)
     const [isVoucherScannerOpen, setIsVoucherScannerOpen] =
-        useState<boolean>(true)
+        useState<boolean>(false)
     const acceptorIntervalRef = useRef<number | null>(null)
     const navigate = useNavigate()
 
