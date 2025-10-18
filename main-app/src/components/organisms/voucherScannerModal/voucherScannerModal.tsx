@@ -1,12 +1,10 @@
-import { useCallback, useEffect, useRef } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 
-import { deviceIcon } from '@/assets/icons'
-import { qrCode } from '@/assets/images'
-import IconHeading from '@/components/atoms/iconHeading/iconHeading'
 import PrimaryButton from '@/components/atoms/primaryButton/primaryButton'
-import SessionCounter from '@/components/molecules/sessionCounter/sessionCounter'
 import { useTranslate } from '@/i18n/useTranslate'
 import { apiService } from '@/services/apiService'
+
+import { scanVoucher } from '../../../assets/images'
 
 export type VoucherScannerModalProps = {
     isOpen: boolean
@@ -19,6 +17,8 @@ export default function VoucherScannerModal({
     onScan,
     onClose
 }: VoucherScannerModalProps) {
+    const [isManualInput, setIsManualInput] = useState(false)
+    const [manualCode, setManualCode] = useState('')
     const { t } = useTranslate()
     const abortControllerRef = useRef<AbortController | null>(null)
     const isOpenRef = useRef(isOpen)
@@ -31,10 +31,51 @@ export default function VoucherScannerModal({
         [onScan]
     )
 
+    // Format code as XXX-XXX-XXX
+    const formatCode = (code: string) => {
+        const digits = code.replace(/\D/g, '').slice(0, 9)
+        if (digits.length <= 3) return digits
+        if (digits.length <= 6)
+            return `${digits.slice(0, 3)}-${digits.slice(3)}`
+        return `${digits.slice(0, 3)}-${digits.slice(3, 6)}-${digits.slice(6)}`
+    }
+
+    // Handle numeric input
+    const handleNumericInput = (digit: string) => {
+        if (manualCode.replace(/\D/g, '').length < 9) {
+            const newCode = manualCode.replace(/\D/g, '') + digit
+            setManualCode(formatCode(newCode))
+        }
+    }
+
+    // Handle backspace
+    const handleBackspace = () => {
+        const digits = manualCode.replace(/\D/g, '')
+        if (digits.length > 0) {
+            const newDigits = digits.slice(0, -1)
+            setManualCode(formatCode(newDigits))
+        }
+    }
+
+    // Handle manual code submission
+    const handleManualSubmit = () => {
+        const digits = manualCode.replace(/\D/g, '')
+        if (digits.length === 9) {
+            const formattedCode = formatCode(digits)
+            onScan(`http://localhost?mode=manual&code=${formattedCode}`)
+        }
+    }
+
+    // Check if code is complete
+    const isCodeComplete = manualCode.replace(/\D/g, '').length === 9
+
     useEffect(() => {
         isOpenRef.current = isOpen
 
         if (!isOpen) {
+            // Reset state when modal closes
+            setIsManualInput(false)
+            setManualCode('')
             return
         }
 
@@ -62,6 +103,7 @@ export default function VoucherScannerModal({
             }
         }
 
+        // Always start scanning when modal opens, regardless of manual input mode
         startScanning()
 
         // Cleanup function
@@ -82,34 +124,140 @@ export default function VoucherScannerModal({
         return <></>
     }
 
+    if (isManualInput) {
+        return (
+            <div className="voucher-scanner-modal">
+                <div className="modal-content manual-input">
+                    <h1>{t('voucherScannerModal.title')}</h1>
+                    <h2>{t('voucherScannerModal.manualInputTitle')}</h2>
+                    <span className="manual-description">
+                        {t('voucherScannerModal.manualInputDescription')}
+                    </span>
+                    <span className="code-format">
+                        {t('voucherScannerModal.codeFormat')}
+                    </span>
+
+                    {/* Code input display */}
+                    <div className="code-input-display">
+                        {Array.from({ length: 9 }, (_, index) => {
+                            const digits = manualCode.replace(/\D/g, '')
+                            const digit = digits[index] || ''
+                            const showDash = index === 2 || index === 5
+
+                            return (
+                                <div key={index} className="code-input-group">
+                                    <div
+                                        className={`code-digit ${digit ? 'filled' : ''}`}>
+                                        {digit}
+                                    </div>
+                                    {showDash && (
+                                        <span className="code-dash">-</span>
+                                    )}
+                                </div>
+                            )
+                        })}
+                    </div>
+
+                    {/* Submit button */}
+                    <div className="submit-button-container">
+                        <PrimaryButton
+                            text={t('voucherScannerModal.submitButton')}
+                            callback={handleManualSubmit}
+                            isDisabled={!isCodeComplete}
+                        />
+                    </div>
+
+                    {/* Numeric keyboard */}
+                    <div className="numeric-keyboard">
+                        <div className="keyboard-row">
+                            {[1, 2, 3].map((num) => (
+                                <button
+                                    key={num}
+                                    className="keyboard-key"
+                                    onClick={() =>
+                                        handleNumericInput(num.toString())
+                                    }>
+                                    {num}
+                                </button>
+                            ))}
+                        </div>
+                        <div className="keyboard-row">
+                            {[4, 5, 6].map((num) => (
+                                <button
+                                    key={num}
+                                    className="keyboard-key"
+                                    onClick={() =>
+                                        handleNumericInput(num.toString())
+                                    }>
+                                    {num}
+                                </button>
+                            ))}
+                        </div>
+                        <div className="keyboard-row">
+                            {[7, 8, 9].map((num) => (
+                                <button
+                                    key={num}
+                                    className="keyboard-key"
+                                    onClick={() =>
+                                        handleNumericInput(num.toString())
+                                    }>
+                                    {num}
+                                </button>
+                            ))}
+                        </div>
+                        <div className="keyboard-row">
+                            <button
+                                className="keyboard-key backspace"
+                                onClick={handleBackspace}>
+                                ⌫
+                            </button>
+                            <button
+                                className="keyboard-key"
+                                onClick={() => handleNumericInput('0')}>
+                                0
+                            </button>
+                            <button
+                                className="keyboard-key clear"
+                                onClick={() => setManualCode('')}>
+                                C
+                            </button>
+                        </div>
+                    </div>
+
+                    {/* Cancel button */}
+                    <div className="cancel-button-container">
+                        <PrimaryButton
+                            text={t('voucherScannerModal.cancelButton')}
+                            callback={onClose}
+                        />
+                    </div>
+                </div>
+            </div>
+        )
+    }
+
     return (
         <div className="voucher-scanner-modal">
             <div className="modal-content">
-                <IconHeading
-                    heading={t('voucherScannerModal.title')}
-                    icon={deviceIcon}
+                <h1>{t('voucherScannerModal.title')}</h1>
+                <h2>{t('voucherScannerModal.scanTitle')}</h2>
+                <span>{t('voucherScannerModal.scanDescription')}</span>
+                <img
+                    src={scanVoucher}
+                    alt={t('voucherScannerModal.scannerImageAlt')}
                 />
-                <p className="scanner-description">
-                    {t('voucherScannerModal.description')}
-                </p>
-                <div className="scanner-image-container">
-                    <img
-                        src={qrCode}
-                        className="scanner-image"
-                        alt={t('voucherScannerModal.scannerImageAlt')}
-                    />
-                    <div className="scanner-overlay">
-                        <div className="scanner-frame"></div>
-                    </div>
-                </div>
-                <p className="scanner-instruction">
-                    {t('voucherScannerModal.instruction')}
-                </p>
+                <button
+                    className="alt-input"
+                    onClick={() => {
+                        setIsManualInput(true)
+                        setManualCode('')
+                    }}>
+                    {t('voucherScannerModal.altButton')}
+                </button>
                 <PrimaryButton
                     text={t('voucherScannerModal.cancelButton')}
                     callback={onClose}
                 />
-                <SessionCounter />
             </div>
         </div>
     )

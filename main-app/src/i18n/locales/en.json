@@ -378,6 +378,14 @@
     "description": "Scanner is now active. Please scan your existing voucher to continue.",
     "instruction": "Position your voucher within the frame",
     "scannerImageAlt": "Scanner active",
-    "cancelButton": "Cancel"
+    "cancelButton": "Cancel",
+    "scanTitle": "Scan Voucher",
+    "scanDescription": "Quick and easy - scan the QR code from your old voucher",
+    "altButton": "Can't scan? Enter code manually",
+    "manualInputTitle": "Enter Code Manually",
+    "manualInputDescription": "Enter the 9-digit code from your voucher",
+    "codeFormat": "Format: XXX-XXX-XXX",
+    "submitButton": "Submit Code",
+    "backToScanner": "Back to Scanner"
   }
 }

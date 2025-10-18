@@ -379,10 +379,16 @@
     "supportText": "VCash tim će vam pomoći da dobijete vaučer u vrednosti novca koji ste uneli"
   },
   "voucherScannerModal": {
-    "title": "Skeniraj Vaučer",
-    "description": "Skener je sada aktivan. Molimo skenirajte postojeći vaučer da biste nastavili.",
-    "instruction": "Postavite vaučer unutar okvira",
-    "scannerImageAlt": "Skener aktivan",
-    "cancelButton": "Otkaži"
+    "title": "Prenesi kusur sa starog vaučera",
+    "scanTitle": "Skeniraj Vaučer",
+    "scanDescription": "Brzo i lako - skeniraj QR kod sa tvog starog vaučera",
+    "scannerImageAlt": "Skeniraj Vaučer",
+    "cancelButton": "Otkaži prenos",
+    "altButton": "Ne možeš da skeniraš? Unesi kod ručno",
+    "manualInputTitle": "Unesi kod ručno",
+    "manualInputDescription": "Unesi 9-cifreni kod sa tvog vaučera",
+    "codeFormat": "Format: XXX-XXX-XXX",
+    "submitButton": "Potvrdi kod",
+    "backToScanner": "Nazad na skener"
   }
 }

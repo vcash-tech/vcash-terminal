@@ -497,7 +497,7 @@ class ApiService {
         this.counter++
         return new Promise((resolve, reject) => {
             const timeoutId = setTimeout(() => {
-                if (this.counter % 3 === 0) {
+                if (this.counter % 300 === 0) {
                     // const mockContent =
                     //     'https://market.vcash.rs?code=123-456-789'
                     const mockContent = prompt('Enter voucher code')

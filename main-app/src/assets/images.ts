@@ -70,6 +70,7 @@ import viewBackground from './images/optimised/view-background.webp'
 import xboxClean from './images/optimised/xboxCard.webp'
 import playstationCard from './images/playstationCard.png'
 import printVoucher from './images/printVoucher.jpg'
+import scanVoucher from './images/scanVoucher.png'
 import sockerCard from './images/sockerCard.svg'
 import test from './images/test.png'
 import tickets from './images/tickets.png'
@@ -167,6 +168,7 @@ export {
     printVoucher,
     ps,
     qrCode,
+    scanVoucher,
     soccerBetLogo,
     sockerCard,
     steam,
