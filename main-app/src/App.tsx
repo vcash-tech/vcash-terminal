@@ -26,7 +26,7 @@ import WelcomeWithServicesPage from './pages/welcomeWithServicesPage'
 
 function Layout() {
     const { startUrl } = useNavigationContext()
-    useInactivityRedirect(startUrl ?? '/welcome')
+    // useInactivityRedirect(startUrl ?? '/welcome')
 
     return (
         <Routes>
