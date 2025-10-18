@@ -1,5 +1,5 @@
 import { format } from 'date-fns'
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import Container from '@/components/atoms/container/container'
@@ -215,7 +215,6 @@ export default function PaymentInProgress() {
                             })
                         }}
                         onUsePreviousVoucher={() => {
-                            console.log('🔍 DEBUG: Use previous voucher')
                             setIsVoucherScannerOpen(true)
                         }}
                     />
@@ -305,6 +304,33 @@ export default function PaymentInProgress() {
 
     useEffect(() => () => setIsMoneyPending(false), [])
 
+    const onScan = useCallback(
+        (value: string) => {
+            console.log('🔍 DEBUG: Voucher scanned:', value)
+            setIsVoucherScannerOpen(false)
+            const createDraftFromVoucher = async () => {
+                try {
+                    const url = new URL(value)
+                    const voucherCode = url.searchParams.get('code')
+                    if (!voucherCode) {
+                        throw new Error('Voucher code not found')
+                    }
+                    await TransactionService.CreateDraftFromVoucher({
+                        voucherCode: voucherCode
+                    })
+                    console.log('uspjelo')
+                } catch (error) {
+                    console.error('Error creating draft from voucher:', error)
+                }
+            }
+            createDraftFromVoucher()
+        },
+        [setIsVoucherScannerOpen]
+    )
+    const onClose = useCallback(() => {
+        setIsVoucherScannerOpen(false)
+    }, [setIsVoucherScannerOpen])
+
     return (
         <>
             <ErrorNotification
@@ -328,7 +354,8 @@ export default function PaymentInProgress() {
             </Container>
             <VoucherScannerModal
                 isOpen={isVoucherScannerOpen}
-                onClose={() => setIsVoucherScannerOpen(false)}
+                onScan={onScan}
+                onClose={onClose}
             />
         </>
     )

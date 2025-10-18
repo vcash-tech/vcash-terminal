@@ -31,7 +31,7 @@
     padding: 5.5rem 0 0;
     background: colors.$main-background-color;
     flex: 1;
-    justify-content: end;
+    justify-content: space-between;
 
     .demo-wrapper {
         background: #ced9f9;
@@ -40,9 +40,9 @@
         margin-top: 5rem;
         overflow: hidden;
         display: flex;
-        height: 50rem;
+        height: 40rem;
         flex-direction: column;
-        width: 50rem;
+        width: 40rem;
         justify-content: flex-end;
 
         img {
@@ -56,41 +56,99 @@
     h1 {
         font-family: fonts.$body-font;
         font-weight: 600;
-        font-size: 4.2rem;
+        font-size: 6.2rem;
         line-height: 100%;
         color: colors.$black-color;
         text-align: center;
         margin: 0 0 0.8rem;
     }
-    
-
-
-    .inserted-amount {
-        font-family: fonts.$body-font;
-        font-weight: 500;
-        font-size: 3.6rem;
-        line-height: 5rem;
-        color: colors.$dark-grey;
-        text-align: center;
-        margin-top: 6rem;
-
+    h3 {
+        font-weight: 400;
         span {
-            display: block;
-            margin-top: 3rem;
-            font-size: 4.6rem;
-            font-weight: 700;
-            color: colors.$brand-primary-color;
-
-            .currency {
-                font-size: 3rem;
-                display: inline-block;
-            }
+            font-weight: 600;
         }
     }
+    
+    .amount-wrapper {
+        margin-top: 6rem;
+        display: flex;
+        flex-direction: row;
+        justify-items: center;
+        align-items: stretch;
+        width:100%;
+        padding: 0 15rem;
+        
+        .plus-sign {
+            font-size: 2.6rem;
+            font-weight: 700;
+            color: colors.$brand-primary-color;
+            display: flex;           // create a flex context just for the sign
+            align-items: center;     // center vertically within its own box
+            justify-content: center; // center horizontally if needed
+            padding: 0 0.5rem;         // give it some width so centering is visible
+            font-size: 5.6rem;
+            font-weight: 600;
+            color: colors.$brand-primary-color;
+        }
+        
+        .previous-voucher-button {
+            line-height: 3rem;
+            font-size: 2.3rem;
+            background-color: colors.$white-color;
+            border: 5px solid colors.$brand-primary-color;
+            border-radius: 10%;
+            aspect-ratio: 1/1;
+            font-weight: 600;
+            width: 300px;
+            padding: 0 1rem;
+        }
+
+        .inserted-amount {
+            border-radius:1.5rem;
+            border: 2px solid colors.$input-border-color;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 2rem;
+            font-family: fonts.$body-font;
+            font-weight: 600;
+            font-size: 3.6rem;
+            line-height: 5rem;
+            color: colors.$dark-grey;
+            width: 100%;
+            flex-grow: 1;
+            text-align: center;
+            background-color: colors.$white-color;
+            padding: 0rem 5rem;
+            
+
+            span {
+                display: block;
+                font-size: 6.5rem;
+                font-weight: 500;
+                color: colors.$brand-primary-color;
+
+                .currency {
+                    font-weight: 600;
+                    font-size: 3.5rem;
+                    display: inline-block;
+                }
+            }
+        }
+        
+    }
+
+
 
     .buttons-wrapper {
-        margin: 20rem 0 10rem;
-        padding: 5rem;
+        margin-bottom: 5rem;
+        padding: 5rem 15rem;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        .primary-button {
+            width:100%;
+        }
     }
 
     .progress-to-full {

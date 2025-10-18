@@ -34,6 +34,8 @@
   },
   "insertCash": {
     "title": "Insert cash",
+    "subtitle1": "min amount from",
+    "subtitle2": "max amount up to",
     "acceptedNotes": "Accepted notes: 500 RSD and above",
     "altText": "Insert cash",
     "insertedAmount": "Inserted Amount",
