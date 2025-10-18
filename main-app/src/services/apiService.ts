@@ -486,16 +486,26 @@ class ApiService {
         // Does nothing in local mode
     }
 
+    private counter = 0
+
     /**
      * Local implementation for QR scanner
      * Simulates a 2-second scan delay and returns mock data
      */
     private async localStartQrScanner(signal?: AbortSignal): Promise<string> {
-        console.log('Local QR scanner: starting mock scan...')
-
-        // Simulate 2-second scan delay with abort support
-        await new Promise((resolve, reject) => {
-            const timeoutId = setTimeout(resolve, 2000)
+        console.log('start mock scan')
+        this.counter++
+        return new Promise((resolve, reject) => {
+            const timeoutId = setTimeout(() => {
+                if (this.counter % 3 === 0) {
+                    // const mockContent =
+                    //     'https://market.vcash.rs?code=123-456-789'
+                    const mockContent = prompt('Enter voucher code')
+                    resolve(mockContent || '')
+                } else {
+                    reject(new QrScannerTimeoutError('Scan timeout'))
+                }
+            }, 2000)
 
             if (signal) {
                 signal.addEventListener('abort', () => {
@@ -504,13 +514,6 @@ class ApiService {
                 })
             }
         })
-
-        const mockContent = 'https://market.vcash.rs?code=123-456-789'
-        console.log(
-            `Local QR scanner: mock scan completed with content: ${mockContent}`
-        )
-
-        return mockContent
     }
 
     // Public API methods that route to appropriate implementation
@@ -564,8 +567,8 @@ class ApiService {
         return this.localGetCredentials()
     }
 
-    async startQrScanner(signal?: AbortSignal): Promise<string> {
-        while (true) {
+    async startQrScanner(signal?: AbortSignal): Promise<string | undefined> {
+        while (signal?.aborted === false) {
             try {
                 if (this.isHttpMode()) {
                     return await this.httpStartQrScanner(signal)
@@ -588,6 +591,7 @@ class ApiService {
         if (this.isHttpMode()) {
             return this.httpStopQrScanner()
         }
+        console.log('stop mock scan')
         return Promise.resolve()
     }
 }

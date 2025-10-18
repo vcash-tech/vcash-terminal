@@ -34,9 +34,11 @@
   },
   "insertCash": {
     "title": "Ubacite gotovinu",
+    "subtitle1": "min uplata od",
+    "subtitle2": "max uplata do",
     "acceptedNotes": "Terminal prihvata sledeće novčanice: 500, 1000 i 2000 RSD.",
     "altText": "Ubacite gotovinu",
-    "insertedAmount": "Uplaćen iznos",
+    "insertedAmount": "Uplaćeni iznos",
     "noChangeWarning": "Ubacite tačan iznos - terminal ne vraća kusur. Povraćaj novca nakon uplate nije moguć.",
     "confirmPayment": "Potvrdi plaćanje",
     "progressText": "{{amount}} RSD preostalo do maksimalnog iznosa vaučera",

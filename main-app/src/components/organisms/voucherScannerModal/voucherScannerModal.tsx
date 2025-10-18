@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useCallback, useEffect, useRef } from 'react'
 
 import { deviceIcon } from '@/assets/icons'
 import { qrCode } from '@/assets/images'
@@ -6,113 +6,77 @@ import IconHeading from '@/components/atoms/iconHeading/iconHeading'
 import PrimaryButton from '@/components/atoms/primaryButton/primaryButton'
 import SessionCounter from '@/components/molecules/sessionCounter/sessionCounter'
 import { useTranslate } from '@/i18n/useTranslate'
-import { apiService, QrScannerTimeoutError } from '@/services/apiService'
-import { TransactionService } from '@/services/transactionService'
+import { apiService } from '@/services/apiService'
 
 export type VoucherScannerModalProps = {
     isOpen: boolean
+    onScan: (value: string) => void
     onClose: () => void
 }
 
 export default function VoucherScannerModal({
     isOpen,
+    onScan,
     onClose
 }: VoucherScannerModalProps) {
     const { t } = useTranslate()
+    const abortControllerRef = useRef<AbortController | null>(null)
+    const isOpenRef = useRef(isOpen)
 
-    // Business logic useEffect with retry logic for timeout errors
+    // Stable callback to avoid useEffect re-runs
+    const handleScan = useCallback(
+        (value: string) => {
+            onScan(value)
+        },
+        [onScan]
+    )
+
     useEffect(() => {
-        let isActive = true
-        const abortController = new AbortController()
+        isOpenRef.current = isOpen
+
+        if (!isOpen) {
+            return
+        }
 
         const startScanning = async () => {
-            if (!isOpen || !isActive) return
+            try {
+                // Create new abort controller for this scan session
+                abortControllerRef.current = new AbortController()
+                console.log('start scan')
 
-            console.log(
-                '🔍 VoucherScannerModal: Scanner activated, ready to scan existing voucher'
-            )
+                // apiService.startQrScanner handles timeout retries internally with while(true)
+                // It will keep retrying until a QR code is found or the request is aborted
+                const value = await apiService.startQrScanner(
+                    abortControllerRef.current.signal
+                )
 
-            while (isActive) {
-                try {
-                    const content = await apiService.startQrScanner(
-                        abortController.signal
-                    )
-
-                    if (!isActive) break // Component unmounted during scan
-
-                    const url = new URL(content)
-                    const code = url.searchParams.get('code') || ''
-
-                    if (!code) {
-                        alert('🔍 VoucherScannerModal: No code found')
-                        break
-                    }
-
-                    try {
-                        await TransactionService.CreateDraftFromVoucher({
-                            voucherCode: code
-                        })
-                    } catch (error) {
-                        alert(
-                            '🔍 VoucherScannerModal: Draft from voucher error:' +
-                                JSON.stringify(error)
-                        )
-                    }
-
-                    // Success - break out of retry loop
-                    break
-                } catch (error) {
-                    if (!isActive) break // Component unmounted during error handling
-
-                    // If it's a timeout error, continue the loop to retry
-                    if (error instanceof QrScannerTimeoutError) {
-                        console.log(
-                            '🔍 VoucherScannerModal: Scan timeout, retrying...'
-                        )
-                        continue
-                    }
-
-                    // For all other errors, show alert and break out of loop
-                    alert(
-                        '🔍 VoucherScannerModal: Scanner error:' +
-                            JSON.stringify(error)
-                    )
-                    break
+                // Only call onScan if modal is still open
+                if (isOpenRef.current) {
+                    handleScan(value || '')
+                }
+            } catch (e) {
+                // Only log errors if the modal is still open (not aborted due to close)
+                if (isOpenRef.current) {
+                    console.log('🔍 VoucherScannerModal: Scanner error:', e)
                 }
             }
-
-            // Cleanup and close modal (finally equivalent)
-            abortController.abort()
-            try {
-                await apiService.stopQrScanner()
-            } catch (error) {
-                console.error('Error stopping QR scanner:', error)
-            }
-
-            // Always close the modal when we exit the scanning loop
-            if (isActive) {
-                onClose()
-            }
         }
 
-        if (isOpen) {
-            startScanning()
-        }
+        startScanning()
 
+        // Cleanup function
         return () => {
-            isActive = false
-            abortController.abort()
-            if (isOpen) {
-                console.log('🔍 VoucherScannerModal: Scanner deactivated')
-                apiService.stopQrScanner().catch((error) => {
-                    console.error(
-                        'Error stopping QR scanner during cleanup:',
-                        error
-                    )
-                })
+            console.log('aborting scan')
+            if (abortControllerRef.current) {
+                abortControllerRef.current.abort()
+                abortControllerRef.current = null
             }
+            // Stop the scanner with a slight delay to ensure abort is processed
+            setTimeout(() => {
+                apiService.stopQrScanner()
+            }, 200)
         }
-    }, [isOpen, onClose])
+    }, [isOpen, handleScan])
 
     if (!isOpen) {
         return <></>
