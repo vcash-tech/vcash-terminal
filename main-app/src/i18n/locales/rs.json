@@ -390,5 +390,22 @@
     "codeFormat": "Format: XXX-XXX-XXX",
     "submitButton": "Potvrdi kod",
     "backToScanner": "Nazad na skener"
+  },
+  "voucherScanResultModal": {
+    "loadingTitle": "Prenos vaučera u toku",
+    "loadingDescription": "Molimo za strpljenje dok se stanje vaučera proverava",
+    "successTitle": "Prenos uspešan!",
+    "successDescription": "Stanje vašeg vaučera je uspešno preneseno",
+    "amountTransferred": "Preneseni iznos",
+    "errorTitle": "Prenos neuspešan",
+    "successButton": "Nastavi",
+    "retryButton": "Pokušaj ponovo",
+    "closeButton": "Zatvori",
+    "errors": {
+      "overLimit": "Iznos vaučera prelazi limit za ovu transakciju",
+      "invalid": "Kod vaučera je neispravan. Molimo proverite i pokušajte ponovo",
+      "network": "Greška mrežne veze. Molimo proverite konekciju i pokušajte ponovo",
+      "other": "Došlo je do neočekivane greške. Molimo kontaktirajte podršku ako se problem nastavi"
+    }
   }
 }

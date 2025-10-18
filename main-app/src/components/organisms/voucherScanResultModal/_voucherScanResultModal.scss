@@ -1,0 +1,165 @@
+@use '../../../styles/config/colors';
+
+.voucher-scan-result-modal {
+    background: rgba(0, 0, 0, 0.3);
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 998;
+    backdrop-filter: blur(5px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .modal-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 3rem;
+        flex: 1;
+        justify-content: space-evenly;
+        margin: auto 7vw;
+        background: colors.$white-color;
+        border-radius: 12px;
+        width: 82vw;
+        padding: 6rem 4rem 4rem;
+        text-align: center;
+        
+        h1 {
+            font-size: 3.2rem;
+            font-weight: 700;
+            line-height: 4rem;
+            color: #25292A;
+            margin: 0;
+        }
+        
+        h2 {
+            font-size: 2.4rem;
+            font-weight: 500;
+            line-height: 3.2rem;
+            color: #666;
+            margin: 0;
+        }
+
+        // Loading state styles
+        &.loading {
+            gap: 4rem;
+            
+            .loading-spinner {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin: 2rem 0;
+                
+                .spinner {
+                    width: 8rem;
+                    height: 8rem;
+                    border: 4px solid #f3f3f3;
+                    border-top: 4px solid colors.$brand-primary-color;
+                    border-radius: 50%;
+                    animation: spin 1s linear infinite;
+                }
+            }
+        }
+
+        // Success state styles
+        &.success {
+            gap: 3rem;
+            
+            .status-icon {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 10rem;
+                height: 10rem;
+                border-radius: 50%;
+                margin: 2rem 0;
+                
+                &.success-icon {
+                    background: #E8F5E8;
+                    
+                    img {
+                        width: 6rem;
+                        height: 6rem;
+                    }
+                }
+            }
+            
+            .amount-display {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+                margin: 2rem 0;
+                padding: 3rem;
+                background: #f8f9fa;
+                border-radius: 16px;
+                border: 2px solid colors.$brand-primary-color;
+                
+                .amount-label {
+                    font-size: 2rem;
+                    font-weight: 500;
+                    color: #666;
+                }
+                
+                .amount-value {
+                    font-size: 4rem;
+                    font-weight: 700;
+                    color: colors.$brand-primary-color;
+                }
+            }
+        }
+
+        // Error state styles
+        &.error {
+            gap: 3rem;
+            
+            .status-icon {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 10rem;
+                height: 10rem;
+                border-radius: 50%;
+                margin: 2rem 0;
+                
+                &.error-icon {
+                    background: #FFF2F2;
+                    
+                    img {
+                        width: 6rem;
+                        height: 6rem;
+                    }
+                }
+            }
+            
+            h1 {
+                color: #EF404C;
+            }
+        }
+
+        // Button container styles
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            width: 100%;
+            align-items: center;
+            
+            .primary-button {
+                width: 85%;
+                
+                &:last-child {
+                    background: #EF404C;
+                }
+            }
+        }
+    }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

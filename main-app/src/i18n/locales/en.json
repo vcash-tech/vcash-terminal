@@ -374,18 +374,33 @@
     "supportText": "VCash team will help you to get your voucher for the amount you've inserted"
   },
   "voucherScannerModal": {
-    "title": "Scan Your Voucher",
-    "description": "Scanner is now active. Please scan your existing voucher to continue.",
-    "instruction": "Position your voucher within the frame",
-    "scannerImageAlt": "Scanner active",
-    "cancelButton": "Cancel",
+    "title": "Transfer leftover from old voucher",
     "scanTitle": "Scan Voucher",
     "scanDescription": "Quick and easy - scan the QR code from your old voucher",
+    "scannerImageAlt": "Scan Voucher",
+    "cancelButton": "Cancel transfer",
     "altButton": "Can't scan? Enter code manually",
-    "manualInputTitle": "Enter Code Manually",
+    "manualInputTitle": "Enter code manually",
     "manualInputDescription": "Enter the 9-digit code from your voucher",
     "codeFormat": "Format: XXX-XXX-XXX",
-    "submitButton": "Submit Code",
-    "backToScanner": "Back to Scanner"
+    "submitButton": "Submit code",
+    "backToScanner": "Back to scanner"
+  },
+  "voucherScanResultModal": {
+    "loadingTitle": "Voucher transfer in progress",
+    "loadingDescription": "Please wait while we transfer your voucher balance",
+    "successTitle": "Transfer successful!",
+    "successDescription": "Your voucher balance has been successfully transferred",
+    "amountTransferred": "Amount transferred",
+    "errorTitle": "Transfer failed",
+    "successButton": "Continue",
+    "retryButton": "Try again",
+    "closeButton": "Close",
+    "errors": {
+      "overLimit": "The voucher amount exceeds the maximum allowed limit for this transaction",
+      "invalid": "The voucher code is invalid. Please check and try again",
+      "network": "Network connection error. Please check your connection and try again",
+      "other": "An unexpected error occurred. Please contact support if the problem persists"
+    }
   }
 }
