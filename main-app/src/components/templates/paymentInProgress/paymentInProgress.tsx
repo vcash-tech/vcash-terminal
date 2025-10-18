@@ -331,14 +331,14 @@ export default function PaymentInProgress() {
                         return
                     }
 
-                    await new Promise((resolve) => setTimeout(resolve, 3000))
+                    await new Promise((resolve) => setTimeout(resolve, 1000))
                     const response =
                         await TransactionService.CreateDraftFromVoucher({
                             voucherCode: voucherCode
                         })
                     setVoucherScanStatus('success')
                     setVoucherScanSuccessAmount(
-                        response.draftDeposit?.amount ?? 0
+                        response.deviceDraftDeposit?.amount ?? 0
                     )
                 } catch (error) {
                     if (
@@ -350,7 +350,10 @@ export default function PaymentInProgress() {
                         if (
                             error.errors.find(
                                 (e) =>
-                                    e.code === 'MONEY_TRANSFER_CANNOT_BE_FOUND'
+                                    e.code ===
+                                        'MONEY_TRANSFER_CANNOT_BE_FOUND' ||
+                                    e.code === 'INVALID_MONEY_TRANSFER' ||
+                                    e.code === 'INVALID_VOUCHER_TYPE'
                             ) !== undefined
                         ) {
                             setVoucherScanStatus('error')
