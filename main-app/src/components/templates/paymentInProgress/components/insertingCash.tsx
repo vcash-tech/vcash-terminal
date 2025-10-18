@@ -41,7 +41,7 @@ export default function InsertingCash({
                         <span className="currency">RSD</span>
                     </span>
                 </div>
-                {amount > 80000 ? (
+                {/* {amount > 80000 ? (
                     <div className="progress-to-full-wrapper">
                         <div
                             className="progress-to-full"
@@ -51,7 +51,7 @@ export default function InsertingCash({
                             <progress value={amount} max={100000} />
                         </div>
                     </div>
-                ) : null}
+                ) : null} */}
             </div>
             <div className="buttons-wrapper">
                 <PrimaryButton

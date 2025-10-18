@@ -176,10 +176,10 @@ export default function InsertCashTemplate({
         fetchAmount()
 
         // Set up 3-second polling
-        const amountPollingInterval = setInterval(fetchAmount, 1000)
+        // const amountPollingInterval = setInterval(fetchAmount, 3000)
 
         return () => {
-            clearInterval(amountPollingInterval)
+            // clearInterval(amountPollingInterval)
         }
     }, [amount, setIsMoneyPending])
 

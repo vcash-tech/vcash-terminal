@@ -7,6 +7,7 @@ import ErrorNotification from '@/components/atoms/errorNotification/errorNotific
 import Footer from '@/components/organisms/footer/footer'
 import Header from '@/components/organisms/header/header'
 import VoucherScannerModal from '@/components/organisms/voucherScannerModal/voucherScannerModal'
+import VoucherScanResultModal from '@/components/organisms/voucherScanResultModal/voucherScanResultModal'
 import PaymentComplete from '@/components/templates/paymentInProgress/components/paymentComplete'
 import VoucherConfirmationTemplate from '@/components/templates/voucherConfirmation/voucherConfirmationTemplate'
 import VoucherErrorTemplate from '@/components/templates/voucherDataError/VoucherErrorTemplate'
@@ -40,6 +41,16 @@ export default function PaymentInProgress() {
     const [hasPrintingError, setHasPrintingError] = useState<boolean>(false)
     const [isVoucherScannerOpen, setIsVoucherScannerOpen] =
         useState<boolean>(false)
+    const [isVoucherScanResultOpen, setIsVoucherScanResultOpen] =
+        useState<boolean>(false)
+    const [voucherScanStatus, setVoucherScanStatus] = useState<
+        'loading' | 'success' | 'error'
+    >('loading')
+    const [voucherScanErrorType, setVoucherScanErrorType] = useState<
+        'none' | 'over-limit' | 'invalid' | 'other'
+    >('none')
+    const [voucherScanSuccessAmount, setVoucherScanSuccessAmount] =
+        useState<number>(0)
     const acceptorIntervalRef = useRef<number | null>(null)
     const navigate = useNavigate()
 
@@ -253,7 +264,7 @@ export default function PaymentInProgress() {
         fetchAmount()
 
         // Set up 3-second polling
-        const amountPollingInterval = setInterval(fetchAmount, 1000)
+        const amountPollingInterval = setInterval(fetchAmount, 5000)
 
         return () => {
             clearInterval(amountPollingInterval)
@@ -308,19 +319,62 @@ export default function PaymentInProgress() {
         (value: string) => {
             console.log('🔍 DEBUG: Voucher scanned:', value)
             setIsVoucherScannerOpen(false)
+            setIsVoucherScanResultOpen(true)
+            setVoucherScanStatus('loading')
             const createDraftFromVoucher = async () => {
                 try {
                     const url = new URL(value)
                     const voucherCode = url.searchParams.get('code')
                     if (!voucherCode) {
-                        throw new Error('Voucher code not found')
+                        setVoucherScanStatus('error')
+                        setVoucherScanErrorType('invalid')
+                        return
                     }
-                    await TransactionService.CreateDraftFromVoucher({
-                        voucherCode: voucherCode
-                    })
-                    console.log('uspjelo')
+
+                    await new Promise((resolve) => setTimeout(resolve, 3000))
+                    const response =
+                        await TransactionService.CreateDraftFromVoucher({
+                            voucherCode: voucherCode
+                        })
+                    setVoucherScanStatus('success')
+                    setVoucherScanSuccessAmount(
+                        response.draftDeposit?.amount ?? 0
+                    )
                 } catch (error) {
-                    console.error('Error creating draft from voucher:', error)
+                    if (
+                        typeof error === 'object' &&
+                        error !== null &&
+                        'errors' in error &&
+                        Array.isArray(error.errors)
+                    ) {
+                        if (
+                            error.errors.find(
+                                (e) =>
+                                    e.code === 'MONEY_TRANSFER_CANNOT_BE_FOUND'
+                            ) !== undefined
+                        ) {
+                            setVoucherScanStatus('error')
+                            setVoucherScanErrorType('invalid')
+                            return
+                        }
+
+                        if (
+                            error.errors.find(
+                                (e) =>
+                                    e.code === 'DRAFT_AMOUNT_EXCEEDS_THE_LIMIT'
+                            ) !== undefined
+                        ) {
+                            setVoucherScanStatus('error')
+                            setVoucherScanErrorType('over-limit')
+                            return
+                        }
+                        console.error(
+                            'Error creating draft from voucher:',
+                            error
+                        )
+                        setVoucherScanStatus('error')
+                        setVoucherScanErrorType('other')
+                    }
                 }
             }
             createDraftFromVoucher()
@@ -356,6 +410,13 @@ export default function PaymentInProgress() {
                 isOpen={isVoucherScannerOpen}
                 onScan={onScan}
                 onClose={onClose}
+            />
+            <VoucherScanResultModal
+                status={voucherScanStatus}
+                successAmount={voucherScanSuccessAmount}
+                errorType={voucherScanErrorType}
+                isOpen={isVoucherScanResultOpen}
+                onClose={() => setIsVoucherScanResultOpen(false)}
             />
         </>
     )

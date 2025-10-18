@@ -57,7 +57,7 @@ export interface DraftFromVoucherRequest {
 }
 
 export interface DraftFromVoucherResponse {
-    draftDeposit: unknown
+    draftDeposit: { amount: number }
 }
 
 export interface VoucherAmountResponse {
