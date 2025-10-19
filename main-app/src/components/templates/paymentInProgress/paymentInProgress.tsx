@@ -197,6 +197,7 @@ export default function PaymentInProgress() {
             default:
                 return (
                     <InsertingCash
+                        canUsePreviousVoucher={state.voucherType === 'gaming'}
                         amount={amount || 0}
                         onProcessPayment={() => {
                             setCurrentStep(VoucherPurchaseStep.PRINT_VOUCHER)

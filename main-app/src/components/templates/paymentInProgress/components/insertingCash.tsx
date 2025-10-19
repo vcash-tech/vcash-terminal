@@ -7,12 +7,14 @@ export type InsertingCashProps = {
     amount: number
     onProcessPayment: () => void
     onUsePreviousVoucher: () => void
+    canUsePreviousVoucher: boolean
 }
 
 export default function InsertingCash({
     amount,
     onProcessPayment,
-    onUsePreviousVoucher
+    onUsePreviousVoucher,
+    canUsePreviousVoucher
 }: InsertingCashProps) {
     const { t } = useTranslate()
 
@@ -28,12 +30,16 @@ export default function InsertingCash({
                 <img src={insertCashImg} alt={t('insertCash.altText')} />
             </div>
             <div className="amount-wrapper">
-                <button
-                    className="previous-voucher-button"
-                    onClick={onUsePreviousVoucher}>
-                    Prenesi kusur sa starog vaučera
-                </button>
-                <span className="plus-sign">+</span>
+                {canUsePreviousVoucher && (
+                    <>
+                        <button
+                            className="previous-voucher-button"
+                            onClick={onUsePreviousVoucher}>
+                            Prenesi kusur sa starog vaučera
+                        </button>
+                        <span className="plus-sign">+</span>
+                    </>
+                )}
                 <div className="inserted-amount">
                     {t('insertCash.insertedAmount')}:
                     <span>

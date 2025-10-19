@@ -2,7 +2,6 @@ import { useTranslation } from 'react-i18next'
 import { NavigateFunction } from 'react-router-dom'
 
 import {
-    gaming_josServisaUskoro,
     gaming_playstation,
     gaming_steam,
     gaming_xbox,
@@ -49,7 +48,7 @@ export default function GamingVoucher({ navigate }: GamingVoucherProps) {
                             items={[
                                 {
                                     image: gaming_xbox,
-                                    backgroundColor: '#D4DFED',
+                                    backgroundColor: '#DEE8DB',
                                     serviceName: 'XBOX',
                                     region: 'Europe',
                                     priceRangeCurrency: 'EUR',
@@ -57,7 +56,7 @@ export default function GamingVoucher({ navigate }: GamingVoucherProps) {
                                 },
                                 {
                                     image: gaming_steam,
-                                    backgroundColor: '#DEE9DA',
+                                    backgroundColor: '#D4D4D4',
                                     serviceName: 'Steam',
                                     region: 'Europe',
                                     priceRangeCurrency: 'EUR',
@@ -65,7 +64,7 @@ export default function GamingVoucher({ navigate }: GamingVoucherProps) {
                                 },
                                 {
                                     image: gaming_playstation,
-                                    backgroundColor: '#D4D4D4',
+                                    backgroundColor: '#D4DFED',
                                     serviceName: 'PlayStation',
                                     region: 'US/UK/CRO',
                                     priceRangeCurrency: 'USD/GBP/EUR',
@@ -73,7 +72,7 @@ export default function GamingVoucher({ navigate }: GamingVoucherProps) {
                                 },
                                 {
                                     image: welcome_gaming_roblox,
-                                    backgroundColor: '#D4B4BB',
+                                    backgroundColor: '#DCE3FF',
                                     serviceName: 'Roblox',
                                     region: 'Europe',
                                     priceRangeCurrency: 'EUR',
