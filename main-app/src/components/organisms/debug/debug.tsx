@@ -251,24 +251,24 @@ const Debug = () => {
         window.location.reload()
     }
 
-    // const handleNavigateToAltUrl = () => {
-    //     const altUrl = import.meta.env.VITE_ALT_URL
+    const handleNavigateToAltUrl = () => {
+        const altUrl = import.meta.env.VITE_ALT_URL
 
-    //     if (!altUrl || typeof altUrl !== 'string' || altUrl.trim() === '') {
-    //         alert('VITE_ALT_URL is not set or is empty')
-    //         return
-    //     }
+        if (!altUrl || typeof altUrl !== 'string' || altUrl.trim() === '') {
+            alert('VITE_ALT_URL is not set or is empty')
+            return
+        }
 
-    //     if (!altUrl.startsWith('http://') && !altUrl.startsWith('https://')) {
-    //         alert('VITE_ALT_URL must begin with http:// or https://')
-    //         return
-    //     }
+        if (!altUrl.startsWith('http://') && !altUrl.startsWith('https://')) {
+            alert('VITE_ALT_URL must begin with http:// or https://')
+            return
+        }
 
-    //     const confirmed = confirm(`Navigate to: ${altUrl}?`)
-    //     if (confirmed) {
-    //         window.location.href = altUrl
-    //     }
-    // }
+        const confirmed = confirm(`Navigate to: ${altUrl}?`)
+        if (confirmed) {
+            window.location.href = altUrl
+        }
+    }
 
     const handleOpenSpeedTest = () => {
         setIsSpeedTestOpen(true)
@@ -426,7 +426,7 @@ const Debug = () => {
                         }}>
                         Refresh
                     </button>
-                    {/* <button
+                    <button
                         onClick={handleNavigateToAltUrl}
                         style={{
                             marginLeft: '5px',
@@ -439,7 +439,7 @@ const Debug = () => {
                             cursor: 'pointer'
                         }}>
                         Change env
-                    </button> */}
+                    </button>
                     <button
                         onClick={handleOpenSpeedTest}
                         style={{

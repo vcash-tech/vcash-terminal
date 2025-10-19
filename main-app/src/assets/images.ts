@@ -13,9 +13,12 @@ import betting_meridian from './images/betting/meridian.png'
 import betting_merkurXtip from './images/betting/merkurXtip.png'
 import betting_soccerBet from './images/betting/soccerBet.png'
 import betVoucher from './images/betVoucher.webp'
+import bill100 from './images/bill100.jpg'
+import bill200 from './images/bill200.jpg'
 import bill500 from './images/bill500.jpg'
 import bill1000 from './images/bill1000.jpg'
 import bill2000 from './images/bill2000.jpg'
+import bill5000 from './images/bill5000.jpg'
 import cashPayment from './images/cashPayment.svg'
 import casinoCard from './images/casinoCard.png'
 import casinoCard2 from './images/casinoCard2.png'
@@ -116,9 +119,12 @@ export {
     betting_merkurXtipUskoro,
     betting_soccerBet,
     betVoucher,
+    bill100,
+    bill200,
     bill500,
     bill1000,
     bill2000,
+    bill5000,
     cash,
     cashPayment,
     casinoCard,

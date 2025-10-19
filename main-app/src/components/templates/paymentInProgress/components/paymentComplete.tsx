@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react'
 import { NavigateFunction } from 'react-router-dom'
 
-import { warningIcon } from '@/assets/icons'
-import { confirmedIcon, printerIco } from '@/assets/icons'
+import { confirmedIcon, printerIco, warningIcon } from '@/assets/icons'
 import { printVoucher } from '@/assets/images'
 import PrimaryButton from '@/components/atoms/primaryButton/primaryButton'
 import WireButton from '@/components/atoms/wireButton/wireButton'

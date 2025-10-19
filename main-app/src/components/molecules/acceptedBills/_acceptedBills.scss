@@ -27,7 +27,12 @@
       display: flex;
       flex: 1;
       flex-direction: row;
-      gap: 5.6rem;
+      gap: 0rem;
+      
+      img {
+        margin-left: -3rem;
+        margin-right: -3rem;
+      }
     }
 
     .info-box {
