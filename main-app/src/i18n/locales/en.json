@@ -144,11 +144,16 @@
     }
   },
   "gamingVouchers": {
-    "title": "Gaming Vouchers",
+    "title": "Digital voucher",
+    "informText": "Inform yourself about the prices before purchasing",
     "description": "Use a VCash <b>multipurpose</b> gaming voucher to purchase PlayStation/Xbox/Steam top-ups.",
     "availableServices": "Available services",
     "qrInfo": "Scan or visit <span style='color:#1048A3;'>vcash.rs</span> for current product prices.",
     "qrInfo2": "Direct product purchases <b>are not available</b>. \nProducts are purchased and activated using a multi-purpose voucher in a selected amount based on the product/service you wish to activate.",
+    "scanInfo": {
+      "title": "Scan the QR code to see the complete offer:",
+      "footer": "or visit market.vcash.rs"
+    },
     "cards": {
       "playstation": {
         "title": "PlayStation Top-Ups",
@@ -325,7 +330,8 @@
   "comingSoon": "Coming soon...",
   "howTo": {
     "title": "How it works",
-    "description": "Use a <b>VCash voucher</b> to quickly top up your account at leading bookmakers!<br />In 4 steps, buy, choose your bookmaker, activate the voucher, and top up your account",
+    "descriptionBetting": "Use a <b>VCash voucher</b> to quickly top up your account at leading bookmakers!<br />In 4 steps, buy, choose your bookmaker, activate the voucher, and top up your account",
+    "descriptionGaming": "In 4 steps, activate your voucher and top up your account",
     "steps": {
       "betting": [
         {
@@ -348,7 +354,7 @@
       "gaming": [
         {
           "title": "Buy a Voucher",
-          "description": "Buy a VCash voucher with cash or card"
+          "description": "After reviewing available products, insert cash and confirm the issuance of a Digital voucher."
         },
         {
           "title": "Scan the QR Code",
@@ -356,7 +362,7 @@
         },
         {
           "title": "Choose a Platform",
-          "description": "Select a platform and desired product from the list"
+          "description": "Top up your gaming account quickly and easily with a VCash voucher"
         },
         {
           "title": "Activate the Voucher",

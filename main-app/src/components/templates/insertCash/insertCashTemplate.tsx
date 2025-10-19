@@ -94,8 +94,7 @@ export default function InsertCashTemplate({
                 return
             }
 
-            console.log('apiService.activate', apiService.activate)
-            const result = await apiService.activate(jwt)
+            const result = await apiService.activate(jwt, selectedVoucherType)
             console.log('result', result)
             if (!result.activated) {
                 setErrorMessage(t('insertCash.errors.cashAcceptorError'))

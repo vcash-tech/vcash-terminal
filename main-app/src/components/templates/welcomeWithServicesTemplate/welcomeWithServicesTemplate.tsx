@@ -144,7 +144,7 @@ export default function WelcomeWithServices({
                             setCurrentStep(
                                 VoucherPurchaseStep.SELECT_PAYMENT_METHOD
                             )
-                            navigate('/buy-voucher-cash')
+                            navigate('/gaming')
                         }}
                     />
 

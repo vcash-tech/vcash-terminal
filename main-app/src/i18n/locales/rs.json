@@ -147,11 +147,16 @@
     }
   },
   "gamingVouchers": {
-    "title": "Gejming vaučeri",
+    "title": "Digital vaučer",
     "description": "Iskoristi <b>VCash vaučer</b> za kupovinu dopuna na PlayStation, Xbox, Steam i brojnim drugim servisima.",
     "availableServices": "Podržane platforme",
+    "informText": "Informiši se o cenama pre kupovine",
     "qrInfo": "Skenirajte ili posetite <span style='color:#1048A3;'>vcash.rs</span> da se informišete o aktuelnim cenama proizvoda",
     "qrInfo2": "Direktna kupovina proizvoda <b>nije moguća</b>. \nProizvodi se kupuju i aktiviraju kupovinom višenamenskog vaučera u odabranoj vrednosti prema proizvodu / servisu koji aktivirate",
+    "scanInfo": {
+      "title": "Skeniraj QR kod da pogledaš kompletnu ponudu:",
+      "footer": "ili poseti market.vcash.rs"
+    },
     "cards": {
       "playstation": {
         "title": "PlayStation Dopune",
@@ -330,7 +335,8 @@
   "comingSoon": "Dolazi uskoro...",
   "howTo": {
     "title": "Kako funkcioniše",
-    "description": "Iskoristi <b>VCash vaučer</b> za brzu dopunu svog naloga u vodećim kladionicama!<br />U 4 koraka, kupi, izaberi svoju kladionicu, aktiviraj vaučer i dopuni svoj nalog",
+    "descriptionBetting": "Iskoristi <b>VCash vaučer</b> za brzu dopunu svog naloga u vodećim kladionicama!<br />U 4 koraka, kupi, izaberi svoju kladionicu, aktiviraj vaučer i dopuni svoj nalog",
+    "descriptionGaming": "U 4 koraka, aktiviraj vaučer i dopuni svoj nalog",
     "steps": {
       "betting": [
         {
@@ -353,15 +359,15 @@
       "gaming": [
         {
           "title": "Kupi vaučer",
-          "description": "Kupi VCash vaučer gotovinom ili karticom"
+          "description": "Nakon informisanja o dostupnim proizvodima, unesi novac i potvrdi izdavanje Digital vaučera."
         },
         {
           "title": "Skeniraj QR kod",
           "description": "Skeniraj dobijeni QR kod kamerom ili aktiviraj vaučer na "
         },
         {
-          "title": "Izaberi Platformu",
-          "description": "Odaberi platformu i željeni proizvod iz liste"
+          "title": "Izaberi Kladionicu",
+          "description": "Dopunite vaš gaming nalog brzo i lako uz Vcash vaučer"
         },
         {
           "title": "Aktiviraj Vaučer",

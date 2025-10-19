@@ -15,6 +15,7 @@ import {
 export type PaymentActivationError = 'cashAcceptorError' | 'authRequired'
 
 export const activatePaymentSession = async (
+    voucherTypeId: string,
     onError: (error: PaymentActivationError) => void
 ) => {
     console.log('callActivate')
@@ -31,8 +32,7 @@ export const activatePaymentSession = async (
             return
         }
 
-        console.log('apiService.activate', apiService.activate)
-        const result = await apiService.activate(jwt)
+        const result = await apiService.activate(jwt, voucherTypeId)
         console.log('result', result)
         if (!result.activated) {
             onError('cashAcceptorError')

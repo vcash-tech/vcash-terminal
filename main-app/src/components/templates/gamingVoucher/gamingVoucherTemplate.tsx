@@ -5,11 +5,13 @@ import {
     gaming_josServisaUskoro,
     gaming_playstation,
     gaming_steam,
-    gaming_xbox
+    gaming_xbox,
+    vcashMarketQR,
+    welcome_gaming_roblox
 } from '@/assets/images'
 import Container from '@/components/atoms/container/container'
 import PrimaryButton from '@/components/atoms/primaryButton/primaryButton'
-import AvailableServices from '@/components/molecules/availableServices/availableServices'
+import AvailableServicesVertical from '@/components/molecules/availableServicesVertical/availableServicesVertical'
 import Footer from '@/components/organisms/footer/footer'
 import Header from '@/components/organisms/header/header'
 import HowTo from '@/components/organisms/how-to/how-to'
@@ -24,22 +26,64 @@ export default function GamingVoucher({ navigate }: GamingVoucherProps) {
             <Header navigationBackText={' '} navigateBackUrl={'/welcome'} />
             <div className="gaming-voucher">
                 <h1>{t('gamingVouchers.title')}</h1>
-                <h2
+                {/* <h2
                     dangerouslySetInnerHTML={{
                         __html: t('gamingVouchers.description')
                     }}
-                />
-                <AvailableServices
-                    title={t('gamingVouchers.availableServices')}
-                    images={[
-                        gaming_xbox,
-                        gaming_steam,
-                        gaming_playstation,
-                        gaming_josServisaUskoro
-                    ]}
-                />
-
+                /> */}
                 <HowTo isModal={false} />
+                <h2 className="inform-header">
+                    {t('gamingVouchers.informText')}
+                </h2>
+                <div className="gaming-info-section">
+                    <div className="gaming-info-scan">
+                        <h3>{t('gamingVouchers.scanInfo.title')}</h3>
+                        <img
+                            src={vcashMarketQR}
+                            alt="qr code with a url for the offer"
+                        />
+                        <p>{t('gamingVouchers.scanInfo.footer')}</p>
+                    </div>
+                    <div className="available-services-vertical">
+                        <AvailableServicesVertical
+                            items={[
+                                {
+                                    image: gaming_xbox,
+                                    backgroundColor: '#D4DFED',
+                                    serviceName: 'XBOX',
+                                    region: 'Europe',
+                                    priceRangeCurrency: 'EUR',
+                                    priceRangeText: '10 - 50'
+                                },
+                                {
+                                    image: gaming_steam,
+                                    backgroundColor: '#DEE9DA',
+                                    serviceName: 'Steam',
+                                    region: 'Europe',
+                                    priceRangeCurrency: 'EUR',
+                                    priceRangeText: '10 - 20'
+                                },
+                                {
+                                    image: gaming_playstation,
+                                    backgroundColor: '#D4D4D4',
+                                    serviceName: 'PlayStation',
+                                    region: 'US/UK/CRO',
+                                    priceRangeCurrency: 'USD/GBP/EUR',
+                                    priceRangeText: '10 - 100'
+                                },
+                                {
+                                    image: welcome_gaming_roblox,
+                                    backgroundColor: '#D4B4BB',
+                                    serviceName: 'Roblox',
+                                    region: 'Europe',
+                                    priceRangeCurrency: 'EUR',
+                                    priceRangeText: '10 - 50'
+                                }
+                            ]}
+                        />
+                    </div>
+                </div>
+
                 <div className="gaming-voucher__primary-button">
                     <PrimaryButton
                         text={t('gamingVouchers.buttonText')}

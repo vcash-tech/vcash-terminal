@@ -290,16 +290,22 @@ export default function PaymentInProgress() {
             return
         } else {
             if (acceptorIntervalRef.current == null && isOnline) {
-                activatePaymentSession((activationError) => {
-                    setError(activationError)
-                })
+                activatePaymentSession(
+                    state.voucherType ?? '',
+                    (activationError) => {
+                        setError(activationError)
+                    }
+                )
                 acceptorIntervalRef.current = window.setInterval(async () => {
                     if (!acceptorIntervalRef.current) {
                         return
                     }
-                    await activatePaymentSession((activationError) => {
-                        setError(activationError)
-                    })
+                    await activatePaymentSession(
+                        state.voucherType ?? '',
+                        (activationError) => {
+                            setError(activationError)
+                        }
+                    )
                 }, 5000)
             }
         }

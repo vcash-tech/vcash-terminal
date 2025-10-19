@@ -283,7 +283,10 @@ class ApiService {
     /**
      * HTTP implementation for activate
      */
-    private async httpActivate(jwt: string): Promise<ActivateApiResponse> {
+    private async httpActivate(
+        jwt: string,
+        voucherTypeId: string
+    ): Promise<ActivateApiResponse> {
         try {
             const response = await fetch(
                 `${this.baseUrl}/api/v1/bill-acceptor/activate`,
@@ -292,7 +295,10 @@ class ApiService {
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ token: jwt })
+                    body: JSON.stringify({
+                        token: jwt,
+                        voucher_type_id: voucherTypeId
+                    })
                 }
             )
 
@@ -525,9 +531,12 @@ class ApiService {
         return this.localPrint(imageUrl)
     }
 
-    async activate(jwt: string): Promise<ActivateApiResponse> {
+    async activate(
+        jwt: string,
+        voucherTypeId: string
+    ): Promise<ActivateApiResponse> {
         if (this.isHttpMode()) {
-            return this.httpActivate(jwt)
+            return this.httpActivate(jwt, voucherTypeId)
         }
         return this.localActivate(jwt)
     }

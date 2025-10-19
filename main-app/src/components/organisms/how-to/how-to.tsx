@@ -4,7 +4,8 @@ import {
     insertCashImg2,
     izaberiPlatformu,
     mockupVoucher,
-    useVoucherBetting, useVoucherGaming
+    useVoucherBetting,
+    useVoucherGaming
 } from '@/assets/images'
 import PrimaryButton from '@/components/atoms/primaryButton/primaryButton'
 import { useTranslate } from '@/i18n/useTranslate'
@@ -24,7 +25,11 @@ export type HowToProps = {
     isBetting?: boolean
 }
 
-export default function HowTo({ onClose, isModal, isBetting = false }: HowToProps) {
+export default function HowTo({
+    onClose,
+    isModal,
+    isBetting = false
+}: HowToProps) {
     const { t } = useTranslate()
     const gamingImages = [
         insertCashImg2,
@@ -50,17 +55,30 @@ export default function HowTo({ onClose, isModal, isBetting = false }: HowToProp
                     </button>
                 )}
                 <h1 className="howToTitle">{t('howTo.title')}</h1>
-                <p className="description" dangerouslySetInnerHTML={{__html: t('howTo.description')}} />
+                <p
+                    className="description"
+                    dangerouslySetInnerHTML={{
+                        __html: isBetting
+                            ? t('howTo.descriptionBetting')
+                            : t('howTo.descriptionGaming')
+                    }}
+                />
                 <div className="steps">
-                    {(isBetting ? bettingImages : gamingImages)?.map((step, index) => (
-                        <StepItem
-                            key={index}
-                            title={t(`howTo.steps.${howToGroup}.${index}.title`)}
-                            description={t(`howTo.steps.${howToGroup}.${index}.description`)}
-                            image={step}
-                            stepIndex={index + 1}
-                        />
-                    ))}
+                    {(isBetting ? bettingImages : gamingImages)?.map(
+                        (step, index) => (
+                            <StepItem
+                                key={index}
+                                title={t(
+                                    `howTo.steps.${howToGroup}.${index}.title`
+                                )}
+                                description={t(
+                                    `howTo.steps.${howToGroup}.${index}.description`
+                                )}
+                                image={step}
+                                stepIndex={index + 1}
+                            />
+                        )
+                    )}
                 </div>
             </div>
         )

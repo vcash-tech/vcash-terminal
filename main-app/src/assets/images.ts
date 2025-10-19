@@ -80,6 +80,7 @@ import tickets from './images/tickets.png'
 import useVoucherBetting from './images/useVoucherBetting.jpg'
 import useVoucherGaming from './images/useVoucherGaming.jpg'
 import marketplaceQR from './images/vcash-marketplace.svg'
+import vcashMarketQR from './images/vcashmarketqr.png'
 import welcome_betting_balkanBet from './images/welcome/betting/balkanBet.png'
 import welcome_betting_maxBet from './images/welcome/betting/maxBet.png'
 import welcome_betting_meridianBet from './images/welcome/betting/meridianBet.png'
@@ -187,6 +188,7 @@ export {
     useVoucherGaming,
     uskoroGreenLarge,
     uskoroGreenSmall,
+    vcashMarketQR,
     viewBackground,
     welcome_betting_balkanBet,
     welcome_betting_maxBet,
