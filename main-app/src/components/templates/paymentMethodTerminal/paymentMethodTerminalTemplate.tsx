@@ -21,9 +21,7 @@ export default function PaymentMethodTerminalTemplate({
     const { setPaymentMethod, setCurrentStep } = useOrder()
 
     useEffect(() => {
-        console.log('wtf', prevState)
         if (prevState?.voucherType === 'betting') {
-            console.log('wtf2', prevState)
             setPaymentMethod('cash')
             setCurrentStep(VoucherPurchaseStep.INSERT_CASH)
             navigate('/buy-voucher-cash', {

@@ -118,8 +118,8 @@ export default function WelcomeWithServices({
                         subtitle="welcome.dark.gaming.subtitle"
                         type="gaming"
                         hasAgeDisclaimer={false}
-                        isComingSoon={true}
-                        isSelected={state.voucherType === 'gaming'}
+                        isComingSoon={false}
+                        isSelected={true}
                         images={[
                             {
                                 src: welcome_gaming_playStation,
@@ -144,6 +144,7 @@ export default function WelcomeWithServices({
                             setCurrentStep(
                                 VoucherPurchaseStep.SELECT_PAYMENT_METHOD
                             )
+                            navigate('/buy-voucher-cash')
                         }}
                     />
 
