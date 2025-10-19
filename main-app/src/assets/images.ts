@@ -88,6 +88,7 @@ import welcome_betting_merkurXtip from './images/welcome/betting/merkurXtip.png'
 import welcome_betting_soccerBet from './images/welcome/betting/soccerBet.png'
 import comingSoonLarge from './images/welcome/comingSoonLarge.png'
 import comingSoonSmall from './images/welcome/comingSoonSmall.png'
+import welcome_gaming_netflix from './images/welcome/gaming/netflix.png'
 import welcome_gaming_playStation from './images/welcome/gaming/playStation.png'
 import welcome_gaming_roblox from './images/welcome/gaming/roblox.png'
 import welcome_gaming_steam from './images/welcome/gaming/steam.png'
@@ -195,6 +196,7 @@ export {
     welcome_betting_meridianBet,
     welcome_betting_merkurXtip,
     welcome_betting_soccerBet,
+    welcome_gaming_netflix,
     welcome_gaming_playStation,
     welcome_gaming_roblox,
     welcome_gaming_steam,

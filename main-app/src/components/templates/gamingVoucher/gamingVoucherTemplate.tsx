@@ -6,6 +6,7 @@ import {
     gaming_steam,
     gaming_xbox,
     vcashMarketQR,
+    welcome_gaming_netflix,
     welcome_gaming_roblox
 } from '@/assets/images'
 import Container from '@/components/atoms/container/container'
@@ -79,7 +80,7 @@ export default function GamingVoucher({ navigate }: GamingVoucherProps) {
                                     priceRangeText: '10 - 50'
                                 },
                                 {
-                                    image: welcome_gaming_roblox,
+                                    image: welcome_gaming_netflix,
                                     backgroundColor: '#F4D6DD',
                                     serviceName: 'Netflix',
                                     region: 'Europe',
