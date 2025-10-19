@@ -91,7 +91,7 @@ export const createVoucherPrintObject = (
         ] || VOUCHER_TYPE_MAPPING['20'] // Default fallback
 
     return {
-        url: `https://voucher.vcash.rs/?code=${moneyTransfer.voucherCode}`,
+        url: `https://market.vcash.rs/?code=${moneyTransfer.voucherCode}`,
         voucherCode: moneyTransfer.voucherCode || '---',
         publicCode: moneyTransfer.moneyTransferCode,
         venueName: moneyTransfer.venue?.name || 'VCash Terminal',
