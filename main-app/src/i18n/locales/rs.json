@@ -410,6 +410,8 @@
     "errors": {
       "overLimit": "Iznos vaučera prelazi limit za ovu transakciju",
       "invalid": "Kod vaučera je neispravan. Molimo proverite i pokušajte ponovo",
+      "used": "Kod vaučera je već korišćen. Molimo proverite i pokušajte ponovo",
+      "type": "Tip vaučera nije podržan. Molimo proverite tip vaučera i pokušajte ponovo",
       "network": "Greška mrežne veze. Molimo proverite konekciju i pokušajte ponovo",
       "other": "Došlo je do neočekivane greške. Molimo kontaktirajte podršku ako se problem nastavi"
     }

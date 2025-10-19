@@ -151,9 +151,8 @@ export default function VoucherScannerModal({
                     <h1>{t('voucherScannerModal.title')}</h1>
                     <h2>{t('voucherScannerModal.manualInputTitle')}</h2>
                     <span className="manual-description">
-                        {t('voucherScannerModal.manualInputDescription')}
+                        {t('voucherSannerModal.manualInputDescription')}
                     </span>
-                    <iframe src="https://bp-templates.fly.dev/preview/template-activation-code-preview?data=e30%3D&width=576" />
                     <span className="code-format">
                         {t('voucherScannerModal.codeFormat')}
                     </span>

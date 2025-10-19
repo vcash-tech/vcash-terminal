@@ -405,6 +405,8 @@
     "errors": {
       "overLimit": "The voucher amount exceeds the maximum allowed limit for this transaction",
       "invalid": "The voucher code is invalid. Please check and try again",
+      "used": "The voucher code has already been used. Please check and try again",
+      "type": "The voucher type is not supported. Please check the voucher type and try again",
       "network": "Network connection error. Please check your connection and try again",
       "other": "An unexpected error occurred. Please contact support if the problem persists"
     }

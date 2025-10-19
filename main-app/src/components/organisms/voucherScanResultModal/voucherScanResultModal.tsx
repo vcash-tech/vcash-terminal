@@ -5,7 +5,14 @@ import { useTranslate } from '@/i18n/useTranslate'
 export type VoucherScanResultModalProps = {
     status: 'loading' | 'success' | 'error'
     successAmount?: number
-    errorType?: 'over-limit' | 'invalid' | 'network' | 'other' | 'none'
+    errorType?:
+        | 'over-limit'
+        | 'invalid'
+        | 'used'
+        | 'type'
+        | 'network'
+        | 'other'
+        | 'none'
     isOpen: boolean
     onClose: () => void
     onRetry?: () => void
@@ -33,6 +40,10 @@ export default function VoucherScanResultModal({
                 return t('voucherScanResultModal.errors.invalid')
             case 'network':
                 return t('voucherScanResultModal.errors.network')
+            case 'type':
+                return t('voucherScanResultModal.errors.type')
+            case 'used':
+                return t('voucherScanResultModal.errors.used')
             default:
                 return t('voucherScanResultModal.errors.other')
         }

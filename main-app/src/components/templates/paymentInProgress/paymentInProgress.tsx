@@ -47,7 +47,7 @@ export default function PaymentInProgress() {
         'loading' | 'success' | 'error'
     >('loading')
     const [voucherScanErrorType, setVoucherScanErrorType] = useState<
-        'none' | 'over-limit' | 'invalid' | 'other'
+        'none' | 'over-limit' | 'invalid' | 'used' | 'type' | 'other'
     >('none')
     const [voucherScanSuccessAmount, setVoucherScanSuccessAmount] =
         useState<number>(0)
@@ -356,14 +356,29 @@ export default function PaymentInProgress() {
                         if (
                             error.errors.find(
                                 (e) =>
-                                    e.code ===
-                                        'MONEY_TRANSFER_CANNOT_BE_FOUND' ||
-                                    e.code === 'INVALID_MONEY_TRANSFER' ||
-                                    e.code === 'INVALID_VOUCHER_TYPE'
+                                    e.code === 'MONEY_TRANSFER_CANNOT_BE_FOUND'
                             ) !== undefined
                         ) {
                             setVoucherScanStatus('error')
                             setVoucherScanErrorType('invalid')
+                            return
+                        }
+                        if (
+                            error.errors.find(
+                                (e) => e.code === 'INVALID_MONEY_TRANSFER'
+                            ) !== undefined
+                        ) {
+                            setVoucherScanStatus('error')
+                            setVoucherScanErrorType('used')
+                            return
+                        }
+                        if (
+                            error.errors.find(
+                                (e) => e.code === 'INVALID_VOUCHER_TYPE'
+                            ) !== undefined
+                        ) {
+                            setVoucherScanStatus('error')
+                            setVoucherScanErrorType('type')
                             return
                         }
 
