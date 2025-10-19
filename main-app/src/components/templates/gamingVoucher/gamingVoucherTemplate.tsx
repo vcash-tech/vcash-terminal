@@ -47,6 +47,14 @@ export default function GamingVoucher({ navigate }: GamingVoucherProps) {
                         <AvailableServicesVertical
                             items={[
                                 {
+                                    image: gaming_playstation,
+                                    backgroundColor: '#D4DFED',
+                                    serviceName: 'PlayStation',
+                                    region: 'US/UK/CRO',
+                                    priceRangeCurrency: 'USD/GBP/EUR',
+                                    priceRangeText: '10 - 100'
+                                },
+                                {
                                     image: gaming_xbox,
                                     backgroundColor: '#DEE8DB',
                                     serviceName: 'XBOX',
@@ -63,20 +71,20 @@ export default function GamingVoucher({ navigate }: GamingVoucherProps) {
                                     priceRangeText: '10 - 20'
                                 },
                                 {
-                                    image: gaming_playstation,
-                                    backgroundColor: '#D4DFED',
-                                    serviceName: 'PlayStation',
-                                    region: 'US/UK/CRO',
-                                    priceRangeCurrency: 'USD/GBP/EUR',
-                                    priceRangeText: '10 - 100'
-                                },
-                                {
                                     image: welcome_gaming_roblox,
                                     backgroundColor: '#DCE3FF',
                                     serviceName: 'Roblox',
                                     region: 'Europe',
                                     priceRangeCurrency: 'EUR',
                                     priceRangeText: '10 - 50'
+                                },
+                                {
+                                    image: welcome_gaming_roblox,
+                                    backgroundColor: '#F4D6DD',
+                                    serviceName: 'Netflix',
+                                    region: 'Europe',
+                                    priceRangeCurrency: 'EUR',
+                                    priceRangeText: '25 - 50'
                                 }
                             ]}
                         />
