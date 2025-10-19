@@ -17,6 +17,8 @@ export const VOUCHER_TYPE_MAPPING = {
     STANDARD_VOUCHER: 'Bet Vaučer',
     NON_BETTING_VOUCHER: 'Digital Vaučer',
     TERMINAL_BETTING_VOUCHER: 'Bet Vaučer',
+    gaming: 'Digital Vaučer',
+    betting: 'Bet Vaučer',
 
     '10': 'Bet Vaučer',
     '20': 'Digital Vaučer',
