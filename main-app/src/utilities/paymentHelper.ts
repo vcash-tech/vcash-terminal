@@ -89,9 +89,12 @@ export const createVoucherPrintObject = (
         VOUCHER_TYPE_MAPPING[
             voucherTypeId as keyof typeof VOUCHER_TYPE_MAPPING
         ] || VOUCHER_TYPE_MAPPING['20'] // Default fallback
-
+    let prefix = ''
+    if (voucherType === 'Digital Vaučer') {
+        prefix = 'digital/'
+    }
     return {
-        url: `https://market.vcash.rs/?code=${moneyTransfer.voucherCode}`,
+        url: `https://market.vcash.rs/${prefix}?code=${moneyTransfer.voucherCode}`,
         voucherCode: moneyTransfer.voucherCode || '---',
         publicCode: moneyTransfer.moneyTransferCode,
         venueName: moneyTransfer.venue?.name || 'VCash Terminal',
