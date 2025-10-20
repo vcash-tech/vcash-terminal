@@ -536,7 +536,10 @@ class ApiService {
         voucherTypeId: string
     ): Promise<ActivateApiResponse> {
         if (this.isHttpMode()) {
-            return this.httpActivate(jwt, voucherTypeId)
+            return this.httpActivate(
+                jwt,
+                voucherTypeId === 'betting' ? '30' : '20'
+            )
         }
         return this.localActivate(jwt)
     }
