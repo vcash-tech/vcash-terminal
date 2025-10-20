@@ -91,7 +91,9 @@ import comingSoonSmall from './images/welcome/comingSoonSmall.png'
 import welcome_gaming_netflix from './images/welcome/gaming/netflix.png'
 import welcome_gaming_playStation from './images/welcome/gaming/playStation.png'
 import welcome_gaming_roblox from './images/welcome/gaming/roblox.png'
+import welcome_gaming_roblox_square from './images/welcome/gaming/roblox_square.png'
 import welcome_gaming_steam from './images/welcome/gaming/steam.png'
+import welcome_gaming_steam_square from './images/welcome/gaming/steam_square.png'
 import welcome_gaming_xBox from './images/welcome/gaming/xBox.png'
 import welcome_ips_katastar from './images/welcome/ips/katastar.png'
 import welcome_ips_komunalije from './images/welcome/ips/komunalije.png'
@@ -199,7 +201,9 @@ export {
     welcome_gaming_netflix,
     welcome_gaming_playStation,
     welcome_gaming_roblox,
+    welcome_gaming_roblox_square,
     welcome_gaming_steam,
+    welcome_gaming_steam_square,
     welcome_gaming_xBox,
     welcome_ips_katastar,
     welcome_ips_komunalije,

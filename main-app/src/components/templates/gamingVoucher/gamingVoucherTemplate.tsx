@@ -3,11 +3,11 @@ import { NavigateFunction } from 'react-router-dom'
 
 import {
     gaming_playstation,
-    gaming_steam,
     gaming_xbox,
     vcashMarketQR,
     welcome_gaming_netflix,
-    welcome_gaming_roblox
+    welcome_gaming_roblox_square,
+    welcome_gaming_steam_square
 } from '@/assets/images'
 import Container from '@/components/atoms/container/container'
 import PrimaryButton from '@/components/atoms/primaryButton/primaryButton'
@@ -64,7 +64,7 @@ export default function GamingVoucher({ navigate }: GamingVoucherProps) {
                                     priceRangeText: '10 - 50'
                                 },
                                 {
-                                    image: gaming_steam,
+                                    image: welcome_gaming_steam_square,
                                     backgroundColor: '#D4D4D4',
                                     serviceName: 'Steam',
                                     region: 'Europe',
@@ -72,7 +72,7 @@ export default function GamingVoucher({ navigate }: GamingVoucherProps) {
                                     priceRangeText: '10 - 20'
                                 },
                                 {
-                                    image: welcome_gaming_roblox,
+                                    image: welcome_gaming_roblox_square,
                                     backgroundColor: '#DCE3FF',
                                     serviceName: 'Roblox',
                                     region: 'Europe',
