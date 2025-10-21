@@ -22,7 +22,7 @@ export default function InsertingCash({
         <div className="insert-cash">
             <h1>{t('insertCash.title')}</h1>
             <h3>
-                {t('insertCash.subtitle1')} <span>500 RSD</span>{' '}
+                {t('insertCash.subtitle1')} <span>200 RSD</span>{' '}
                 {t('insertCash.subtitle2')} <span>100.000 RSD</span>{' '}
             </h3>
             <AcceptedBills />
