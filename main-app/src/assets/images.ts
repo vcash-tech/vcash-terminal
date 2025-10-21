@@ -9,6 +9,7 @@ import betting_meridianBetComingSoon from './images/betting/comming-soon/meridia
 import betting_meridianBetUskoro from './images/betting/comming-soon/meridianbet-uskoro.png'
 import betting_merkurXtipComingSoon from './images/betting/comming-soon/merkur-x-tip-coming-soon.png'
 import betting_merkurXtipUskoro from './images/betting/comming-soon/merkur-x-tip-uskoro.png'
+import betting_VolcanoComingSoon from './images/betting/comming-soon/volcano-coming-soon.png'
 import betting_meridian from './images/betting/meridian.png'
 import betting_merkurXtip from './images/betting/merkurXtip.png'
 import betting_soccerBet from './images/betting/soccerBet.png'
@@ -86,6 +87,7 @@ import welcome_betting_maxBet from './images/welcome/betting/maxBet.png'
 import welcome_betting_meridianBet from './images/welcome/betting/meridianBet.png'
 import welcome_betting_merkurXtip from './images/welcome/betting/merkurXtip.png'
 import welcome_betting_soccerBet from './images/welcome/betting/soccerBet.png'
+import welcome_betting_volcanoUskoro from './images/welcome/betting/volcano-uskoro.png'
 import comingSoonLarge from './images/welcome/comingSoonLarge.png'
 import comingSoonSmall from './images/welcome/comingSoonSmall.png'
 import welcome_gaming_netflix from './images/welcome/gaming/netflix.png'
@@ -122,6 +124,7 @@ export {
     betting_merkurXtipComingSoon,
     betting_merkurXtipUskoro,
     betting_soccerBet,
+    betting_VolcanoComingSoon,
     betVoucher,
     bill100,
     bill200,
@@ -198,6 +201,7 @@ export {
     welcome_betting_meridianBet,
     welcome_betting_merkurXtip,
     welcome_betting_soccerBet,
+    welcome_betting_volcanoUskoro,
     welcome_gaming_netflix,
     welcome_gaming_playStation,
     welcome_gaming_roblox,

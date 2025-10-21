@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { NavigateFunction } from 'react-router-dom'
 
 import {
+    welcome_betting_volcanoUskoro,
     logoBlue,
     welcome_betting_balkanBet,
     welcome_betting_maxBet,
@@ -84,6 +85,10 @@ export default function WelcomeWithServices({
                                 isComingSoon: false
                             },
                             {
+                                src: welcome_betting_volcanoUskoro,
+                                isComingSoon: true
+                            },
+                            {
                                 src: welcome_betting_soccerBet,
                                 isComingSoon: false
                             },
@@ -102,6 +107,10 @@ export default function WelcomeWithServices({
                             {
                                 src: welcome_betting_meridianBet,
                                 isComingSoon: false
+                            },
+                            {
+                                src: welcome_betting_volcanoUskoro,
+                                isComingSoon: true
                             }
                         ]}
                         onClick={() => {
