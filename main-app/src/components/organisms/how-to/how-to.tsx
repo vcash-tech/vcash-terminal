@@ -67,6 +67,7 @@ export default function HowTo({
                     {(isBetting ? bettingImages : gamingImages)?.map(
                         (step, index) => (
                             <StepItem
+                                isGaming={!isBetting}
                                 key={index}
                                 title={t(
                                     `howTo.steps.${howToGroup}.${index}.title`

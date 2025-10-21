@@ -2,6 +2,7 @@ import { insertCashImg } from '@/assets/images'
 import PrimaryButton from '@/components/atoms/primaryButton/primaryButton'
 import AcceptedBills from '@/components/molecules/acceptedBills/acceptedBills'
 import { useTranslate } from '@/i18n/useTranslate'
+import { useOrder } from '@/providers'
 
 export type InsertingCashProps = {
     amount: number
@@ -17,12 +18,15 @@ export default function InsertingCash({
     canUsePreviousVoucher
 }: InsertingCashProps) {
     const { t } = useTranslate()
+    const { state } = useOrder()
+    const isGaming = state.voucherType === 'gaming'
 
     return (
         <div className="insert-cash">
             <h1>{t('insertCash.title')}</h1>
             <h3>
-                {t('insertCash.subtitle1')} <span>200 RSD</span>{' '}
+                {t('insertCash.subtitle1')}{' '}
+                <span>{isGaming ? '200 RSD' : '500 RSD'}</span>{' '}
                 {t('insertCash.subtitle2')} <span>100.000 RSD</span>{' '}
             </h3>
             <AcceptedBills />
@@ -61,10 +65,12 @@ export default function InsertingCash({
             </div>
             <div className="buttons-wrapper">
                 <PrimaryButton
-                    isDisabled={!amount || amount < 200}
+                    isDisabled={!amount || amount < (isGaming ? 200 : 500)}
                     text={
-                        amount < 200
-                            ? t('insertCash.minAmount') + ' 200 RSD'
+                        amount < (isGaming ? 200 : 500)
+                            ? t('insertCash.minAmount') +
+                              ' ' +
+                              (isGaming ? '200 RSD' : '500 RSD')
                             : t('insertCash.confirmPayment')
                     }
                     callback={onProcessPayment}

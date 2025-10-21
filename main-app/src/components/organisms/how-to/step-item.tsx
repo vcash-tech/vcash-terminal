@@ -7,12 +7,14 @@ export type StepItemProps = {
     description: string | React.ReactNode
     image: string
     stepIndex: number
+    isGaming?: boolean
 }
 export default function StepItem({
     title,
     description,
     image,
-    stepIndex
+    stepIndex,
+    isGaming = false
 }: StepItemProps) {
     return (
         <div className="step-item">
@@ -26,7 +28,11 @@ export default function StepItem({
             <h2>{title}</h2>
             <p className="step-item-description ">{description}</p>
             <p className="step-item-description no-margin">
-                {stepIndex == 2 && <span>market.vcash.rs/digital</span>}
+                {stepIndex == 2 && (
+                    <span>
+                        market.vcash.rs{isGaming ? '/digital' : '/betting'}
+                    </span>
+                )}
             </p>
         </div>
     )
