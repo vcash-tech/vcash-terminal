@@ -278,6 +278,9 @@ export default function VoucherScannerModal({
                     src={scanVoucher}
                     alt={t('voucherScannerModal.scannerImageAlt')}
                 />
+                <span className="scan-active">
+                    {t('voucherScannerModal.scanActive')}
+                </span>
                 <button
                     className="alt-input"
                     onClick={() => {
