@@ -174,6 +174,7 @@ export default function InsertCashTemplate({
         // Initial fetch
         fetchAmount()
 
+        // ovo se ne koristi više
         // Set up 3-second polling
         // const amountPollingInterval = setInterval(fetchAmount, 3000)
 

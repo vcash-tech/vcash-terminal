@@ -265,7 +265,7 @@ export default function PaymentInProgress() {
         fetchAmount()
 
         // Set up 3-second polling
-        const amountPollingInterval = setInterval(fetchAmount, 5000)
+        const amountPollingInterval = setInterval(fetchAmount, 1000)
 
         return () => {
             clearInterval(amountPollingInterval)
