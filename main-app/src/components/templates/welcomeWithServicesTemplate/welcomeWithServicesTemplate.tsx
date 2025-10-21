@@ -3,13 +3,13 @@ import { useTranslation } from 'react-i18next'
 import { NavigateFunction } from 'react-router-dom'
 
 import {
-    welcome_betting_volcanoUskoro,
     logoBlue,
     welcome_betting_balkanBet,
     welcome_betting_maxBet,
     welcome_betting_meridianBet,
     welcome_betting_merkurXtip,
     welcome_betting_soccerBet,
+    welcome_betting_volcanoUskoro,
     welcome_gaming_playStation,
     welcome_gaming_roblox,
     welcome_gaming_steam,

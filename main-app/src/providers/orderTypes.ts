@@ -57,5 +57,5 @@ export const initialOrderState: OrderState = {
     timestamp: null,
     error: null,
     shouldShowAreYouThere: false,
-    gamingEnabled: false
+    gamingEnabled: true
 }
