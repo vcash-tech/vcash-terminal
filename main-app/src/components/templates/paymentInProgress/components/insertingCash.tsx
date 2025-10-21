@@ -61,8 +61,12 @@ export default function InsertingCash({
             </div>
             <div className="buttons-wrapper">
                 <PrimaryButton
-                    isDisabled={!amount || amount <= 0}
-                    text={t('insertCash.confirmPayment')}
+                    isDisabled={!amount || amount < 200}
+                    text={
+                        amount < 200
+                            ? t('insertCash.minAmount') + ' 200 RSD'
+                            : t('insertCash.confirmPayment')
+                    }
                     callback={onProcessPayment}
                 />
             </div>

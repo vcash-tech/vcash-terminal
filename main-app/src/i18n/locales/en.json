@@ -41,6 +41,7 @@
     "insertedAmount": "Inserted Amount",
     "noChangeWarning": "The machine does not return change. Refunds are not available.",
     "confirmPayment": "Confirm Payment",
+    "minAmount": "Minimum amount",
     "usePreviousVoucher": "Use previous voucher",
     "progressText": "{{amount}} RSD remaining to the maximum voucher amount",
     "errors": {

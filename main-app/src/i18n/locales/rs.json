@@ -41,6 +41,7 @@
     "insertedAmount": "Uplaćeni iznos",
     "noChangeWarning": "Ubacite tačan iznos - terminal ne vraća kusur. Povraćaj novca nakon uplate nije moguć.",
     "confirmPayment": "Potvrdi plaćanje",
+    "minAmount": "Minimalni iznos",
     "progressText": "{{amount}} RSD preostalo do maksimalnog iznosa vaučera",
     "usePreviousVoucher": "Koristi prethodni vaučer",
     "errors": {
