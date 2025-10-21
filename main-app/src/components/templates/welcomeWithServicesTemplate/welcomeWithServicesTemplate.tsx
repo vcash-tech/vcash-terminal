@@ -118,8 +118,8 @@ export default function WelcomeWithServices({
                         subtitle="welcome.dark.gaming.subtitle"
                         type="gaming"
                         hasAgeDisclaimer={false}
-                        isComingSoon={false}
-                        isSelected={true}
+                        isComingSoon={!state.gamingEnabled}
+                        isSelected={state.gamingEnabled}
                         images={[
                             {
                                 src: welcome_gaming_playStation,
@@ -140,6 +140,9 @@ export default function WelcomeWithServices({
                             { src: welcome_gaming_roblox, isComingSoon: false }
                         ]}
                         onClick={() => {
+                            if (!state.gamingEnabled) {
+                                return
+                            }
                             setVoucherType('gaming')
                             setCurrentStep(
                                 VoucherPurchaseStep.SELECT_PAYMENT_METHOD

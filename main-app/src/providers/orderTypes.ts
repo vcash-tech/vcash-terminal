@@ -14,6 +14,7 @@ export interface OrderState {
     timestamp: number | null
     error: string | null
     shouldShowAreYouThere: boolean
+    gamingEnabled: boolean
 }
 
 export interface OrderContextType {
@@ -22,6 +23,7 @@ export interface OrderContextType {
     setSessionId: (sessionId: string) => void
     setVoucherType: (voucherType: VoucherType) => void
     setPaymentMethod: (paymentMethod: PaymentMethod) => void
+    setGamingEnabled: (gamingEnabled: boolean) => void
     setAmount: (amount: number) => void
     setTransactionId: (transactionId: string) => void
     setError: (error: string | null) => void
@@ -35,6 +37,7 @@ export type OrderAction =
     | { type: 'SET_CURRENT_STEP'; payload: VoucherPurchaseStep }
     | { type: 'SET_SESSION_ID'; payload: string }
     | { type: 'SET_VOUCHER_TYPE'; payload: VoucherType }
+    | { type: 'SET_GAMING_ENABLED'; payload: boolean }
     | { type: 'SET_PAYMENT_METHOD'; payload: PaymentMethod }
     | { type: 'SET_AMOUNT'; payload: number }
     | { type: 'SET_TRANSACTION_ID'; payload: string }
@@ -53,5 +56,6 @@ export const initialOrderState: OrderState = {
     transactionId: null,
     timestamp: null,
     error: null,
-    shouldShowAreYouThere: false
+    shouldShowAreYouThere: false,
+    gamingEnabled: false
 }

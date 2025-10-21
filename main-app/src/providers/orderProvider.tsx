@@ -78,6 +78,10 @@ export function OrderProvider({
         dispatch({ type: 'SET_PAYMENT_METHOD', payload: paymentMethod })
     }, [])
 
+    const setGamingEnabled = useCallback((gamingEnabled: boolean) => {
+        dispatch({ type: 'SET_GAMING_ENABLED', payload: gamingEnabled })
+    }, [])
+
     const setAmount = useCallback((amount: number) => {
         dispatch({ type: 'SET_AMOUNT', payload: amount })
     }, [])
@@ -108,6 +112,7 @@ export function OrderProvider({
         setSessionId,
         setVoucherType,
         setPaymentMethod,
+        setGamingEnabled,
         setAmount,
         setTransactionId,
         setError,

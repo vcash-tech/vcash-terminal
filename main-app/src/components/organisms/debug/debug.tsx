@@ -1,10 +1,12 @@
 import { useState } from 'react'
 
+import { useOrder } from '@/providers'
+import { apiService } from '@/services/apiService'
 import { AuthService } from '@/services/authService'
 import { Auth } from '@/types/common/httpRequest'
-import { apiService } from '@/services/apiService'
 
 const Debug = () => {
+    const { state, setGamingEnabled } = useOrder()
     // Runtime debug mode state
     const [runtimeDebugMode, setRuntimeDebugMode] = useState(() => {
         return localStorage.getItem('runtime_debug_mode') === 'true'
@@ -251,24 +253,24 @@ const Debug = () => {
         window.location.reload()
     }
 
-    const handleNavigateToAltUrl = () => {
-        const altUrl = import.meta.env.VITE_ALT_URL
+    // const handleNavigateToAltUrl = () => {
+    //     const altUrl = import.meta.env.VITE_ALT_URL
 
-        if (!altUrl || typeof altUrl !== 'string' || altUrl.trim() === '') {
-            alert('VITE_ALT_URL is not set or is empty')
-            return
-        }
+    //     if (!altUrl || typeof altUrl !== 'string' || altUrl.trim() === '') {
+    //         alert('VITE_ALT_URL is not set or is empty')
+    //         return
+    //     }
 
-        if (!altUrl.startsWith('http://') && !altUrl.startsWith('https://')) {
-            alert('VITE_ALT_URL must begin with http:// or https://')
-            return
-        }
+    //     if (!altUrl.startsWith('http://') && !altUrl.startsWith('https://')) {
+    //         alert('VITE_ALT_URL must begin with http:// or https://')
+    //         return
+    //     }
 
-        const confirmed = confirm(`Navigate to: ${altUrl}?`)
-        if (confirmed) {
-            window.location.href = altUrl
-        }
-    }
+    //     const confirmed = confirm(`Navigate to: ${altUrl}?`)
+    //     if (confirmed) {
+    //         window.location.href = altUrl
+    //     }
+    // }
 
     const handleOpenSpeedTest = () => {
         setIsSpeedTestOpen(true)
@@ -426,7 +428,7 @@ const Debug = () => {
                         }}>
                         Refresh
                     </button>
-                    <button
+                    {/* <button
                         onClick={handleNavigateToAltUrl}
                         style={{
                             marginLeft: '5px',
@@ -439,7 +441,7 @@ const Debug = () => {
                             cursor: 'pointer'
                         }}>
                         Change env
-                    </button>
+                    </button> */}
                     <button
                         onClick={handleOpenSpeedTest}
                         style={{
@@ -454,6 +456,24 @@ const Debug = () => {
                         }}>
                         Speed Test
                     </button>
+                    {window.location.href.includes('welcome') && (
+                        <button
+                            onClick={() =>
+                                setGamingEnabled(!state.gamingEnabled)
+                            }
+                            style={{
+                                marginLeft: '5px',
+                                padding: '5px 10px',
+                                background: '#3498db',
+                                color: 'white',
+                                border: 'none',
+                                borderRadius: '4px',
+                                fontSize: '12px',
+                                cursor: 'pointer'
+                            }}>
+                            Toggle Gaming
+                        </button>
+                    )}
                     {import.meta.env.VITE_DEBUG_MODE === 'true' && (
                         <button
                             onClick={handleMoneyTransferVoucherDraft}

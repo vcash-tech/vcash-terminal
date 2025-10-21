@@ -37,6 +37,12 @@ export function orderReducer(
                 paymentMethod: action.payload,
                 timestamp: Date.now()
             }
+        case 'SET_GAMING_ENABLED':
+            return {
+                ...state,
+                gamingEnabled: action.payload,
+                timestamp: Date.now()
+            }
         case 'SET_AMOUNT':
             return {
                 ...state,
