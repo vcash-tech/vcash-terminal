@@ -134,9 +134,14 @@
         font-size: 2.5rem;
 
         &.selected {
-            background: #0AAD59;
             opacity: 1;
             color:white;
+            &.betting {
+                background: #0AAD59;
+            }
+            &.gaming {
+                background: #900AD1;
+            }
         }
     }
 }

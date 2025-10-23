@@ -83,7 +83,8 @@ const ServicesDark: React.FC<serviceDarkProps> = ({
                 ))}
             </Marquee>
             <div className="action-container">
-                <div className={`action ${isSelected ? 'selected' : ''}`}>
+                <div
+                    className={`action ${isSelected ? 'selected' : ''} ${type}`}>
                     {actionText}
                 </div>
             </div>
