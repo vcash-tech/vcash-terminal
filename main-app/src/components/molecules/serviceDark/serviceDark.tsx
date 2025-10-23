@@ -4,10 +4,8 @@ import { useTranslation } from 'react-i18next'
 
 import { ageDisclaimerWhiteFilled } from '@/assets/icons'
 import {
-    comingSoonLarge,
     comingSoonSmall,
     pointingHand,
-    uskoroGreenLarge,
     uskoroGreenSmall
 } from '@/assets/images'
 import i18n from '@/i18n/i18n'
@@ -21,6 +19,7 @@ export interface serviceDarkProps {
     images: serviceImage[]
     type: string
     onClick: () => void
+    actionText: string
 }
 
 export interface serviceImage {
@@ -36,7 +35,8 @@ const ServicesDark: React.FC<serviceDarkProps> = ({
     isComingSoon = false,
     hasAgeDisclaimer = false,
     images,
-    onClick
+    onClick,
+    actionText
 }) => {
     const { t } = useTranslation()
 
@@ -84,11 +84,7 @@ const ServicesDark: React.FC<serviceDarkProps> = ({
             </Marquee>
             <div className="action-container">
                 <div className={`action ${isSelected ? 'selected' : ''}`}>
-                    {t(
-                        isComingSoon
-                            ? 'welcome.dark.comingSoon'
-                            : 'welcome.dark.betCta'
-                    )}
+                    {actionText}
                 </div>
             </div>
         </button>

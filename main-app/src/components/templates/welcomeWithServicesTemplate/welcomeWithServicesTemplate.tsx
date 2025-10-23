@@ -63,6 +63,7 @@ export default function WelcomeWithServices({
                         hasAgeDisclaimer={true}
                         isComingSoon={false}
                         isSelected={true}
+                        actionText={t('welcome.dark.betCta')}
                         images={[
                             {
                                 src: welcome_betting_soccerBet,
@@ -129,6 +130,7 @@ export default function WelcomeWithServices({
                         hasAgeDisclaimer={false}
                         isComingSoon={!state.gamingEnabled}
                         isSelected={state.gamingEnabled}
+                        actionText={t('welcome.dark.digitalCta')}
                         images={[
                             {
                                 src: welcome_gaming_playStation,
@@ -167,6 +169,7 @@ export default function WelcomeWithServices({
                         hasAgeDisclaimer={false}
                         isComingSoon={true}
                         isSelected={state.voucherType === 'ips'}
+                        actionText={t('welcome.dark.betCta')}
                         images={[
                             { src: welcome_ips_struja, isComingSoon: false },
                             { src: welcome_ips_telefon, isComingSoon: false },

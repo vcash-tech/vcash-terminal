@@ -17,11 +17,19 @@
     padding-bottom: 2.5rem;
 
     &.betting {
-        background-image: url('../assets/images/welcome/betting.png');
+        background-image:
+            url('../assets/images/welcome/betting.png'),
+            linear-gradient(97.1deg, rgba(3, 58, 46, 0.50) 3.06%, rgba(14, 124, 98, 1.0) 99.54%);
+        border: 4px solid rgba(255, 255, 255, 0.45);
+        border-radius: 18px;
     }
 
     &.gaming {
-        background-image: url('../assets/images/welcome/gaming.png');
+        background-image:
+            url('../assets/images/welcome/gaming.png'),
+            linear-gradient(97.1deg, rgba(142, 45, 226, 1.0) 3.06%, rgba(74, 0, 224, 1.0) 99.54%);
+        border: 4px solid rgba(255, 255, 255, 0.45);
+        border-radius: 18px;
     }
 
     &.ips {
