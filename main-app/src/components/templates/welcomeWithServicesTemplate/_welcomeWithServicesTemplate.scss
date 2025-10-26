@@ -28,11 +28,15 @@
         .vcash-logo {
             margin: 5.5rem 0 6rem;
             object-fit: contain;
+            
+            img {
+            height: 18rem;
+            }
         }
 
         h1 {
             font-family: fonts.$font-urbanist;
-            font-size: 4.8rem;
+            font-size: 3.4rem;
             font-weight: 700;
             color: colors.$white-color;
             margin: 0 0 6rem;
