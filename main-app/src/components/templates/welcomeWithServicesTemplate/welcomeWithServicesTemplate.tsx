@@ -14,12 +14,7 @@ import {
     welcome_gaming_playStation,
     welcome_gaming_roblox,
     welcome_gaming_steam,
-    welcome_gaming_xBox,
-    welcome_ips_katastar,
-    welcome_ips_komunalije,
-    welcome_ips_mup,
-    welcome_ips_struja,
-    welcome_ips_telefon
+    welcome_gaming_xBox
 } from '@/assets/images'
 import Container from '@/components/atoms/container/container'
 import ServicesDark from '@/components/molecules/serviceDark/serviceDark'
@@ -153,7 +148,7 @@ export default function WelcomeWithServices({
                                 isComingSoon: false
                             },
                             {
-                                src: welcome_betting_merkurXtip,
+                                src: welcome_betting_meridianBet,
                                 isComingSoon: false
                             },
                             {
@@ -161,36 +156,12 @@ export default function WelcomeWithServices({
                                 isComingSoon: false
                             },
                             {
-                                src: welcome_betting_meridianBet,
-                                isComingSoon: false
-                            },
-                            {
-                                src: welcome_betting_volcano,
-                                isComingSoon: false
-                            },
-                            {
-                                src: welcome_betting_soccerBet,
-                                isComingSoon: false
-                            },
-                            {
-                                src: welcome_betting_balkanBet,
-                                isComingSoon: false
-                            },
-                            {
                                 src: welcome_betting_merkurXtip,
                                 isComingSoon: false
                             },
                             {
-                                src: welcome_betting_maxBet,
-                                isComingSoon: false
-                            },
-                            {
-                                src: welcome_betting_meridianBet,
-                                isComingSoon: false
-                            },
-                            {
                                 src: welcome_betting_volcano,
-                                isComingSoon: false
+                                isComingSoon: true
                             }
                         ]}
                         onClick={() => {
@@ -240,41 +211,6 @@ export default function WelcomeWithServices({
                                 VoucherPurchaseStep.SELECT_PAYMENT_METHOD
                             )
                             navigate('/gaming')
-                        }}
-                    />
-
-                    <ServicesDark
-                        title="welcome.dark.ips.title"
-                        subtitle="welcome.dark.ips.subtitle"
-                        type="ips"
-                        hasAgeDisclaimer={false}
-                        isComingSoon={true}
-                        isSelected={state.voucherType === 'ips'}
-                        actionText={t('welcome.dark.betCta')}
-                        images={[
-                            { src: welcome_ips_struja, isComingSoon: false },
-                            { src: welcome_ips_telefon, isComingSoon: false },
-                            {
-                                src: welcome_ips_komunalije,
-                                isComingSoon: false
-                            },
-                            { src: welcome_ips_mup, isComingSoon: false },
-                            { src: welcome_ips_katastar, isComingSoon: false },
-                            { src: welcome_ips_struja, isComingSoon: false },
-                            { src: welcome_ips_telefon, isComingSoon: false },
-                            {
-                                src: welcome_ips_komunalije,
-                                isComingSoon: false
-                            },
-                            { src: welcome_ips_mup, isComingSoon: false },
-                            { src: welcome_ips_katastar, isComingSoon: false }
-                        ]}
-                        onClick={() => {
-                            startOrderSession()
-                            setVoucherType('ips')
-                            setCurrentStep(
-                                VoucherPurchaseStep.SELECT_PAYMENT_METHOD
-                            )
                         }}
                     />
 

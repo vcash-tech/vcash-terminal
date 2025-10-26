@@ -1,14 +1,8 @@
 import React from 'react'
-import Marquee from 'react-fast-marquee'
 import { useTranslation } from 'react-i18next'
 
 import { ageDisclaimerWhiteFilled } from '@/assets/icons'
-import {
-    comingSoonSmall,
-    pointingHand,
-    uskoroGreenSmall
-} from '@/assets/images'
-import i18n from '@/i18n/i18n'
+import { pointingHand } from '@/assets/images'
 
 export interface serviceDarkProps {
     title: string
@@ -63,25 +57,15 @@ const ServicesDark: React.FC<serviceDarkProps> = ({
                 )}
             </h3>
             <p dangerouslySetInnerHTML={{ __html: t(subtitle) }} />
-            <Marquee>
-                {images.map((image, idx) => (
+            <div className="services-grid">
+                {images.slice(0, 6).map((image, idx) => (
                     <div
                         key={idx}
-                        className={`marquee-item ${image.isComingSoon ? 'coming-soon' : ''}`}>
-                        {image.isComingSoon && (
-                            <img
-                                className="coming-soon-banner"
-                                src={
-                                    i18n.language === 'en'
-                                        ? comingSoonSmall
-                                        : uskoroGreenSmall
-                                }
-                            />
-                        )}
+                        className={`grid-item ${image.isComingSoon ? 'coming-soon' : ''}`}>
                         <img src={image.src} alt={t(title)} />
                     </div>
                 ))}
-            </Marquee>
+            </div>
             <div className="action-container">
                 <div
                     className={`action ${isSelected ? 'selected' : ''} ${type}`}>
