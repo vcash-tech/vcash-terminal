@@ -47,12 +47,16 @@ export default function WelcomeWithServices({
     ) => {
         if (e && typeof e.preventDefault === 'function') e.preventDefault()
         if (e && typeof e.stopPropagation === 'function') e.stopPropagation()
+        // Do not hide here; wait for pointerup to avoid long-press click-through
+    }
+
+    const handleOverlayPointerUp = (e: React.PointerEvent<HTMLDivElement>) => {
+        if (e && typeof e.preventDefault === 'function') e.preventDefault()
+        if (e && typeof e.stopPropagation === 'function') e.stopPropagation()
         suppressNextClickRef.current = true
-        // Delay hiding to ensure the synthetic click doesn't hit underlying elements
+        // Hide after the current frame so no click leaks through
         requestAnimationFrame(() => {
-            setTimeout(() => {
-                setIsOverlayVisible(false)
-            }, 100)
+            setIsOverlayVisible(false)
         })
     }
 
@@ -95,6 +99,11 @@ export default function WelcomeWithServices({
             {isOverlayVisible && (
                 <div
                     onPointerDown={handleOverlayPointerDown}
+                    onPointerUp={handleOverlayPointerUp}
+                    onContextMenu={(e) => {
+                        e.preventDefault()
+                        e.stopPropagation()
+                    }}
                     style={{
                         position: 'fixed',
                         inset: 0,
