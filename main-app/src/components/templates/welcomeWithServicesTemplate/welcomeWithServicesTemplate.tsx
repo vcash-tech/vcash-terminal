@@ -1,4 +1,5 @@
-import { useEffect } from 'react'
+import type React from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { NavigateFunction } from 'react-router-dom'
 
@@ -38,6 +39,41 @@ export default function WelcomeWithServices({
 
     const { resetOrder } = useOrder()
 
+    const [isOverlayVisible, setIsOverlayVisible] = useState(true)
+    const suppressNextClickRef = useRef(false)
+
+    const handleOverlayPointerDown = (
+        e: React.PointerEvent<HTMLDivElement>
+    ) => {
+        if (e && typeof e.preventDefault === 'function') e.preventDefault()
+        if (e && typeof e.stopPropagation === 'function') e.stopPropagation()
+        suppressNextClickRef.current = true
+        // Delay hiding to ensure the synthetic click doesn't hit underlying elements
+        requestAnimationFrame(() => {
+            setTimeout(() => {
+                setIsOverlayVisible(false)
+            }, 100)
+        })
+    }
+
+    useEffect(() => {
+        const suppress = (event: Event) => {
+            if (!suppressNextClickRef.current) return
+            event.preventDefault()
+            event.stopPropagation()
+            suppressNextClickRef.current = false
+        }
+        // Capture phase to intercept before underlying handlers
+        window.addEventListener('click', suppress, true)
+        window.addEventListener('pointerup', suppress, true)
+        window.addEventListener('touchend', suppress, true)
+        return () => {
+            window.removeEventListener('click', suppress, true)
+            window.removeEventListener('pointerup', suppress, true)
+            window.removeEventListener('touchend', suppress, true)
+        }
+    }, [])
+
     useEffect(() => {
         setVoucherType(null)
     }, [setVoucherType])
@@ -56,6 +92,32 @@ export default function WelcomeWithServices({
 
     return (
         <Container style={{ gap: 0 }} isFullHeight={true}>
+            {isOverlayVisible && (
+                <div
+                    onPointerDown={handleOverlayPointerDown}
+                    style={{
+                        position: 'fixed',
+                        inset: 0,
+                        width: '100vw',
+                        height: '100vh',
+                        zIndex: 9999,
+                        backgroundColor: '#000',
+                        touchAction: 'none'
+                    }}>
+                    <iframe
+                        title="kiosk-overlay"
+                        src="https://vcash.screenmaestro.app/app/index.html?device_id=kiosk0001"
+                        // src="/welcome"
+                        style={{
+                            border: 'none',
+                            width: '100%',
+                            height: '100%',
+                            pointerEvents: 'none'
+                        }}
+                        allow="fullscreen"
+                    />
+                </div>
+            )}
             <div className="welcome-with-services">
                 <Header isWelcome={true} shouldResetLanguage={true} />
                 <div className="container">
