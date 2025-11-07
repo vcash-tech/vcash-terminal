@@ -1,13 +1,6 @@
 import { useTranslation } from 'react-i18next'
 
-import {
-    bill100,
-    bill200,
-    bill500,
-    bill1000,
-    bill2000,
-    bill5000
-} from '@/assets/images'
+import { bill500, bill1000, bill2000 } from '@/assets/images'
 import { useOrder } from '@/providers'
 
 import { warningIcon } from '../../../assets/icons'
@@ -26,21 +19,27 @@ const AcceptedBills = () => {
                     <img src={bill500} alt="500 RSD" />
                     <img src={bill1000} alt="1000 RSD" />
                     <img src={bill2000} alt="2000 RSD" />
-                    <img src={bill5000} alt="5000 RSD" />
+                    {/* <img src={bill5000} alt="5000 RSD" /> */}
                 </div>
             ) : (
-                <>
-                    <div className="bills">
-                        <img src={bill100} alt="500 RSD" />
-                        <img src={bill200} alt="500 RSD" />
-                        <img src={bill500} alt="500 RSD" />
-                    </div>
-                    <div className="bills">
-                        <img src={bill1000} alt="1000 RSD" />
-                        <img src={bill2000} alt="2000 RSD" />
-                        <img src={bill5000} alt="5000 RSD" />
-                    </div>
-                </>
+                // <>
+                //     <div className="bills">
+                //         <img src={bill100} alt="100 RSD" />
+                //         <img src={bill200} alt="200 RSD" />
+                //         <img src={bill500} alt="500 RSD" />
+                //     </div>
+                //     <div className="bills">
+                //         <img src={bill1000} alt="1000 RSD" />
+                //         <img src={bill2000} alt="2000 RSD" />
+                //         <img src={bill5000} alt="5000 RSD" />
+                //     </div>
+                // </>
+                <div className="bills">
+                    <img src={bill500} alt="500 RSD" />
+                    <img src={bill1000} alt="1000 RSD" />
+                    <img src={bill2000} alt="2000 RSD" />
+                    {/* <img src={bill5000} alt="5000 RSD" /> */}
+                </div>
             )}
             <div className="info-box">
                 <img src={warningIcon} alt={t('common.info')} />
