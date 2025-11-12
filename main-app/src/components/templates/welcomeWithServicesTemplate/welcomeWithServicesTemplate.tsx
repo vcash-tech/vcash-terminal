@@ -26,6 +26,7 @@ import Footer from '@/components/organisms/footer/footer'
 import Header from '@/components/organisms/header/header'
 import { VoucherPurchaseStep } from '@/data/enums/voucherPurchaseSteps'
 import { useOrder } from '@/providers'
+import { generateSessionId } from '@/utilities/sessionHelper'
 
 export default function WelcomeWithServices({
     navigate
@@ -33,7 +34,7 @@ export default function WelcomeWithServices({
     navigate: NavigateFunction
 }) {
     const { t } = useTranslation()
-    const { setVoucherType, setCurrentStep, state } = useOrder()
+    const { setVoucherType, setCurrentStep, setSessionId, state } = useOrder()
 
     const { resetOrder } = useOrder()
 
@@ -45,6 +46,13 @@ export default function WelcomeWithServices({
         console.log('resetting order')
         resetOrder()
     }, [resetOrder])
+
+    // Helper function to start a new order session
+    const startOrderSession = () => {
+        const newSessionId = generateSessionId()
+        setSessionId(newSessionId)
+        console.log('🆔 New session started:', newSessionId)
+    }
 
     return (
         <Container style={{ gap: 0 }} isFullHeight={true}>
@@ -115,6 +123,7 @@ export default function WelcomeWithServices({
                             }
                         ]}
                         onClick={() => {
+                            startOrderSession()
                             setVoucherType('betting')
                             setCurrentStep(
                                 VoucherPurchaseStep.SELECT_PAYMENT_METHOD
@@ -154,6 +163,7 @@ export default function WelcomeWithServices({
                             if (!state.gamingEnabled) {
                                 return
                             }
+                            startOrderSession()
                             setVoucherType('gaming')
                             setCurrentStep(
                                 VoucherPurchaseStep.SELECT_PAYMENT_METHOD
@@ -189,6 +199,7 @@ export default function WelcomeWithServices({
                             { src: welcome_ips_katastar, isComingSoon: false }
                         ]}
                         onClick={() => {
+                            startOrderSession()
                             setVoucherType('ips')
                             setCurrentStep(
                                 VoucherPurchaseStep.SELECT_PAYMENT_METHOD

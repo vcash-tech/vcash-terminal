@@ -1,18 +1,43 @@
 import { NavigateFunction } from 'react-router-dom'
+import { v4 as uuidv4, v7 as uuidv7 } from 'uuid'
 
 import { POSService } from '@/services/posService'
 
-export const startSession = async (
-    onSave: (sessionId: string) => void,
-    navigate: NavigateFunction
-) => {
+/**
+ * Generates a globally unique session ID with embedded timestamp.
+ * Uses UUIDv7 which includes timestamp information in the UUID itself.
+ * Format: UUIDv7 string (e.g., "018d3f85-6f3a-7000-8000-123456789abc")
+ * The timestamp is embedded in the first part of the UUID.
+ *
+ * Fallback: If UUIDv7 is not available, uses UUIDv4 with appended Unix timestamp.
+ */
+export const generateSessionId = (): string => {
     try {
-        console.log('Welcome page - attempting to create/verify session...')
-        const sessionId = await POSService.createSession()
-        if (sessionId) {
-            onSave(sessionId)
-        }
-        console.log('✅ Session verified successfully on welcome page')
+        // Use UUIDv7 (timestamp-based, available in uuid v11+)
+        return uuidv7()
+    } catch (error) {
+        // Fallback: UUIDv4 with appended Unix timestamp
+        console.warn('UUIDv7 not available, using fallback', error)
+        const timestamp = Date.now()
+        return `${uuidv4()}-${timestamp}`
+    }
+}
+
+/**
+ * Verifies or creates cashier JWT authentication token.
+ * Note: This is separate from the order session ID (UUIDv7).
+ * The JWT is for API authentication, while sessionId tracks user order sessions.
+ */
+export const verifyCashierAuth = async (navigate: NavigateFunction) => {
+    try {
+        console.log(
+            'Welcome page - attempting to verify cashier authentication...'
+        )
+        // This creates/verifies the JWT token for API authentication
+        await POSService.createSession()
+        console.log(
+            '✅ Cashier authentication verified successfully on welcome page'
+        )
     } catch (error) {
         // Check if error requires specific navigation
         if (
@@ -30,7 +55,7 @@ export const startSession = async (
             navigate(navigationError.requiresNavigation)
         } else {
             console.error(
-                'Failed to create session on welcome page, redirecting to registration:',
+                'Failed to verify cashier authentication on welcome page, redirecting to registration:',
                 error
             )
             navigate('/register')

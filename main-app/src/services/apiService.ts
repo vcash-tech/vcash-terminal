@@ -163,15 +163,23 @@ class ApiService {
     /**
      * HTTP implementation for saveDeviceToken
      */
-    private async httpSaveDeviceToken(token: string): Promise<boolean> {
+    private async httpSaveDeviceToken(
+        token: string,
+        sessionId?: string
+    ): Promise<boolean> {
         try {
+            const headers: Record<string, string> = {
+                'Content-Type': 'application/json'
+            }
+            if (sessionId) {
+                headers['X-Session-ID'] = sessionId
+            }
+
             const response = await fetch(
                 `${this.baseUrl}/api/v1/device/save-token`,
                 {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
+                    headers,
                     body: JSON.stringify({ token })
                 }
             )
@@ -187,10 +195,16 @@ class ApiService {
     /**
      * HTTP implementation for getDeviceToken
      */
-    private async httpGetDeviceToken(): Promise<string> {
+    private async httpGetDeviceToken(sessionId?: string): Promise<string> {
         try {
+            const headers: Record<string, string> = {}
+            if (sessionId) {
+                headers['X-Session-ID'] = sessionId
+            }
+
             const response = await fetch(
-                `${this.baseUrl}/api/v1/device/get-token`
+                `${this.baseUrl}/api/v1/device/get-token`,
+                { headers }
             )
             const data: DeviceTokenResponse = await response.json()
 
@@ -207,13 +221,22 @@ class ApiService {
     /**
      * HTTP implementation for sendLog
      */
-    private async httpSendLog(level: string, message: string): Promise<void> {
+    private async httpSendLog(
+        level: string,
+        message: string,
+        sessionId?: string
+    ): Promise<void> {
         try {
+            const headers: Record<string, string> = {
+                'Content-Type': 'application/json'
+            }
+            if (sessionId) {
+                headers['X-Session-ID'] = sessionId
+            }
+
             const response = await fetch(`${this.baseUrl}/api/v1/device/log`, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
+                headers,
                 body: JSON.stringify({ level, message })
             })
 
@@ -229,10 +252,18 @@ class ApiService {
     /**
      * HTTP implementation for getCredentials
      */
-    private async httpGetCredentials(): Promise<DeviceCredentials | null> {
+    private async httpGetCredentials(
+        sessionId?: string
+    ): Promise<DeviceCredentials | null> {
         try {
+            const headers: Record<string, string> = {}
+            if (sessionId) {
+                headers['X-Session-ID'] = sessionId
+            }
+
             const response = await fetch(
-                `${this.baseUrl}/api/v1/device/get-credentials`
+                `${this.baseUrl}/api/v1/device/get-credentials`,
+                { headers }
             )
             const data: CredentialsResponse = await response.json()
 
@@ -255,15 +286,23 @@ class ApiService {
      * HTTP implementation for print
      * Passes image URL to localhost service which handles download and conversion
      */
-    private async httpPrint(imageUrl: string): Promise<ApiResponse> {
+    private async httpPrint(
+        imageUrl: string,
+        sessionId?: string
+    ): Promise<ApiResponse> {
         try {
+            const headers: Record<string, string> = {
+                'Content-Type': 'application/json'
+            }
+            if (sessionId) {
+                headers['X-Session-ID'] = sessionId
+            }
+
             const response = await fetch(
                 `${this.baseUrl}/api/v1/printer/print-image`,
                 {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
+                    headers,
                     body: JSON.stringify({ file: imageUrl })
                 }
             )
@@ -285,16 +324,22 @@ class ApiService {
      */
     private async httpActivate(
         jwt: string,
-        voucherTypeId: string
+        voucherTypeId: string,
+        sessionId?: string
     ): Promise<ActivateApiResponse> {
         try {
+            const headers: Record<string, string> = {
+                'Content-Type': 'application/json'
+            }
+            if (sessionId) {
+                headers['X-Session-ID'] = sessionId
+            }
+
             const response = await fetch(
                 `${this.baseUrl}/api/v1/bill-acceptor/activate`,
                 {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
+                    headers,
                     body: JSON.stringify({
                         token: jwt,
                         voucher_type_id: voucherTypeId
@@ -317,15 +362,20 @@ class ApiService {
     /**
      * HTTP implementation for deactivate
      */
-    private async httpDeactivate(): Promise<void> {
+    private async httpDeactivate(sessionId?: string): Promise<void> {
         try {
+            const headers: Record<string, string> = {
+                'Content-Type': 'application/json'
+            }
+            if (sessionId) {
+                headers['X-Session-ID'] = sessionId
+            }
+
             const response = await fetch(
                 `${this.baseUrl}/api/v1/bill-acceptor/deactivate`,
                 {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
+                    headers
                 }
             )
             if (!response.ok) {
@@ -339,15 +389,23 @@ class ApiService {
     /**
      * HTTP implementation for QR scanner
      */
-    private async httpStartQrScanner(signal?: AbortSignal): Promise<string> {
+    private async httpStartQrScanner(
+        signal?: AbortSignal,
+        sessionId?: string
+    ): Promise<string> {
         try {
+            const headers: Record<string, string> = {
+                'Content-Type': 'application/json'
+            }
+            if (sessionId) {
+                headers['X-Session-ID'] = sessionId
+            }
+
             const response = await fetch(
                 `${this.baseUrl}/api/v1/qr-scanner/start`,
                 {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
+                    headers,
                     signal
                 }
             )
@@ -385,13 +443,20 @@ class ApiService {
         }
     }
 
-    private async httpStopQrScanner(): Promise<void> {
+    private async httpStopQrScanner(sessionId?: string): Promise<void> {
         try {
+            const headers: Record<string, string> = {
+                'Content-Type': 'application/json'
+            }
+            if (sessionId) {
+                headers['X-Session-ID'] = sessionId
+            }
+
             const response = await fetch(
                 `${this.baseUrl}/api/v1/qr-scanner/stop`,
                 {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' }
+                    headers
                 }
             )
             if (!response.ok) {
@@ -524,66 +589,77 @@ class ApiService {
 
     // Public API methods that route to appropriate implementation
 
-    async print(imageUrl: string): Promise<ApiResponse> {
+    async print(imageUrl: string, sessionId?: string): Promise<ApiResponse> {
         if (this.isHttpMode()) {
-            return this.httpPrint(imageUrl)
+            return this.httpPrint(imageUrl, sessionId)
         }
         return this.localPrint(imageUrl)
     }
 
     async activate(
         jwt: string,
-        voucherTypeId: string
+        voucherTypeId: string,
+        sessionId?: string
     ): Promise<ActivateApiResponse> {
         if (this.isHttpMode()) {
             return this.httpActivate(
                 jwt,
-                voucherTypeId === 'betting' ? '30' : '20'
+                voucherTypeId === 'betting' ? '30' : '20',
+                sessionId
             )
         }
         return this.localActivate(jwt)
     }
 
-    async deactivate(): Promise<void> {
+    async deactivate(sessionId?: string): Promise<void> {
         if (this.isHttpMode()) {
-            return this.httpDeactivate()
+            return this.httpDeactivate(sessionId)
         }
         return this.localDeactivate()
     }
 
-    async saveDeviceToken(token: string): Promise<boolean> {
+    async saveDeviceToken(token: string, sessionId?: string): Promise<boolean> {
         if (this.isHttpMode()) {
-            return this.httpSaveDeviceToken(token)
+            return this.httpSaveDeviceToken(token, sessionId)
         }
         return this.localSaveDeviceToken(token)
     }
 
-    async getDeviceToken(): Promise<string> {
+    async getDeviceToken(sessionId?: string): Promise<string> {
         if (this.isHttpMode()) {
-            return this.httpGetDeviceToken()
+            return this.httpGetDeviceToken(sessionId)
         }
         return this.localGetDeviceToken()
     }
 
-    async sendLog(level: string, message: string): Promise<void> {
+    async sendLog(
+        level: string,
+        message: string,
+        sessionId?: string
+    ): Promise<void> {
         if (this.isHttpMode()) {
-            return this.httpSendLog(level, message)
+            return this.httpSendLog(level, message, sessionId)
         }
         return this.localSendLog(level, message)
     }
 
-    async getCredentials(): Promise<DeviceCredentials | null> {
+    async getCredentials(
+        sessionId?: string
+    ): Promise<DeviceCredentials | null> {
         if (this.isHttpMode()) {
-            return this.httpGetCredentials()
+            return this.httpGetCredentials(sessionId)
         }
         return this.localGetCredentials()
     }
 
-    async startQrScanner(signal?: AbortSignal): Promise<string | undefined> {
+    async startQrScanner(
+        signal?: AbortSignal,
+        sessionId?: string
+    ): Promise<string | undefined> {
         while (signal?.aborted === false) {
             try {
                 if (this.isHttpMode()) {
-                    return await this.httpStartQrScanner(signal)
+                    return await this.httpStartQrScanner(signal, sessionId)
                 } else {
                     return await this.localStartQrScanner(signal)
                 }
@@ -599,9 +675,9 @@ class ApiService {
         }
     }
 
-    async stopQrScanner(): Promise<void> {
+    async stopQrScanner(sessionId?: string): Promise<void> {
         if (this.isHttpMode()) {
-            return this.httpStopQrScanner()
+            return this.httpStopQrScanner(sessionId)
         }
         console.log('stop mock scan')
         return Promise.resolve()

@@ -30,6 +30,7 @@ import InsertingCash from './components/insertingCash'
 export default function PaymentInProgress() {
     const { isOnline, setIsMoneyPending } = useCheckInternetConnection()
     const { setCurrentStep, state } = useOrder()
+    const sessionId = state.sessionId || undefined
     const [amount, _setAmount] = useState<number>(0)
     const [error, setError] = useState<PaymentActivationError | string | null>(
         null
@@ -72,7 +73,8 @@ export default function PaymentInProgress() {
         const printResult = await printVoucher(
             voucherData,
             state.voucherType ?? '20',
-            setError
+            setError,
+            sessionId
         )
         console.log('🔍 DEBUG: Print success:', printResult)
 
@@ -277,7 +279,7 @@ export default function PaymentInProgress() {
             if (acceptorIntervalRef.current) {
                 clearInterval(acceptorIntervalRef.current)
                 acceptorIntervalRef.current = null
-                deactivatePaymentSession()
+                deactivatePaymentSession(sessionId)
             }
             return
         }
@@ -286,7 +288,7 @@ export default function PaymentInProgress() {
             if (acceptorIntervalRef.current) {
                 clearInterval(acceptorIntervalRef.current)
                 acceptorIntervalRef.current = null
-                deactivatePaymentSession()
+                deactivatePaymentSession(sessionId)
             }
             return
         } else {
@@ -295,7 +297,8 @@ export default function PaymentInProgress() {
                     state.voucherType ?? '',
                     (activationError) => {
                         setError(activationError)
-                    }
+                    },
+                    sessionId
                 )
                 acceptorIntervalRef.current = window.setInterval(async () => {
                     if (!acceptorIntervalRef.current) {
@@ -305,7 +308,8 @@ export default function PaymentInProgress() {
                         state.voucherType ?? '',
                         (activationError) => {
                             setError(activationError)
-                        }
+                        },
+                        sessionId
                     )
                 }, 5000)
             }
@@ -316,9 +320,9 @@ export default function PaymentInProgress() {
                 clearInterval(acceptorIntervalRef.current)
                 acceptorIntervalRef.current = null
             }
-            deactivatePaymentSession()
+            deactivatePaymentSession(sessionId)
         }
-    }, [state, isOnline, setIsMoneyPending])
+    }, [state, isOnline, setIsMoneyPending, sessionId])
 
     useEffect(() => () => setIsMoneyPending(false), [])
 
