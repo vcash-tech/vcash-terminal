@@ -3,6 +3,7 @@ export enum VoucherPurchaseStep {
     SELECT_VOUCHER_TYPE = 'select-voucher-type',
     SELECT_PAYMENT_METHOD = 'select-payment-method',
     INSERT_CASH = 'insert-cash',
+    CARD_PAYMENT = 'card-payment',
     PROCESS_PAYMENT = 'process-payment',
     VOUCHER_ERROR = 'voucher_error',
     PRINT_VOUCHER = 'print-voucher',
@@ -16,6 +17,7 @@ export const VOUCHER_PURCHASE_STEPS_ORDER: VoucherPurchaseStep[] = [
     VoucherPurchaseStep.SELECT_VOUCHER_TYPE,
     VoucherPurchaseStep.SELECT_PAYMENT_METHOD,
     VoucherPurchaseStep.INSERT_CASH,
+    VoucherPurchaseStep.CARD_PAYMENT,
     VoucherPurchaseStep.PROCESS_PAYMENT,
     VoucherPurchaseStep.PRINT_VOUCHER,
     VoucherPurchaseStep.VOUCHER_ERROR,
@@ -29,4 +31,3 @@ export const VOUCHER_PURCHASE_STEPS = Object.values(VoucherPurchaseStep)
 export const getStepIndex = (step: VoucherPurchaseStep): number => {
     return VOUCHER_PURCHASE_STEPS_ORDER.indexOf(step)
 }
-

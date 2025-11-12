@@ -1,0 +1,242 @@
+@use '../../../../styles/config/colors';
+@use '../../../../styles/config/fonts';
+@use '../../../../styles/config/media-queries';
+
+.card-payment {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5.5rem 0 0;
+    background: colors.$main-background-color;
+    flex: 1;
+    justify-content: space-between;
+
+    h1 {
+        font-family: fonts.$body-font;
+        font-weight: 600;
+        font-size: 6.2rem;
+        line-height: 100%;
+        color: colors.$black-color;
+        text-align: center;
+        margin: 0 0 0.8rem;
+    }
+
+    h3 {
+        font-weight: 400;
+        span {
+            font-weight: 600;
+        }
+    }
+
+    .demo-wrapper {
+        background: #ced9f9;
+        border-radius: 100rem;
+        margin-bottom: 1rem;
+        margin-top: 5rem;
+        overflow: hidden;
+        display: flex;
+        height: 40rem;
+        flex-direction: column;
+        width: 40rem;
+        justify-content: center;
+        align-items: center;
+
+        img {
+            width: 20rem;
+            height: auto;
+            object-fit: contain;
+        }
+    }
+
+    .amount-input-section {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 6rem;
+        flex: 1;
+        justify-content: flex-start;
+
+        label {
+            font-family: fonts.$body-font;
+            font-weight: 600;
+            font-size: 3.6rem;
+            color: colors.$dark-grey;
+            margin-bottom: 2rem;
+        }
+
+        .amount-input-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+
+            input {
+                font-family: fonts.$body-font;
+                font-size: 6.5rem;
+                font-weight: 500;
+                padding: 2rem 4rem;
+                text-align: center;
+                border: 2px solid colors.$input-border-color;
+                border-radius: 1.5rem;
+                width: 100%;
+                max-width: 50rem;
+                background-color: colors.$white-color;
+                color: colors.$brand-primary-color;
+
+                &:focus {
+                    outline: none;
+                    border-color: colors.$brand-primary-color;
+                }
+
+                &:disabled {
+                    background-color: #f5f5f5;
+                    cursor: not-allowed;
+                }
+
+                &::placeholder {
+                    color: #ccc;
+                }
+            }
+
+            .currency {
+                font-family: fonts.$body-font;
+                font-size: 3.5rem;
+                font-weight: 600;
+                color: colors.$dark-grey;
+            }
+        }
+
+        .quick-amounts {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 2rem;
+
+            button {
+                font-family: fonts.$body-font;
+                padding: 1.5rem 3rem;
+                font-size: 2.4rem;
+                font-weight: 500;
+                border-radius: 1rem;
+                border: 2px solid colors.$input-border-color;
+                background: colors.$white-color;
+                color: colors.$dark-grey;
+                cursor: pointer;
+                transition: all 0.2s ease;
+
+                &:hover:not(:disabled) {
+                    border-color: colors.$brand-primary-color;
+                    background: colors.$brand-primary-color;
+                    color: colors.$white-color;
+                }
+
+                &:disabled {
+                    opacity: 0.5;
+                    cursor: not-allowed;
+                }
+            }
+        }
+
+        .validation-message {
+            font-family: fonts.$body-font;
+            font-size: 2.4rem;
+            font-weight: 500;
+            color: #d32f2f;
+            margin-top: 1rem;
+            text-align: center;
+        }
+    }
+
+    .buttons-wrapper {
+        margin-bottom: 5rem;
+        padding: 5rem 15rem;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+
+        .primary-button {
+            width: 100%;
+        }
+    }
+
+    .processing-indicator {
+        font-family: fonts.$body-font;
+        margin-top: 2rem;
+        margin-bottom: 3rem;
+        text-align: center;
+        font-size: 2.8rem;
+        font-weight: 500;
+        color: colors.$dark-grey;
+        line-height: 1.5;
+
+        br {
+            margin: 1rem 0;
+        }
+    }
+}
+
+@include media-queries.media('<=desktop') {
+    .card-payment {
+        padding: 10rem 5rem;
+        flex: 1;
+        height: 100%;
+        justify-content: center;
+
+        h1 {
+            font-size: 3.6rem;
+        }
+
+        .demo-wrapper {
+            height: 30rem;
+            width: 30rem;
+
+            img {
+                width: 15rem;
+            }
+        }
+
+        .amount-input-section {
+            label {
+                font-size: 2.8rem;
+            }
+
+            .amount-input-container {
+                input {
+                    font-size: 4.5rem;
+                    padding: 1.5rem 3rem;
+                }
+
+                .currency {
+                    font-size: 2.8rem;
+                }
+            }
+
+            .quick-amounts {
+                gap: 1.5rem;
+
+                button {
+                    padding: 1rem 2rem;
+                    font-size: 2rem;
+                }
+            }
+
+            .validation-message {
+                font-size: 2rem;
+            }
+        }
+
+        .buttons-wrapper {
+            padding: 3rem 5rem;
+            margin-bottom: 3rem;
+        }
+
+        .processing-indicator {
+            font-size: 2.2rem;
+            margin-top: 1.5rem;
+            margin-bottom: 2rem;
+        }
+    }
+}
+

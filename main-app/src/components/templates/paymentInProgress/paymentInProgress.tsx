@@ -25,6 +25,7 @@ import {
     printVoucher
 } from '@/utilities/paymentHelper'
 
+import CardPayment from './components/cardPayment'
 import InsertingCash from './components/insertingCash'
 
 export default function PaymentInProgress() {
@@ -194,6 +195,54 @@ export default function PaymentInProgress() {
                             } as VoucherConfirmation
                         }
                         navigate={navigate}
+                    />
+                )
+
+            case VoucherPurchaseStep.CARD_PAYMENT:
+                return (
+                    <CardPayment
+                        onPaymentSuccess={(response) => {
+                            console.log(
+                                '✅ Card payment successful, proceeding to buy voucher',
+                                response
+                            )
+
+                            // Proceed to print voucher
+                            setCurrentStep(VoucherPurchaseStep.PRINT_VOUCHER)
+
+                            // Call to buyVoucher with the paid amount
+                            onBuyVoucher({
+                                selectedVoucherType: state.voucherType,
+                                setVoucherRecreateAttempts,
+                                voucherRecreateAttempts,
+                                sessionId,
+                                onError: () => {
+                                    setError(error)
+                                    setCurrentStep(
+                                        VoucherPurchaseStep.VOUCHER_ERROR
+                                    )
+                                    setVoucherRecreateAttempts(
+                                        voucherRecreateAttempts + 1
+                                    )
+                                },
+                                onSuccess: (voucherData) => {
+                                    setVoucherData(voucherData)
+                                    setVoucherRecreateAttempts(0)
+                                    setCurrentStep(
+                                        VoucherPurchaseStep.PRINT_VOUCHER
+                                    )
+                                },
+                                onPrintVoucher: (voucherData) =>
+                                    onPrintVoucher(voucherData)
+                            })
+                        }}
+                        onPaymentError={(errorMessage) => {
+                            console.error(
+                                '❌ Card payment error:',
+                                errorMessage
+                            )
+                            setError(errorMessage)
+                        }}
                     />
                 )
 

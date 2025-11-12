@@ -63,10 +63,16 @@ export default function PaymentMethodTerminalTemplate({
                         image={creditCard}
                         text={t('selectPaymentMethod.cardPayment')}
                         callback={() => {
-                            // TODO: Implemenet Card Payment
-                            console.log('Card payment selected')
+                            setPaymentMethod('card')
+                            setCurrentStep(VoucherPurchaseStep.CARD_PAYMENT)
+                            navigate('/buy-voucher-cash', {
+                                state: {
+                                    voucherType:
+                                        prevState?.voucherType || 'gaming'
+                                }
+                            })
                         }}
-                        isDisabled={true}
+                        isDisabled={false}
                     />
                 </div>
             </div>

@@ -65,6 +65,78 @@ interface QrScannerErrorResponse {
     timestamp: string
 }
 
+interface PosStatusResponse {
+    success: boolean
+    message: string | null
+    errorCode: string | null
+    device: string
+    device_type: string
+    data:
+        | {
+              status: string
+              terminalId: string
+              configuration: {
+                  timeout: number
+                  currency: string
+              }
+          }
+        | Record<string, never>
+    timestamp: string
+}
+
+interface PosActivateRequest {
+    amount: string
+    terminalId: string
+    jwt_token: string
+    currency: string
+}
+
+interface PosActivateSuccessResponse {
+    success: true
+    message: string
+    errorCode: null
+    device: string
+    device_type: string
+    sequenceNumber: string
+    transactionNumber: string
+    deviceDraftDepositId: string
+    amount: string
+    terminalId: string
+    traceId: string
+    data: {
+        TerminalID: string
+        CardIssuer: string
+        AID: string
+        CardApplicationName: string
+        CardNumber: string
+        TransactionType: string
+        InvoiceNumber: string
+        TransactionDate: string
+        TransactionTime: string
+        RRN: string
+        ApprovalCode: string
+        ResponseCode: string
+        TransactionStatus: string
+        Amount: string
+        EMVData: string
+        InstallmentsNumber: string
+        SignatureLine: string
+    }
+    timestamp: string
+}
+
+interface PosActivateErrorResponse {
+    success: false
+    message: string
+    errorCode: string
+    device: string
+    device_type: string
+    data: Record<string, unknown>
+    timestamp: string
+}
+
+type PosActivateResponse = PosActivateSuccessResponse | PosActivateErrorResponse
+
 class QrScannerTimeoutError extends Error {
     constructor(message: string) {
         super(message)
@@ -469,6 +541,78 @@ class ApiService {
     }
 
     /**
+     * HTTP implementation for POS status
+     */
+    private async httpGetPosStatus(
+        sessionId?: string
+    ): Promise<PosStatusResponse> {
+        try {
+            const headers: Record<string, string> = {}
+            if (sessionId) {
+                headers['X-Session-ID'] = sessionId
+            }
+
+            const response = await fetch(`${this.baseUrl}/api/v1/pos/status`, {
+                headers
+            })
+
+            const data: PosStatusResponse = await response.json()
+            return data
+        } catch (error) {
+            console.error('HTTP getPosStatus error:', error)
+            return {
+                success: false,
+                message: `Failed to get POS status: ${error instanceof Error ? error.message : 'Unknown error'}`,
+                errorCode: 'NETWORK_ERROR',
+                device: 'pos',
+                device_type: 'hardware',
+                data: {},
+                timestamp: new Date().toISOString()
+            }
+        }
+    }
+
+    /**
+     * HTTP implementation for POS activate
+     */
+    private async httpActivatePos(
+        request: PosActivateRequest,
+        sessionId?: string
+    ): Promise<PosActivateResponse> {
+        try {
+            const headers: Record<string, string> = {
+                'Content-Type': 'application/json'
+            }
+            if (sessionId) {
+                headers['X-Session-ID'] = sessionId
+            }
+
+            const response = await fetch(
+                `${this.baseUrl}/api/v1/pos/activate`,
+                {
+                    method: 'POST',
+                    headers,
+                    body: JSON.stringify(request)
+                }
+            )
+
+            const data: PosActivateResponse = await response.json()
+            return data
+        } catch (error) {
+            console.error('HTTP activatePos error:', error)
+            return {
+                success: false,
+                message: `Failed to activate POS: ${error instanceof Error ? error.message : 'Unknown error'}`,
+                errorCode: 'NETWORK_ERROR',
+                device: 'pos',
+                device_type: 'hardware',
+                data: {},
+                timestamp: new Date().toISOString()
+            }
+        }
+    }
+
+    /**
      * Local implementation for saveDeviceToken
      * Persists token to localStorage
      */
@@ -587,6 +731,99 @@ class ApiService {
         })
     }
 
+    /**
+     * Local implementation for POS status
+     * Returns mock status data for development
+     */
+    private async localGetPosStatus(): Promise<PosStatusResponse> {
+        console.log('Local getPosStatus: returning mock status')
+        return {
+            success: true,
+            message: null,
+            errorCode: null,
+            device: 'pos',
+            device_type: 'hardware',
+            data: {
+                status: 'ready',
+                terminalId: 'POS001',
+                configuration: {
+                    timeout: 30,
+                    currency: 'RSD'
+                }
+            },
+            timestamp: new Date().toISOString()
+        }
+    }
+
+    /**
+     * Local implementation for POS activate
+     * Returns mock successful transaction data for development
+     */
+    private async localActivatePos(
+        request: PosActivateRequest
+    ): Promise<PosActivateResponse> {
+        console.log('Local activatePos: mock activation', request)
+
+        // Simulate processing delay
+        await new Promise((resolve) => setTimeout(resolve, 2000))
+
+        // Generate mock transaction numbers
+        const transactionNumber = Math.floor(
+            Math.random() * 900000 + 100000
+        ).toString()
+        const invoiceNumber = Math.floor(
+            Math.random() * 900000 + 100000
+        ).toString()
+
+        return {
+            success: true,
+            message: 'Activate successful',
+            errorCode: null,
+            device: 'pos',
+            device_type: 'hardware',
+            sequenceNumber: '0001',
+            transactionNumber,
+            deviceDraftDepositId: `draft-${Date.now()}`,
+            amount: request.amount,
+            terminalId: request.terminalId,
+            traceId: crypto.randomUUID(),
+            data: {
+                TerminalID: `KLA${request.terminalId}`,
+                CardIssuer: 'VISA_K',
+                AID: 'A0000000031010',
+                CardApplicationName: 'Visa Debit',
+                CardNumber: '4532********9012',
+                TransactionType: '01',
+                InvoiceNumber: invoiceNumber,
+                TransactionDate: new Date()
+                    .toLocaleDateString('en-GB', {
+                        year: '2-digit',
+                        month: '2-digit',
+                        day: '2-digit'
+                    })
+                    .replace(/\//g, ''),
+                TransactionTime: new Date()
+                    .toLocaleTimeString('en-GB', { hour12: false })
+                    .replace(/:/g, ''),
+                RRN: Math.floor(Math.random() * 1e12)
+                    .toString()
+                    .padStart(12, '0'),
+                ApprovalCode: Math.floor(Math.random() * 900000 + 100000)
+                    .toString()
+                    .padStart(6, '0'),
+                ResponseCode: '00',
+                TransactionStatus: 'Approved',
+                Amount: (parseInt(request.amount) / 100).toFixed(2),
+                EMVData: `ARQC (80) ${Math.floor(Math.random() * 1e16)
+                    .toString(16)
+                    .toUpperCase()}`,
+                InstallmentsNumber: '',
+                SignatureLine: '1'
+            },
+            timestamp: new Date().toISOString()
+        }
+    }
+
     // Public API methods that route to appropriate implementation
 
     async print(imageUrl: string, sessionId?: string): Promise<ApiResponse> {
@@ -682,6 +919,23 @@ class ApiService {
         console.log('stop mock scan')
         return Promise.resolve()
     }
+
+    async getPosStatus(sessionId?: string): Promise<PosStatusResponse> {
+        if (this.isHttpMode()) {
+            return this.httpGetPosStatus(sessionId)
+        }
+        return this.localGetPosStatus()
+    }
+
+    async activatePos(
+        request: PosActivateRequest,
+        sessionId?: string
+    ): Promise<PosActivateResponse> {
+        if (this.isHttpMode()) {
+            return this.httpActivatePos(request, sessionId)
+        }
+        return this.localActivatePos(request)
+    }
 }
 
 // Create singleton instance
@@ -693,5 +947,13 @@ if (import.meta.env.DEV) {
 }
 
 // Export types for external use
-export type { ActivateApiResponse, ApiMode, ApiResponse, DeviceCredentials }
+export type {
+    ActivateApiResponse,
+    ApiMode,
+    ApiResponse,
+    DeviceCredentials,
+    PosActivateRequest,
+    PosActivateResponse,
+    PosStatusResponse
+}
 export { QrScannerTimeoutError }
