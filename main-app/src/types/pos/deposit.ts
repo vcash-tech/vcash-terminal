@@ -45,6 +45,7 @@ export interface ConfirmVoucherData {
 
 export interface VoucherRequest {
     voucherTypeId: string
+    sessionId?: string
 }
 
 export interface VoucherResponse {

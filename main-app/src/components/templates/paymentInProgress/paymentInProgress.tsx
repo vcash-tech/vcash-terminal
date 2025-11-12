@@ -132,6 +132,7 @@ export default function PaymentInProgress() {
                                 selectedVoucherType: state.voucherType,
                                 setVoucherRecreateAttempts,
                                 voucherRecreateAttempts,
+                                sessionId,
                                 onError: () => {
                                     setError(error)
                                     setCurrentStep(
@@ -208,6 +209,7 @@ export default function PaymentInProgress() {
                                 selectedVoucherType: state.voucherType,
                                 setVoucherRecreateAttempts,
                                 voucherRecreateAttempts,
+                                sessionId,
                                 onError: () => {
                                     setError(error)
                                     setCurrentStep(

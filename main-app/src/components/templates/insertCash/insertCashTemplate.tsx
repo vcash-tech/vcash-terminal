@@ -341,7 +341,8 @@ export default function InsertCashTemplate({
         try {
             const voucherTypeId = selectedVoucherType
             const createVoucher = await TransactionService.CreateVoucher({
-                voucherTypeId
+                voucherTypeId,
+                sessionId
             })
 
             if (!createVoucher || !createVoucher?.moneyTransfer?.voucherCode) {

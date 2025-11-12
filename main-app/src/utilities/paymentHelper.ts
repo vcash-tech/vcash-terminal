@@ -198,6 +198,7 @@ export const printVoucher = async (
 
 export type BuyVoucherParams = {
     selectedVoucherType: VoucherType | null
+    sessionId?: string
     voucherRecreateAttempts: number
     setVoucherRecreateAttempts: (attempts: number) => void
     onError: (error: string) => void
@@ -207,6 +208,7 @@ export type BuyVoucherParams = {
 
 export const onBuyVoucher = async ({
     selectedVoucherType,
+    sessionId,
     setVoucherRecreateAttempts,
     voucherRecreateAttempts,
     onError,
@@ -221,7 +223,8 @@ export const onBuyVoucher = async ({
         //     return
         // }
         const createVoucher = await TransactionService.CreateVoucher({
-            voucherTypeId: getPaymentType(selectedVoucherType)
+            voucherTypeId: getPaymentType(selectedVoucherType),
+            sessionId
         })
 
         if (!createVoucher || !createVoucher?.moneyTransfer?.voucherCode) {
