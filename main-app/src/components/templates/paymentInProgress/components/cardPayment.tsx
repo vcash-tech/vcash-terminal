@@ -65,7 +65,10 @@ export default function CardPayment({
                     amount: numericAmount.toFixed(2),
                     terminalId: isGaming ? '02' : '01',
                     jwt_token: jwt,
-                    currency: '941'
+                    currency: '941',
+                    depositTypeId: 'PAYMENT_CARD_TRANSACTION',
+                    voucher_type_id:
+                        state.voucherType === 'betting' ? '30' : '20'
                 },
                 sessionId
             )

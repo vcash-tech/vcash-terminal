@@ -89,6 +89,8 @@ interface PosActivateRequest {
     terminalId: string
     jwt_token: string
     currency: string
+    voucher_type_id: string
+    depositTypeId: string
 }
 
 interface PosActivateSuccessResponse {
