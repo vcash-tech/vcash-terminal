@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { NavigateFunction, useLocation } from 'react-router-dom'
 
 import { cash, creditCard } from '@/assets/images'
@@ -9,6 +9,7 @@ import Header from '@/components/organisms/header/header'
 import { VoucherPurchaseStep } from '@/data/enums/voucherPurchaseSteps'
 import { useTranslate } from '@/i18n/useTranslate'
 import { useOrder } from '@/providers'
+import { apiService, PosStatusResponse } from '@/services/apiService'
 
 export default function PaymentMethodTerminalTemplate({
     navigate
@@ -18,7 +19,23 @@ export default function PaymentMethodTerminalTemplate({
     const { t } = useTranslate()
     const location = useLocation()
     const prevState = location.state // This is the state object passed from previous navigation
-    const { setPaymentMethod, setCurrentStep } = useOrder()
+    const { setPaymentMethod, setCurrentStep, state } = useOrder()
+    const [status, setStatus] = useState<PosStatusResponse | null>(null)
+
+    useEffect(() => {
+        apiService
+            .getPosStatus(state.sessionId ?? '')
+            .then((response) => {
+                setStatus(response)
+            })
+            .catch((error) => {
+                console.error('Error getting pos status:', error)
+                alert(
+                    'Error getting pos status: ' +
+                        JSON.stringify(error, null, 2)
+                )
+            })
+    }, [setStatus, state])
 
     useEffect(() => {
         if (prevState?.voucherType === 'betting') {
@@ -74,6 +91,14 @@ export default function PaymentMethodTerminalTemplate({
                         }}
                         isDisabled={false}
                     />
+                    <div>
+                        Status pos:
+                        {status === null ? (
+                            <p>Učitavanje</p>
+                        ) : (
+                            <pre>{JSON.stringify(status, null, 2)}</pre>
+                        )}
+                    </div>
                 </div>
             </div>
             <Footer />
