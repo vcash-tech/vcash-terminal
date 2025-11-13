@@ -402,13 +402,6 @@ class ApiService {
         sessionId?: string
     ): Promise<ActivateApiResponse> {
         try {
-            try {
-                const resp = await fetch(`${this.baseUrl}/api/v1/pos/status`)
-                alert(resp.status)
-            } catch (error) {
-                alert('error')
-                alert(JSON.stringify(error, null, 2))
-            }
             const headers: Record<string, string> = {
                 'Content-Type': 'application/json'
             }
