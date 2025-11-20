@@ -161,7 +161,7 @@ export default function WelcomeWithServices({
                             },
                             {
                                 src: welcome_betting_volcano,
-                                isComingSoon: true
+                                isComingSoon: false
                             }
                         ]}
                         onClick={() => {
