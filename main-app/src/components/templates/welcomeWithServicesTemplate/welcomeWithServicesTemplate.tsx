@@ -22,6 +22,7 @@ import Footer from '@/components/organisms/footer/footer'
 import Header from '@/components/organisms/header/header'
 import { VoucherPurchaseStep } from '@/data/enums/voucherPurchaseSteps'
 import { useOrder } from '@/providers'
+import { apiService } from '@/services/apiService'
 import { generateSessionId } from '@/utilities/sessionHelper'
 
 export default function WelcomeWithServices({
@@ -35,6 +36,8 @@ export default function WelcomeWithServices({
     const { resetOrder } = useOrder()
 
     const [isOverlayVisible, setIsOverlayVisible] = useState(true)
+    const [deviceId, setDeviceId] = useState<string>('vcsut-pending')
+    const [isDeviceIdLoaded, setIsDeviceIdLoaded] = useState(false)
     const suppressNextClickRef = useRef(false)
 
     const handleOverlayPointerDown = (
@@ -82,6 +85,23 @@ export default function WelcomeWithServices({
         resetOrder()
     }, [resetOrder])
 
+    useEffect(() => {
+        const fetchDeviceId = async () => {
+            try {
+                const credentials = await apiService.getCredentials()
+                if (credentials && credentials.device_name) {
+                    setDeviceId(credentials.device_name)
+                    console.log('Device ID loaded:', credentials.device_name)
+                }
+            } catch (error) {
+                console.error('Error fetching device credentials:', error)
+            } finally {
+                setIsDeviceIdLoaded(true)
+            }
+        }
+        fetchDeviceId()
+    }, [])
+
     // Helper function to start a new order session
     const startOrderSession = () => {
         const newSessionId = generateSessionId()
@@ -108,18 +128,20 @@ export default function WelcomeWithServices({
                         backgroundColor: '#000',
                         touchAction: 'none'
                     }}>
-                    <iframe
-                        title="kiosk-overlay"
-                        src="https://vcash.screenmaestro.app/app/index.html?device_id=kiosk0001"
-                        // src="/welcome"
-                        style={{
-                            border: 'none',
-                            width: '100%',
-                            height: '100%',
-                            pointerEvents: 'none'
-                        }}
-                        allow="fullscreen"
-                    />
+                    {isDeviceIdLoaded && (
+                        <iframe
+                            title="kiosk-overlay"
+                            src={`https://vcash.screenmaestro.app/app/index.html?device_id=${deviceId}`}
+                            // src="/welcome"
+                            style={{
+                                border: 'none',
+                                width: '100%',
+                                height: '100%',
+                                pointerEvents: 'none'
+                            }}
+                            allow="fullscreen"
+                        />
+                    )}
                 </div>
             )}
             <div className="welcome-with-services">
