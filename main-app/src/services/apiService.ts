@@ -659,8 +659,11 @@ class ApiService {
      * Returns no credentials stored
      */
     private async localGetCredentials(): Promise<DeviceCredentials | null> {
-        console.log('Local getCredentials: no credentials stored')
-        return null
+        console.log('Local getCredentials: returning mock credentials')
+        return {
+            email: 'test@test.com',
+            device_name: 'kiosk0001'
+        }
     }
 
     /**
