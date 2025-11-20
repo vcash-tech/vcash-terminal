@@ -10,7 +10,7 @@ import {
     welcome_betting_meridianBet,
     welcome_betting_merkurXtip,
     welcome_betting_soccerBet,
-    welcome_betting_volcanoUskoro,
+    welcome_betting_volcano,
     welcome_gaming_playStation,
     welcome_gaming_roblox,
     welcome_gaming_steam,
@@ -165,8 +165,8 @@ export default function WelcomeWithServices({
                                 isComingSoon: false
                             },
                             {
-                                src: welcome_betting_volcanoUskoro,
-                                isComingSoon: true
+                                src: welcome_betting_volcano,
+                                isComingSoon: false
                             },
                             {
                                 src: welcome_betting_soccerBet,
@@ -189,8 +189,8 @@ export default function WelcomeWithServices({
                                 isComingSoon: false
                             },
                             {
-                                src: welcome_betting_volcanoUskoro,
-                                isComingSoon: true
+                                src: welcome_betting_volcano,
+                                isComingSoon: false
                             }
                         ]}
                         onClick={() => {
