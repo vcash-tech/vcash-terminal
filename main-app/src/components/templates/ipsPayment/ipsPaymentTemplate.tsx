@@ -28,12 +28,12 @@ export interface IPSPaymentData {
 }
 
 type IPSView = 'list' | 'add' | 'edit' | 'summary' | 'payment-method' | 'success'
-type EditingField = 'amount' | 'recipientAccount' | 'referenceNumber' | null
+type EditingField = 'amount' | 'recipientAccount' | 'referenceNumber' | 'payerName' | 'payerAddress' | null
 
-const createEmptyPayment = (): IPSPaymentData => ({
+const createEmptyPayment = (prefillPayer?: { name: string; address: string }): IPSPaymentData => ({
     id: Date.now().toString(),
-    payerName: '',
-    payerAddress: '',
+    payerName: prefillPayer?.name || '',
+    payerAddress: prefillPayer?.address || '',
     recipientName: '',
     recipientAddress: '',
     recipientAccount: '',
@@ -61,10 +61,17 @@ export default function IpsPaymentTemplate({
     const [editingPaymentId, setEditingPaymentId] = useState<string | null>(null)
     const [editingField, setEditingField] = useState<EditingField>(null)
     const [isScanning, setIsScanning] = useState(false)
-    const [payerName, setPayerName] = useState('')
-    const [payerAddress, setPayerAddress] = useState('')
 
     const abortControllerRef = useRef<AbortController | null>(null)
+
+    // Get the last payer info for prefilling new payments
+    const getLastPayerInfo = useCallback(() => {
+        if (payments.length > 0) {
+            const lastPayment = payments[payments.length - 1]
+            return { name: lastPayment.payerName, address: lastPayment.payerAddress }
+        }
+        return { name: '', address: '' }
+    }, [payments])
 
     // Service fee calculation (mock - 50 RSD per payment)
     const SERVICE_FEE_PER_PAYMENT = 50
@@ -95,18 +102,17 @@ export default function IpsPaymentTemplate({
         (value: string) => {
             if (value) {
                 const parsedData = parseIPSQRCode(value)
+                const lastPayer = getLastPayerInfo()
                 const newPayment: IPSPaymentData = {
-                    ...createEmptyPayment(),
-                    ...parsedData,
-                    payerName,
-                    payerAddress
+                    ...createEmptyPayment(lastPayer),
+                    ...parsedData
                 }
                 setPayments((prev) => [...prev, newPayment])
                 setIsScanning(false)
                 setCurrentView('list')
             }
         },
-        [parseIPSQRCode, payerName, payerAddress]
+        [parseIPSQRCode, getLastPayerInfo]
     )
 
     // Start QR scanning
@@ -151,9 +157,9 @@ export default function IpsPaymentTemplate({
         return amount.toLocaleString('sr-RS', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
     }
 
-    // Handle keyboard input
+    // Handle keyboard input (numeric fields only)
     const handleKeyPress = (key: string) => {
-        if (!editingField) return
+        if (!editingField || editingField === 'payerName' || editingField === 'payerAddress') return
 
         setCurrentPayment((prev) => {
             const currentValue = prev[editingField] || ''
@@ -180,25 +186,27 @@ export default function IpsPaymentTemplate({
         })
     }
 
+    // Handle text field changes
+    const handleTextFieldChange = (field: 'payerName' | 'payerAddress', value: string) => {
+        setCurrentPayment((prev) => ({ ...prev, [field]: value }))
+    }
+
+    // Check if current field needs numeric keyboard
+    const isNumericField = editingField === 'amount' || editingField === 'recipientAccount' || editingField === 'referenceNumber'
+
     // Add current payment to list
     const addPayment = () => {
         if (currentPayment.recipientAccount && currentPayment.amount) {
-            const paymentToAdd = {
-                ...currentPayment,
-                payerName,
-                payerAddress
-            }
-            
             if (editingPaymentId) {
                 setPayments((prev) =>
-                    prev.map((p) => (p.id === editingPaymentId ? paymentToAdd : p))
+                    prev.map((p) => (p.id === editingPaymentId ? currentPayment : p))
                 )
                 setEditingPaymentId(null)
             } else {
-                setPayments((prev) => [...prev, paymentToAdd])
+                setPayments((prev) => [...prev, currentPayment])
             }
             
-            setCurrentPayment(createEmptyPayment())
+            setCurrentPayment(createEmptyPayment(getLastPayerInfo()))
             setEditingField(null)
             setCurrentView('list')
         }
@@ -227,7 +235,7 @@ export default function IpsPaymentTemplate({
     // Go back handler
     const handleBack = () => {
         if (currentView === 'add' || currentView === 'edit') {
-            setCurrentPayment(createEmptyPayment())
+            setCurrentPayment(createEmptyPayment(getLastPayerInfo()))
             setEditingPaymentId(null)
             setEditingField(null)
             setCurrentView('list')
@@ -311,6 +319,7 @@ export default function IpsPaymentTemplate({
                 <button
                     className="add-button scan"
                     onClick={() => {
+                        setCurrentPayment(createEmptyPayment(getLastPayerInfo()))
                         setIsScanning(true)
                         setCurrentView('add')
                     }}>
@@ -323,7 +332,7 @@ export default function IpsPaymentTemplate({
                 <button
                     className="add-button manual"
                     onClick={() => {
-                        setCurrentPayment(createEmptyPayment())
+                        setCurrentPayment(createEmptyPayment(getLastPayerInfo()))
                         setCurrentView('add')
                         setEditingField('recipientAccount')
                     }}>
@@ -384,6 +393,37 @@ export default function IpsPaymentTemplate({
                     <h2>{editingPaymentId ? t('ips.editPayment') : t('ips.addPayment')}</h2>
                     
                     <div className="form-fields">
+                        {/* Payer info section */}
+                        <div className="payer-section-inline">
+                            <div
+                                className={`field text-field ${editingField === 'payerName' ? 'active' : ''}`}
+                                onClick={() => setEditingField('payerName')}>
+                                <label>{t('ips.payerName')}</label>
+                                <input
+                                    type="text"
+                                    value={currentPayment.payerName}
+                                    onChange={(e) => handleTextFieldChange('payerName', e.target.value)}
+                                    onFocus={() => setEditingField('payerName')}
+                                    placeholder={t('ips.payerNamePlaceholder')}
+                                />
+                            </div>
+                            <div
+                                className={`field text-field ${editingField === 'payerAddress' ? 'active' : ''}`}
+                                onClick={() => setEditingField('payerAddress')}>
+                                <label>{t('ips.payerAddress')}</label>
+                                <input
+                                    type="text"
+                                    value={currentPayment.payerAddress}
+                                    onChange={(e) => handleTextFieldChange('payerAddress', e.target.value)}
+                                    onFocus={() => setEditingField('payerAddress')}
+                                    placeholder={t('ips.payerAddressPlaceholder')}
+                                />
+                            </div>
+                        </div>
+
+                        <div className="divider"></div>
+
+                        {/* Recipient info section */}
                         <div
                             className={`field ${editingField === 'recipientAccount' ? 'active' : ''}`}
                             onClick={() => setEditingField('recipientAccount')}>
@@ -428,7 +468,7 @@ export default function IpsPaymentTemplate({
                 </div>
             )}
 
-            {!isScanning && renderKeyboard()}
+            {!isScanning && isNumericField && renderKeyboard()}
         </div>
     )
 
@@ -438,39 +478,22 @@ export default function IpsPaymentTemplate({
             <h1>{t('ips.summaryTitle')}</h1>
             
             <div className="summary-card">
-                <div className="payer-section">
-                    <h3>{t('ips.payerInfo')}</h3>
-                    <div className="payer-fields">
-                        <div className="payer-field">
-                            <label>{t('ips.payerName')}</label>
-                            <input
-                                type="text"
-                                value={payerName}
-                                onChange={(e) => setPayerName(e.target.value)}
-                                placeholder={t('ips.payerNamePlaceholder')}
-                            />
-                        </div>
-                        <div className="payer-field">
-                            <label>{t('ips.payerAddress')}</label>
-                            <input
-                                type="text"
-                                value={payerAddress}
-                                onChange={(e) => setPayerAddress(e.target.value)}
-                                placeholder={t('ips.payerAddressPlaceholder')}
-                            />
-                        </div>
-                    </div>
-                </div>
-
                 <div className="payments-summary">
                     <h3>{t('ips.paymentsSummary')}</h3>
                     {payments.map((payment, index) => (
                         <div key={payment.id} className="summary-item">
                             <div className="item-info">
                                 <span className="item-number">{index + 1}.</span>
-                                <span className="item-name">
-                                    {payment.recipientName || formatAccountNumber(payment.recipientAccount)}
-                                </span>
+                                <div className="item-details">
+                                    <span className="item-name">
+                                        {payment.recipientName || formatAccountNumber(payment.recipientAccount)}
+                                    </span>
+                                    {payment.payerName && (
+                                        <span className="item-payer">
+                                            {t('ips.from')}: {payment.payerName}
+                                        </span>
+                                    )}
+                                </div>
                             </div>
                             <span className="item-amount">
                                 {formatCurrency(parseFloat(payment.amount) || 0)} RSD

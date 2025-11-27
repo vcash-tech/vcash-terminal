@@ -426,6 +426,23 @@
             flex-direction: column;
             gap: 1.5rem;
             margin-bottom: 2rem;
+            overflow-y: auto;
+            flex: 1;
+
+            .payer-section-inline {
+                display: flex;
+                gap: 1.5rem;
+                
+                .field {
+                    flex: 1;
+                }
+            }
+
+            .divider {
+                height: 2px;
+                background: linear-gradient(90deg, transparent, #e0e6f0, transparent);
+                margin: 0.5rem 0;
+            }
 
             .field {
                 background: white;
@@ -439,6 +456,25 @@
                 &.active {
                     border-color: colors.$brand-primary-color;
                     box-shadow: 0 4px 20px rgba(56, 90, 201, 0.15);
+                }
+
+                &.text-field {
+                    input {
+                        width: 100%;
+                        border: none;
+                        background: transparent;
+                        font-family: fonts.$font-urbanist;
+                        font-size: 2.2rem;
+                        font-weight: 500;
+                        color: #1a2b4a;
+                        padding: 0;
+                        outline: none;
+
+                        &::placeholder {
+                            color: #b8c4d8;
+                            font-weight: 400;
+                        }
+                    }
                 }
 
                 label {
@@ -633,7 +669,7 @@
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
-                padding: 1.2rem 0;
+                padding: 1.5rem 0;
                 border-bottom: 1px solid #f0f4f8;
 
                 &:last-child {
@@ -642,21 +678,41 @@
 
                 .item-info {
                     display: flex;
-                    align-items: center;
+                    align-items: flex-start;
                     gap: 1rem;
+                    flex: 1;
+                    min-width: 0;
 
                     .item-number {
                         font-family: fonts.$font-urbanist;
                         font-size: 1.8rem;
                         font-weight: 600;
                         color: #7a8ba8;
+                        flex-shrink: 0;
                     }
 
-                    .item-name {
-                        font-family: fonts.$font-urbanist;
-                        font-size: 1.8rem;
-                        font-weight: 500;
-                        color: #1a2b4a;
+                    .item-details {
+                        display: flex;
+                        flex-direction: column;
+                        gap: 0.3rem;
+                        min-width: 0;
+
+                        .item-name {
+                            font-family: fonts.$font-urbanist;
+                            font-size: 1.8rem;
+                            font-weight: 600;
+                            color: #1a2b4a;
+                            white-space: nowrap;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                        }
+
+                        .item-payer {
+                            font-family: fonts.$font-urbanist;
+                            font-size: 1.4rem;
+                            font-weight: 500;
+                            color: #7a8ba8;
+                        }
                     }
                 }
 
@@ -665,6 +721,8 @@
                     font-size: 1.8rem;
                     font-weight: 600;
                     color: #1a2b4a;
+                    flex-shrink: 0;
+                    margin-left: 1rem;
                 }
             }
         }

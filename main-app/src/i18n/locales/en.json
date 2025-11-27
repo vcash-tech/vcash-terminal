@@ -437,6 +437,7 @@
     "saveChanges": "Save Changes",
     "noDescription": "No description",
     "paymentsCount": "{{count}} payment(s)",
+    "from": "From",
     "continue": "Continue",
     "emptyState": "No payments added yet. Scan a QR code or add manually.",
     "summaryTitle": "Review & Confirm",

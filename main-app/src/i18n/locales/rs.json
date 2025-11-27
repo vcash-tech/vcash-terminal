@@ -442,6 +442,7 @@
     "saveChanges": "Sačuvaj izmene",
     "noDescription": "Bez opisa",
     "paymentsCount": "{{count}} plaćanje/a",
+    "from": "Od",
     "continue": "Nastavi",
     "emptyState": "Nema dodatih plaćanja. Skenirajte QR kod ili dodajte ručno.",
     "summaryTitle": "Pregled i potvrda",
