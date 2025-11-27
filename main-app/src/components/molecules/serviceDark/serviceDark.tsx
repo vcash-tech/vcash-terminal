@@ -39,13 +39,6 @@ const ServicesDark: React.FC<serviceDarkProps> = ({
             disabled={!!isComingSoon}
             className={`service-dark ${type} ${isSelected ? 'selected' : ''}`}
             onClick={onClick}>
-            {hasAgeDisclaimer && (
-                <img
-                    className="age-disclaimer"
-                    src={ageDisclaimerWhiteFilled}
-                    alt="Age disclaimer"
-                />
-            )}
             {!isComingSoon && (
                 <img
                     className="checkbox-selected"
@@ -53,7 +46,16 @@ const ServicesDark: React.FC<serviceDarkProps> = ({
                     alt="select"
                 />
             )}
-            <h3>{t(title)}</h3>
+            <h3>
+                {t(title)}
+                {hasAgeDisclaimer && (
+                    <img
+                        className="age-disclaimer"
+                        src={ageDisclaimerWhiteFilled}
+                        alt="Age disclaimer"
+                    />
+                )}
+            </h3>
             <p dangerouslySetInnerHTML={{ __html: t(subtitle) }} />
             <div className="services-grid">
                 {images.slice(0, 6).map((image, idx) => (
