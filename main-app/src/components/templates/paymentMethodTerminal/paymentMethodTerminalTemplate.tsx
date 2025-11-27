@@ -54,6 +54,23 @@ export default function PaymentMethodTerminalTemplate({
         return null
     }
 
+    // Handle IPS payment method selection
+    const handleIpsPaymentMethod = (method: 'cash' | 'card') => {
+        setPaymentMethod(method)
+        if (method === 'cash') {
+            setCurrentStep(VoucherPurchaseStep.INSERT_CASH)
+        } else {
+            setCurrentStep(VoucherPurchaseStep.CARD_PAYMENT)
+        }
+        navigate('/buy-voucher-cash', {
+            state: {
+                voucherType: 'ips',
+                instructions: prevState?.instructions,
+                totalAmount: prevState?.totalAmount
+            }
+        })
+    }
+
     return (
         <Container isFullHeight={true}>
             <Header navigateBackUrl={'/welcome'} navigationBackText={' '} />
@@ -61,33 +78,58 @@ export default function PaymentMethodTerminalTemplate({
                 <h1>{t('selectPaymentMethod.title')}</h1>
                 <h2>{t('selectPaymentMethod.subtitle')}</h2>
                 <div className="payment-methods">
+                    {prevState?.voucherType === 'ips' && prevState?.totalAmount && (
+                        <div className="ips-payment-info">
+                            <div className="ips-payment-summary-info">
+                                <span className="ips-payment-label">
+                                    {t('ipsPayment.totalAmount') || 'Ukupan iznos'}:
+                                </span>
+                                <span className="ips-payment-amount">
+                                    {prevState.totalAmount.toFixed(2)} RSD
+                                </span>
+                            </div>
+                            {prevState?.instructions && (
+                                <div className="ips-payment-count">
+                                    {t('ipsPayment.instructionCount') || 'Broj naloga'}: {prevState.instructions.length}
+                                </div>
+                            )}
+                        </div>
+                    )}
                     <PaymentCard
                         image={cash}
                         text={t('selectPaymentMethod.cashPayment')}
                         // get state from the previous navigate
                         callback={() => {
-                            setPaymentMethod('cash')
-                            setCurrentStep(VoucherPurchaseStep.INSERT_CASH)
-                            navigate('/buy-voucher-cash', {
-                                state: {
-                                    voucherType:
-                                        prevState?.voucherType || 'gaming'
-                                }
-                            })
+                            if (prevState?.voucherType === 'ips') {
+                                handleIpsPaymentMethod('cash')
+                            } else {
+                                setPaymentMethod('cash')
+                                setCurrentStep(VoucherPurchaseStep.INSERT_CASH)
+                                navigate('/buy-voucher-cash', {
+                                    state: {
+                                        voucherType:
+                                            prevState?.voucherType || 'gaming'
+                                    }
+                                })
+                            }
                         }}
                     />
                     <PaymentCard
                         image={creditCard}
                         text={t('selectPaymentMethod.cardPayment')}
                         callback={() => {
-                            setPaymentMethod('card')
-                            setCurrentStep(VoucherPurchaseStep.CARD_PAYMENT)
-                            navigate('/buy-voucher-cash', {
-                                state: {
-                                    voucherType:
-                                        prevState?.voucherType || 'gaming'
-                                }
-                            })
+                            if (prevState?.voucherType === 'ips') {
+                                handleIpsPaymentMethod('card')
+                            } else {
+                                setPaymentMethod('card')
+                                setCurrentStep(VoucherPurchaseStep.CARD_PAYMENT)
+                                navigate('/buy-voucher-cash', {
+                                    state: {
+                                        voucherType:
+                                            prevState?.voucherType || 'gaming'
+                                    }
+                                })
+                            }
                         }}
                         isDisabled={false}
                     />
