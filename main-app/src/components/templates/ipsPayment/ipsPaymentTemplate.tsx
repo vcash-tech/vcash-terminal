@@ -22,7 +22,34 @@ interface ScannedBill {
     model: string
 }
 
-type ModalType = 'none' | 'success' | 'error' | 'cash' | 'recap'
+// Print data structure for IPS confirmation
+interface IPSPrintData {
+    venueName: string
+    venueAddress: string
+    venueCity: string
+    deviceName: string
+    billCount: number
+    bills: Array<{
+        recipient: string
+        accountNumber: string
+        referenceNumber: string
+        purpose: string
+        amount: string
+    }>
+    totalBillAmount: string
+    commissionRate: string
+    totalCommission: string
+    totalPaid: string
+    surplusAmount: string
+    surplusVoucherCode: string
+    paymentMethod: 'cash' | 'card'
+    transactionDate: string
+    transactionCode: string
+    terminalId: string
+    currentTime: string
+}
+
+type ModalType = 'none' | 'success' | 'error' | 'cash' | 'recap' | 'printing'
 
 // Commission rate (2%)
 const COMMISSION_RATE = 0.02
@@ -54,6 +81,9 @@ export default function IpsPaymentTemplate({
 
     // Cash payment state
     const [cashInserted, setCashInserted] = useState(0)
+    
+    // Payment method tracking
+    const [paymentMethodUsed, setPaymentMethodUsed] = useState<'cash' | 'card'>('cash')
 
     // Get selected bill
     const selectedBill = bills.find(b => b.id === selectedBillId) || null
@@ -205,16 +235,119 @@ export default function IpsPaymentTemplate({
         setCashInserted(prev => prev + amount)
     }
 
+    // Generate transaction code
+    const generateTransactionCode = (): string => {
+        const now = new Date()
+        const dateStr = now.toISOString().replace(/[-:T]/g, '').slice(0, 14)
+        const random = Math.floor(Math.random() * 10000).toString().padStart(4, '0')
+        return `IPS-${dateStr}${random}`
+    }
+
+    // Format date for print
+    const formatDateTime = (date: Date): string => {
+        return date.toLocaleString('sr-RS', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+        }).replace(',', '.')
+    }
+
+    // Print IPS confirmation receipt
+    const printIPSConfirmation = async (method: 'cash' | 'card', paidAmount: number): Promise<boolean> => {
+        try {
+            const templateRendererUrl = import.meta.env.VITE_TEMPLATE_RENDERER_URL
+            if (!templateRendererUrl) {
+                console.error('VITE_TEMPLATE_RENDERER_URL not configured')
+                return false
+            }
+
+            const now = new Date()
+            const surplus = method === 'cash' ? Math.max(0, paidAmount - finalAmount) : 0
+
+            // Build print data object
+            const printData: IPSPrintData = {
+                venueName: 'VCash Kiosk',
+                venueAddress: '',
+                venueCity: '',
+                deviceName: '',
+                billCount: bills.length,
+                bills: bills.map(bill => ({
+                    recipient: bill.recipient,
+                    accountNumber: bill.accountNumber,
+                    referenceNumber: bill.referenceNumber,
+                    purpose: bill.purpose,
+                    amount: formatRSD(bill.amount)
+                })),
+                totalBillAmount: formatRSD(totalBillAmount),
+                commissionRate: '2',
+                totalCommission: formatRSD(totalCommission),
+                totalPaid: formatRSD(finalAmount),
+                surplusAmount: surplus > 0 ? formatRSD(surplus) : '',
+                surplusVoucherCode: '', // TODO: Generate voucher code if surplus
+                paymentMethod: method,
+                transactionDate: formatDateTime(now),
+                transactionCode: generateTransactionCode(),
+                terminalId: '',
+                currentTime: formatDateTime(now)
+            }
+
+            // Convert to base64 with proper UTF-8 handling
+            const jsonString = JSON.stringify(printData)
+            const utf8Bytes = new TextEncoder().encode(jsonString)
+            const base64Data = btoa(
+                Array.from(utf8Bytes, (byte) => String.fromCharCode(byte)).join('')
+            )
+
+            // Construct the print URL with the new template name
+            const printUrl = `${templateRendererUrl}/ips_confirmation?rotate=180&data=${encodeURIComponent(base64Data)}&type=bmp`
+
+            console.log('Printing IPS confirmation with URL:', printUrl)
+
+            // Call print with timeout
+            const printPromise = apiService.print(printUrl, sessionId)
+            const timeoutPromise = new Promise<{ success: boolean; message: string }>((resolve) => {
+                setTimeout(() => {
+                    console.log('Print operation timed out after 10 seconds')
+                    resolve({ success: false, message: 'Print timeout' })
+                }, 10000)
+            })
+
+            const result = await Promise.race([printPromise, timeoutPromise])
+            console.log('Print result:', result)
+
+            return result.success
+        } catch (error) {
+            console.error('Print error:', error)
+            return false
+        }
+    }
+
     // Complete cash payment
-    const completeCashPayment = () => {
+    const completeCashPayment = async () => {
         if (cashInserted >= finalAmount) {
+            setPaymentMethodUsed('cash')
+            setModalType('printing')
+            
+            // Print confirmation
+            await printIPSConfirmation('cash', cashInserted)
+            
+            // Show recap regardless of print result
             setModalType('recap')
         }
     }
 
     // Process card payment
-    const processCardPayment = () => {
+    const processCardPayment = async () => {
         setPaymentMethod('card')
+        setPaymentMethodUsed('card')
+        setModalType('printing')
+        
+        // Print confirmation
+        await printIPSConfirmation('card', finalAmount)
+        
+        // Show recap regardless of print result
         setModalType('recap')
     }
 
@@ -224,6 +357,7 @@ export default function IpsPaymentTemplate({
         setBills([])
         setSelectedBillId(null)
         setCashInserted(0)
+        setPaymentMethodUsed('cash')
         navigate(startUrl ?? '/welcome')
     }
 
@@ -491,6 +625,21 @@ export default function IpsPaymentTemplate({
                 </div>
             )}
 
+            {/* Printing Modal */}
+            {modalType === 'printing' && (
+                <div className="ips-modal-overlay">
+                    <div className="ips-modal printing-modal">
+                        <div className="printing-spinner">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                <path d="M12 2v4m0 12v4m10-10h-4M6 12H2m15.07-5.07l-2.83 2.83M8.76 15.24l-2.83 2.83m11.14 0l-2.83-2.83M8.76 8.76L5.93 5.93" />
+                            </svg>
+                        </div>
+                        <h3>{t('ips.printing')}</h3>
+                        <p>{t('ips.printingDescription')}</p>
+                    </div>
+                </div>
+            )}
+
             {/* Recap Modal */}
             {modalType === 'recap' && (
                 <div className="ips-modal-overlay">
@@ -517,7 +666,7 @@ export default function IpsPaymentTemplate({
                                 <span>{t('ips.totalPaid')}:</span>
                                 <span>{formatRSD(finalAmount)} RSD</span>
                             </div>
-                            {cashInserted > finalAmount && (
+                            {paymentMethodUsed === 'cash' && cashInserted > finalAmount && (
                                 <div className="recap-row surplus">
                                     <span>{t('ips.surplusVoucher')}:</span>
                                     <span>{formatRSD(cashInserted - finalAmount)} RSD</span>

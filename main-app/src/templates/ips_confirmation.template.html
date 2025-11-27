@@ -1,0 +1,388 @@
+{{ define "content" }}
+<style>
+    .ips-print {
+        font-family: Arial, sans-serif;
+    }
+    
+    .voucher-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 8px;
+        font-size: 14px;
+    }
+
+    .voucher-table td {
+        padding: 4px 8px;
+    }
+
+    .center {
+        text-align: center;
+    }
+
+    .left {
+        text-align: left;
+    }
+
+    .right {
+        text-align: right;
+    }
+
+    .bold {
+        font-weight: bold;
+    }
+
+    .large-header {
+        font-size: 48px;
+    }
+
+    .large {
+        font-size: 30px;
+    }
+
+    .medium {
+        font-size: 22px;
+    }
+
+    .small {
+        font-size: 14px;
+    }
+
+    .separator {
+        border-top: 1px dashed #000;
+        margin: 8px 0;
+    }
+
+    .single-line {
+        border-top: 3px solid #000;
+        margin: 8px 0;
+        height: 3px;
+    }
+
+    .double-line {
+        border-top: 6px double #000;
+        margin: 8px 0;
+        height: 6px;
+    }
+
+    .dashed-line {
+        border-top: 2px dashed #000;
+        margin: 8px 0;
+    }
+
+    .two-column {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .amount-highlight {
+        background-color: #000;
+        color: #fff;
+        padding: 8px 16px;
+        display: inline-block;
+        font-size: 48px;
+        font-weight: bold;
+    }
+
+    .success-icon {
+        font-size: 64px;
+        color: #000;
+    }
+
+    .bill-item {
+        border: 1px solid #000;
+        border-radius: 8px;
+        padding: 12px;
+        margin: 8px 0;
+    }
+
+    .bill-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 8px;
+    }
+
+    .bill-number {
+        background: #000;
+        color: #fff;
+        padding: 4px 12px;
+        border-radius: 4px;
+        font-weight: bold;
+        font-size: 18px;
+    }
+
+    .bill-amount {
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    .bill-detail {
+        font-size: 16px;
+        margin: 4px 0;
+    }
+
+    .small-img {
+        display: inline;
+        width: 24px;
+        height: 24px;
+    }
+</style>
+
+<div class="ips-print">
+    <br />
+    
+    <div class="single-line"></div>
+    
+    <!-- Venue Information -->
+    <table class="voucher-table">
+        <tr>
+            <td class="center medium">
+                Mesto izdavanja: 
+                {{ if .venueName }}
+                {{ .venueName }}
+                {{ else }}
+                N/A
+                {{ end }}
+            </td>
+        </tr>
+        <tr>
+            <td class="center medium">
+                Adresa: 
+                {{ if .venueAddress }}
+                {{ .venueAddress }}
+                {{ else }}
+                N/A
+                {{ end }}
+            </td>
+        </tr>
+        <tr>
+            <td class="center medium">
+                {{ if .venueCity }}
+                {{ .venueCity }}
+                {{ else }}
+                N/A
+                {{ end }}
+            </td>
+        </tr>
+        {{ if .deviceName }}
+        <tr>
+            <td class="center medium">
+                Naziv uređaja: {{ .deviceName }}
+            </td>
+        </tr>
+        {{ end }}
+    </table>
+    
+    <div class="single-line"></div>
+
+    <br />
+
+    <!-- Title -->
+    <table class="voucher-table">
+        <tr>
+            <td class="center large-header bold">IPS POTVRDA</td>
+        </tr>
+        <tr>
+            <td class="center large">PLAĆANJA RAČUNA</td>
+        </tr>
+    </table>
+
+    <br />
+
+    <!-- Success Icon -->
+    <table class="voucher-table">
+        <tr>
+            <td class="center success-icon">✓</td>
+        </tr>
+        <tr>
+            <td class="center large bold">USPEŠNO PLAĆENO</td>
+        </tr>
+    </table>
+
+    <br />
+    <div class="single-line"></div>
+
+    <!-- Paid Bills List -->
+    <table class="voucher-table">
+        <tr>
+            <td class="center medium bold">Plaćeni Računi ({{ .billCount }})</td>
+        </tr>
+    </table>
+
+    {{ range $index, $bill := .bills }}
+    <div class="bill-item">
+        <div class="bill-header">
+            <span class="bill-number">{{ add $index 1 }}</span>
+            <span class="bill-amount">{{ $bill.amount }} RSD</span>
+        </div>
+        <div class="bill-detail"><strong>Primalac:</strong> {{ $bill.recipient }}</div>
+        <div class="bill-detail"><strong>Račun:</strong> {{ $bill.accountNumber }}</div>
+        <div class="bill-detail"><strong>Poziv na broj:</strong> {{ $bill.referenceNumber }}</div>
+        {{ if $bill.purpose }}
+        <div class="bill-detail"><strong>Svrha:</strong> {{ $bill.purpose }}</div>
+        {{ end }}
+    </div>
+    {{ end }}
+
+    <div class="dashed-line"></div>
+
+    <!-- Financial Summary -->
+    <table class="voucher-table">
+        <tr>
+            <td class="center medium bold">Finansijski Pregled</td>
+        </tr>
+    </table>
+
+    <table class="voucher-table">
+        <tr>
+            <td class="left medium">
+                <div class="two-column">
+                    <span>Ukupan iznos računa:</span>
+                    <span class="bold">{{ .totalBillAmount }} RSD</span>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="left medium">
+                <div class="two-column">
+                    <span>Provizija ({{ .commissionRate }}%):</span>
+                    <span class="bold">{{ .totalCommission }} RSD</span>
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <div class="dashed-line"></div>
+
+    <table class="voucher-table">
+        <tr>
+            <td class="center">
+                <span class="amount-highlight">
+                    {{ .totalPaid }} RSD
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <td class="center medium">Ukupno Plaćeno</td>
+        </tr>
+    </table>
+
+    {{ if .surplusAmount }}
+    <div class="dashed-line"></div>
+    <table class="voucher-table">
+        <tr>
+            <td class="center medium">
+                <div class="two-column">
+                    <span>Višak (Vaučer):</span>
+                    <span class="bold">{{ .surplusAmount }} RSD</span>
+                </div>
+            </td>
+        </tr>
+        {{ if .surplusVoucherCode }}
+        <tr>
+            <td class="center medium bold">
+                Kod Vaučera: {{ .surplusVoucherCode }}
+            </td>
+        </tr>
+        {{ end }}
+    </table>
+    {{ end }}
+
+    <div class="single-line"></div>
+
+    <!-- Transaction Details -->
+    <table class="voucher-table">
+        <tr>
+            <td class="center medium bold">Podaci o Transakciji</td>
+        </tr>
+        <tr>
+            <td class="left medium">
+                <div class="two-column">
+                    <span>Način plaćanja:</span>
+                    <span>{{ if eq .paymentMethod "cash" }}Gotovina{{ else }}Kartica{{ end }}</span>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="left medium">
+                <div class="two-column">
+                    <span>Datum-vreme:</span>
+                    <span>{{ .transactionDate }}</span>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="left medium">
+                <div class="two-column">
+                    <span>Kod transakcije:</span>
+                    <span>{{ .transactionCode }}</span>
+                </div>
+            </td>
+        </tr>
+        {{ if .terminalId }}
+        <tr>
+            <td class="left medium">
+                <div class="two-column">
+                    <span>Terminal ID:</span>
+                    <span>{{ .terminalId }}</span>
+                </div>
+            </td>
+        </tr>
+        {{ end }}
+    </table>
+
+    <div class="single-line"></div>
+
+    <!-- Legal Information -->
+    <table class="voucher-table">
+        <tr>
+            <td class="center medium bold">Dodatne informacije</td>
+        </tr>
+        <tr>
+            <td class="left medium">
+                IPS plaćanja realizuje VCash Tech d.o.o. Beograd, Savski Venac, Višegradska 6 <br /> MBR: 21858218, PIB:113388644
+            </td>
+        </tr>
+    </table>
+
+    <div class="single-line"></div>
+
+    <!-- Contact Information -->
+    <table class="voucher-table">
+        <tr>
+            <td class="center medium bold">Kontakt</td>
+        </tr>
+        <tr>
+            <td class="left medium">Email: podrska@vcash.rs</td>
+        </tr>
+        <tr>
+            <td class="left medium">Tel: +381 62 111 5 111 (10h-22h)</td>
+        </tr>
+        <tr>
+            <td class="left medium">WhatsApp <img class="small-img" src="https://res.cloudinary.com/dhzivl2ju/image/upload/v1753884471/whatsapp_0e384bec25.png" /> Viber
+            <img class="small-img" src="https://res.cloudinary.com/dhzivl2ju/image/upload/v1753884601/viber_84d634db9b.png" />
+            </td>
+        </tr>
+    </table>
+
+    <div class="double-line"></div>
+
+    <table class="voucher-table">
+        <tr>
+            <td class="center medium">
+                Vreme izdavanja: {{ .currentTime }}
+            </td>
+        </tr>
+    </table>
+
+    <br />
+    <table class="voucher-table">
+        <tr>
+            <td class="center small">
+                Hvala Vam na poverenju!
+            </td>
+        </tr>
+    </table>
+</div>
+{{ end }}

@@ -459,6 +459,8 @@
     "totalPaid": "Total Paid",
     "surplusVoucher": "Surplus (Voucher)",
     "collectReceipt": "Please collect your receipt from the printer.",
-    "finish": "Take Receipt & Finish"
+    "finish": "Take Receipt & Finish",
+    "printing": "Printing Receipt...",
+    "printingDescription": "Please wait while your confirmation is being printed."
   }
 }

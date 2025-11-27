@@ -464,6 +464,8 @@
     "totalPaid": "Ukupno Plaćeno",
     "surplusVoucher": "Višak (Vaučer)",
     "collectReceipt": "Molimo uzmite potvrdu iz štampača.",
-    "finish": "Uzmi Potvrdu i Završi"
+    "finish": "Uzmi Potvrdu i Završi",
+    "printing": "Štampanje potvrde...",
+    "printingDescription": "Molimo sačekajte dok se potvrda štampa."
   }
 }

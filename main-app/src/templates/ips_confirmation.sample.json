@@ -1,0 +1,41 @@
+{
+  "venueName": "VCash Kiosk Centar",
+  "venueAddress": "Knez Mihailova 15",
+  "venueCity": "Beograd",
+  "deviceName": "KIOSK-001",
+  "billCount": 3,
+  "bills": [
+    {
+      "recipient": "Infostan Beograd",
+      "accountNumber": "840-0000000346152-05",
+      "referenceNumber": "97 10-00000000001",
+      "purpose": "Komunalne usluge",
+      "amount": "5.500,50"
+    },
+    {
+      "recipient": "Telekom Srbija AD",
+      "accountNumber": "205-1234567890123-14",
+      "referenceNumber": "97 00-98765432101",
+      "purpose": "Telefonske usluge",
+      "amount": "1.250,00"
+    },
+    {
+      "recipient": "EPS Snabdevanje",
+      "accountNumber": "325-1112223334445-12",
+      "referenceNumber": "97 12-00000000002",
+      "purpose": "Električna energija",
+      "amount": "8.900,25"
+    }
+  ],
+  "totalBillAmount": "15.650,75",
+  "commissionRate": "2",
+  "totalCommission": "313,02",
+  "totalPaid": "15.963,77",
+  "surplusAmount": "",
+  "surplusVoucherCode": "",
+  "paymentMethod": "cash",
+  "transactionDate": "27.11.2025. 14:35",
+  "transactionCode": "IPS-2024112714350001",
+  "terminalId": "T001",
+  "currentTime": "27.11.2025. 14:35"
+}
