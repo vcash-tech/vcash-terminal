@@ -413,5 +413,38 @@
       "network": "Network connection error. Please check your connection and try again",
       "other": "An unexpected error occurred. Please contact support if the problem persists"
     }
+  },
+  "ipsPayment": {
+    "title": "IPS Payment",
+    "subtitle": "Scan QR code or enter data manually",
+    "scanQR": "Scan QR Code",
+    "manualInput": "Manual Input",
+    "scanning": "Scanning in progress...",
+    "scanningHint": "Point camera at QR code on the bill",
+    "cancel": "Cancel",
+    "accountNumber": "Account Number",
+    "amount": "Amount",
+    "model": "Model",
+    "referenceNumber": "Reference Number",
+    "referencePlaceholder": "Enter reference number",
+    "name": "Name",
+    "namePlaceholder": "Enter name",
+    "address": "Address",
+    "addressPlaceholder": "Enter address",
+    "add": "Add",
+    "update": "Update",
+    "addInstruction": "Add Payment Instruction",
+    "editInstruction": "Edit Payment Instruction",
+    "instructions": "Payment Instructions",
+    "edit": "Edit",
+    "delete": "Delete",
+    "total": "Total",
+    "addAnother": "Add Another Instruction",
+    "proceed": "Proceed to Payment",
+    "summary": "Review Instructions",
+    "totalAmount": "Total Amount",
+    "back": "Back",
+    "confirmAndPay": "Confirm and Pay",
+    "instructionCount": "Number of instructions"
   }
 }

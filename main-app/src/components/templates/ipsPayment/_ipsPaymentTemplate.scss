@@ -129,6 +129,7 @@
                 position: relative;
                 display: flex;
                 align-items: center;
+                cursor: pointer;
 
                 input {
                     width: 100%;
@@ -142,10 +143,9 @@
                     background: colors.$white-color;
                     transition: all 0.2s ease;
                     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+                    cursor: pointer;
 
-                    &:focus,
-                    &.active {
-                        outline: none;
+                    &:hover {
                         border-color: colors.$brand-primary-color;
                         background: #f0f8ff;
                         box-shadow: 0 4px 12px rgba(56, 90, 201, 0.15);
@@ -267,8 +267,8 @@
         .instructions-container {
             display: flex;
             flex-direction: column;
-            gap: 2rem;
-            max-height: 60rem;
+            gap: 1.2rem;
+            max-height: calc(100vh - 40rem);
             overflow-y: auto;
             padding: 1rem;
             margin-bottom: 2rem;
@@ -292,100 +292,88 @@
             }
         }
 
-        .instruction-card {
+        .instruction-item {
             background: colors.$white-color;
-            border-radius: 16px;
-            padding: 3rem;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            padding: 1.8rem 2.4rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
             transition: all 0.2s ease;
             border: 2px solid transparent;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            min-height: 7rem;
 
             &:hover {
-                transform: translateY(-2px);
-                box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
                 border-color: colors.$brand-primary-color;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
             }
 
-            .instruction-header {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                margin-bottom: 2rem;
-                padding-bottom: 1.5rem;
-                border-bottom: 2px solid colors.$input-border-color;
+            .instruction-number {
+                font-size: 2rem;
+                font-weight: 700;
+                color: colors.$brand-primary-color;
+                min-width: 3rem;
+                text-align: center;
+            }
 
-                .instruction-number {
-                    font-size: 2.8rem;
-                    font-weight: 700;
-                    color: colors.$brand-primary-color;
-                    background: colors.$hover-blue-color;
-                    width: 4.5rem;
-                    height: 4.5rem;
-                    border-radius: 50%;
+            .instruction-account {
+                font-size: 1.8rem;
+                font-weight: 500;
+                color: colors.$dark-text-color;
+                flex: 1;
+                font-family: 'Courier New', monospace;
+                letter-spacing: 0.05em;
+            }
+
+            .instruction-amount {
+                font-size: 2.2rem;
+                font-weight: 700;
+                color: colors.$brand-primary-color;
+                min-width: 12rem;
+                text-align: right;
+            }
+
+            .instruction-model {
+                font-size: 1.8rem;
+                font-weight: 600;
+                color: colors.$label-text-color;
+                min-width: 4rem;
+                text-align: center;
+                background: colors.$hover-blue-color;
+                padding: 0.5rem 1rem;
+                border-radius: 6px;
+            }
+
+            .instruction-actions {
+                display: flex;
+                gap: 0.8rem;
+                min-width: 10rem;
+                justify-content: flex-end;
+
+                .action-button {
+                    width: 4rem;
+                    height: 4rem;
+                    border: 2px solid colors.$input-border-color;
+                    border-radius: 8px;
+                    background: colors.$white-color;
+                    cursor: pointer;
+                    font-size: 1.8rem;
+                    transition: all 0.2s ease;
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                }
+                    padding: 0;
 
-                .instruction-actions {
-                    display: flex;
-                    gap: 1rem;
-
-                    .action-button {
-                        width: 4.5rem;
-                        height: 4.5rem;
-                        border: 2px solid colors.$input-border-color;
-                        border-radius: 12px;
-                        background: colors.$white-color;
-                        cursor: pointer;
-                        font-size: 2rem;
-                        transition: all 0.2s ease;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-
-                        &:hover {
-                            border-color: colors.$brand-primary-color;
-                            background: colors.$hover-blue-color;
-                            transform: scale(1.1);
-                        }
-
-                        &.delete:hover {
-                            border-color: #EF404C;
-                            background: #ffe6e6;
-                        }
-                    }
-                }
-            }
-
-            .instruction-details {
-                display: flex;
-                flex-direction: column;
-                gap: 1.2rem;
-
-                .detail-row {
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    padding: 1rem 0;
-
-                    .detail-label {
-                        font-size: 2rem;
-                        font-weight: 600;
-                        color: colors.$label-text-color;
+                    &:hover {
+                        border-color: colors.$brand-primary-color;
+                        background: colors.$hover-blue-color;
+                        transform: scale(1.1);
                     }
 
-                    .detail-value {
-                        font-size: 2.2rem;
-                        font-weight: 500;
-                        color: colors.$dark-text-color;
-                        text-align: right;
-
-                        &.amount {
-                            font-weight: 700;
-                            color: colors.$brand-primary-color;
-                            font-size: 2.6rem;
-                        }
+                    &.delete:hover {
+                        border-color: #EF404C;
+                        background: #ffe6e6;
                     }
                 }
             }

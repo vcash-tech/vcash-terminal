@@ -1,0 +1,151 @@
+@use '../../../styles/config/colors';
+@use '../../../styles/config/fonts';
+
+.ips-input-dialog {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .dialog-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(5px);
+    }
+
+    .dialog-content {
+        position: relative;
+        background: colors.$white-color;
+        border-radius: 16px;
+        padding: 4rem;
+        width: 90%;
+        max-width: 80rem;
+        max-height: 90vh;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 3rem;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+
+        h2 {
+            font-family: fonts.$body-font;
+            font-weight: 700;
+            font-size: 3.6rem;
+            color: colors.$black-color;
+            text-align: center;
+            margin: 0;
+        }
+
+        .dialog-input-section {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+
+            label {
+                font-family: fonts.$body-font;
+                font-weight: 600;
+                font-size: 2.4rem;
+                color: colors.$dark-text-color;
+            }
+
+            .input-display {
+                position: relative;
+                display: flex;
+                align-items: center;
+
+                .large-input {
+                    width: 100%;
+                    padding: 3rem 4rem;
+                    border: 3px solid colors.$brand-primary-color;
+                    border-radius: 12px;
+                    font-family: fonts.$body-font;
+                    font-size: 4rem;
+                    font-weight: 600;
+                    color: colors.$dark-text-color;
+                    background: #f0f8ff;
+                    text-align: center;
+                    letter-spacing: 0.1em;
+
+                    &::placeholder {
+                        color: colors.$label-text-color;
+                        opacity: 0.6;
+                    }
+                }
+
+                .currency {
+                    position: absolute;
+                    right: 4rem;
+                    font-size: 3rem;
+                    font-weight: 600;
+                    color: colors.$brand-primary-color;
+                    pointer-events: none;
+                }
+            }
+        }
+
+        .numeric-keyboard {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            padding: 2rem;
+            background: colors.$white-color;
+            border-radius: 12px;
+            border: 2px solid colors.$input-border-color;
+
+            .keyboard-row {
+                display: flex;
+                justify-content: center;
+                gap: 1.5rem;
+
+                .keyboard-key {
+                    flex: 1;
+                    max-width: 12rem;
+                    height: 10rem;
+                    border: 3px solid colors.$brand-primary-color;
+                    border-radius: 16px;
+                    background: colors.$white-color;
+                    color: colors.$brand-primary-color;
+                    font-size: 4rem;
+                    font-weight: 600;
+                    cursor: pointer;
+                    transition: all 0.2s ease;
+                    touch-action: manipulation;
+                    user-select: none;
+
+                    &:active {
+                        background: colors.$hover-blue-color;
+                        transform: scale(0.95);
+                    }
+
+                    &.backspace,
+                    &.clear {
+                        font-size: 3.6rem;
+                    }
+                }
+            }
+        }
+
+        .text-keyboard-container {
+            margin-top: 2rem;
+        }
+
+        .dialog-actions {
+            display: flex;
+            gap: 2rem;
+            margin-top: 2rem;
+
+            .primary-button {
+                flex: 1;
+            }
+        }
+    }
+}

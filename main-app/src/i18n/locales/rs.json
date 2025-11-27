@@ -418,5 +418,38 @@
       "network": "Greška mrežne veze. Molimo proverite konekciju i pokušajte ponovo",
       "other": "Došlo je do neočekivane greške. Molimo kontaktirajte podršku ako se problem nastavi"
     }
+  },
+  "ipsPayment": {
+    "title": "IPS Plaćanje",
+    "subtitle": "Skenirajte QR kod ili unesite podatke ručno",
+    "scanQR": "Skeniraj QR kod",
+    "manualInput": "Ručni unos",
+    "scanning": "Skeniranje u toku...",
+    "scanningHint": "Uperite kameru na QR kod na računu",
+    "cancel": "Otkaži",
+    "accountNumber": "Broj računa",
+    "amount": "Iznos",
+    "model": "Model",
+    "referenceNumber": "Poziv na broj",
+    "referencePlaceholder": "Unesite poziv na broj",
+    "name": "Ime i prezime",
+    "namePlaceholder": "Unesite ime i prezime",
+    "address": "Adresa",
+    "addressPlaceholder": "Unesite adresu",
+    "add": "Dodaj",
+    "update": "Ažuriraj",
+    "addInstruction": "Dodaj nalog za plaćanje",
+    "editInstruction": "Izmeni nalog",
+    "instructions": "Nalozi za plaćanje",
+    "edit": "Izmeni",
+    "delete": "Obriši",
+    "total": "Ukupno",
+    "addAnother": "Dodaj još jedan nalog",
+    "proceed": "Nastavi na plaćanje",
+    "summary": "Pregled naloga",
+    "totalAmount": "Ukupan iznos",
+    "back": "Nazad",
+    "confirmAndPay": "Potvrdi i plati",
+    "instructionCount": "Broj naloga"
   }
 }
