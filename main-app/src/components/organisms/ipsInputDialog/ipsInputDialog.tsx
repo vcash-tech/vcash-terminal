@@ -37,6 +37,7 @@ export default function IpsInputDialog({
     const [inputValue, setInputValue] = useState(value)
 
     // Format account number with mask: xxx-xxxxxxxxxxxxx-xx
+    // Only formats what user types, doesn't pad zeros until confirmation
     const formatAccountNumber = (digits: string): string => {
         const cleanDigits = digits.replace(/\D/g, '')
         
@@ -50,17 +51,16 @@ export default function IpsInputDialog({
             // First 3 + some middle digits (but we don't know last 2 yet)
             const first3 = cleanDigits.slice(0, 3)
             const middle = cleanDigits.slice(3)
-            const middlePadded = middle.padStart(13, '0')
-            return `${first3}-${middlePadded}`
+            // Don't pad during input, just show what they typed
+            return `${first3}-${middle}`
         }
         
-        // Full format: first 3, middle (padded to 13), last 2
+        // Full format: first 3, middle (as typed), last 2
         const first3 = cleanDigits.slice(0, 3)
         const last2 = cleanDigits.slice(-2)
         const middle = cleanDigits.slice(3, -2)
-        const middlePadded = middle.padStart(13, '0')
         
-        return `${first3}-${middlePadded}-${last2}`
+        return `${first3}-${middle}-${last2}`
     }
 
     // Extract raw digits from formatted account number
@@ -129,8 +129,31 @@ export default function IpsInputDialog({
     const handleConfirm = () => {
         let finalValue = inputValue
         if (type === 'accountNumber') {
-            // Return raw 18-digit number (without dashes)
-            finalValue = extractAccountDigits(inputValue).padStart(18, '0')
+            // Extract digits and pad to 18 digits with zeros in the middle
+            const digits = extractAccountDigits(inputValue)
+            
+            if (digits.length === 0) {
+                onClose()
+                return
+            }
+            
+            // User always inputs: first 3, last 2, and at least one in middle
+            // Format: first3 (3) + middle (13, pad with zeros) + last2 (2) = 18 total
+            if (digits.length < 5) {
+                // Not enough digits - need at least 5 (3 first + 1 middle + 1 last)
+                onClose()
+                return
+            }
+            
+            const first3 = digits.slice(0, 3)
+            const last2 = digits.slice(-2)
+            const middle = digits.slice(3, -2)
+            
+            // Pad middle part to 13 digits with leading zeros
+            const middlePadded = middle.padStart(13, '0')
+            
+            // Combine to 18 digits
+            finalValue = first3 + middlePadded + last2
         } else if (formatValue) {
             finalValue = formatValue(inputValue)
         }

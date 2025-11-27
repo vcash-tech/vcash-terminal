@@ -98,18 +98,38 @@ export default function IpsPaymentTemplate({
     const formatAccountNumberDisplay = (account: string): string => {
         const digits = account.replace(/\D/g, '')
         if (digits.length === 0) return ''
-        return digits.padStart(18, '0')
+        
+        // If already 18 digits, format with mask
+        if (digits.length === 18) {
+            const first3 = digits.slice(0, 3)
+            const middle = digits.slice(3, 16)
+            const last2 = digits.slice(16)
+            return `${first3}-${middle}-${last2}`
+        }
+        
+        // If less than 18, show as formatted during input
+        if (digits.length <= 3) {
+            return digits
+        }
+        if (digits.length <= 5) {
+            const first3 = digits.slice(0, 3)
+            const middle = digits.slice(3)
+            return `${first3}-${middle}`
+        }
+        const first3 = digits.slice(0, 3)
+        const last2 = digits.slice(-2)
+        const middle = digits.slice(3, -2)
+        return `${first3}-${middle}-${last2}`
     }
 
     const isFormValid = (): boolean => {
         const accountDigits = formData.accountNumber.replace(/\D/g, '')
         const amountValue = parseFloat(formData.amount)
-        const modelDigits = formData.model.replace(/\D/g, '')
+        // Model and reference number are optional
         return (
-            accountDigits.length === 18 &&
+            accountDigits.length >= 5 && // At least 5 digits (3 first + 1 middle + 1 last)
             !isNaN(amountValue) &&
             amountValue > 0 &&
-            modelDigits.length === 2 &&
             formData.name.trim().length > 0 &&
             formData.address.trim().length > 0
         )
@@ -117,10 +137,24 @@ export default function IpsPaymentTemplate({
 
     const handleAddInstruction = () => {
         if (isFormValid()) {
+            // Format account number: extract digits and pad middle section
+            const digits = formData.accountNumber.replace(/\D/g, '')
+            let formattedAccount = digits
+            
+            if (digits.length >= 5) {
+                const first3 = digits.slice(0, 3)
+                const last2 = digits.slice(-2)
+                const middle = digits.slice(3, -2)
+                const middlePadded = middle.padStart(13, '0')
+                formattedAccount = first3 + middlePadded + last2
+            } else {
+                formattedAccount = digits.padStart(18, '0')
+            }
+            
             const newInstruction: IpsPaymentInstruction = {
                 id: editingId || generateId(),
                 ...formData,
-                accountNumber: formData.accountNumber.replace(/\D/g, '').padStart(18, '0')
+                accountNumber: formattedAccount
             }
             
             if (editingId) {
@@ -264,8 +298,8 @@ export default function IpsPaymentTemplate({
                             <div className="input-container" onClick={() => setDialogField('accountNumber')}>
                                 <input
                                     type="text"
-                                    value={formatAccountNumberDisplay(formData.accountNumber)}
-                                    placeholder="000000000000000000"
+                                    value={formatAccountNumberDisplay(formData.accountNumber) || ''}
+                                    placeholder="xxx-xxxxxxxxxxxxx-xx"
                                     readOnly
                                 />
                             </div>
@@ -369,7 +403,9 @@ export default function IpsPaymentTemplate({
                                     <span className="instruction-number">{index + 1}.</span>
                                     <span className="instruction-account">{formatAccountNumberDisplay(instruction.accountNumber)}</span>
                                     <span className="instruction-amount">{parseFloat(instruction.amount).toFixed(2)} RSD</span>
-                                    <span className="instruction-model">{instruction.model}</span>
+                                    {instruction.model && (
+                                        <span className="instruction-model">{instruction.model}</span>
+                                    )}
                                     <div className="instruction-actions">
                                         <button
                                             className="action-button edit"
