@@ -270,9 +270,9 @@ export default function WelcomeWithServices({
                         subtitle="welcome.dark.ips.subtitle"
                         type="ips"
                         hasAgeDisclaimer={false}
-                        isComingSoon={true}
-                        isSelected={state.voucherType === 'ips'}
-                        actionText={t('welcome.dark.betCta')}
+                        isComingSoon={false}
+                        isSelected={true}
+                        actionText={t('service.payBills.simpleScanTitle')}
                         images={[
                             { src: welcome_ips_struja, isComingSoon: false },
                             { src: welcome_ips_telefon, isComingSoon: false },
@@ -297,6 +297,7 @@ export default function WelcomeWithServices({
                             setCurrentStep(
                                 VoucherPurchaseStep.SELECT_PAYMENT_METHOD
                             )
+                            navigate('/ips-payment')
                         }}
                     />
 
