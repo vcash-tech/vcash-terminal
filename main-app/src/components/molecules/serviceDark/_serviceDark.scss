@@ -83,31 +83,19 @@
         line-height: 180%;
     }
 
-    .services-grid {
-        display: grid;
-        grid-template-columns: repeat(3, auto);
-        grid-template-rows: repeat(2, auto);
-        gap: 2rem;
-        padding: 0 2rem;
-        margin-bottom: 2rem;
-    }
-
-    .grid-item {
+    .marquee-item {
+        display: inline-block;
+        margin-right: 2rem;
         position: relative;
         border: 1px solid transparent;
         border-radius: 1.2rem;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 26.6rem;
-        height: 15rem;
 
         img {
-            width:100%;
-            height:100%;
-            object-fit:contain;
+            max-width: 20rem;
+            height: auto;
+            // height: 12rem;
+            // object-fit: cover;
         }
-        
         &.coming-soon {
             position: relative;
             img {
@@ -131,20 +119,19 @@
         }
     }
     .action-container {
-        padding: 0rem 0 0 0;
-        height: 8.9rem;
+        padding: 2.5rem 0 0 0;
     }
     .action {
         background: #ffffff88;
         border-radius: 1.6rem;
         color:black;
-        padding: 2.2rem 3.2rem;
+        padding: 1.6rem 3.2rem;
         margin: 0 7rem;
         text-transform: uppercase;
         font-family: Urbanist;
         font-weight: 700;
         font-style: Bold;
-        font-size: 3.5rem;
+        font-size: 2.5rem;
 
         &.selected {
             opacity: 1;
@@ -153,7 +140,7 @@
                 background: #0AAD59;
             }
             &.gaming {
-                background: #A040FD;
+                background: #900AD1;
             }
         }
     }
