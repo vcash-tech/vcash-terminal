@@ -31,10 +31,12 @@
         max-width: 80rem;
         max-height: 90vh;
         overflow-y: auto;
+        overflow-x: hidden;
         display: flex;
         flex-direction: column;
         gap: 3rem;
         box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        box-sizing: border-box;
 
         h2 {
             font-family: fonts.$body-font;
@@ -74,6 +76,9 @@
                     background: #f0f8ff;
                     text-align: center;
                     letter-spacing: 0.1em;
+                    box-sizing: border-box;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
 
                     &::placeholder {
                         color: colors.$label-text-color;
@@ -100,15 +105,20 @@
             background: colors.$white-color;
             border-radius: 12px;
             border: 2px solid colors.$input-border-color;
+            width: 100%;
+            box-sizing: border-box;
 
             .keyboard-row {
                 display: flex;
                 justify-content: center;
                 gap: 1.5rem;
+                width: 100%;
+                box-sizing: border-box;
 
                 .keyboard-key {
                     flex: 1;
                     max-width: 12rem;
+                    min-width: 0;
                     height: 10rem;
                     border: 3px solid colors.$brand-primary-color;
                     border-radius: 16px;
@@ -120,6 +130,7 @@
                     transition: all 0.2s ease;
                     touch-action: manipulation;
                     user-select: none;
+                    box-sizing: border-box;
 
                     &:active {
                         background: colors.$hover-blue-color;
@@ -136,6 +147,15 @@
 
         .text-keyboard-container {
             margin-top: 2rem;
+            width: 100%;
+            box-sizing: border-box;
+            overflow-x: hidden;
+
+            .keyboard-container {
+                width: 100%;
+                max-width: 100%;
+                box-sizing: border-box;
+            }
         }
 
         .dialog-actions {

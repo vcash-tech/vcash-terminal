@@ -472,10 +472,8 @@ export default function IpsPaymentTemplate({
                     title={t('ipsPayment.accountNumber')}
                     label={t('ipsPayment.accountNumber')}
                     value={formData.accountNumber}
-                    type="numeric"
-                    placeholder="000000000000000000"
-                    maxLength={18}
-                    formatValue={(val) => formatAccountNumberDisplay(val)}
+                    type="accountNumber"
+                    placeholder="xxx-xxxxxxxxxxxxx-xx"
                     onClose={() => setDialogField(null)}
                     onConfirm={(value) => handleInputDialogConfirm('accountNumber', value)}
                 />
