@@ -1,884 +1,751 @@
 @use '../../../styles/config/colors';
 @use '../../../styles/config/fonts';
 
-.ips-payment {
+// IPS Container
+.ips-container {
+    background: colors.$main-background-color;
+}
+
+.ips-payment-screen {
     display: flex;
     flex-direction: column;
     flex: 1;
-    background: linear-gradient(165deg, #f0f4ff 0%, #e1e9ff 50%, #d4dfff 100%);
-    position: relative;
     overflow: hidden;
+}
 
-    // Decorative background elements
-    &::before {
-        content: '';
-        position: absolute;
-        top: -20%;
-        right: -10%;
-        width: 60rem;
-        height: 60rem;
-        background: radial-gradient(circle, rgba(0, 134, 201, 0.08) 0%, transparent 70%);
-        pointer-events: none;
-    }
-
-    &::after {
-        content: '';
-        position: absolute;
-        bottom: -10%;
-        left: -15%;
-        width: 50rem;
-        height: 50rem;
-        background: radial-gradient(circle, rgba(56, 90, 201, 0.06) 0%, transparent 70%);
-        pointer-events: none;
-    }
-
-    .back-button {
-        position: absolute;
-        top: 2rem;
-        left: 3rem;
-        background: none;
-        border: none;
-        font-family: fonts.$font-urbanist;
-        font-size: 2rem;
-        font-weight: 600;
-        color: colors.$brand-primary-color;
-        cursor: pointer;
-        z-index: 10;
-        padding: 1rem 2rem;
-        border-radius: 1rem;
-        transition: background 0.2s ease;
-
-        &:active {
-            background: rgba(56, 90, 201, 0.1);
-        }
-    }
+// Header Section
+.ips-header {
+    background: linear-gradient(135deg, colors.$brand-primary-color 0%, #2a4599 100%);
+    color: white;
+    padding: 4rem 4rem 3rem;
+    text-align: center;
 
     h1 {
         font-family: fonts.$font-urbanist;
-        font-size: 4rem;
+        font-size: 4.5rem;
         font-weight: 800;
-        color: #1a2b4a;
-        text-align: center;
-        margin: 0 0 1rem;
-        letter-spacing: -0.02em;
-    }
-
-    h2 {
-        font-family: fonts.$font-urbanist;
-        font-size: 3rem;
-        font-weight: 700;
-        color: #1a2b4a;
-        text-align: center;
-        margin: 0 0 2rem;
+        margin: 0 0 0.5rem;
     }
 
     p {
         font-family: fonts.$font-urbanist;
         font-size: 2rem;
-        color: #5a6b8a;
-        text-align: center;
+        opacity: 0.9;
         margin: 0;
-        line-height: 1.5;
     }
 }
 
-// List View
-.ips-list-view {
+// Main Content Area
+.ips-main {
     display: flex;
     flex-direction: column;
-    padding: 3rem 4rem;
     flex: 1;
-    position: relative;
-    z-index: 1;
+    padding: 3rem 4rem;
+    gap: 2rem;
+    overflow: hidden;
+}
 
-    .list-header {
-        text-align: center;
-        margin-bottom: 3rem;
+// Section Title
+.section-title {
+    font-family: fonts.$font-urbanist;
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: colors.$dark-text-color;
+    margin: 0 0 1.5rem;
+
+    .count {
+        color: colors.$brand-primary-color;
     }
+}
 
-    .payments-list {
+// Bills Section
+.bills-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+
+    .scanning-prompt {
+        flex: 1;
         display: flex;
         flex-direction: column;
-        gap: 1.5rem;
-        margin-bottom: 3rem;
-        max-height: 40vh;
+        align-items: center;
+        justify-content: center;
+        background: white;
+        border: 4px dashed #d0d5dd;
+        border-radius: 2rem;
+        padding: 4rem;
+        text-align: center;
+
+        .scan-icon {
+            width: 10rem;
+            height: 10rem;
+            color: colors.$brand-primary-color;
+            margin-bottom: 2rem;
+            animation: pulse 2s ease-in-out infinite;
+
+            svg {
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+        .prompt-text {
+            font-family: fonts.$font-urbanist;
+            font-size: 2.4rem;
+            font-weight: 600;
+            color: colors.$dark-text-color;
+            margin: 0 0 0.5rem;
+        }
+
+        .prompt-subtext {
+            font-family: fonts.$font-urbanist;
+            font-size: 1.8rem;
+            color: #667085;
+            margin: 0;
+        }
+    }
+
+    .bills-list {
+        flex: 1;
         overflow-y: auto;
-        padding: 0.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1.2rem;
+        padding-right: 1rem;
 
-        .payment-item {
-            display: flex;
-            align-items: center;
-            background: white;
-            border-radius: 1.6rem;
-            padding: 2rem 2.5rem;
-            box-shadow: 0 4px 20px rgba(15, 32, 67, 0.08);
-            gap: 2rem;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        &::-webkit-scrollbar {
+            width: 8px;
+        }
+        &::-webkit-scrollbar-thumb {
+            background: #94a3b8;
+            border-radius: 4px;
+        }
+        &::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+    }
 
-            &:active {
-                transform: scale(0.99);
-            }
+    .bill-item {
+        display: flex;
+        align-items: center;
+        background: white;
+        border: 3px solid #e5e7eb;
+        border-radius: 1.4rem;
+        padding: 1.8rem 2rem;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        gap: 1.5rem;
 
-            .payment-number {
-                width: 4rem;
-                height: 4rem;
-                background: linear-gradient(135deg, #0086C9 0%, #005a87 100%);
-                border-radius: 50%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
+        &:active {
+            transform: scale(0.99);
+        }
+
+        &.selected {
+            background: colors.$brand-primary-color;
+            border-color: colors.$brand-primary-color;
+
+            .bill-recipient,
+            .bill-amount {
                 color: white;
+            }
+
+            .bill-reference,
+            .amount-modified {
+                color: rgba(255, 255, 255, 0.8);
+            }
+
+            .remove-btn {
+                color: white;
+                border-color: rgba(255, 255, 255, 0.5);
+
+                &:hover {
+                    background: rgba(255, 255, 255, 0.2);
+                }
+            }
+        }
+
+        .bill-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+            min-width: 0;
+
+            .bill-recipient {
                 font-family: fonts.$font-urbanist;
-                font-size: 1.8rem;
+                font-size: 2.2rem;
                 font-weight: 700;
-                flex-shrink: 0;
+                color: colors.$dark-text-color;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
 
-            .payment-details {
-                flex: 1;
-                min-width: 0;
-
-                .payment-recipient {
-                    font-family: fonts.$font-urbanist;
-                    font-size: 2rem;
-                    font-weight: 600;
-                    color: #1a2b4a;
-                    white-space: nowrap;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                }
-
-                .payment-purpose {
-                    font-family: fonts.$font-urbanist;
-                    font-size: 1.6rem;
-                    color: #7a8ba8;
-                    margin-top: 0.3rem;
-                    white-space: nowrap;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                }
+            .bill-reference {
+                font-family: fonts.$font-urbanist;
+                font-size: 1.4rem;
+                color: #667085;
             }
+        }
 
-            .payment-amount {
+        .bill-amount-section {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 0.3rem;
+
+            .bill-amount {
                 font-family: fonts.$font-urbanist;
                 font-size: 2.4rem;
                 font-weight: 700;
-                color: #0AAD59;
+                color: colors.$brand-primary-color;
                 white-space: nowrap;
-
-                span {
-                    font-size: 1.6rem;
-                    font-weight: 500;
-                    color: #7a8ba8;
-                }
             }
 
-            .payment-actions {
+            .amount-modified {
+                font-family: fonts.$font-urbanist;
+                font-size: 1.2rem;
+                font-weight: 600;
+                color: #f97316;
+                text-transform: uppercase;
+            }
+        }
+
+        .remove-btn {
+            width: 4rem;
+            height: 4rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 1rem;
+            background: transparent;
+            color: #ef4444;
+            font-size: 2.4rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            flex-shrink: 0;
+
+            &:hover {
+                background: #fef2f2;
+            }
+        }
+    }
+
+    .scanning-indicator {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        font-family: fonts.$font-urbanist;
+        font-size: 1.8rem;
+        font-weight: 600;
+        color: colors.$brand-primary-color;
+        padding: 1.5rem;
+
+        &.inline {
+            background: #f0f4ff;
+            border-radius: 1rem;
+            margin-top: 1rem;
+        }
+
+        .pulse {
+            width: 1.2rem;
+            height: 1.2rem;
+            background: colors.$brand-primary-color;
+            border-radius: 50%;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+    }
+}
+
+// Details Section
+.details-section {
+    background: white;
+    border-radius: 1.6rem;
+    padding: 2rem 2.5rem;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    border: 2px solid #e5e7eb;
+
+    .details-prompt {
+        padding: 3rem;
+        text-align: center;
+
+        p {
+            font-family: fonts.$font-urbanist;
+            font-size: 1.8rem;
+            color: #667085;
+            margin: 0;
+        }
+    }
+
+    .bill-details {
+        .detail-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem 2rem;
+            margin-bottom: 2rem;
+
+            .detail-item {
+                &.full {
+                    grid-column: span 2;
+                }
+
+                .detail-label {
+                    font-family: fonts.$font-urbanist;
+                    font-size: 1.4rem;
+                    font-weight: 600;
+                    color: #667085;
+                    display: block;
+                    margin-bottom: 0.3rem;
+                }
+
+                .detail-value {
+                    font-family: fonts.$font-urbanist;
+                    font-size: 1.8rem;
+                    font-weight: 600;
+                    color: colors.$dark-text-color;
+
+                    &.mono {
+                        font-family: fonts.$monospace-font;
+                        font-size: 1.6rem;
+                        color: #475569;
+                    }
+                }
+            }
+        }
+
+        .amount-edit {
+            border-top: 2px solid #f0f0f0;
+            padding-top: 1.5rem;
+
+            label {
+                font-family: fonts.$font-urbanist;
+                font-size: 1.6rem;
+                font-weight: 600;
+                color: colors.$dark-text-color;
+                display: block;
+                margin-bottom: 0.8rem;
+            }
+
+            .amount-input-wrapper {
                 display: flex;
                 gap: 1rem;
 
-                button {
-                    width: 4.5rem;
-                    height: 4.5rem;
+                input {
+                    flex: 1;
+                    padding: 1.2rem 1.5rem;
+                    font-family: fonts.$monospace-font;
+                    font-size: 2.2rem;
+                    font-weight: 600;
+                    border: 3px solid #e5e7eb;
                     border-radius: 1rem;
+                    text-align: center;
+                    color: colors.$dark-text-color;
+
+                    &:focus {
+                        outline: none;
+                        border-color: colors.$brand-primary-color;
+                    }
+                }
+
+                .save-btn {
+                    padding: 1.2rem 2.5rem;
+                    background: #3b82f6;
+                    color: white;
+                    font-family: fonts.$font-urbanist;
+                    font-size: 1.6rem;
+                    font-weight: 700;
                     border: none;
-                    font-size: 2rem;
+                    border-radius: 1rem;
                     cursor: pointer;
                     transition: all 0.2s ease;
 
-                    &.edit-btn {
-                        background: #f0f4ff;
-                        color: colors.$brand-primary-color;
-
-                        &:active {
-                            background: colors.$brand-primary-color;
-                            color: white;
-                        }
+                    &:hover {
+                        background: #2563eb;
                     }
 
-                    &.remove-btn {
-                        background: #fff0f0;
-                        color: #e53e3e;
-
-                        &:active {
-                            background: #e53e3e;
-                            color: white;
-                        }
+                    &:disabled {
+                        background: #d1d5db;
+                        cursor: not-allowed;
                     }
                 }
             }
-        }
-    }
 
-    .add-payment-buttons {
-        display: flex;
-        gap: 2rem;
-        margin-bottom: 3rem;
-
-        .add-button {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            gap: 2rem;
-            background: white;
-            border: 3px solid transparent;
-            border-radius: 1.6rem;
-            padding: 2.5rem;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            box-shadow: 0 4px 20px rgba(15, 32, 67, 0.08);
-
-            &:active {
-                transform: scale(0.98);
-            }
-
-            &.scan {
-                border-color: #0086C9;
-                
-                .button-icon {
-                    background: linear-gradient(135deg, #0086C9 0%, #005a87 100%);
-                }
-
-                &:active {
-                    background: #e6f4ff;
-                }
-            }
-
-            &.manual {
-                border-color: colors.$brand-primary-color;
-
-                .button-icon {
-                    background: linear-gradient(135deg, colors.$brand-primary-color 0%, #2a4599 100%);
-                }
-
-                &:active {
-                    background: #f0f4ff;
-                }
-            }
-
-            .button-icon {
-                width: 6rem;
-                height: 6rem;
-                border-radius: 1.4rem;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 2.8rem;
-                flex-shrink: 0;
-            }
-
-            .button-text {
-                display: flex;
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 0.3rem;
-
-                .button-title {
-                    font-family: fonts.$font-urbanist;
-                    font-size: 2.2rem;
-                    font-weight: 700;
-                    color: #1a2b4a;
-                }
-
-                .button-subtitle {
-                    font-family: fonts.$font-urbanist;
-                    font-size: 1.6rem;
-                    color: #7a8ba8;
-                }
+            .amount-error {
+                font-family: fonts.$font-urbanist;
+                font-size: 1.4rem;
+                color: #ef4444;
+                margin: 0.8rem 0 0;
             }
         }
     }
+}
 
-    .list-summary {
-        margin-top: auto;
+// Summary Section
+.summary-section {
+    background: #f8fafc;
+    padding: 3rem 4rem 4rem;
+    border-top: 2px solid #e5e7eb;
+
+    .summary-card {
         background: white;
-        border-radius: 2rem;
-        padding: 2.5rem 3rem;
-        box-shadow: 0 -4px 30px rgba(15, 32, 67, 0.1);
+        border-radius: 1.6rem;
+        padding: 2rem 2.5rem;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+        margin-bottom: 2.5rem;
 
         .summary-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 2rem;
+            padding: 1rem 0;
             font-family: fonts.$font-urbanist;
-            font-size: 2rem;
-            color: #5a6b8a;
+            font-size: 1.8rem;
+            color: #475569;
+            border-bottom: 1px solid #f0f0f0;
 
-            .total {
-                font-size: 2.8rem;
+            &:last-child {
+                border-bottom: none;
+            }
+
+            .value {
                 font-weight: 700;
-                color: #1a2b4a;
-            }
-        }
-
-        .primary-button {
-            width: 100%;
-        }
-    }
-
-    .empty-state {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        flex: 1;
-        padding: 4rem;
-
-        .empty-icon {
-            font-size: 8rem;
-            margin-bottom: 2rem;
-            opacity: 0.5;
-        }
-
-        p {
-            font-size: 2.2rem;
-            color: #7a8ba8;
-        }
-    }
-}
-
-// Add/Edit View
-.ips-add-view {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    padding: 6rem 4rem 2rem;
-    position: relative;
-    z-index: 1;
-
-    .scan-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        flex: 1;
-
-        h2 {
-            margin-bottom: 3rem;
-        }
-
-        .scan-area {
-            background: white;
-            border-radius: 2rem;
-            padding: 4rem;
-            box-shadow: 0 8px 40px rgba(15, 32, 67, 0.12);
-            margin-bottom: 3rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-
-            img {
-                width: 100%;
-                max-width: 35rem;
-                height: auto;
-                margin-bottom: 2rem;
+                color: colors.$dark-text-color;
             }
 
-            .scan-indicator {
-                display: flex;
-                align-items: center;
-                gap: 1rem;
-                font-family: fonts.$font-urbanist;
-                font-size: 2rem;
-                font-weight: 600;
-                color: #0086C9;
-
-                .pulse {
-                    width: 1.2rem;
-                    height: 1.2rem;
-                    background: #0086C9;
-                    border-radius: 50%;
-                    animation: pulse 1.5s ease-in-out infinite;
-                }
-            }
-        }
-
-        .switch-to-manual {
-            font-family: fonts.$font-urbanist;
-            font-size: 2rem;
-            font-weight: 600;
-            color: colors.$brand-primary-color;
-            background: none;
-            border: 2px solid colors.$brand-primary-color;
-            border-radius: 1.2rem;
-            padding: 1.5rem 3rem;
-            cursor: pointer;
-            transition: all 0.2s ease;
-
-            &:active {
-                background: colors.$brand-primary-color;
-                color: white;
-            }
-        }
-    }
-
-    .form-container {
-        display: flex;
-        flex-direction: column;
-        flex: 1;
-
-        h2 {
-            margin-bottom: 2rem;
-        }
-
-        .form-fields {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-            overflow-y: auto;
-            flex: 1;
-
-            .payer-section-inline {
-                display: flex;
-                gap: 1.5rem;
-                
-                .field {
-                    flex: 1;
+            &.commission {
+                .value {
+                    color: #f97316;
                 }
             }
 
-            .divider {
-                height: 2px;
-                background: linear-gradient(90deg, transparent, #e0e6f0, transparent);
-                margin: 0.5rem 0;
-            }
+            &.total {
+                border-top: 3px dashed #e5e7eb;
+                margin-top: 0.5rem;
+                padding-top: 1.5rem;
+                font-size: 2.2rem;
+                font-weight: 700;
+                color: colors.$dark-text-color;
 
-            .field {
-                background: white;
-                border-radius: 1.4rem;
-                padding: 1.8rem 2.2rem;
-                border: 3px solid transparent;
-                transition: all 0.2s ease;
-                box-shadow: 0 2px 12px rgba(15, 32, 67, 0.06);
-                cursor: pointer;
-
-                &.active {
-                    border-color: colors.$brand-primary-color;
-                    box-shadow: 0 4px 20px rgba(56, 90, 201, 0.15);
-                }
-
-                &.text-field {
-                    input {
-                        width: 100%;
-                        border: none;
-                        background: transparent;
-                        font-family: fonts.$font-urbanist;
-                        font-size: 2.2rem;
-                        font-weight: 500;
-                        color: #1a2b4a;
-                        padding: 0;
-                        outline: none;
-
-                        &::placeholder {
-                            color: #b8c4d8;
-                            font-weight: 400;
-                        }
-                    }
-                }
-
-                label {
-                    display: block;
-                    font-family: fonts.$font-urbanist;
-                    font-size: 1.5rem;
-                    font-weight: 600;
-                    color: #7a8ba8;
-                    margin-bottom: 0.5rem;
-                    text-transform: uppercase;
-                    letter-spacing: 0.05em;
-                }
-
-                .field-value {
-                    font-family: fonts.$font-urbanist;
-                    font-size: 2.6rem;
-                    font-weight: 600;
-                    color: #1a2b4a;
-                    min-height: 3.5rem;
-                    display: flex;
-                    align-items: center;
-
-                    &.account {
-                        font-family: fonts.$monospace-font;
-                        letter-spacing: 0.1em;
-                    }
-
-                    &.amount {
-                        color: #0AAD59;
-                        font-size: 3.2rem;
-                        font-weight: 700;
-                    }
-
-                    .placeholder {
-                        color: #c0c8d8;
-                        font-weight: 400;
-                    }
-
-                    .currency {
-                        font-size: 2rem;
-                        font-weight: 500;
-                        color: #7a8ba8;
-                        margin-left: 0.8rem;
-                    }
-
-                    .model {
-                        color: #7a8ba8;
-                    }
-                }
-            }
-        }
-
-        .form-actions {
-            margin-top: auto;
-            padding-bottom: 1rem;
-
-            .primary-button {
-                width: 100%;
-            }
-        }
-    }
-}
-
-// Keyboard
-.ips-keyboard {
-    background: white;
-    border-radius: 2rem 2rem 0 0;
-    padding: 2rem 3rem 3rem;
-    box-shadow: 0 -4px 30px rgba(15, 32, 67, 0.1);
-    margin: 0 -4rem -2rem;
-
-    .keyboard-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1.2rem;
-        max-width: 45rem;
-        margin: 0 auto;
-
-        .key {
-            height: 7rem;
-            border: none;
-            border-radius: 1.2rem;
-            background: #f5f7fa;
-            font-family: fonts.$font-urbanist;
-            font-size: 3rem;
-            font-weight: 600;
-            color: #1a2b4a;
-            cursor: pointer;
-            transition: all 0.1s ease;
-
-            &:active {
-                background: colors.$brand-primary-color;
-                color: white;
-                transform: scale(0.95);
-            }
-
-            &.special {
-                background: #e8ecf2;
-                color: #5a6b8a;
-
-                &.backspace {
-                    font-size: 2.4rem;
-                }
-
-                &:disabled {
-                    opacity: 0.3;
-                    cursor: default;
+                .value {
+                    font-size: 2.8rem;
+                    color: colors.$brand-primary-color;
                 }
             }
         }
     }
-}
 
-// Summary View
-.ips-summary-view {
-    display: flex;
-    flex-direction: column;
-    padding: 6rem 4rem 3rem;
-    flex: 1;
-    position: relative;
-    z-index: 1;
-
-    h1 {
-        margin-bottom: 3rem;
-    }
-
-    .summary-card {
-        background: white;
-        border-radius: 2rem;
-        padding: 3rem;
-        box-shadow: 0 8px 40px rgba(15, 32, 67, 0.1);
-        margin-bottom: 3rem;
-
+    .payment-section {
         h3 {
             font-family: fonts.$font-urbanist;
             font-size: 2rem;
             font-weight: 700;
-            color: #1a2b4a;
+            color: colors.$dark-text-color;
             margin: 0 0 1.5rem;
-            padding-bottom: 1rem;
-            border-bottom: 2px solid #f0f4f8;
         }
 
-        .payer-section {
-            margin-bottom: 2.5rem;
+        .payment-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
 
-            .payer-fields {
+            .payment-btn {
                 display: flex;
-                flex-direction: column;
+                align-items: center;
+                justify-content: center;
                 gap: 1.5rem;
-
-                .payer-field {
-                    label {
-                        display: block;
-                        font-family: fonts.$font-urbanist;
-                        font-size: 1.5rem;
-                        font-weight: 600;
-                        color: #7a8ba8;
-                        margin-bottom: 0.5rem;
-                        text-transform: uppercase;
-                        letter-spacing: 0.05em;
-                    }
-
-                    input {
-                        width: 100%;
-                        padding: 1.4rem 1.8rem;
-                        font-family: fonts.$font-urbanist;
-                        font-size: 2rem;
-                        border: 2px solid #e8ecf2;
-                        border-radius: 1rem;
-                        color: #1a2b4a;
-                        box-sizing: border-box;
-                        transition: border-color 0.2s ease;
-
-                        &:focus {
-                            outline: none;
-                            border-color: colors.$brand-primary-color;
-                        }
-
-                        &::placeholder {
-                            color: #b8c4d8;
-                        }
-                    }
-                }
-            }
-        }
-
-        .payments-summary {
-            margin-bottom: 2rem;
-
-            .summary-item {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                padding: 1.5rem 0;
-                border-bottom: 1px solid #f0f4f8;
-
-                &:last-child {
-                    border-bottom: none;
-                }
-
-                .item-info {
-                    display: flex;
-                    align-items: flex-start;
-                    gap: 1rem;
-                    flex: 1;
-                    min-width: 0;
-
-                    .item-number {
-                        font-family: fonts.$font-urbanist;
-                        font-size: 1.8rem;
-                        font-weight: 600;
-                        color: #7a8ba8;
-                        flex-shrink: 0;
-                    }
-
-                    .item-details {
-                        display: flex;
-                        flex-direction: column;
-                        gap: 0.3rem;
-                        min-width: 0;
-
-                        .item-name {
-                            font-family: fonts.$font-urbanist;
-                            font-size: 1.8rem;
-                            font-weight: 600;
-                            color: #1a2b4a;
-                            white-space: nowrap;
-                            overflow: hidden;
-                            text-overflow: ellipsis;
-                        }
-
-                        .item-payer {
-                            font-family: fonts.$font-urbanist;
-                            font-size: 1.4rem;
-                            font-weight: 500;
-                            color: #7a8ba8;
-                        }
-                    }
-                }
-
-                .item-amount {
-                    font-family: fonts.$font-urbanist;
-                    font-size: 1.8rem;
-                    font-weight: 600;
-                    color: #1a2b4a;
-                    flex-shrink: 0;
-                    margin-left: 1rem;
-                }
-            }
-        }
-
-        .totals-section {
-            background: #f8fafc;
-            border-radius: 1.2rem;
-            padding: 1.5rem 2rem;
-
-            .total-row {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                padding: 1rem 0;
+                padding: 2rem;
+                border-radius: 1.4rem;
                 font-family: fonts.$font-urbanist;
-                font-size: 1.8rem;
-                color: #5a6b8a;
+                font-size: 2rem;
+                font-weight: 700;
+                border: none;
+                cursor: pointer;
+                transition: all 0.2s ease;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 
-                &.fees {
-                    border-bottom: 1px dashed #d8e0e8;
+                img {
+                    width: 6rem;
+                    height: auto;
                 }
 
-                &.grand-total {
-                    font-size: 2.4rem;
-                    font-weight: 700;
-                    color: #1a2b4a;
-                    padding-top: 1.5rem;
+                &.cash {
+                    background: colors.$brand-primary-color;
+                    color: white;
 
-                    span:last-child {
-                        color: #0AAD59;
+                    &:hover {
+                        background: #2a4599;
                     }
+                }
+
+                &.card {
+                    background: #e5e7eb;
+                    color: colors.$dark-text-color;
+
+                    &:hover {
+                        background: #d1d5db;
+                    }
+                }
+
+                &:disabled {
+                    opacity: 0.5;
+                    cursor: not-allowed;
                 }
             }
         }
-    }
 
-    .summary-actions {
-        margin-top: auto;
-        display: flex;
-        flex-direction: column;
-        gap: 1.5rem;
-
-        .primary-button {
+        .cancel-btn {
             width: 100%;
-        }
-
-        .edit-payments-btn {
-            font-family: fonts.$font-urbanist;
-            font-size: 2rem;
-            font-weight: 600;
-            color: colors.$brand-primary-color;
-            background: none;
+            padding: 1.2rem;
+            background: transparent;
             border: none;
+            font-family: fonts.$font-urbanist;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #ef4444;
             cursor: pointer;
-            text-decoration: underline;
-            padding: 1rem;
+
+            &:hover {
+                text-decoration: underline;
+            }
         }
     }
 }
 
-// Payment Method View
-.ips-payment-method-view {
+// Modal Overlay
+.ips-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
     display: flex;
-    flex-direction: column;
     align-items: center;
-    padding: 6rem 4rem;
-    flex: 1;
-    position: relative;
-    z-index: 1;
+    justify-content: center;
+    padding: 4rem;
+    z-index: 1000;
+}
 
-    h1 {
-        margin-bottom: 1.5rem;
+// Base Modal
+.ips-modal {
+    background: white;
+    border-radius: 2.4rem;
+    padding: 4rem;
+    max-width: 70rem;
+    width: 100%;
+    text-align: center;
+
+    h3 {
+        font-family: fonts.$font-urbanist;
+        font-size: 3rem;
+        font-weight: 800;
+        margin: 0 0 2rem;
     }
 
-    .total-display {
+    p {
         font-family: fonts.$font-urbanist;
-        font-size: 2.4rem;
-        color: #5a6b8a;
-        margin-bottom: 4rem;
+        font-size: 1.8rem;
+        color: #475569;
+        margin: 0 0 2rem;
+    }
+
+    button {
+        padding: 1.5rem 4rem;
+        background: colors.$brand-primary-color;
+        color: white;
+        font-family: fonts.$font-urbanist;
+        font-size: 1.8rem;
+        font-weight: 700;
+        border: none;
+        border-radius: 1.2rem;
+        cursor: pointer;
+
+        &:hover {
+            background: #2a4599;
+        }
+    }
+
+    &.simple {
+        &.success h3 {
+            color: #10b981;
+        }
+        &.error h3 {
+            color: #ef4444;
+        }
+    }
+}
+
+// Cash Modal
+.cash-modal {
+    max-width: 80rem;
+    text-align: left;
+
+    h3 {
+        text-align: center;
+        color: colors.$brand-primary-color;
+    }
+
+    .cash-warning {
+        background: #fef2f2;
+        border: 2px solid #fecaca;
+        border-radius: 1.2rem;
+        padding: 1.5rem 2rem;
+        margin-bottom: 2rem;
 
         strong {
-            color: #0AAD59;
+            font-family: fonts.$font-urbanist;
+            font-size: 1.6rem;
             font-weight: 700;
+            color: #ef4444;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        p {
+            font-size: 1.4rem;
+            color: #7f1d1d;
+            margin: 0;
         }
     }
 
-    .payment-options {
-        display: flex;
-        flex-direction: column;
-        gap: 2.5rem;
-        width: 100%;
-        max-width: 60rem;
+    .cash-summary {
+        background: #f8fafc;
+        border-radius: 1.2rem;
+        padding: 2rem;
+        margin-bottom: 2rem;
 
-        .payment-option {
+        .cash-row {
             display: flex;
-            align-items: center;
-            gap: 3rem;
-            background: white;
-            border: 3px solid transparent;
-            border-radius: 2rem;
-            padding: 3rem;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            box-shadow: 0 8px 30px rgba(15, 32, 67, 0.1);
+            justify-content: space-between;
+            padding: 1rem 0;
+            font-family: fonts.$font-urbanist;
+            font-size: 2rem;
+            border-bottom: 1px solid #e5e7eb;
 
-            &:active {
-                transform: scale(0.98);
+            &:last-child {
+                border-bottom: none;
             }
 
-            &.cash {
-                border-color: #0AAD59;
-
-                &:active {
-                    background: #e8f8ef;
-                }
-            }
-
-            &.card {
-                border-color: colors.$brand-primary-color;
-
-                &:active {
-                    background: #f0f4ff;
-                }
-            }
-
-            img {
-                width: 12rem;
-                height: auto;
-                object-fit: contain;
-            }
-
-            span {
-                font-family: fonts.$font-urbanist;
-                font-size: 2.8rem;
+            .due {
                 font-weight: 700;
-                color: #1a2b4a;
+                color: colors.$brand-primary-color;
+            }
+
+            .inserted {
+                font-weight: 700;
+                color: #10b981;
+            }
+
+            &.status {
+                font-size: 2.4rem;
+                font-weight: 700;
+                padding: 1.5rem 0;
+                margin-top: 0.5rem;
+                border-top: 2px dashed #e5e7eb;
+                border-bottom: none;
+
+                &.remaining span:last-child {
+                    color: #ef4444;
+                }
+
+                &.surplus {
+                    background: #ecfdf5;
+                    margin: 1rem -2rem -2rem;
+                    padding: 1.5rem 2rem;
+                    border-radius: 0 0 1.2rem 1.2rem;
+
+                    span:last-child {
+                        color: #10b981;
+                    }
+                }
+            }
+        }
+    }
+
+    .cash-buttons {
+        margin-bottom: 2rem;
+
+        p {
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: colors.$dark-text-color;
+            margin-bottom: 1rem;
+        }
+
+        .denomination-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+
+            .denom-btn {
+                padding: 1.8rem;
+                font-family: fonts.$font-urbanist;
+                font-size: 2.2rem;
+                font-weight: 800;
+                border: none;
+                border-radius: 1.2rem;
+                cursor: pointer;
+                transition: all 0.15s ease;
+
+                &:active {
+                    transform: scale(0.95);
+                }
+
+                &.d100 { background: #fef3c7; color: #92400e; }
+                &.d200 { background: #d1fae5; color: #065f46; }
+                &.d500 { background: #dbeafe; color: #1e40af; }
+                &.d1000 { background: #fee2e2; color: #991b1b; }
+                &.d2000 { background: #e0e7ff; color: #3730a3; }
+                &.d5000 { background: #fce7f3; color: #9d174d; }
+            }
+        }
+    }
+
+    .cash-actions {
+        display: flex;
+        gap: 1.5rem;
+        padding-top: 2rem;
+        border-top: 2px solid #e5e7eb;
+
+        button {
+            flex: 1;
+            padding: 1.8rem;
+            font-size: 2rem;
+            border-radius: 1.2rem;
+
+            &.cancel {
+                background: #e5e7eb;
+                color: colors.$dark-text-color;
+
+                &:hover {
+                    background: #d1d5db;
+                }
+            }
+
+            &.complete {
+                background: #10b981;
+
+                &:hover {
+                    background: #059669;
+                }
+
+                &:disabled {
+                    background: #d1d5db;
+                    cursor: not-allowed;
+                }
             }
         }
     }
 }
 
-// Success View
-.ips-success-view {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 6rem 4rem;
-    flex: 1;
-    position: relative;
-    z-index: 1;
-
-    .success-icon {
-        width: 14rem;
-        height: 14rem;
-        margin-bottom: 3rem;
-        animation: scaleIn 0.5s ease;
+// Recap Modal
+.recap-modal {
+    .recap-icon {
+        width: 10rem;
+        height: 10rem;
+        margin: 0 auto 2rem;
+        color: #10b981;
 
         svg {
             width: 100%;
@@ -886,74 +753,66 @@
         }
     }
 
-    h1 {
-        color: #0AAD59;
-        margin-bottom: 1rem;
+    h3 {
+        color: #10b981;
     }
 
-    p {
-        font-size: 2.2rem;
-        margin-bottom: 3rem;
-    }
+    .recap-details {
+        background: #f8fafc;
+        border-radius: 1.2rem;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        text-align: left;
 
-    .success-summary {
-        background: white;
-        border-radius: 1.6rem;
-        padding: 2.5rem 3rem;
-        width: 100%;
-        max-width: 50rem;
-        margin-bottom: 4rem;
-        box-shadow: 0 4px 20px rgba(15, 32, 67, 0.08);
-
-        .success-row {
+        .recap-row {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            padding: 1.2rem 0;
+            padding: 0.8rem 0;
             font-family: fonts.$font-urbanist;
-            font-size: 2rem;
-            color: #5a6b8a;
-            border-bottom: 1px solid #f0f4f8;
+            font-size: 1.8rem;
+            color: #475569;
 
-            &:last-child {
-                border-bottom: none;
+            span:last-child {
+                font-weight: 700;
+                color: colors.$dark-text-color;
             }
 
             &.total {
-                font-size: 2.4rem;
-                font-weight: 700;
-                color: #1a2b4a;
+                border-top: 2px solid #e5e7eb;
+                margin-top: 1rem;
                 padding-top: 1.5rem;
+                font-size: 2.2rem;
+                font-weight: 700;
 
                 span:last-child {
-                    color: #0AAD59;
+                    color: colors.$brand-primary-color;
+                    font-size: 2.6rem;
+                }
+            }
+
+            &.surplus {
+                color: #f97316;
+                span:last-child {
+                    color: #f97316;
                 }
             }
         }
     }
 
-    .success-actions {
-        display: flex;
-        flex-direction: column;
-        gap: 1.5rem;
+    .recap-note {
+        font-size: 1.6rem;
+        color: #667085;
+    }
+
+    .finish-btn {
         width: 100%;
-        max-width: 50rem;
-        margin-top: auto;
+        padding: 2rem;
+        font-size: 2.2rem;
+        background: #10b981;
+        margin-top: 1rem;
 
-        .primary-button {
-            width: 100%;
-        }
-
-        .finish-btn {
-            font-family: fonts.$font-urbanist;
-            font-size: 2rem;
-            font-weight: 600;
-            color: #5a6b8a;
-            background: none;
-            border: none;
-            cursor: pointer;
-            text-decoration: underline;
-            padding: 1.5rem;
+        &:hover {
+            background: #059669;
         }
     }
 }
@@ -965,21 +824,7 @@
         opacity: 1;
     }
     50% {
-        transform: scale(1.2);
-        opacity: 0.5;
-    }
-}
-
-@keyframes scaleIn {
-    0% {
-        transform: scale(0);
-        opacity: 0;
-    }
-    50% {
         transform: scale(1.1);
-    }
-    100% {
-        transform: scale(1);
-        opacity: 1;
+        opacity: 0.6;
     }
 }

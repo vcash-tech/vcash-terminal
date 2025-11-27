@@ -1,9 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { NavigateFunction } from 'react-router-dom'
 
-import { cash, creditCard, scanVoucher } from '@/assets/images'
+import { cash, creditCard } from '@/assets/images'
 import Container from '@/components/atoms/container/container'
-import PrimaryButton from '@/components/atoms/primaryButton/primaryButton'
 import Footer from '@/components/organisms/footer/footer'
 import Header from '@/components/organisms/header/header'
 import { useNavigationContext } from '@/hooks/useNavigationHook'
@@ -11,39 +10,22 @@ import { useTranslate } from '@/i18n/useTranslate'
 import { useOrder } from '@/providers'
 import { apiService } from '@/services/apiService'
 
-// IPS QR Code data structure based on Serbian IPS standard
-export interface IPSPaymentData {
+// Bill data structure from IPS QR scan
+interface ScannedBill {
     id: string
-    payerName: string
-    payerAddress: string
-    recipientName: string
-    recipientAddress: string
-    recipientAccount: string
-    amount: string
-    currency: string
-    paymentPurpose: string
-    paymentCode: string
-    model: string
+    recipient: string
+    accountNumber: string
     referenceNumber: string
+    purpose: string
+    originalAmount: number
+    amount: number // Editable amount
+    model: string
 }
 
-type IPSView = 'list' | 'add' | 'edit' | 'summary' | 'payment-method' | 'success'
-type EditingField = 'amount' | 'recipientAccount' | 'referenceNumber' | 'payerName' | 'payerAddress' | null
+type ModalType = 'none' | 'success' | 'error' | 'cash' | 'recap'
 
-const createEmptyPayment = (prefillPayer?: { name: string; address: string }): IPSPaymentData => ({
-    id: Date.now().toString(),
-    payerName: prefillPayer?.name || '',
-    payerAddress: prefillPayer?.address || '',
-    recipientName: '',
-    recipientAddress: '',
-    recipientAccount: '',
-    amount: '',
-    currency: 'RSD',
-    paymentPurpose: '',
-    paymentCode: '289',
-    model: '97',
-    referenceNumber: ''
-})
+// Commission rate (2%)
+const COMMISSION_RATE = 0.02
 
 export default function IpsPaymentTemplate({
     navigate
@@ -55,581 +37,483 @@ export default function IpsPaymentTemplate({
     const { state, setPaymentMethod } = useOrder()
     const sessionId = state.sessionId || undefined
 
-    const [currentView, setCurrentView] = useState<IPSView>('list')
-    const [payments, setPayments] = useState<IPSPaymentData[]>([])
-    const [currentPayment, setCurrentPayment] = useState<IPSPaymentData>(createEmptyPayment())
-    const [editingPaymentId, setEditingPaymentId] = useState<string | null>(null)
-    const [editingField, setEditingField] = useState<EditingField>(null)
-    const [isScanning, setIsScanning] = useState(false)
-
+    // Bills state
+    const [bills, setBills] = useState<ScannedBill[]>([])
+    const [selectedBillId, setSelectedBillId] = useState<string | null>(null)
+    const [editAmount, setEditAmount] = useState<string>('')
+    
+    // Scanning state
+    const [isScanning, setIsScanning] = useState(true)
     const abortControllerRef = useRef<AbortController | null>(null)
 
-    // Get the last payer info for prefilling new payments
-    const getLastPayerInfo = useCallback(() => {
-        if (payments.length > 0) {
-            const lastPayment = payments[payments.length - 1]
-            return { name: lastPayment.payerName, address: lastPayment.payerAddress }
-        }
-        return { name: '', address: '' }
-    }, [payments])
+    // Modal state
+    const [modalType, setModalType] = useState<ModalType>('none')
+    const [modalMessage, setModalMessage] = useState('')
 
-    // Service fee calculation (mock - 50 RSD per payment)
-    const SERVICE_FEE_PER_PAYMENT = 50
+    // Cash payment state
+    const [cashInserted, setCashInserted] = useState(0)
+
+    // Get selected bill
+    const selectedBill = bills.find(b => b.id === selectedBillId) || null
 
     // Calculate totals
-    const totalAmount = payments.reduce((sum, p) => sum + (parseFloat(p.amount) || 0), 0)
-    const totalFees = payments.length * SERVICE_FEE_PER_PAYMENT
-    const grandTotal = totalAmount + totalFees
+    const totalBillAmount = bills.reduce((sum, bill) => sum + bill.amount, 0)
+    const totalCommission = totalBillAmount * COMMISSION_RATE
+    const finalAmount = totalBillAmount + totalCommission
 
-    // Parse IPS QR code data
-    const parseIPSQRCode = useCallback((qrData: string): Partial<IPSPaymentData> => {
-        // IPS QR codes use specific format - this is simplified
+    // Format currency
+    const formatRSD = (num: number): string => {
+        return num.toLocaleString('sr-RS', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+    }
+
+    // Parse IPS QR code
+    const parseIPSQRCode = useCallback((qrData: string): Omit<ScannedBill, 'id'> => {
+        // IPS QR format parsing (simplified)
         const parts = qrData.split('|')
+        const amount = parseFloat(parts[4]) || Math.floor(Math.random() * 5000) + 500
         return {
-            recipientName: parts[5] || '',
-            recipientAddress: parts[6] || '',
-            recipientAccount: parts[7] || '',
-            amount: parts[4] || '',
-            paymentPurpose: parts[9] || '',
-            paymentCode: parts[3] || '289',
-            model: parts[10] || '97',
-            referenceNumber: parts[11] || ''
+            recipient: parts[5] || ['Infostan Beograd', 'Telekom Srbija', 'EPS Snabdevanje', 'Parking Servis'][Math.floor(Math.random() * 4)],
+            accountNumber: parts[7] || `840-${Math.random().toString().slice(2, 15)}-05`,
+            referenceNumber: parts[11] || `97 ${Math.floor(Math.random() * 100)}-${Math.random().toString().slice(2, 12)}`,
+            purpose: parts[9] || 'Komunalne usluge',
+            originalAmount: amount,
+            amount: amount,
+            model: parts[10] || '97'
         }
     }, [])
 
-    // Handle QR scan result
-    const handleScan = useCallback(
-        (value: string) => {
-            if (value) {
-                const parsedData = parseIPSQRCode(value)
-                const lastPayer = getLastPayerInfo()
-                const newPayment: IPSPaymentData = {
-                    ...createEmptyPayment(lastPayer),
-                    ...parsedData
-                }
-                setPayments((prev) => [...prev, newPayment])
-                setIsScanning(false)
-                setCurrentView('list')
+    // Handle successful scan
+    const handleScan = useCallback((value: string) => {
+        if (value) {
+            const billData = parseIPSQRCode(value)
+            const newBill: ScannedBill = {
+                id: Date.now().toString(),
+                ...billData
             }
-        },
-        [parseIPSQRCode, getLastPayerInfo]
-    )
-
-    // Start QR scanning
-    useEffect(() => {
-        if (!isScanning) return
-
-        const startScanning = async () => {
-            try {
-                abortControllerRef.current = new AbortController()
-                const value = await apiService.startQrScanner(
-                    abortControllerRef.current.signal,
-                    sessionId
-                )
-                handleScan(value || '')
-            } catch (e) {
-                console.log('IPS Scanner error:', e)
-                setIsScanning(false)
-            }
+            setBills(prev => [...prev, newBill])
+            setSelectedBillId(newBill.id)
+            setEditAmount(newBill.amount.toFixed(2))
+            
+            // Show success briefly
+            setModalMessage(t('ips.scanSuccess', { recipient: newBill.recipient }))
+            setModalType('success')
+            setTimeout(() => setModalType('none'), 2000)
         }
+    }, [parseIPSQRCode, t])
 
+    // Start/restart scanning
+    const startScanning = useCallback(async () => {
+        if (abortControllerRef.current) {
+            abortControllerRef.current.abort()
+        }
+        
+        setIsScanning(true)
+        
+        try {
+            abortControllerRef.current = new AbortController()
+            const value = await apiService.startQrScanner(
+                abortControllerRef.current.signal,
+                sessionId
+            )
+            handleScan(value || '')
+            // Continue scanning for more bills
+            startScanning()
+        } catch (e) {
+            console.log('Scanner stopped or error:', e)
+            setIsScanning(false)
+        }
+    }, [handleScan, sessionId])
+
+    // Start scanning on mount
+    useEffect(() => {
         startScanning()
-
+        
         return () => {
             if (abortControllerRef.current) {
                 abortControllerRef.current.abort()
-                abortControllerRef.current = null
             }
             apiService.stopQrScanner(sessionId)
         }
-    }, [isScanning, handleScan, sessionId])
+    }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
-    // Format account number for display (XXX-XXXXXXXXXXX-XX)
-    const formatAccountNumber = (account: string): string => {
-        const digits = account.replace(/\D/g, '')
-        if (digits.length <= 3) return digits
-        if (digits.length <= 13) return `${digits.slice(0, 3)}-${digits.slice(3)}`
-        return `${digits.slice(0, 3)}-${digits.slice(3, 13)}-${digits.slice(13, 15)}`
-    }
-
-    // Format currency
-    const formatCurrency = (amount: number): string => {
-        return amount.toLocaleString('sr-RS', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
-    }
-
-    // Handle keyboard input (numeric fields only)
-    const handleKeyPress = (key: string) => {
-        if (!editingField || editingField === 'payerName' || editingField === 'payerAddress') return
-
-        setCurrentPayment((prev) => {
-            const currentValue = prev[editingField] || ''
-            
-            if (key === 'backspace') {
-                return { ...prev, [editingField]: currentValue.slice(0, -1) }
-            }
-            if (key === 'clear') {
-                return { ...prev, [editingField]: '' }
-            }
-            if (key === '.' && editingField === 'amount') {
-                if (!currentValue.includes('.')) {
-                    return { ...prev, [editingField]: currentValue + '.' }
-                }
-                return prev
-            }
-            
-            // Limit account number to 18 digits
-            if (editingField === 'recipientAccount' && currentValue.replace(/\D/g, '').length >= 18) {
-                return prev
-            }
-            
-            return { ...prev, [editingField]: currentValue + key }
-        })
-    }
-
-    // Handle text field changes
-    const handleTextFieldChange = (field: 'payerName' | 'payerAddress', value: string) => {
-        setCurrentPayment((prev) => ({ ...prev, [field]: value }))
-    }
-
-    // Check if current field needs numeric keyboard
-    const isNumericField = editingField === 'amount' || editingField === 'recipientAccount' || editingField === 'referenceNumber'
-
-    // Add current payment to list
-    const addPayment = () => {
-        if (currentPayment.recipientAccount && currentPayment.amount) {
-            if (editingPaymentId) {
-                setPayments((prev) =>
-                    prev.map((p) => (p.id === editingPaymentId ? currentPayment : p))
-                )
-                setEditingPaymentId(null)
-            } else {
-                setPayments((prev) => [...prev, currentPayment])
-            }
-            
-            setCurrentPayment(createEmptyPayment(getLastPayerInfo()))
-            setEditingField(null)
-            setCurrentView('list')
+    // Select a bill
+    const selectBill = (id: string) => {
+        setSelectedBillId(id)
+        const bill = bills.find(b => b.id === id)
+        if (bill) {
+            setEditAmount(bill.amount.toFixed(2))
         }
     }
 
-    // Edit payment
-    const editPayment = (payment: IPSPaymentData) => {
-        setCurrentPayment(payment)
-        setEditingPaymentId(payment.id)
-        setCurrentView('edit')
-    }
-
-    // Remove payment
-    const removePayment = (id: string) => {
-        setPayments((prev) => prev.filter((p) => p.id !== id))
-    }
-
-    // Handle payment method selection
-    const handlePaymentMethodSelect = (method: 'cash' | 'card') => {
-        setPaymentMethod(method)
-        // In a real implementation, this would process the payment
-        // For now, just show success
-        setCurrentView('success')
-    }
-
-    // Go back handler
-    const handleBack = () => {
-        if (currentView === 'add' || currentView === 'edit') {
-            setCurrentPayment(createEmptyPayment(getLastPayerInfo()))
-            setEditingPaymentId(null)
-            setEditingField(null)
-            setCurrentView('list')
-        } else if (currentView === 'summary') {
-            setCurrentView('list')
-        } else if (currentView === 'payment-method') {
-            setCurrentView('summary')
-        } else {
-            navigate(startUrl ?? '/welcome')
+    // Remove a bill
+    const removeBill = (id: string) => {
+        setBills(prev => prev.filter(b => b.id !== id))
+        if (selectedBillId === id) {
+            setSelectedBillId(null)
+            setEditAmount('')
         }
     }
 
-    // Render numeric keyboard
-    const renderKeyboard = () => (
-        <div className="ips-keyboard">
-            <div className="keyboard-grid">
-                {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((num) => (
-                    <button
-                        key={num}
-                        className="key"
-                        onClick={() => handleKeyPress(num.toString())}>
-                        {num}
-                    </button>
-                ))}
-                <button
-                    className="key special"
-                    onClick={() => handleKeyPress('.')}
-                    disabled={editingField !== 'amount'}>
-                    {editingField === 'amount' ? '.' : ''}
-                </button>
-                <button className="key" onClick={() => handleKeyPress('0')}>
-                    0
-                </button>
-                <button
-                    className="key special backspace"
-                    onClick={() => handleKeyPress('backspace')}>
-                    ⌫
-                </button>
-            </div>
-        </div>
-    )
+    // Save edited amount
+    const saveAmount = () => {
+        if (!selectedBill) return
+        
+        const newAmount = parseFloat(editAmount)
+        if (isNaN(newAmount) || newAmount < selectedBill.originalAmount) {
+            setModalMessage(t('ips.amountTooLow'))
+            setModalType('error')
+            return
+        }
 
-    // Render list view (main view)
-    const renderListView = () => (
-        <div className="ips-list-view">
-            <div className="list-header">
-                <h1>{t('ips.title')}</h1>
-                <p>{t('ips.subtitle')}</p>
-            </div>
+        setBills(prev => prev.map(b => 
+            b.id === selectedBillId ? { ...b, amount: newAmount } : b
+        ))
+        
+        setModalMessage(t('ips.amountSaved'))
+        setModalType('success')
+        setTimeout(() => setModalType('none'), 1500)
+    }
 
-            {payments.length > 0 && (
-                <div className="payments-list">
-                    {payments.map((payment, index) => (
-                        <div key={payment.id} className="payment-item">
-                            <div className="payment-number">{index + 1}</div>
-                            <div className="payment-details">
-                                <div className="payment-recipient">
-                                    {payment.recipientName || formatAccountNumber(payment.recipientAccount)}
-                                </div>
-                                <div className="payment-purpose">
-                                    {payment.paymentPurpose || t('ips.noDescription')}
-                                </div>
-                            </div>
-                            <div className="payment-amount">
-                                {formatCurrency(parseFloat(payment.amount) || 0)} <span>RSD</span>
-                            </div>
-                            <div className="payment-actions">
-                                <button className="edit-btn" onClick={() => editPayment(payment)}>
-                                    ✎
-                                </button>
-                                <button className="remove-btn" onClick={() => removePayment(payment.id)}>
-                                    ×
-                                </button>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            )}
+    // Open cash payment modal
+    const openCashModal = () => {
+        setCashInserted(0)
+        setModalType('cash')
+    }
 
-            <div className="add-payment-buttons">
-                <button
-                    className="add-button scan"
-                    onClick={() => {
-                        setCurrentPayment(createEmptyPayment(getLastPayerInfo()))
-                        setIsScanning(true)
-                        setCurrentView('add')
-                    }}>
-                    <div className="button-icon">📷</div>
-                    <div className="button-text">
-                        <span className="button-title">{t('ips.scanQR')}</span>
-                        <span className="button-subtitle">{t('ips.scanQRDesc')}</span>
-                    </div>
-                </button>
-                <button
-                    className="add-button manual"
-                    onClick={() => {
-                        setCurrentPayment(createEmptyPayment(getLastPayerInfo()))
-                        setCurrentView('add')
-                        setEditingField('recipientAccount')
-                    }}>
-                    <div className="button-icon">✍</div>
-                    <div className="button-text">
-                        <span className="button-title">{t('ips.manualEntry')}</span>
-                        <span className="button-subtitle">{t('ips.manualEntryDesc')}</span>
-                    </div>
-                </button>
-            </div>
+    // Insert cash (simulation)
+    const insertCash = (amount: number) => {
+        setCashInserted(prev => prev + amount)
+    }
 
-            {payments.length > 0 && (
-                <div className="list-summary">
-                    <div className="summary-row">
-                        <span>{t('ips.paymentsCount', { count: payments.length })}</span>
-                        <span className="total">{formatCurrency(totalAmount)} RSD</span>
-                    </div>
-                    <PrimaryButton
-                        text={t('ips.continue')}
-                        callback={() => setCurrentView('summary')}
-                    />
-                </div>
-            )}
+    // Complete cash payment
+    const completeCashPayment = () => {
+        if (cashInserted >= finalAmount) {
+            setModalType('recap')
+        }
+    }
 
-            {payments.length === 0 && (
-                <div className="empty-state">
-                    <div className="empty-icon">📋</div>
-                    <p>{t('ips.emptyState')}</p>
-                </div>
-            )}
-        </div>
-    )
+    // Process card payment
+    const processCardPayment = () => {
+        setPaymentMethod('card')
+        setModalType('recap')
+    }
 
-    // Render add/edit view
-    const renderAddEditView = () => (
-        <div className="ips-add-view">
-            {isScanning ? (
-                <div className="scan-container">
-                    <h2>{t('ips.scanTitle')}</h2>
-                    <div className="scan-area">
-                        <img src={scanVoucher} alt={t('ips.scannerAlt')} />
-                        <div className="scan-indicator">
-                            <span className="pulse"></span>
-                            {t('ips.scanActive')}
-                        </div>
-                    </div>
-                    <button
-                        className="switch-to-manual"
-                        onClick={() => {
-                            setIsScanning(false)
-                            setEditingField('recipientAccount')
-                        }}>
-                        {t('ips.switchToManual')}
-                    </button>
-                </div>
-            ) : (
-                <div className="form-container">
-                    <h2>{editingPaymentId ? t('ips.editPayment') : t('ips.addPayment')}</h2>
-                    
-                    <div className="form-fields">
-                        {/* Payer info section */}
-                        <div className="payer-section-inline">
-                            <div
-                                className={`field text-field ${editingField === 'payerName' ? 'active' : ''}`}
-                                onClick={() => setEditingField('payerName')}>
-                                <label>{t('ips.payerName')}</label>
-                                <input
-                                    type="text"
-                                    value={currentPayment.payerName}
-                                    onChange={(e) => handleTextFieldChange('payerName', e.target.value)}
-                                    onFocus={() => setEditingField('payerName')}
-                                    placeholder={t('ips.payerNamePlaceholder')}
-                                />
-                            </div>
-                            <div
-                                className={`field text-field ${editingField === 'payerAddress' ? 'active' : ''}`}
-                                onClick={() => setEditingField('payerAddress')}>
-                                <label>{t('ips.payerAddress')}</label>
-                                <input
-                                    type="text"
-                                    value={currentPayment.payerAddress}
-                                    onChange={(e) => handleTextFieldChange('payerAddress', e.target.value)}
-                                    onFocus={() => setEditingField('payerAddress')}
-                                    placeholder={t('ips.payerAddressPlaceholder')}
-                                />
-                            </div>
-                        </div>
+    // Finish and reset
+    const finishPayment = () => {
+        setModalType('none')
+        setBills([])
+        setSelectedBillId(null)
+        setCashInserted(0)
+        navigate(startUrl ?? '/welcome')
+    }
 
-                        <div className="divider"></div>
+    // Reset/cancel
+    const resetAll = () => {
+        setBills([])
+        setSelectedBillId(null)
+        setCashInserted(0)
+        setModalType('none')
+        navigate(startUrl ?? '/welcome')
+    }
 
-                        {/* Recipient info section */}
-                        <div
-                            className={`field ${editingField === 'recipientAccount' ? 'active' : ''}`}
-                            onClick={() => setEditingField('recipientAccount')}>
-                            <label>{t('ips.recipientAccount')}</label>
-                            <div className="field-value account">
-                                {formatAccountNumber(currentPayment.recipientAccount) || (
-                                    <span className="placeholder">{t('ips.accountPlaceholder')}</span>
-                                )}
-                            </div>
-                        </div>
+    // Cash remaining calculation
+    const cashRemaining = finalAmount - cashInserted
+    const hasSurplus = cashRemaining < 0
 
-                        <div
-                            className={`field ${editingField === 'amount' ? 'active' : ''}`}
-                            onClick={() => setEditingField('amount')}>
-                            <label>{t('ips.amount')}</label>
-                            <div className="field-value amount">
-                                {currentPayment.amount || '0'}
-                                <span className="currency">RSD</span>
-                            </div>
-                        </div>
-
-                        <div
-                            className={`field ${editingField === 'referenceNumber' ? 'active' : ''}`}
-                            onClick={() => setEditingField('referenceNumber')}>
-                            <label>{t('ips.referenceNumber')}</label>
-                            <div className="field-value">
-                                <span className="model">{currentPayment.model}-</span>
-                                {currentPayment.referenceNumber || (
-                                    <span className="placeholder">{t('ips.optional')}</span>
-                                )}
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="form-actions">
-                        <PrimaryButton
-                            text={editingPaymentId ? t('ips.saveChanges') : t('ips.addToList')}
-                            callback={addPayment}
-                            isDisabled={!currentPayment.recipientAccount || !currentPayment.amount}
-                        />
-                    </div>
-                </div>
-            )}
-
-            {!isScanning && isNumericField && renderKeyboard()}
-        </div>
-    )
-
-    // Render summary view
-    const renderSummaryView = () => (
-        <div className="ips-summary-view">
-            <h1>{t('ips.summaryTitle')}</h1>
+    return (
+        <Container isFullHeight={true} className="ips-container">
+            <Header
+                navigationBackText={t('header.back')}
+                navigateBackUrl={startUrl ?? '/welcome'}
+            />
             
-            <div className="summary-card">
-                <div className="payments-summary">
-                    <h3>{t('ips.paymentsSummary')}</h3>
-                    {payments.map((payment, index) => (
-                        <div key={payment.id} className="summary-item">
-                            <div className="item-info">
-                                <span className="item-number">{index + 1}.</span>
-                                <div className="item-details">
-                                    <span className="item-name">
-                                        {payment.recipientName || formatAccountNumber(payment.recipientAccount)}
-                                    </span>
-                                    {payment.payerName && (
-                                        <span className="item-payer">
-                                            {t('ips.from')}: {payment.payerName}
-                                        </span>
+            <div className="ips-payment-screen">
+                {/* Header Section */}
+                <div className="ips-header">
+                    <h1>{t('ips.title')}</h1>
+                    <p>{t('ips.headerSubtitle')}</p>
+                </div>
+
+                {/* Main Content */}
+                <div className="ips-main">
+                    {/* Bills List Section */}
+                    <div className="bills-section">
+                        <h2 className="section-title">
+                            {t('ips.scannedBills')} <span className="count">({bills.length})</span>
+                        </h2>
+
+                        {bills.length === 0 ? (
+                            <div className="scanning-prompt">
+                                <div className="scan-icon">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M4 7V4m0 0h3M4 4l.113.113M17 4h3m0 0v3m0-3l-.113.113M4 17v3m0 0h3M4 20l.113-.113M17 20h3m0 0v-3m0 3l-.113-.113M12 21a9 9 0 100-18 9 9 0 000 18z" />
+                                    </svg>
+                                </div>
+                                <p className="prompt-text">{t('ips.scanPrompt')}</p>
+                                <p className="prompt-subtext">{t('ips.scanPromptSub')}</p>
+                                {isScanning && (
+                                    <div className="scanning-indicator">
+                                        <span className="pulse"></span>
+                                        {t('ips.scannerActive')}
+                                    </div>
+                                )}
+                            </div>
+                        ) : (
+                            <div className="bills-list">
+                                {bills.map(bill => (
+                                    <div 
+                                        key={bill.id}
+                                        className={`bill-item ${selectedBillId === bill.id ? 'selected' : ''}`}
+                                        onClick={() => selectBill(bill.id)}
+                                    >
+                                        <div className="bill-info">
+                                            <span className="bill-recipient">{bill.recipient}</span>
+                                            <span className="bill-reference">{t('ips.refNumber')}: {bill.referenceNumber}</span>
+                                        </div>
+                                        <div className="bill-amount-section">
+                                            <span className="bill-amount">{formatRSD(bill.amount)} RSD</span>
+                                            {bill.amount !== bill.originalAmount && (
+                                                <span className="amount-modified">{t('ips.modified')}</span>
+                                            )}
+                                        </div>
+                                        <button 
+                                            className="remove-btn"
+                                            onClick={(e) => { e.stopPropagation(); removeBill(bill.id) }}
+                                        >
+                                            ×
+                                        </button>
+                                    </div>
+                                ))}
+                                
+                                {isScanning && (
+                                    <div className="scanning-indicator inline">
+                                        <span className="pulse"></span>
+                                        {t('ips.scanMore')}
+                                    </div>
+                                )}
+                            </div>
+                        )}
+                    </div>
+
+                    {/* Bill Details Section */}
+                    <div className="details-section">
+                        <h2 className="section-title">{t('ips.detailsTitle')}</h2>
+                        
+                        {!selectedBill ? (
+                            <div className="details-prompt">
+                                <p>{t('ips.selectBillPrompt')}</p>
+                            </div>
+                        ) : (
+                            <div className="bill-details">
+                                <div className="detail-grid">
+                                    <div className="detail-item">
+                                        <span className="detail-label">{t('ips.recipient')}:</span>
+                                        <span className="detail-value">{selectedBill.recipient}</span>
+                                    </div>
+                                    <div className="detail-item">
+                                        <span className="detail-label">{t('ips.account')}:</span>
+                                        <span className="detail-value mono">{selectedBill.accountNumber}</span>
+                                    </div>
+                                    <div className="detail-item full">
+                                        <span className="detail-label">{t('ips.reference')}:</span>
+                                        <span className="detail-value mono">{selectedBill.referenceNumber}</span>
+                                    </div>
+                                    <div className="detail-item full">
+                                        <span className="detail-label">{t('ips.purpose')}:</span>
+                                        <span className="detail-value">{selectedBill.purpose}</span>
+                                    </div>
+                                </div>
+
+                                <div className="amount-edit">
+                                    <label>{t('ips.amountLabel')} (RSD):</label>
+                                    <div className="amount-input-wrapper">
+                                        <input
+                                            type="number"
+                                            value={editAmount}
+                                            onChange={(e) => setEditAmount(e.target.value)}
+                                            min={selectedBill.originalAmount}
+                                            step="0.01"
+                                        />
+                                        <button 
+                                            className="save-btn"
+                                            onClick={saveAmount}
+                                            disabled={parseFloat(editAmount) === selectedBill.amount}
+                                        >
+                                            {t('ips.saveAmount')}
+                                        </button>
+                                    </div>
+                                    {parseFloat(editAmount) < selectedBill.originalAmount && (
+                                        <p className="amount-error">{t('ips.amountMinError')}</p>
                                     )}
                                 </div>
                             </div>
-                            <span className="item-amount">
-                                {formatCurrency(parseFloat(payment.amount) || 0)} RSD
-                            </span>
+                        )}
+                    </div>
+                </div>
+
+                {/* Summary Section */}
+                <div className="summary-section">
+                    <h2 className="section-title">{t('ips.summaryTitle')}</h2>
+                    
+                    <div className="summary-card">
+                        <div className="summary-row">
+                            <span>{t('ips.totalBills')}:</span>
+                            <span className="value">{formatRSD(totalBillAmount)} RSD</span>
                         </div>
-                    ))}
-                </div>
-
-                <div className="totals-section">
-                    <div className="total-row">
-                        <span>{t('ips.subtotal')}</span>
-                        <span>{formatCurrency(totalAmount)} RSD</span>
+                        <div className="summary-row commission">
+                            <span>{t('ips.commission')} (2%):</span>
+                            <span className="value">{formatRSD(totalCommission)} RSD</span>
+                        </div>
+                        <div className="summary-row total">
+                            <span>{t('ips.totalToPay')}:</span>
+                            <span className="value">{formatRSD(finalAmount)} RSD</span>
+                        </div>
                     </div>
-                    <div className="total-row fees">
-                        <span>{t('ips.serviceFee')} ({payments.length}x {SERVICE_FEE_PER_PAYMENT} RSD)</span>
-                        <span>{formatCurrency(totalFees)} RSD</span>
+
+                    {/* Payment Buttons */}
+                    <div className="payment-section">
+                        <h3>{t('ips.paymentMethod')}</h3>
+                        <div className="payment-buttons">
+                            <button 
+                                className="payment-btn cash"
+                                onClick={openCashModal}
+                                disabled={bills.length === 0}
+                            >
+                                <img src={cash} alt="" />
+                                <span>{t('selectPaymentMethod.cashPayment')}</span>
+                            </button>
+                            <button 
+                                className="payment-btn card"
+                                onClick={processCardPayment}
+                                disabled={bills.length === 0}
+                            >
+                                <img src={creditCard} alt="" />
+                                <span>{t('selectPaymentMethod.cardPayment')}</span>
+                            </button>
+                        </div>
+                        <button className="cancel-btn" onClick={resetAll}>
+                            {t('ips.cancelTransaction')}
+                        </button>
                     </div>
-                    <div className="total-row grand-total">
-                        <span>{t('ips.totalToPay')}</span>
-                        <span>{formatCurrency(grandTotal)} RSD</span>
+                </div>
+            </div>
+
+            {/* Success/Error Modal */}
+            {(modalType === 'success' || modalType === 'error') && (
+                <div className="ips-modal-overlay">
+                    <div className={`ips-modal simple ${modalType}`}>
+                        <h3>{modalType === 'success' ? t('ips.success') : t('ips.error')}</h3>
+                        <p>{modalMessage}</p>
+                        <button onClick={() => setModalType('none')}>
+                            {t('common.confirm')}
+                        </button>
                     </div>
                 </div>
-            </div>
+            )}
 
-            <div className="summary-actions">
-                <PrimaryButton
-                    text={t('ips.proceedToPayment')}
-                    callback={() => setCurrentView('payment-method')}
-                />
-                <button className="edit-payments-btn" onClick={() => setCurrentView('list')}>
-                    {t('ips.editPayments')}
-                </button>
-            </div>
-        </div>
-    )
+            {/* Cash Payment Modal */}
+            {modalType === 'cash' && (
+                <div className="ips-modal-overlay">
+                    <div className="ips-modal cash-modal">
+                        <h3>{t('ips.cashPayment')}</h3>
+                        
+                        <div className="cash-warning">
+                            <strong>{t('ips.importantWarning')}</strong>
+                            <p>{t('ips.noChangeWarning')}</p>
+                        </div>
 
-    // Render payment method selection
-    const renderPaymentMethodView = () => (
-        <div className="ips-payment-method-view">
-            <h1>{t('selectPaymentMethod.title')}</h1>
-            <p className="total-display">
-                {t('ips.totalToPay')}: <strong>{formatCurrency(grandTotal)} RSD</strong>
-            </p>
+                        <div className="cash-summary">
+                            <div className="cash-row">
+                                <span>{t('ips.totalDue')}:</span>
+                                <span className="due">{formatRSD(finalAmount)} RSD</span>
+                            </div>
+                            <div className="cash-row">
+                                <span>{t('ips.inserted')}:</span>
+                                <span className="inserted">{formatRSD(cashInserted)} RSD</span>
+                            </div>
+                            <div className={`cash-row status ${hasSurplus ? 'surplus' : 'remaining'}`}>
+                                <span>{hasSurplus ? t('ips.surplus') : t('ips.remaining')}:</span>
+                                <span>{formatRSD(Math.abs(cashRemaining))} RSD</span>
+                            </div>
+                        </div>
 
-            <div className="payment-options">
-                <button
-                    className="payment-option cash"
-                    onClick={() => handlePaymentMethodSelect('cash')}>
-                    <img src={cash} alt={t('selectPaymentMethod.cashPayment')} />
-                    <span>{t('selectPaymentMethod.cashPayment')}</span>
-                </button>
-                <button
-                    className="payment-option card"
-                    onClick={() => handlePaymentMethodSelect('card')}>
-                    <img src={creditCard} alt={t('selectPaymentMethod.cardPayment')} />
-                    <span>{t('selectPaymentMethod.cardPayment')}</span>
-                </button>
-            </div>
-        </div>
-    )
+                        <div className="cash-buttons">
+                            <p>{t('ips.insertBills')}:</p>
+                            <div className="denomination-grid">
+                                {[100, 200, 500, 1000, 2000, 5000].map(amount => (
+                                    <button 
+                                        key={amount}
+                                        onClick={() => insertCash(amount)}
+                                        className={`denom-btn d${amount}`}
+                                    >
+                                        {amount}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
 
-    // Render success view
-    const renderSuccessView = () => (
-        <div className="ips-success-view">
-            <div className="success-icon">
-                <svg viewBox="0 0 120 120" fill="none">
-                    <circle cx="60" cy="60" r="60" fill="#0AAD59" />
-                    <path
-                        d="M35 60L52 77L85 44"
-                        stroke="white"
-                        strokeWidth="8"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                    />
-                </svg>
-            </div>
-            <h1>{t('ips.successTitle')}</h1>
-            <p>{t('ips.successDescription')}</p>
-
-            <div className="success-summary">
-                <div className="success-row">
-                    <span>{t('ips.paymentsProcessed')}</span>
-                    <span>{payments.length}</span>
+                        <div className="cash-actions">
+                            <button 
+                                className="cancel"
+                                onClick={() => setModalType('none')}
+                            >
+                                {t('common.cancel')}
+                            </button>
+                            <button 
+                                className="complete"
+                                onClick={completeCashPayment}
+                                disabled={cashInserted < finalAmount}
+                            >
+                                {t('ips.completePayment')}
+                            </button>
+                        </div>
+                    </div>
                 </div>
-                <div className="success-row total">
-                    <span>{t('ips.totalPaid')}</span>
-                    <span>{formatCurrency(grandTotal)} RSD</span>
+            )}
+
+            {/* Recap Modal */}
+            {modalType === 'recap' && (
+                <div className="ips-modal-overlay">
+                    <div className="ips-modal recap-modal">
+                        <div className="recap-icon">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <circle cx="12" cy="12" r="10" fill="currentColor"/>
+                                <path d="M8 12l2.5 2.5L16 9" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                            </svg>
+                        </div>
+                        
+                        <h3>{t('ips.paymentComplete')}</h3>
+                        
+                        <div className="recap-details">
+                            <div className="recap-row">
+                                <span>{t('ips.billsTotal')}:</span>
+                                <span>{formatRSD(totalBillAmount)} RSD</span>
+                            </div>
+                            <div className="recap-row">
+                                <span>{t('ips.commission')}:</span>
+                                <span>{formatRSD(totalCommission)} RSD</span>
+                            </div>
+                            <div className="recap-row total">
+                                <span>{t('ips.totalPaid')}:</span>
+                                <span>{formatRSD(finalAmount)} RSD</span>
+                            </div>
+                            {cashInserted > finalAmount && (
+                                <div className="recap-row surplus">
+                                    <span>{t('ips.surplusVoucher')}:</span>
+                                    <span>{formatRSD(cashInserted - finalAmount)} RSD</span>
+                                </div>
+                            )}
+                        </div>
+
+                        <p className="recap-note">{t('ips.collectReceipt')}</p>
+
+                        <button className="finish-btn" onClick={finishPayment}>
+                            {t('ips.finish')}
+                        </button>
+                    </div>
                 </div>
-            </div>
+            )}
 
-            <div className="success-actions">
-                <PrimaryButton
-                    text={t('ips.newPayment')}
-                    callback={() => {
-                        setPayments([])
-                        setCurrentPayment(createEmptyPayment())
-                        setCurrentView('list')
-                    }}
-                />
-                <button
-                    className="finish-btn"
-                    onClick={() => navigate(startUrl ?? '/welcome')}>
-                    {t('ips.finish')}
-                </button>
-            </div>
-        </div>
-    )
-
-    // Determine back URL based on current view
-    const getBackUrl = () => {
-        if (currentView === 'list') return startUrl ?? '/welcome'
-        return undefined
-    }
-
-    return (
-        <Container isFullHeight={true}>
-            <Header
-                navigationBackText={t('header.back')}
-                navigateBackUrl={getBackUrl()}
-                {...(currentView !== 'list' && { 
-                    navigateBackUrl: undefined 
-                })}
-            />
-            <div className="ips-payment">
-                {currentView !== 'list' && currentView !== 'success' && (
-                    <button className="back-button" onClick={handleBack}>
-                        ← {t('header.back')}
-                    </button>
-                )}
-                
-                {currentView === 'list' && renderListView()}
-                {(currentView === 'add' || currentView === 'edit') && renderAddEditView()}
-                {currentView === 'summary' && renderSummaryView()}
-                {currentView === 'payment-method' && renderPaymentMethodView()}
-                {currentView === 'success' && renderSuccessView()}
-            </div>
             <Footer />
         </Container>
     )
