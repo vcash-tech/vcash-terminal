@@ -14,7 +14,6 @@ import { VoucherConfirmation } from '@/data/entities/voucher-confirmation'
 import { mockedPrinterData, shouldMockPrinter } from '@/helpers/mock.printer'
 import { useCheckInternetConnection } from '@/hooks'
 import { useTranslate } from '@/i18n/useTranslate'
-import { useOrder } from '@/providers'
 import { apiService } from '@/services/apiService'
 import { AuthService } from '@/services/authService'
 import { TransactionService } from '@/services/transactionService'
@@ -43,8 +42,6 @@ export default function InsertCashTemplate({
     selectedVoucherType: string
 }) {
     const { t } = useTranslate()
-    const { state } = useOrder()
-    const sessionId = state.sessionId || undefined
     const [amount, _setAmount] = useState<number>(0)
     const [isVoucherPrinting, setIsVoucherPrinting] = useState<boolean>(false)
     const [showPrintVoucher, setShowPrintVoucher] = useState<unknown>(null)
@@ -97,11 +94,7 @@ export default function InsertCashTemplate({
                 return
             }
 
-            const result = await apiService.activate(
-                jwt,
-                selectedVoucherType,
-                sessionId
-            )
+            const result = await apiService.activate(jwt, selectedVoucherType)
             console.log('result', result)
             if (!result.activated) {
                 setErrorMessage(t('insertCash.errors.cashAcceptorError'))
@@ -112,16 +105,16 @@ export default function InsertCashTemplate({
             setErrorMessage(t('insertCash.errors.cashAcceptorError'))
             setShowError(true)
         }
-    }, [getJwtToken, t, sessionId, selectedVoucherType])
+    }, [getJwtToken, t])
 
     const callDeactivate = useCallback(async () => {
         try {
-            await apiService.deactivate(sessionId)
+            await apiService.deactivate()
         } catch (error) {
             console.error('Deactivation error:', error)
             // Silent failure for deactivate as per requirements
         }
-    }, [sessionId])
+    }, [])
 
     useEffect(() => {
         console.log('useEffect za aktivaciju')
@@ -277,7 +270,7 @@ export default function InsertCashTemplate({
             console.log('Printing voucher with URL:', printUrl)
 
             // Add 10-second timeout to print operation
-            const printPromise = apiService.print(printUrl, sessionId)
+            const printPromise = apiService.print(printUrl)
             const timeoutPromise = new Promise<{
                 success: boolean
                 message: string

@@ -16,8 +16,7 @@ export type PaymentActivationError = 'cashAcceptorError' | 'authRequired'
 
 export const activatePaymentSession = async (
     voucherTypeId: string,
-    onError: (error: PaymentActivationError) => void,
-    sessionId?: string
+    onError: (error: PaymentActivationError) => void
 ) => {
     console.log('callActivate')
     try {
@@ -33,7 +32,7 @@ export const activatePaymentSession = async (
             return
         }
 
-        const result = await apiService.activate(jwt, voucherTypeId, sessionId)
+        const result = await apiService.activate(jwt, voucherTypeId)
         console.log('result', result)
         if (!result.activated) {
             onError('cashAcceptorError')
@@ -47,9 +46,9 @@ export const activatePaymentSession = async (
 }
 
 // old callDeactivate
-export const deactivatePaymentSession = async (sessionId?: string) => {
+export const deactivatePaymentSession = async () => {
     try {
-        await apiService.deactivate(sessionId)
+        await apiService.deactivate()
     } catch (error) {
         console.error('Deactivation error:', error)
         // Silent failure for deactivate as per requirements
@@ -114,8 +113,7 @@ export const createVoucherPrintObject = (
 export const printVoucher = async (
     voucherResponse: VoucherResponse,
     voucherTypeId: string,
-    onError: (error: string) => void,
-    sessionId?: string
+    onError: (error: string) => void
 ): Promise<{ success: boolean; message: string }> => {
     try {
         const templateRendererUrl = import.meta.env.VITE_TEMPLATE_RENDERER_URL
@@ -150,7 +148,7 @@ export const printVoucher = async (
 
         // Add 10-second timeout to print operation
         let timeoutRef: number | null = null
-        const printPromise = apiService.print(printUrl, sessionId)
+        const printPromise = apiService.print(printUrl)
         const timeoutPromise = new Promise<{
             success: boolean
             message: string

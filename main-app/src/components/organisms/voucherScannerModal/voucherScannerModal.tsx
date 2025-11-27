@@ -2,7 +2,6 @@ import React, { useCallback, useEffect, useRef, useState } from 'react'
 
 import PrimaryButton from '@/components/atoms/primaryButton/primaryButton'
 import { useTranslate } from '@/i18n/useTranslate'
-import { useOrder } from '@/providers'
 import { apiService } from '@/services/apiService'
 
 import { scanVoucher } from '../../../assets/images'
@@ -21,8 +20,6 @@ export default function VoucherScannerModal({
     const [isManualInput, setIsManualInput] = useState(false)
     const [manualCode, setManualCode] = useState('')
     const { t } = useTranslate()
-    const { state } = useOrder()
-    const sessionId = state.sessionId || undefined
     const abortControllerRef = useRef<AbortController | null>(null)
     const isOpenRef = useRef(isOpen)
 
@@ -111,8 +108,7 @@ export default function VoucherScannerModal({
                 // apiService.startQrScanner handles timeout retries internally with while(true)
                 // It will keep retrying until a QR code is found or the request is aborted
                 const value = await apiService.startQrScanner(
-                    abortControllerRef.current.signal,
-                    sessionId
+                    abortControllerRef.current.signal
                 )
 
                 // Only call onScan if modal is still open
@@ -139,10 +135,10 @@ export default function VoucherScannerModal({
             }
             // Stop the scanner with a slight delay to ensure abort is processed
             setTimeout(() => {
-                apiService.stopQrScanner(sessionId)
+                apiService.stopQrScanner()
             }, 200)
         }
-    }, [isOpen, handleScan, sessionId])
+    }, [isOpen, handleScan])
 
     if (!isOpen) {
         return <></>
