@@ -19,6 +19,7 @@ import { TranslationProvider } from './i18n/TranslationProvider'
 import DisclaimerPage from './pages/disclaimerPage'
 import HomePage from './pages/homePage'
 import InsertCashPage from './pages/insertCashPage'
+import IpsPaymentPage from './pages/ipsPaymentPage'
 import PaymentMethodPage from './pages/paymentMethodPage'
 import RegisterPage from './pages/registerPage'
 import UnderMaintenacePage from './pages/UnderMaintenance'
@@ -43,6 +44,7 @@ function Layout() {
             {/* <Route path="/digital-services" element={<DigitalServicesPage />} /> */}
             <Route path="/payment-method" element={<PaymentMethodPage />} />
             <Route path="/buy-voucher-cash" element={<InsertCashPage />} />
+            <Route path="/ips-payment" element={<IpsPaymentPage />} />
             <Route
                 path="/under-maintenance"
                 element={<UnderMaintenacePage />}
