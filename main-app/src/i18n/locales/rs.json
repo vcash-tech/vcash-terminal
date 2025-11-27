@@ -426,6 +426,7 @@
     "scanPrompt": "Prinesite IPS QR kod skeneru",
     "scanPromptSub": "Svi skenirani računi će se pojaviti ovde",
     "scannerActive": "Skener je aktivan",
+    "scanPaused": "Spreman za sledeće skeniranje...",
     "scanMore": "Skeniraj još računa...",
     "refNumber": "Poziv na broj",
     "modified": "Izmenjen",

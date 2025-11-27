@@ -44,7 +44,9 @@ export default function IpsPaymentTemplate({
     
     // Scanning state
     const [isScanning, setIsScanning] = useState(true)
+    const [scanPaused, setScanPaused] = useState(false)
     const abortControllerRef = useRef<AbortController | null>(null)
+    const billsListRef = useRef<HTMLDivElement | null>(null)
 
     // Modal state
     const [modalType, setModalType] = useState<ModalType>('none')
@@ -101,10 +103,18 @@ export default function IpsPaymentTemplate({
         }
     }, [parseIPSQRCode, t])
 
-    // Start/restart scanning
-    const startScanning = useCallback(async () => {
+    // Start/restart scanning with delay to prevent double scans
+    const startScanning = useCallback(async (withDelay = false) => {
         if (abortControllerRef.current) {
             abortControllerRef.current.abort()
+        }
+        
+        // Pause for 2 seconds after a successful scan
+        if (withDelay) {
+            setScanPaused(true)
+            setIsScanning(false)
+            await new Promise(resolve => setTimeout(resolve, 2000))
+            setScanPaused(false)
         }
         
         setIsScanning(true)
@@ -116,8 +126,8 @@ export default function IpsPaymentTemplate({
                 sessionId
             )
             handleScan(value || '')
-            // Continue scanning for more bills
-            startScanning()
+            // Continue scanning for more bills (with delay)
+            startScanning(true)
         } catch (e) {
             console.log('Scanner stopped or error:', e)
             setIsScanning(false)
@@ -135,6 +145,16 @@ export default function IpsPaymentTemplate({
             apiService.stopQrScanner(sessionId)
         }
     }, []) // eslint-disable-line react-hooks/exhaustive-deps
+
+    // Auto-scroll bills list when new bill is added
+    useEffect(() => {
+        if (billsListRef.current && bills.length > 0) {
+            billsListRef.current.scrollTo({
+                top: billsListRef.current.scrollHeight,
+                behavior: 'smooth'
+            })
+        }
+    }, [bills.length])
 
     // Select a bill
     const selectBill = (id: string) => {
@@ -244,22 +264,22 @@ export default function IpsPaymentTemplate({
 
                         {bills.length === 0 ? (
                             <div className="scanning-prompt">
-                                <div className="scan-icon">
+                                <div className={`scan-icon ${scanPaused ? 'paused' : ''}`}>
                                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M4 7V4m0 0h3M4 4l.113.113M17 4h3m0 0v3m0-3l-.113.113M4 17v3m0 0h3M4 20l.113-.113M17 20h3m0 0v-3m0 3l-.113-.113M12 21a9 9 0 100-18 9 9 0 000 18z" />
                                     </svg>
                                 </div>
                                 <p className="prompt-text">{t('ips.scanPrompt')}</p>
                                 <p className="prompt-subtext">{t('ips.scanPromptSub')}</p>
-                                {isScanning && (
-                                    <div className="scanning-indicator">
+                                {(isScanning || scanPaused) && (
+                                    <div className={`scanning-indicator ${scanPaused ? 'paused' : ''}`}>
                                         <span className="pulse"></span>
-                                        {t('ips.scannerActive')}
+                                        {scanPaused ? t('ips.scanPaused') : t('ips.scannerActive')}
                                     </div>
                                 )}
                             </div>
                         ) : (
-                            <div className="bills-list">
+                            <div className="bills-list" ref={billsListRef}>
                                 {bills.map(bill => (
                                     <div 
                                         key={bill.id}
@@ -285,10 +305,10 @@ export default function IpsPaymentTemplate({
                                     </div>
                                 ))}
                                 
-                                {isScanning && (
-                                    <div className="scanning-indicator inline">
+                                {(isScanning || scanPaused) && (
+                                    <div className={`scanning-indicator inline ${scanPaused ? 'paused' : ''}`}>
                                         <span className="pulse"></span>
-                                        {t('ips.scanMore')}
+                                        {scanPaused ? t('ips.scanPaused') : t('ips.scanMore')}
                                     </div>
                                 )}
                             </div>

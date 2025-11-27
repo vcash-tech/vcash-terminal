@@ -421,6 +421,7 @@
     "scanPrompt": "Place the IPS QR code under the scanner",
     "scanPromptSub": "All scanned bills will appear here",
     "scannerActive": "Scanner is active",
+    "scanPaused": "Ready for next scan...",
     "scanMore": "Scan another bill...",
     "refNumber": "Reference",
     "modified": "Modified",

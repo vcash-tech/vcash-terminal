@@ -1,69 +1,79 @@
 @use '../../../styles/config/colors';
 @use '../../../styles/config/fonts';
 
-// IPS Container
+// IPS Container - Fixed height layout
 .ips-container {
     background: colors.$main-background-color;
+    height: 100%;
+    max-height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
 }
 
 .ips-payment-screen {
     display: flex;
     flex-direction: column;
     flex: 1;
+    min-height: 0; // Critical for nested flex scrolling
     overflow: hidden;
 }
 
-// Header Section
+// Header Section - Fixed
 .ips-header {
     background: linear-gradient(135deg, colors.$brand-primary-color 0%, #2a4599 100%);
     color: white;
-    padding: 4rem 4rem 3rem;
+    padding: 3rem 4rem 2.5rem;
     text-align: center;
+    flex-shrink: 0;
 
     h1 {
         font-family: fonts.$font-urbanist;
-        font-size: 4.5rem;
+        font-size: 4rem;
         font-weight: 800;
         margin: 0 0 0.5rem;
     }
 
     p {
         font-family: fonts.$font-urbanist;
-        font-size: 2rem;
+        font-size: 1.8rem;
         opacity: 0.9;
         margin: 0;
     }
 }
 
-// Main Content Area
+// Main Content Area - Flexible with scroll
 .ips-main {
     display: flex;
     flex-direction: column;
     flex: 1;
-    padding: 3rem 4rem;
-    gap: 2rem;
+    min-height: 0;
+    padding: 2rem 3rem;
+    gap: 1.5rem;
     overflow: hidden;
 }
 
 // Section Title
 .section-title {
     font-family: fonts.$font-urbanist;
-    font-size: 2.8rem;
+    font-size: 2.4rem;
     font-weight: 700;
     color: colors.$dark-text-color;
-    margin: 0 0 1.5rem;
+    margin: 0 0 1rem;
+    flex-shrink: 0;
 
     .count {
         color: colors.$brand-primary-color;
     }
 }
 
-// Bills Section
+// Bills Section - Takes remaining space
 .bills-section {
     flex: 1;
     display: flex;
     flex-direction: column;
     min-height: 0;
+    overflow: hidden;
 
     .scanning-prompt {
         flex: 1;
@@ -73,16 +83,21 @@
         justify-content: center;
         background: white;
         border: 4px dashed #d0d5dd;
-        border-radius: 2rem;
-        padding: 4rem;
+        border-radius: 1.5rem;
+        padding: 3rem;
         text-align: center;
 
         .scan-icon {
-            width: 10rem;
-            height: 10rem;
+            width: 8rem;
+            height: 8rem;
             color: colors.$brand-primary-color;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             animation: pulse 2s ease-in-out infinite;
+
+            &.paused {
+                animation: none;
+                opacity: 0.5;
+            }
 
             svg {
                 width: 100%;
@@ -92,7 +107,7 @@
 
         .prompt-text {
             font-family: fonts.$font-urbanist;
-            font-size: 2.4rem;
+            font-size: 2.2rem;
             font-weight: 600;
             color: colors.$dark-text-color;
             margin: 0 0 0.5rem;
@@ -100,7 +115,7 @@
 
         .prompt-subtext {
             font-family: fonts.$font-urbanist;
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             color: #667085;
             margin: 0;
         }
@@ -111,8 +126,8 @@
         overflow-y: auto;
         display: flex;
         flex-direction: column;
-        gap: 1.2rem;
-        padding-right: 1rem;
+        gap: 1rem;
+        padding-right: 0.5rem;
 
         &::-webkit-scrollbar {
             width: 8px;
@@ -123,6 +138,7 @@
         }
         &::-webkit-scrollbar-track {
             background: #f1f5f9;
+            border-radius: 4px;
         }
     }
 
@@ -131,11 +147,12 @@
         align-items: center;
         background: white;
         border: 3px solid #e5e7eb;
-        border-radius: 1.4rem;
-        padding: 1.8rem 2rem;
+        border-radius: 1.2rem;
+        padding: 1.4rem 1.6rem;
         cursor: pointer;
         transition: all 0.2s ease;
-        gap: 1.5rem;
+        gap: 1.2rem;
+        flex-shrink: 0;
 
         &:active {
             transform: scale(0.99);
@@ -145,22 +162,33 @@
             background: colors.$brand-primary-color;
             border-color: colors.$brand-primary-color;
 
-            .bill-recipient,
-            .bill-amount {
-                color: white;
+            .bill-info {
+                .bill-recipient {
+                    color: white;
+                }
+
+                .bill-reference {
+                    color: rgba(255, 255, 255, 0.85);
+                }
             }
 
-            .bill-reference,
-            .amount-modified {
-                color: rgba(255, 255, 255, 0.8);
+            .bill-amount-section {
+                .bill-amount {
+                    color: white;
+                }
+
+                .amount-modified {
+                    color: #fbbf24;
+                }
             }
 
             .remove-btn {
                 color: white;
-                border-color: rgba(255, 255, 255, 0.5);
+                border-color: rgba(255, 255, 255, 0.4);
+                background: rgba(255, 255, 255, 0.1);
 
                 &:hover {
-                    background: rgba(255, 255, 255, 0.2);
+                    background: rgba(255, 255, 255, 0.25);
                 }
             }
         }
@@ -169,12 +197,12 @@
             flex: 1;
             display: flex;
             flex-direction: column;
-            gap: 0.3rem;
+            gap: 0.2rem;
             min-width: 0;
 
             .bill-recipient {
                 font-family: fonts.$font-urbanist;
-                font-size: 2.2rem;
+                font-size: 2rem;
                 font-weight: 700;
                 color: colors.$dark-text-color;
                 white-space: nowrap;
@@ -184,7 +212,7 @@
 
             .bill-reference {
                 font-family: fonts.$font-urbanist;
-                font-size: 1.4rem;
+                font-size: 1.3rem;
                 color: #667085;
             }
         }
@@ -193,11 +221,11 @@
             display: flex;
             flex-direction: column;
             align-items: flex-end;
-            gap: 0.3rem;
+            gap: 0.2rem;
 
             .bill-amount {
                 font-family: fonts.$font-urbanist;
-                font-size: 2.4rem;
+                font-size: 2.2rem;
                 font-weight: 700;
                 color: colors.$brand-primary-color;
                 white-space: nowrap;
@@ -205,7 +233,7 @@
 
             .amount-modified {
                 font-family: fonts.$font-urbanist;
-                font-size: 1.2rem;
+                font-size: 1.1rem;
                 font-weight: 600;
                 color: #f97316;
                 text-transform: uppercase;
@@ -213,13 +241,13 @@
         }
 
         .remove-btn {
-            width: 4rem;
-            height: 4rem;
+            width: 3.5rem;
+            height: 3.5rem;
             border: 2px solid #e5e7eb;
-            border-radius: 1rem;
+            border-radius: 0.8rem;
             background: transparent;
             color: #ef4444;
-            font-size: 2.4rem;
+            font-size: 2.2rem;
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -237,22 +265,35 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 1rem;
+        gap: 0.8rem;
         font-family: fonts.$font-urbanist;
-        font-size: 1.8rem;
+        font-size: 1.6rem;
         font-weight: 600;
         color: colors.$brand-primary-color;
-        padding: 1.5rem;
+        padding: 1.2rem;
+
+        &.paused {
+            color: #94a3b8;
+
+            .pulse {
+                background: #94a3b8;
+                animation: none;
+            }
+        }
 
         &.inline {
             background: #f0f4ff;
-            border-radius: 1rem;
-            margin-top: 1rem;
+            border-radius: 0.8rem;
+            flex-shrink: 0;
+
+            &.paused {
+                background: #f1f5f9;
+            }
         }
 
         .pulse {
-            width: 1.2rem;
-            height: 1.2rem;
+            width: 1rem;
+            height: 1rem;
             background: colors.$brand-primary-color;
             border-radius: 50%;
             animation: pulse 1.5s ease-in-out infinite;
@@ -260,21 +301,24 @@
     }
 }
 
-// Details Section
+// Details Section - Fixed height
 .details-section {
     background: white;
-    border-radius: 1.6rem;
-    padding: 2rem 2.5rem;
+    border-radius: 1.2rem;
+    padding: 1.5rem 2rem;
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
     border: 2px solid #e5e7eb;
+    flex-shrink: 0;
+    max-height: 28rem;
+    overflow-y: auto;
 
     .details-prompt {
-        padding: 3rem;
+        padding: 2rem;
         text-align: center;
 
         p {
             font-family: fonts.$font-urbanist;
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             color: #667085;
             margin: 0;
         }
@@ -284,8 +328,8 @@
         .detail-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 1.5rem 2rem;
-            margin-bottom: 2rem;
+            gap: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
 
             .detail-item {
                 &.full {
@@ -294,22 +338,22 @@
 
                 .detail-label {
                     font-family: fonts.$font-urbanist;
-                    font-size: 1.4rem;
+                    font-size: 1.2rem;
                     font-weight: 600;
                     color: #667085;
                     display: block;
-                    margin-bottom: 0.3rem;
+                    margin-bottom: 0.2rem;
                 }
 
                 .detail-value {
                     font-family: fonts.$font-urbanist;
-                    font-size: 1.8rem;
+                    font-size: 1.6rem;
                     font-weight: 600;
                     color: colors.$dark-text-color;
 
                     &.mono {
                         font-family: fonts.$monospace-font;
-                        font-size: 1.6rem;
+                        font-size: 1.4rem;
                         color: #475569;
                     }
                 }
@@ -318,29 +362,29 @@
 
         .amount-edit {
             border-top: 2px solid #f0f0f0;
-            padding-top: 1.5rem;
+            padding-top: 1.2rem;
 
             label {
                 font-family: fonts.$font-urbanist;
-                font-size: 1.6rem;
+                font-size: 1.4rem;
                 font-weight: 600;
                 color: colors.$dark-text-color;
                 display: block;
-                margin-bottom: 0.8rem;
+                margin-bottom: 0.6rem;
             }
 
             .amount-input-wrapper {
                 display: flex;
-                gap: 1rem;
+                gap: 0.8rem;
 
                 input {
                     flex: 1;
-                    padding: 1.2rem 1.5rem;
+                    padding: 1rem 1.2rem;
                     font-family: fonts.$monospace-font;
-                    font-size: 2.2rem;
+                    font-size: 2rem;
                     font-weight: 600;
                     border: 3px solid #e5e7eb;
-                    border-radius: 1rem;
+                    border-radius: 0.8rem;
                     text-align: center;
                     color: colors.$dark-text-color;
 
@@ -351,14 +395,14 @@
                 }
 
                 .save-btn {
-                    padding: 1.2rem 2.5rem;
+                    padding: 1rem 2rem;
                     background: #3b82f6;
                     color: white;
                     font-family: fonts.$font-urbanist;
-                    font-size: 1.6rem;
+                    font-size: 1.4rem;
                     font-weight: 700;
                     border: none;
-                    border-radius: 1rem;
+                    border-radius: 0.8rem;
                     cursor: pointer;
                     transition: all 0.2s ease;
 
@@ -375,34 +419,35 @@
 
             .amount-error {
                 font-family: fonts.$font-urbanist;
-                font-size: 1.4rem;
+                font-size: 1.2rem;
                 color: #ef4444;
-                margin: 0.8rem 0 0;
+                margin: 0.6rem 0 0;
             }
         }
     }
 }
 
-// Summary Section
+// Summary Section - Fixed at bottom
 .summary-section {
     background: #f8fafc;
-    padding: 3rem 4rem 4rem;
+    padding: 2rem 3rem 2.5rem;
     border-top: 2px solid #e5e7eb;
+    flex-shrink: 0;
 
     .summary-card {
         background: white;
-        border-radius: 1.6rem;
-        padding: 2rem 2.5rem;
+        border-radius: 1.2rem;
+        padding: 1.5rem 2rem;
         box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-        margin-bottom: 2.5rem;
+        margin-bottom: 1.5rem;
 
         .summary-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 0;
+            padding: 0.8rem 0;
             font-family: fonts.$font-urbanist;
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             color: #475569;
             border-bottom: 1px solid #f0f0f0;
 
@@ -423,14 +468,14 @@
 
             &.total {
                 border-top: 3px dashed #e5e7eb;
-                margin-top: 0.5rem;
-                padding-top: 1.5rem;
-                font-size: 2.2rem;
+                margin-top: 0.3rem;
+                padding-top: 1rem;
+                font-size: 1.8rem;
                 font-weight: 700;
                 color: colors.$dark-text-color;
 
                 .value {
-                    font-size: 2.8rem;
+                    font-size: 2.4rem;
                     color: colors.$brand-primary-color;
                 }
             }
@@ -440,27 +485,27 @@
     .payment-section {
         h3 {
             font-family: fonts.$font-urbanist;
-            font-size: 2rem;
+            font-size: 1.8rem;
             font-weight: 700;
             color: colors.$dark-text-color;
-            margin: 0 0 1.5rem;
+            margin: 0 0 1rem;
         }
 
         .payment-buttons {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
-            margin-bottom: 1.5rem;
+            gap: 1.2rem;
+            margin-bottom: 1rem;
 
             .payment-btn {
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                gap: 1.5rem;
-                padding: 2rem;
-                border-radius: 1.4rem;
+                gap: 1.2rem;
+                padding: 1.5rem;
+                border-radius: 1.2rem;
                 font-family: fonts.$font-urbanist;
-                font-size: 2rem;
+                font-size: 1.8rem;
                 font-weight: 700;
                 border: none;
                 cursor: pointer;
@@ -468,7 +513,7 @@
                 box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 
                 img {
-                    width: 6rem;
+                    width: 5rem;
                     height: auto;
                 }
 
@@ -499,11 +544,11 @@
 
         .cancel-btn {
             width: 100%;
-            padding: 1.2rem;
+            padding: 1rem;
             background: transparent;
             border: none;
             font-family: fonts.$font-urbanist;
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             font-weight: 600;
             color: #ef4444;
             cursor: pointer;
@@ -523,42 +568,42 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 4rem;
+    padding: 3rem;
     z-index: 1000;
 }
 
 // Base Modal
 .ips-modal {
     background: white;
-    border-radius: 2.4rem;
-    padding: 4rem;
-    max-width: 70rem;
+    border-radius: 2rem;
+    padding: 3rem;
+    max-width: 60rem;
     width: 100%;
     text-align: center;
 
     h3 {
         font-family: fonts.$font-urbanist;
-        font-size: 3rem;
+        font-size: 2.6rem;
         font-weight: 800;
-        margin: 0 0 2rem;
+        margin: 0 0 1.5rem;
     }
 
     p {
         font-family: fonts.$font-urbanist;
-        font-size: 1.8rem;
+        font-size: 1.6rem;
         color: #475569;
-        margin: 0 0 2rem;
+        margin: 0 0 1.5rem;
     }
 
     button {
-        padding: 1.5rem 4rem;
+        padding: 1.2rem 3rem;
         background: colors.$brand-primary-color;
         color: white;
         font-family: fonts.$font-urbanist;
-        font-size: 1.8rem;
+        font-size: 1.6rem;
         font-weight: 700;
         border: none;
-        border-radius: 1.2rem;
+        border-radius: 1rem;
         cursor: pointer;
 
         &:hover {
@@ -578,7 +623,7 @@
 
 // Cash Modal
 .cash-modal {
-    max-width: 80rem;
+    max-width: 70rem;
     text-align: left;
 
     h3 {
@@ -589,21 +634,21 @@
     .cash-warning {
         background: #fef2f2;
         border: 2px solid #fecaca;
-        border-radius: 1.2rem;
-        padding: 1.5rem 2rem;
-        margin-bottom: 2rem;
+        border-radius: 1rem;
+        padding: 1.2rem 1.5rem;
+        margin-bottom: 1.5rem;
 
         strong {
             font-family: fonts.$font-urbanist;
-            font-size: 1.6rem;
+            font-size: 1.4rem;
             font-weight: 700;
             color: #ef4444;
             display: block;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.4rem;
         }
 
         p {
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             color: #7f1d1d;
             margin: 0;
         }
@@ -611,16 +656,16 @@
 
     .cash-summary {
         background: #f8fafc;
-        border-radius: 1.2rem;
-        padding: 2rem;
-        margin-bottom: 2rem;
+        border-radius: 1rem;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
 
         .cash-row {
             display: flex;
             justify-content: space-between;
-            padding: 1rem 0;
+            padding: 0.8rem 0;
             font-family: fonts.$font-urbanist;
-            font-size: 2rem;
+            font-size: 1.8rem;
             border-bottom: 1px solid #e5e7eb;
 
             &:last-child {
@@ -638,10 +683,10 @@
             }
 
             &.status {
-                font-size: 2.4rem;
+                font-size: 2rem;
                 font-weight: 700;
-                padding: 1.5rem 0;
-                margin-top: 0.5rem;
+                padding: 1.2rem 0;
+                margin-top: 0.3rem;
                 border-top: 2px dashed #e5e7eb;
                 border-bottom: none;
 
@@ -651,9 +696,9 @@
 
                 &.surplus {
                     background: #ecfdf5;
-                    margin: 1rem -2rem -2rem;
-                    padding: 1.5rem 2rem;
-                    border-radius: 0 0 1.2rem 1.2rem;
+                    margin: 0.8rem -1.5rem -1.5rem;
+                    padding: 1.2rem 1.5rem;
+                    border-radius: 0 0 1rem 1rem;
 
                     span:last-child {
                         color: #10b981;
@@ -664,27 +709,27 @@
     }
 
     .cash-buttons {
-        margin-bottom: 2rem;
+        margin-bottom: 1.5rem;
 
         p {
-            font-size: 1.6rem;
+            font-size: 1.4rem;
             font-weight: 600;
             color: colors.$dark-text-color;
-            margin-bottom: 1rem;
+            margin-bottom: 0.8rem;
         }
 
         .denomination-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
+            gap: 0.8rem;
 
             .denom-btn {
-                padding: 1.8rem;
+                padding: 1.4rem;
                 font-family: fonts.$font-urbanist;
-                font-size: 2.2rem;
+                font-size: 2rem;
                 font-weight: 800;
                 border: none;
-                border-radius: 1.2rem;
+                border-radius: 1rem;
                 cursor: pointer;
                 transition: all 0.15s ease;
 
@@ -704,15 +749,15 @@
 
     .cash-actions {
         display: flex;
-        gap: 1.5rem;
-        padding-top: 2rem;
+        gap: 1rem;
+        padding-top: 1.5rem;
         border-top: 2px solid #e5e7eb;
 
         button {
             flex: 1;
-            padding: 1.8rem;
-            font-size: 2rem;
-            border-radius: 1.2rem;
+            padding: 1.5rem;
+            font-size: 1.8rem;
+            border-radius: 1rem;
 
             &.cancel {
                 background: #e5e7eb;
@@ -742,9 +787,9 @@
 // Recap Modal
 .recap-modal {
     .recap-icon {
-        width: 10rem;
-        height: 10rem;
-        margin: 0 auto 2rem;
+        width: 8rem;
+        height: 8rem;
+        margin: 0 auto 1.5rem;
         color: #10b981;
 
         svg {
@@ -759,17 +804,17 @@
 
     .recap-details {
         background: #f8fafc;
-        border-radius: 1.2rem;
-        padding: 2rem;
-        margin-bottom: 2rem;
+        border-radius: 1rem;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
         text-align: left;
 
         .recap-row {
             display: flex;
             justify-content: space-between;
-            padding: 0.8rem 0;
+            padding: 0.6rem 0;
             font-family: fonts.$font-urbanist;
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             color: #475569;
 
             span:last-child {
@@ -779,14 +824,14 @@
 
             &.total {
                 border-top: 2px solid #e5e7eb;
-                margin-top: 1rem;
-                padding-top: 1.5rem;
-                font-size: 2.2rem;
+                margin-top: 0.8rem;
+                padding-top: 1.2rem;
+                font-size: 1.8rem;
                 font-weight: 700;
 
                 span:last-child {
                     color: colors.$brand-primary-color;
-                    font-size: 2.6rem;
+                    font-size: 2.2rem;
                 }
             }
 
@@ -800,16 +845,16 @@
     }
 
     .recap-note {
-        font-size: 1.6rem;
+        font-size: 1.4rem;
         color: #667085;
     }
 
     .finish-btn {
         width: 100%;
-        padding: 2rem;
-        font-size: 2.2rem;
+        padding: 1.5rem;
+        font-size: 1.8rem;
         background: #10b981;
-        margin-top: 1rem;
+        margin-top: 0.8rem;
 
         &:hover {
             background: #059669;
