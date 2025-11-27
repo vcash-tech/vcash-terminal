@@ -91,7 +91,6 @@
 
     .bill-item {
         border: 1px solid #000;
-        border-radius: 8px;
         padding: 12px;
         margin: 8px 0;
     }
@@ -101,15 +100,8 @@
         justify-content: space-between;
         align-items: center;
         margin-bottom: 8px;
-    }
-
-    .bill-number {
-        background: #000;
-        color: #fff;
-        padding: 4px 12px;
-        border-radius: 4px;
-        font-weight: bold;
-        font-size: 18px;
+        border-bottom: 1px dashed #000;
+        padding-bottom: 8px;
     }
 
     .bill-amount {
@@ -171,6 +163,7 @@
                 Naziv uređaja: {{ .deviceName }}
             </td>
         </tr>
+        {{ else }}
         {{ end }}
     </table>
     
@@ -206,23 +199,26 @@
     <!-- Paid Bills List -->
     <table class="voucher-table">
         <tr>
-            <td class="center medium bold">Plaćeni Računi ({{ .billCount }})</td>
+            <td class="center medium bold">Plaćeni Računi ({{ if .billCount }}{{ .billCount }}{{ else }}0{{ end }})</td>
         </tr>
     </table>
 
-    {{ range $index, $bill := .bills }}
+    {{ if .bills }}
+    {{ range .bills }}
     <div class="bill-item">
         <div class="bill-header">
-            <span class="bill-number">{{ add $index 1 }}</span>
-            <span class="bill-amount">{{ $bill.amount }} RSD</span>
+            <span class="bold">{{ if .recipient }}{{ .recipient }}{{ else }}N/A{{ end }}</span>
+            <span class="bill-amount">{{ if .amount }}{{ .amount }}{{ else }}0{{ end }} RSD</span>
         </div>
-        <div class="bill-detail"><strong>Primalac:</strong> {{ $bill.recipient }}</div>
-        <div class="bill-detail"><strong>Račun:</strong> {{ $bill.accountNumber }}</div>
-        <div class="bill-detail"><strong>Poziv na broj:</strong> {{ $bill.referenceNumber }}</div>
-        {{ if $bill.purpose }}
-        <div class="bill-detail"><strong>Svrha:</strong> {{ $bill.purpose }}</div>
+        <div class="bill-detail"><strong>Račun:</strong> {{ if .accountNumber }}{{ .accountNumber }}{{ else }}N/A{{ end }}</div>
+        <div class="bill-detail"><strong>Poziv na broj:</strong> {{ if .referenceNumber }}{{ .referenceNumber }}{{ else }}N/A{{ end }}</div>
+        {{ if .purpose }}
+        <div class="bill-detail"><strong>Svrha:</strong> {{ .purpose }}</div>
+        {{ else }}
         {{ end }}
     </div>
+    {{ end }}
+    {{ else }}
     {{ end }}
 
     <div class="dashed-line"></div>
@@ -239,15 +235,15 @@
             <td class="left medium">
                 <div class="two-column">
                     <span>Ukupan iznos računa:</span>
-                    <span class="bold">{{ .totalBillAmount }} RSD</span>
+                    <span class="bold">{{ if .totalBillAmount }}{{ .totalBillAmount }}{{ else }}0{{ end }} RSD</span>
                 </div>
             </td>
         </tr>
         <tr>
             <td class="left medium">
                 <div class="two-column">
-                    <span>Provizija ({{ .commissionRate }}%):</span>
-                    <span class="bold">{{ .totalCommission }} RSD</span>
+                    <span>Provizija ({{ if .commissionRate }}{{ .commissionRate }}{{ else }}2{{ end }}%):</span>
+                    <span class="bold">{{ if .totalCommission }}{{ .totalCommission }}{{ else }}0{{ end }} RSD</span>
                 </div>
             </td>
         </tr>
@@ -259,7 +255,12 @@
         <tr>
             <td class="center">
                 <span class="amount-highlight">
-                    {{ .totalPaid }} RSD
+                    {{ if .totalPaid }}
+                    {{ .totalPaid }}
+                    {{ else }}
+                    0
+                    {{ end }}
+                    RSD
                 </span>
             </td>
         </tr>
@@ -272,7 +273,7 @@
     <div class="dashed-line"></div>
     <table class="voucher-table">
         <tr>
-            <td class="center medium">
+            <td class="left medium">
                 <div class="two-column">
                     <span>Višak (Vaučer):</span>
                     <span class="bold">{{ .surplusAmount }} RSD</span>
@@ -285,8 +286,10 @@
                 Kod Vaučera: {{ .surplusVoucherCode }}
             </td>
         </tr>
+        {{ else }}
         {{ end }}
     </table>
+    {{ else }}
     {{ end }}
 
     <div class="single-line"></div>
@@ -300,7 +303,13 @@
             <td class="left medium">
                 <div class="two-column">
                     <span>Način plaćanja:</span>
-                    <span>{{ if eq .paymentMethod "cash" }}Gotovina{{ else }}Kartica{{ end }}</span>
+                    <span>
+                        {{ if .paymentMethod }}
+                            {{ if eq .paymentMethod "cash" }}Gotovina{{ else }}Kartica{{ end }}
+                        {{ else }}
+                        N/A
+                        {{ end }}
+                    </span>
                 </div>
             </td>
         </tr>
@@ -308,7 +317,13 @@
             <td class="left medium">
                 <div class="two-column">
                     <span>Datum-vreme:</span>
-                    <span>{{ .transactionDate }}</span>
+                    <span>
+                        {{ if .transactionDate }}
+                        {{ .transactionDate }}
+                        {{ else }}
+                        {{ now.Format "02.01.2006. 15:04" }}
+                        {{ end }}
+                    </span>
                 </div>
             </td>
         </tr>
@@ -316,7 +331,13 @@
             <td class="left medium">
                 <div class="two-column">
                     <span>Kod transakcije:</span>
-                    <span>{{ .transactionCode }}</span>
+                    <span>
+                        {{ if .transactionCode }}
+                        {{ .transactionCode }}
+                        {{ else }}
+                        N/A
+                        {{ end }}
+                    </span>
                 </div>
             </td>
         </tr>
@@ -329,6 +350,7 @@
                 </div>
             </td>
         </tr>
+        {{ else }}
         {{ end }}
     </table>
 
@@ -371,7 +393,12 @@
     <table class="voucher-table">
         <tr>
             <td class="center medium">
-                Vreme izdavanja: {{ .currentTime }}
+                Vreme izdavanja: 
+                {{ if .currentTime }}
+                {{ .currentTime }}
+                {{ else }}
+                {{ now.Format "02.01.2006. 15:04" }}
+                {{ end }}
             </td>
         </tr>
     </table>
