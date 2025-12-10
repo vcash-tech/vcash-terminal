@@ -114,24 +114,26 @@ export default function WelcomeWithServices({
         setSessionId(newSessionId)
         console.log('🆔 New session started:', newSessionId)
     }
-    // Helper to navigate with fresh session token
+    // Helper to navigate immediately and refresh session token in background
     const navigateWithFreshSession = useCallback(
-        async (destination: string) => {
-            try {
-                console.log(
-                    '🔄 Creating fresh session before navigating to:',
-                    destination
-                )
-                await POSService.forceRecreateSession()
-                console.log('✅ Fresh session created, navigating...')
-                navigate(destination)
-            } catch (error) {
-                console.error(
-                    '❌ Failed to create session, redirecting to connectivity issues:',
-                    error
-                )
-                navigate('/connectivity-issues')
-            }
+        (destination: string) => {
+            console.log('🚀 Navigating to:', destination)
+
+            // Navigate immediately for responsive UX
+            navigate(destination)
+
+            // Refresh session token in background
+            POSService.forceRecreateSession()
+                .then(() => {
+                    console.log('✅ Fresh session created in background')
+                })
+                .catch((error) => {
+                    console.error(
+                        '❌ Failed to create session in background, redirecting to connectivity issues:',
+                        error
+                    )
+                    navigate('/connectivity-issues')
+                })
         },
         [navigate]
     )
