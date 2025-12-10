@@ -1,5 +1,5 @@
 import type React from 'react'
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { NavigateFunction } from 'react-router-dom'
 
@@ -27,6 +27,7 @@ import Footer from '@/components/organisms/footer/footer'
 import Header from '@/components/organisms/header/header'
 import { VoucherPurchaseStep } from '@/data/enums/voucherPurchaseSteps'
 import { useOrder } from '@/providers'
+import { POSService } from '@/services/posService'
 
 export default function WelcomeWithServices({
     navigate
@@ -85,6 +86,28 @@ export default function WelcomeWithServices({
         console.log('resetting order')
         resetOrder()
     }, [resetOrder])
+
+    // Helper to navigate with fresh session token
+    const navigateWithFreshSession = useCallback(
+        async (destination: string) => {
+            try {
+                console.log(
+                    '🔄 Creating fresh session before navigating to:',
+                    destination
+                )
+                await POSService.forceRecreateSession()
+                console.log('✅ Fresh session created, navigating...')
+                navigate(destination)
+            } catch (error) {
+                console.error(
+                    '❌ Failed to create session, redirecting to connectivity issues:',
+                    error
+                )
+                navigate('/connectivity-issues')
+            }
+        },
+        [navigate]
+    )
 
     return (
         <Container style={{ gap: 0 }} isFullHeight={true}>
@@ -190,7 +213,7 @@ export default function WelcomeWithServices({
                             setCurrentStep(
                                 VoucherPurchaseStep.SELECT_PAYMENT_METHOD
                             )
-                            navigate('/disclaimer')
+                            navigateWithFreshSession('/disclaimer')
                         }}
                     />
 
@@ -229,7 +252,7 @@ export default function WelcomeWithServices({
                             setCurrentStep(
                                 VoucherPurchaseStep.SELECT_PAYMENT_METHOD
                             )
-                            navigate('/gaming')
+                            navigateWithFreshSession('/gaming')
                         }}
                     />
 

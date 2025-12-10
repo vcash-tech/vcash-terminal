@@ -75,7 +75,7 @@ export class POSService {
     }
 
     // Session creation - creates session token if needed
-    static async createSession(): Promise<string|null> {
+    static async createSession(): Promise<string | null> {
         try {
             // Check if we already have a valid session token
             if (AuthService.HasToken(Auth.Cashier)) {
@@ -111,13 +111,24 @@ export class POSService {
             console.log('✅ Session token created successfully')
 
             return response.accessToken
-
         } catch (error) {
             console.error('❌ Error creating session token:', error)
             // Clear any partial session token
             AuthService.DeleteToken(Auth.Cashier)
             throw error // Re-throw so caller can handle navigation
         }
+    }
+
+    // Force recreate session - always creates a new session token
+    // Used when starting a new flow to ensure fresh session
+    static async forceRecreateSession(): Promise<string | null> {
+        console.log('🔄 Force recreating session token...')
+
+        // Delete existing session token first
+        AuthService.DeleteToken(Auth.Cashier)
+
+        // Now create a new session
+        return POSService.createSession()
     }
 
     // Cashier Locked Screen
