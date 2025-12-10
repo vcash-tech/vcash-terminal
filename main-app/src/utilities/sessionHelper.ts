@@ -1,7 +1,9 @@
 import { NavigateFunction } from 'react-router-dom'
 import { v4 as uuidv4, v7 as uuidv7 } from 'uuid'
 
+import { AuthService } from '@/services/authService'
 import { POSService } from '@/services/posService'
+import { Auth } from '@/types/common/httpRequest'
 
 /**
  * Generates a globally unique session ID with embedded timestamp.
@@ -54,11 +56,21 @@ export const verifyCashierAuth = async (navigate: NavigateFunction) => {
             )
             navigate(navigationError.requiresNavigation)
         } else {
-            console.error(
-                'Failed to verify cashier authentication on welcome page, redirecting to registration:',
-                error
-            )
-            navigate('/register')
+            // If we have a device token, this is likely a connectivity issue
+            // Navigate to connectivity issues page instead of registration
+            if (AuthService.HasToken(Auth.POS)) {
+                console.error(
+                    'Failed to create session on welcome page with valid device token, redirecting to connectivity issues:',
+                    error
+                )
+                navigate('/connectivity-issues')
+            } else {
+                console.error(
+                    'Failed to create session on welcome page, no device token - redirecting to registration:',
+                    error
+                )
+                navigate('/register')
+            }
         }
     }
 }

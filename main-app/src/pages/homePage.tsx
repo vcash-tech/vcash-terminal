@@ -3,7 +3,9 @@ import { useNavigate } from 'react-router-dom'
 
 import Welcome from '@/components/templates/welcome/welcomeTemplate'
 import { useNavigationContext } from '@/hooks/useNavigationHook'
+import { AuthService } from '@/services/authService'
 import { POSService } from '@/services/posService'
+import { Auth } from '@/types/common/httpRequest'
 
 function HomePage() {
     const navigate = useNavigate()
@@ -34,11 +36,21 @@ function HomePage() {
                     )
                     navigate(navigationError.requiresNavigation)
                 } else {
-                    console.error(
-                        'Failed to create session, redirecting to registration:',
-                        error
-                    )
-                    navigate('/register')
+                    // If we have a device token, this is likely a connectivity issue
+                    // Navigate to connectivity issues page instead of registration
+                    if (AuthService.HasToken(Auth.POS)) {
+                        console.error(
+                            'Failed to create session with valid device token, redirecting to connectivity issues:',
+                            error
+                        )
+                        navigate('/connectivity-issues')
+                    } else {
+                        console.error(
+                            'Failed to create session, no device token - redirecting to registration:',
+                            error
+                        )
+                        navigate('/register')
+                    }
                 }
             }
         }

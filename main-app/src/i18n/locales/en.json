@@ -124,6 +124,14 @@
     "title": "Service available soon",
     "text": "Buy vouchers, pay bills, or top up digital services in a few taps. For more information, scan QR code bellow:"
   },
+  "connectivityIssues": {
+    "title": "Temporary Connection Issue",
+    "text": "We're experiencing temporary connectivity problems. The terminal will automatically reconnect when the connection is restored.",
+    "retrying": "Connecting...",
+    "autoRetry": "Auto-reconnecting",
+    "retryIn": "Next attempt in {{seconds}} seconds",
+    "attempts": "Attempt {{count}}"
+  },
   "service": {
     "title": "Choose your voucher",
     "subtitle": "",

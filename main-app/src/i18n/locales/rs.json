@@ -127,6 +127,14 @@
     "title": "USKORO",
     "text": "Sve na jednom mestu – brzo, jednostavno i dostupno 24/7. Kupujte gaming vaučere za PlayStation, Xbox i Steam, dopunjujte korisničke naloge kod najvećih kladionica u Srbiji, plaćajte račune i pristupajte brojnim digitalnim uslugama – sve to na jednom mestu, bez čekanja i komplikacija."
   },
+  "connectivityIssues": {
+    "title": "Privremeni prekid veze",
+    "text": "Trenutno imamo poteškoće sa konekcijom. Terminal će se automatski ponovo povezati kada veza bude ponovo uspostavljena.",
+    "retrying": "Povezivanje...",
+    "autoRetry": "Automatsko ponovno povezivanje",
+    "retryIn": "Sledeći pokušaj za {{seconds}} sekundi",
+    "attempts": "Pokušaj {{count}}"
+  },
   "service": {
     "title": "Izaberi tip vaučera",
     "subtitle": "",
