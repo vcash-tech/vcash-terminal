@@ -1,5 +1,5 @@
 import type React from 'react'
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { NavigateFunction } from 'react-router-dom'
 
@@ -28,6 +28,7 @@ import Header from '@/components/organisms/header/header'
 import { VoucherPurchaseStep } from '@/data/enums/voucherPurchaseSteps'
 import { useOrder } from '@/providers'
 import { apiService } from '@/services/apiService'
+import { POSService } from '@/services/posService'
 import { generateSessionId } from '@/utilities/sessionHelper'
 
 export default function WelcomeWithServices({
@@ -113,6 +114,27 @@ export default function WelcomeWithServices({
         setSessionId(newSessionId)
         console.log('🆔 New session started:', newSessionId)
     }
+    // Helper to navigate with fresh session token
+    const navigateWithFreshSession = useCallback(
+        async (destination: string) => {
+            try {
+                console.log(
+                    '🔄 Creating fresh session before navigating to:',
+                    destination
+                )
+                await POSService.forceRecreateSession()
+                console.log('✅ Fresh session created, navigating...')
+                navigate(destination)
+            } catch (error) {
+                console.error(
+                    '❌ Failed to create session, redirecting to connectivity issues:',
+                    error
+                )
+                navigate('/connectivity-issues')
+            }
+        },
+        [navigate]
+    )
 
     return (
         <Container style={{ gap: 0 }} isFullHeight={true}>
@@ -221,7 +243,7 @@ export default function WelcomeWithServices({
                             setCurrentStep(
                                 VoucherPurchaseStep.SELECT_PAYMENT_METHOD
                             )
-                            navigate('/disclaimer')
+                            navigateWithFreshSession('/disclaimer')
                         }}
                     />
 
@@ -261,7 +283,7 @@ export default function WelcomeWithServices({
                             setCurrentStep(
                                 VoucherPurchaseStep.SELECT_PAYMENT_METHOD
                             )
-                            navigate('/gaming')
+                            navigateWithFreshSession('/gaming')
                         }}
                     />
 
