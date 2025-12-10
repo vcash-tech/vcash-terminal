@@ -16,6 +16,7 @@ import useInactivityRedirect from './helpers/inactivityRedirect'
 import { InternetConnectionProvider } from './hooks'
 import { NavigationProvider } from './hooks/useNavigationContext'
 import { TranslationProvider } from './i18n/TranslationProvider'
+import ConnectivityIssuesPage from './pages/connectivityIssuesPage'
 import DisclaimerPage from './pages/disclaimerPage'
 import HomePage from './pages/homePage'
 import InsertCashPage from './pages/insertCashPage'
@@ -46,6 +47,10 @@ function Layout() {
             <Route
                 path="/under-maintenance"
                 element={<UnderMaintenacePage />}
+            />
+            <Route
+                path="/connectivity-issues"
+                element={<ConnectivityIssuesPage />}
             />
             <Route
                 path="/payment-in-progress"

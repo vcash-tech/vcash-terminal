@@ -113,23 +113,17 @@ function RegisterPage() {
                     return // Exit early if successful
                 } catch (error) {
                     console.error(
-                        'Failed to create session, clearing invalid token:',
+                        'Failed to create session - device token preserved, redirecting to connectivity issues:',
                         error
                     )
 
-                    // Clear any invalid tokens
-                    AuthService.DeleteToken(Auth.POS)
+                    // Clear only session token, never delete device token
                     AuthService.DeleteToken(Auth.Cashier)
 
-                    // Clear from persistent storage
-                    try {
-                        await apiService.saveDeviceToken('')
-                    } catch (clearError) {
-                        console.error(
-                            'Failed to clear device token from persistent storage:',
-                            clearError
-                        )
-                    }
+                    // Device token exists but session creation failed - likely connectivity issue
+                    // Navigate to connectivity issues page instead of continuing with registration
+                    navigate('/connectivity-issues')
+                    return
                 }
             }
 

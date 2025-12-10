@@ -70,7 +70,10 @@ export class HttpService {
             if (!response.ok) {
                 if (response.status === 401 && hasToken) {
                     const authType = req.authorization as Auth
-                    AuthService.DeleteToken(authType)
+                    // Never delete device token (Auth.POS) - only clear session tokens
+                    if (authType !== Auth.POS) {
+                        AuthService.DeleteToken(authType)
+                    }
 
                     // If it's a Cashier token 401, try to recreate session
                     if (authType === Auth.Cashier) {

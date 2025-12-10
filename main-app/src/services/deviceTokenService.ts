@@ -29,17 +29,17 @@ class DeviceTokenService {
                     'Device token loaded from persistent storage and stored in localStorage'
                 )
             } else {
-                // No token in persistent storage, clear any stale localStorage
-                localStorage.removeItem(`${Auth.POS}_token`)
+                // No token in persistent storage - keep localStorage as-is
+                // Device token should never be cleared programmatically
                 console.log(
-                    'No device token found in persistent storage, cleared localStorage'
+                    'No device token found in persistent storage, keeping localStorage intact'
                 )
             }
         } catch (error) {
-            // API failed, clear localStorage to be safe
-            localStorage.removeItem(`${Auth.POS}_token`)
-            console.error(
-                'Error loading device token, cleared localStorage:',
+            // API failed - keep localStorage as-is to handle flaky connections
+            // Device token should never be cleared programmatically
+            console.warn(
+                'Error loading device token from persistent storage, keeping localStorage intact:',
                 error
             )
         } finally {
