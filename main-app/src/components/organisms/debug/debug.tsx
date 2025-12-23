@@ -280,6 +280,11 @@ const Debug = () => {
         setIsSpeedTestOpen(false)
     }
 
+    const printBatch = async () => {
+        window.location.href =
+            'https://vcash-promo-print-dec-23-tmp.vercel.app/'
+    }
+
     return (
         <>
             {/* Hidden debug activation area - only render when debug is not active */}
@@ -456,24 +461,20 @@ const Debug = () => {
                         }}>
                         Speed Test
                     </button>
-                    {/* {window.location.href.includes('welcome') && (
-                        // <button
-                        //     onClick={() =>
-                        //         setGamingEnabled(!state.gamingEnabled)
-                        //     }
-                        //     style={{
-                        //         marginLeft: '5px',
-                        //         padding: '5px 10px',
-                        //         background: '#3498db',
-                        //         color: 'white',
-                        //         border: 'none',
-                        //         borderRadius: '4px',
-                        //         fontSize: '12px',
-                        //         cursor: 'pointer'
-                        //     }}>
-                        //     Toggle Gaming
-                        // </button>
-                    )} */}
+                    <button
+                        onClick={() => printBatch()}
+                        style={{
+                            marginLeft: '5px',
+                            padding: '5px 10px',
+                            background: '#3498db',
+                            color: 'white',
+                            border: 'none',
+                            borderRadius: '4px',
+                            fontSize: '12px',
+                            cursor: 'pointer'
+                        }}>
+                        Print batch
+                    </button>
                     {import.meta.env.VITE_DEBUG_MODE === 'true' && (
                         <button
                             onClick={handleMoneyTransferVoucherDraft}
