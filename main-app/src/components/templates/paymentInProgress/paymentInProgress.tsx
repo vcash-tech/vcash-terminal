@@ -341,7 +341,11 @@ export default function PaymentInProgress() {
                     await new Promise((resolve) => setTimeout(resolve, 1000))
                     const response =
                         await TransactionService.CreateDraftFromVoucher({
-                            voucherCode: voucherCode
+                            voucherCode: voucherCode,
+                            targetVoucherType:
+                                state.voucherType === 'gaming'
+                                    ? 'non_betting'
+                                    : (state.voucherType ?? '')
                         })
                     setVoucherScanStatus('success')
                     setVoucherScanSuccessAmount(

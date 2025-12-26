@@ -54,6 +54,7 @@ export interface VoucherResponse {
 
 export interface DraftFromVoucherRequest {
     voucherCode: string
+    voucherTypeId: string
 }
 
 export interface DraftFromVoucherResponse {
