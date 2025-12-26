@@ -63,6 +63,7 @@ export interface DraftFromVoucherResponse {
 
 export interface VoucherAmountResponse {
     amount: number
+    amountByDraftDepositType?: Record<string, number>
 }
 
 export interface Vendors {

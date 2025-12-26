@@ -9,17 +9,26 @@ export type InsertingCashProps = {
     onProcessPayment: () => void
     onUsePreviousVoucher: () => void
     canUsePreviousVoucher: boolean
+    amountByDraftDepositType?: Record<string, number>
 }
 
 export default function InsertingCash({
     amount,
     onProcessPayment,
     onUsePreviousVoucher,
-    canUsePreviousVoucher
+    canUsePreviousVoucher,
+    amountByDraftDepositType
 }: InsertingCashProps) {
     const { t } = useTranslate()
     const { state } = useOrder()
     const isGaming = state.voucherType === 'gaming'
+
+    // Check if only PROMO_VOUCHER type is present in the draft deposit
+    const hasOnlyPromoVoucher = (() => {
+        if (!amountByDraftDepositType) return false
+        const types = Object.keys(amountByDraftDepositType)
+        return types.length === 1 && types[0] === 'PROMO_VOUCHER'
+    })()
 
     return (
         <div className="insert-cash">
@@ -34,6 +43,11 @@ export default function InsertingCash({
                 <img src={insertCashImg} alt={t('insertCash.altText')} />
             </div>
             <div className="amount-wrapper">
+                {hasOnlyPromoVoucher && (
+                    <div className="promo-voucher-warning">
+                        <p>{t('insertCash.promoVoucherWarning')}</p>
+                    </div>
+                )}
                 {canUsePreviousVoucher && (
                     <>
                         <button

@@ -44,6 +44,7 @@
     "minAmount": "Minimalni iznos",
     "progressText": "{{amount}} RSD preostalo do maksimalnog iznosa vaučera",
     "usePreviousVoucher": "Imam Vaučer",
+    "promoVoucherWarning": "Poklon vaučer se ne može koristiti samostalno. Molimo ubacite gotovinu do iznosa željene gift kartice da biste završili uplatu.",
     "errors": {
       "authRequired": "Potrebna je autentifikacija.",
       "activationFailed": "Aktivacija neuspešna: {{message}}",
@@ -396,9 +397,9 @@
   },
   "promoVoucherError": {
     "title": "Potrebna je dodatna uplata",
-    "subtitle": "Poklon vaučer se ne može koristiti samostalno. Molimo ubacite gotovinu da biste završili uplatu.",
+    "subtitle": "Poklon vaučer se ne može koristiti samostalno. Molimo ubacite gotovinu do željenog iznosa gift kartice da biste završili uplatu.",
     "infoTitle": "Kako da završite uplatu",
-    "infoText": "Ubacite dodatnu gotovinu do iznosa željenje gift kartice, zatim potvrdite plaćanje da biste dobili vaučer koji uključuje promo bonus.",
+    "infoText": "Ubacite dodatnu gotovinu do iznosa željene gift kartice, zatim potvrdite plaćanje da biste dobili vaučer koji uključuje promo bonus.",
     "addCashButton": "Dodaj gotovinu"
   },
   "voucherScannerModal": {

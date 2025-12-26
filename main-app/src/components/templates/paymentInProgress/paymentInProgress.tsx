@@ -31,6 +31,9 @@ export default function PaymentInProgress() {
     const { isOnline, setIsMoneyPending } = useCheckInternetConnection()
     const { setCurrentStep, state } = useOrder()
     const [amount, _setAmount] = useState<number>(0)
+    const [amountByDraftDepositType, setAmountByDraftDepositType] = useState<
+        Record<string, number> | undefined
+    >(undefined)
     const [error, setError] = useState<PaymentActivationError | string | null>(
         null
     )
@@ -231,6 +234,7 @@ export default function PaymentInProgress() {
                     <InsertingCash
                         canUsePreviousVoucher={state.voucherType === 'gaming'}
                         amount={amount || 0}
+                        amountByDraftDepositType={amountByDraftDepositType}
                         onProcessPayment={() => {
                             setCurrentStep(VoucherPurchaseStep.PRINT_VOUCHER)
                             // call to buyVoucher
@@ -296,6 +300,7 @@ export default function PaymentInProgress() {
                 }
 
                 _setAmount(response.amount)
+                setAmountByDraftDepositType(response.amountByDraftDepositType)
             } catch (error) {
                 console.error('Error fetching voucher amount:', error)
                 // The HttpService will handle 401 errors and token cleanup automatically
