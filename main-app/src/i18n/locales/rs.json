@@ -424,6 +424,9 @@
       "used": "Kod vaučera je već korišćen. Molimo proverite i pokušajte ponovo",
       "type": "Tip vaučera nije podržan. Molimo proverite tip vaučera i pokušajte ponovo",
       "network": "Greška mrežne veze. Molimo proverite konekciju i pokušajte ponovo",
+      "invalidTypeForPromo": "Poklon vaučer je moguće aktivirati samo za kupovinu Digital Vaučera",
+      "promoAlreadyUsed": "Poklon Vaučer je već dodat. Dozvoljen je samo jedan Poklon Vaučer po osobi",
+      "promoRequiresAdditionalAmount": "Morate doplatiti još sredstava za kupovinu Digital Vaučera uz Poklon Vaučer",
       "other": "Došlo je do neočekivane greške. Molimo kontaktirajte podršku ako se problem nastavi"
     }
   }

@@ -419,6 +419,9 @@
       "used": "The voucher code has already been used. Please check and try again",
       "type": "The voucher type is not supported. Please check the voucher type and try again",
       "network": "Network connection error. Please check your connection and try again",
+      "invalidTypeForPromo": "Promo voucher can only be activated for Digital Voucher purchase",
+      "promoAlreadyUsed": "Promo Voucher has already been added. Only one Promo Voucher per person is allowed",
+      "promoRequiresAdditionalAmount": "You need to deposit additional funds for Digital Voucher purchase with Promo Voucher",
       "other": "An unexpected error occurred. Please contact support if the problem persists"
     }
   }
