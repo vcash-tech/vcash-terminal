@@ -394,13 +394,20 @@
     "supportTitle": "Pozovi podršku",
     "supportText": "VCash tim će vam pomoći da dobijete vaučer u vrednosti novca koji ste uneli"
   },
+  "promoVoucherError": {
+    "title": "Potrebna je dodatna uplata",
+    "subtitle": "Poklon vaučer se ne može koristiti samostalno. Molimo ubacite gotovinu da biste završili uplatu.",
+    "infoTitle": "Kako da završite uplatu",
+    "infoText": "Ubacite dodatnu gotovinu do iznosa željenje gift kartice, zatim potvrdite plaćanje da biste dobili vaučer koji uključuje promo bonus.",
+    "addCashButton": "Dodaj gotovinu"
+  },
   "voucherScannerModal": {
     "title": "Iskoristi postojeći vaučer",
-    "scanTitle": "Skeniraj Vaučer",
+    "scanTitle": "Skener je aktiviran",
     "scanDescription": "Brzo i lako - skeniraj QR kod sa tvog vaučera",
     "scannerImageAlt": "Skeniraj Vaučer",
     "cancelButton": "Otkaži prenos",
-    "scanActive": "Skener je aktiviran",
+    "scanActive": "⚠️ Pažnja: Skeniranjem ovog vaučera on se odmah poništava i više nije moguće ponovno korišćenje.",
     "altButton": "Ne možeš da skeniraš? Dodirni ovde za ručni unos",
     "manualInputTitle": "Unesi kod ručno",
     "manualInputDescription": "Unesi 9-cifreni kod sa tvog vaučera",
@@ -428,6 +435,8 @@
       "promoAlreadyUsed": "Poklon Vaučer je već dodat. Dozvoljen je samo jedan Poklon Vaučer po osobi",
       "promoRequiresAdditionalAmount": "Morate doplatiti još sredstava za kupovinu Digital Vaučera uz Poklon Vaučer",
       "promoRequiresActivation": "Morate aktivirati Poklon Vaučer pre korišćenja. Skenirajte QR kod sa vaučera telefonom i pratite uputstvo za unos podataka.",
+      "cannotAddToPromoSession": "Postojeći Vaučeri se ne mogu kombinovati sa Poklon Vaučerom.",
+      "promoCannotCombineWithOthers": "Poklon Vaučer se ne može dodati nakon što ste već dodali postojeći Vaučer.",
       "other": "Došlo je do neočekivane greške. Molimo kontaktirajte podršku ako se problem nastavi"
     }
   }

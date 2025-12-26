@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import { NavigateFunction } from 'react-router-dom'
 
 import { printVoucher } from '@/assets/images'
-import Container from '@/components/atoms/container/container'
 import PrimaryButton from '@/components/atoms/primaryButton/primaryButton'
 import WireButton from '@/components/atoms/wireButton/wireButton'
 import { useNavigationContext } from '@/hooks'
@@ -11,11 +10,13 @@ import { useTranslate } from '@/i18n/useTranslate'
 export default function VoucherErrorTemplate({
     navigate,
     onTryAgain,
-    voucherRecreateAttempts = 0
+    voucherRecreateAttempts = 0,
+    isPromoVoucherError = false
 }: {
     navigate: NavigateFunction
     onTryAgain?: () => void
     voucherRecreateAttempts?: number
+    isPromoVoucherError?: boolean
 }) {
     const { t } = useTranslate()
     const [isWaitingVoucher, setIsWaitingVoucher] = useState<boolean>(false)
@@ -29,6 +30,44 @@ export default function VoucherErrorTemplate({
             setCurrentAttempt(voucherRecreateAttempts)
         }
     }, [currentAttempt, voucherRecreateAttempts])
+
+    // For promo voucher error, always show try again button that returns to insert cash
+    if (isPromoVoucherError) {
+        return (
+            <>
+                <div className="voucher-error">
+                    <h1>{t('promoVoucherError.title')}</h1>
+                    <h2>{t('promoVoucherError.subtitle')}</h2>
+
+                    <div className="demo-wrapper">
+                        <img
+                            src={printVoucher}
+                            alt={t('insertCash.altText')}
+                            className="demo-error-illustration"
+                        />
+                    </div>
+
+                    <div className="fallback-wrapper">
+                        <div className="fallback">
+                            <div>
+                                <p>{t('promoVoucherError.infoTitle')}</p>
+                                <p className="support-text">
+                                    {t('promoVoucherError.infoText')}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <PrimaryButton
+                        isDisabled={false}
+                        callback={() => {
+                            onTryAgain?.()
+                        }}
+                        text={t('promoVoucherError.addCashButton')}
+                    />
+                </div>
+            </>
+        )
+    }
 
     return (
         <>

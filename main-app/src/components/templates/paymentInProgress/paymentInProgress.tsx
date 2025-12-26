@@ -56,6 +56,8 @@ export default function PaymentInProgress() {
         | 'promo-already-used'
         | 'promo-requires-additional-amount'
         | 'promo-requires-activation'
+        | 'cannot-add-to-promo-session'
+        | 'promo-cannot-combine-with-others'
         | 'other'
     >('none')
     const [voucherScanSuccessAmount, setVoucherScanSuccessAmount] =
@@ -139,7 +141,16 @@ export default function PaymentInProgress() {
                                 selectedVoucherType: state.voucherType,
                                 setVoucherRecreateAttempts,
                                 voucherRecreateAttempts,
-                                onError: () => {
+                                onError: (errorType) => {
+                                    if (
+                                        errorType ===
+                                        'promoVoucherOnlyNotAllowed'
+                                    ) {
+                                        setCurrentStep(
+                                            VoucherPurchaseStep.PROMO_VOUCHER_ERROR
+                                        )
+                                        return
+                                    }
                                     setError(error)
                                     setCurrentStep(
                                         VoucherPurchaseStep.VOUCHER_ERROR
@@ -160,6 +171,18 @@ export default function PaymentInProgress() {
                             })
                         }}
                         voucherRecreateAttempts={voucherRecreateAttempts}
+                    />
+                )
+
+            case VoucherPurchaseStep.PROMO_VOUCHER_ERROR:
+                return (
+                    <VoucherErrorTemplate
+                        navigate={navigate}
+                        onTryAgain={() => {
+                            setCurrentStep(VoucherPurchaseStep.INSERT_CASH)
+                        }}
+                        voucherRecreateAttempts={0}
+                        isPromoVoucherError={true}
                     />
                 )
 
@@ -215,7 +238,16 @@ export default function PaymentInProgress() {
                                 selectedVoucherType: state.voucherType,
                                 setVoucherRecreateAttempts,
                                 voucherRecreateAttempts,
-                                onError: () => {
+                                onError: (errorType) => {
+                                    if (
+                                        errorType ===
+                                        'promoVoucherOnlyNotAllowed'
+                                    ) {
+                                        setCurrentStep(
+                                            VoucherPurchaseStep.PROMO_VOUCHER_ERROR
+                                        )
+                                        return
+                                    }
                                     setError(error)
                                     setCurrentStep(
                                         VoucherPurchaseStep.VOUCHER_ERROR
@@ -450,6 +482,35 @@ export default function PaymentInProgress() {
                             setVoucherScanErrorType('promo-requires-activation')
                             return
                         }
+
+                        if (
+                            error.errors.find(
+                                (e) =>
+                                    e.code ===
+                                    'CANNOT_ADD_VOUCHER_TO_PROMO_SESSION'
+                            ) !== undefined
+                        ) {
+                            setVoucherScanStatus('error')
+                            setVoucherScanErrorType(
+                                'cannot-add-to-promo-session'
+                            )
+                            return
+                        }
+
+                        if (
+                            error.errors.find(
+                                (e) =>
+                                    e.code ===
+                                    'PROMO_VOUCHER_CANNOT_COMBINE_WITH_OTHERS'
+                            ) !== undefined
+                        ) {
+                            setVoucherScanStatus('error')
+                            setVoucherScanErrorType(
+                                'promo-cannot-combine-with-others'
+                            )
+                            return
+                        }
+
                         console.error(
                             'Error creating draft from voucher:',
                             error

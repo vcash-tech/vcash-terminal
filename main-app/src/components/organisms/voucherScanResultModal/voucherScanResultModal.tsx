@@ -15,6 +15,8 @@ export type VoucherScanResultModalProps = {
         | 'promo-already-used'
         | 'promo-requires-additional-amount'
         | 'promo-requires-activation'
+        | 'cannot-add-to-promo-session'
+        | 'promo-cannot-combine-with-others'
         | 'other'
         | 'none'
     isOpen: boolean
@@ -59,6 +61,14 @@ export default function VoucherScanResultModal({
             case 'promo-requires-activation':
                 return t(
                     'voucherScanResultModal.errors.promoRequiresActivation'
+                )
+            case 'cannot-add-to-promo-session':
+                return t(
+                    'voucherScanResultModal.errors.cannotAddToPromoSession'
+                )
+            case 'promo-cannot-combine-with-others':
+                return t(
+                    'voucherScanResultModal.errors.promoCannotCombineWithOthers'
                 )
             default:
                 return t('voucherScanResultModal.errors.other')
