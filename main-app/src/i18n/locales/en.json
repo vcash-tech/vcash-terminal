@@ -422,7 +422,7 @@
       "invalidTypeForPromo": "Promo voucher can only be activated for Digital Voucher purchase",
       "promoAlreadyUsed": "Promo Voucher has already been added. Only one Promo Voucher per person is allowed",
       "promoRequiresAdditionalAmount": "You need to deposit additional funds for Digital Voucher purchase with Promo Voucher",
-      "promoRequiresActivation": "You need to activate the Promo Voucher before using it. Scan the QR code on the voucher with your smartphone",
+      "promoRequiresActivation": "This gift voucher needs to be activated before use. Scan the QR code on the voucher with your phone and follow the instructions.",
       "other": "An unexpected error occurred. Please contact support if the problem persists"
     }
   }
