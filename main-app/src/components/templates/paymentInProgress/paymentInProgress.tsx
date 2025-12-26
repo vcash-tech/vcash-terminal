@@ -57,6 +57,7 @@ export default function PaymentInProgress() {
         | 'invalid-type-for-promo'
         | 'promo-already-used'
         | 'promo-requires-additional-amount'
+        | 'promo-requires-activation'
         | 'other'
     >('none')
     const [voucherScanSuccessAmount, setVoucherScanSuccessAmount] =
@@ -492,6 +493,16 @@ export default function PaymentInProgress() {
                         ) {
                             setVoucherScanStatus('error')
                             setVoucherScanErrorType('over-limit')
+                            return
+                        }
+
+                        if (
+                            error.errors.find(
+                                (e) => e.code === 'VOUCHER_REQUIRES_ACTIVATION'
+                            ) !== undefined
+                        ) {
+                            setVoucherScanStatus('error')
+                            setVoucherScanErrorType('promo-requires-activation')
                             return
                         }
                         console.error(

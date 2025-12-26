@@ -427,6 +427,7 @@
       "invalidTypeForPromo": "Poklon vaučer je moguće aktivirati samo za kupovinu Digital Vaučera",
       "promoAlreadyUsed": "Poklon Vaučer je već dodat. Dozvoljen je samo jedan Poklon Vaučer po osobi",
       "promoRequiresAdditionalAmount": "Morate doplatiti još sredstava za kupovinu Digital Vaučera uz Poklon Vaučer",
+      "promoRequiresActivation": "Morate aktivirati Poklon Vaučer pre nego što ga koristite. Skenirajte QR kod vaučera svojim mobilnim uređajem",
       "other": "Došlo je do neočekivane greške. Molimo kontaktirajte podršku ako se problem nastavi"
     }
   }

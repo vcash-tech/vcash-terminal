@@ -14,6 +14,7 @@ export type VoucherScanResultModalProps = {
         | 'invalid-type-for-promo'
         | 'promo-already-used'
         | 'promo-requires-additional-amount'
+        | 'promo-requires-activation'
         | 'other'
         | 'none'
     isOpen: boolean
@@ -54,6 +55,10 @@ export default function VoucherScanResultModal({
             case 'promo-requires-additional-amount':
                 return t(
                     'voucherScanResultModal.errors.promoRequiresAdditionalAmount'
+                )
+            case 'promo-requires-activation':
+                return t(
+                    'voucherScanResultModal.errors.promoRequiresActivation'
                 )
             default:
                 return t('voucherScanResultModal.errors.other')
