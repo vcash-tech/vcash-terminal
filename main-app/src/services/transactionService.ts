@@ -10,7 +10,8 @@ import { HttpService } from './httpService'
 
 const api = {
     voucher: '/cashier-app/money-transfer/voucher/draft/convert',
-    draftFromVoucher: '/cashier-app/money-transfer/voucher/draft/{voucherCode}',
+    draftFromVoucher:
+        '/cashier-app/money-transfer/voucher/draft/{voucherCode}?voucherTypeId={targetVoucherType}',
     getVoucherAmount: '/cashier-app/money-transfer/voucher/draft'
 }
 
@@ -23,7 +24,9 @@ export class TransactionService {
         dto: DraftFromVoucherRequest
     ): Promise<DraftFromVoucherResponse> {
         return HttpService.Post(
-            api.draftFromVoucher.replace('{voucherCode}', dto.voucherCode),
+            api.draftFromVoucher
+                .replace('{voucherCode}', dto.voucherCode)
+                .replace('{targetVoucherType}', dto.targetVoucherType),
             {},
             Auth.Cashier
         )
