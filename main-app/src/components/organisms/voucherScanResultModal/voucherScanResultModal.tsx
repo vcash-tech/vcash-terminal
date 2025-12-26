@@ -11,6 +11,9 @@ export type VoucherScanResultModalProps = {
         | 'used'
         | 'type'
         | 'network'
+        | 'invalid-type-for-promo'
+        | 'promo-already-used'
+        | 'promo-requires-additional-amount'
         | 'other'
         | 'none'
     isOpen: boolean
@@ -44,6 +47,14 @@ export default function VoucherScanResultModal({
                 return t('voucherScanResultModal.errors.type')
             case 'used':
                 return t('voucherScanResultModal.errors.used')
+            case 'invalid-type-for-promo':
+                return t('voucherScanResultModal.errors.invalidTypeForPromo')
+            case 'promo-already-used':
+                return t('voucherScanResultModal.errors.promoAlreadyUsed')
+            case 'promo-requires-additional-amount':
+                return t(
+                    'voucherScanResultModal.errors.promoRequiresAdditionalAmount'
+                )
             default:
                 return t('voucherScanResultModal.errors.other')
         }

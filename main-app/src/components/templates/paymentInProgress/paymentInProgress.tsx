@@ -49,7 +49,15 @@ export default function PaymentInProgress() {
         'loading' | 'success' | 'error'
     >('loading')
     const [voucherScanErrorType, setVoucherScanErrorType] = useState<
-        'none' | 'over-limit' | 'invalid' | 'used' | 'type' | 'other'
+        | 'none'
+        | 'over-limit'
+        | 'invalid'
+        | 'used'
+        | 'type'
+        | 'invalid-type-for-promo'
+        | 'promo-already-used'
+        | 'promo-requires-additional-amount'
+        | 'other'
     >('none')
     const [voucherScanSuccessAmount, setVoucherScanSuccessAmount] =
         useState<number>(0)
@@ -439,6 +447,40 @@ export default function PaymentInProgress() {
                         ) {
                             setVoucherScanStatus('error')
                             setVoucherScanErrorType('type')
+                            return
+                        }
+                        if (
+                            error.errors.find(
+                                (e) =>
+                                    e.code ===
+                                    'PROMO_VOUCHER_REQUIRES_NON_BETTING_TYPE'
+                            ) !== undefined
+                        ) {
+                            setVoucherScanStatus('error')
+                            setVoucherScanErrorType('invalid-type-for-promo')
+                            return
+                        }
+
+                        if (
+                            error.errors.find(
+                                (e) => e.code === 'PROMO_VOUCHER_ALREADY_USED'
+                            ) !== undefined
+                        ) {
+                            setVoucherScanStatus('error')
+                            setVoucherScanErrorType('promo-already-used')
+                            return
+                        }
+
+                        if (
+                            error.errors.find(
+                                (e) =>
+                                    e.code === 'PROMO_VOUCHER_ONLY_NOT_ALLOWED'
+                            ) !== undefined
+                        ) {
+                            setVoucherScanStatus('error')
+                            setVoucherScanErrorType(
+                                'promo-requires-additional-amount'
+                            )
                             return
                         }
 
