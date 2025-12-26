@@ -42,7 +42,7 @@
     "noChangeWarning": "The machine does not return change. Refunds are not available.",
     "confirmPayment": "Confirm Payment",
     "minAmount": "Minimum amount",
-    "usePreviousVoucher": "Use previous voucher",
+    "usePreviousVoucher": "Use Existing Voucher",
     "progressText": "{{amount}} RSD remaining to the maximum voucher amount",
     "errors": {
       "authRequired": "Authentication required.",
@@ -390,9 +390,9 @@
     "supportText": "VCash team will help you to get your voucher for the amount you've inserted"
   },
   "voucherScannerModal": {
-    "title": "Transfer leftover from old voucher",
+    "title": "Transfer from existing voucher",
     "scanTitle": "Scan Voucher",
-    "scanDescription": "Quick and easy - scan the QR code from your old voucher",
+    "scanDescription": "Quick and easy - scan the QR code from your voucher",
     "scannerImageAlt": "Scan Voucher",
     "cancelButton": "Cancel transfer",
     "altButton": "Can't scan? Touch here for manual input",

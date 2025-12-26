@@ -39,7 +39,7 @@ export default function InsertingCash({
                         <button
                             className="previous-voucher-button"
                             onClick={onUsePreviousVoucher}>
-                            Prenesi kusur sa starog vaučera
+                            {t('insertCash.usePreviousVoucher')}
                         </button>
                         <span className="plus-sign">+</span>
                     </>

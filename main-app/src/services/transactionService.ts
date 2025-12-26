@@ -11,7 +11,7 @@ import { HttpService } from './httpService'
 const api = {
     voucher: '/cashier-app/money-transfer/voucher/draft/convert',
     draftFromVoucher:
-        '/cashier-app/money-transfer/voucher/draft/{voucherCode}?voucherTypeId={targetVoucherType}',
+        '/cashier-app/money-transfer/voucher/draft/{voucherCode}?targetVoucherType={targetVoucherType}',
     getVoucherAmount: '/cashier-app/money-transfer/voucher/draft'
 }
 

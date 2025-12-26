@@ -296,7 +296,7 @@ export default function WelcomeWithServices({
                         hasAgeDisclaimer={false}
                         isComingSoon={true}
                         isSelected={state.voucherType === 'ips'}
-                        actionText={t('welcome.dark.betCta')}
+                        actionText={t('welcome.dark.comingSoon')}
                         images={[
                             { src: welcome_ips_struja, isComingSoon: false },
                             { src: welcome_ips_telefon, isComingSoon: false },
