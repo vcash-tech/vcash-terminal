@@ -44,6 +44,7 @@
     "minAmount": "Minimum amount",
     "usePreviousVoucher": "Use Existing Voucher",
     "progressText": "{{amount}} RSD remaining to the maximum voucher amount",
+    "promoVoucherWarning": "A promo voucher cannot be used alone. Please insert cash up to the desired gift card amount to complete your deposit.",
     "errors": {
       "authRequired": "Authentication required.",
       "activationFailed": "Activation failed: {{message}}",
