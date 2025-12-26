@@ -43,7 +43,7 @@
     "confirmPayment": "Potvrdi plaćanje",
     "minAmount": "Minimalni iznos",
     "progressText": "{{amount}} RSD preostalo do maksimalnog iznosa vaučera",
-    "usePreviousVoucher": "Koristi prethodni vaučer",
+    "usePreviousVoucher": "Imam Vaučer",
     "errors": {
       "authRequired": "Potrebna je autentifikacija.",
       "activationFailed": "Aktivacija neuspešna: {{message}}",
@@ -395,9 +395,9 @@
     "supportText": "VCash tim će vam pomoći da dobijete vaučer u vrednosti novca koji ste uneli"
   },
   "voucherScannerModal": {
-    "title": "Prenesi kusur sa starog vaučera",
+    "title": "Iskoristi postojeći vaučer",
     "scanTitle": "Skeniraj Vaučer",
-    "scanDescription": "Brzo i lako - skeniraj QR kod sa tvog starog vaučera",
+    "scanDescription": "Brzo i lako - skeniraj QR kod sa tvog vaučera",
     "scannerImageAlt": "Skeniraj Vaučer",
     "cancelButton": "Otkaži prenos",
     "scanActive": "Skener je aktiviran",
