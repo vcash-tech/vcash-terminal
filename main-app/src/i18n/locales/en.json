@@ -389,14 +389,21 @@
     "supportTitle": "Call Support",
     "supportText": "VCash team will help you to get your voucher for the amount you've inserted"
   },
+  "promoVoucherError": {
+    "title": "Additional Deposit Required",
+    "subtitle": "A promo voucher cannot be used alone. Please add cash to complete your deposit.",
+    "infoTitle": "How to complete your deposit",
+    "infoText": "Insert cash up to the desired gift card amount using the cash acceptor, then confirm your payment to issue a voucher that includes the promo bonus.",
+    "addCashButton": "Add Cash"
+  },
   "voucherScannerModal": {
     "title": "Transfer from existing voucher",
-    "scanTitle": "Scan Voucher",
+    "scanTitle": "Scanner is active",
     "scanDescription": "Quick and easy - scan the QR code from your voucher",
     "scannerImageAlt": "Scan Voucher",
     "cancelButton": "Cancel transfer",
     "altButton": "Can't scan? Touch here for manual input",
-    "scanActive": "Scanner is active",
+    "scanActive": "⚠️ Warning: Scanning a voucher will immediately invalidate it and it will no longer be reusable.",
     "manualInputTitle": "Enter code manually",
     "manualInputDescription": "Enter the 9-digit code from your voucher",
     "codeFormat": "Format: XXX-XXX-XXX",
@@ -423,6 +430,8 @@
       "promoAlreadyUsed": "Promo Voucher has already been added. Only one Promo Voucher per person is allowed",
       "promoRequiresAdditionalAmount": "You need to deposit additional funds for Digital Voucher purchase with Promo Voucher",
       "promoRequiresActivation": "This gift voucher needs to be activated before use. Scan the QR code on the voucher with your phone and follow the instructions.",
+      "cannotAddToPromoSession": "Existing Vouchers cannot be combined with Promo Voucher.",
+      "promoCannotCombineWithOthers": "Promo Voucher cannot be added after you have already added an existing Voucher.",
       "other": "An unexpected error occurred. Please contact support if the problem persists"
     }
   }

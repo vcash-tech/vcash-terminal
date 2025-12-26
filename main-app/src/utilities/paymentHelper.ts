@@ -246,11 +246,27 @@ export const onBuyVoucher = async ({
             onError('voucherCreatedFailed')
         }
     } catch (err) {
-        // not printed
-        // setShowPrintVoucher(true)
-        // if (!voucherData?.moneyTransfer?.voucherCode) {
-        //     setShouldShowVoucherError(true)
-        // }
+        // Check for PROMO_VOUCHER_ONLY_NOT_ALLOWED error
+        if (
+            typeof err === 'object' &&
+            err !== null &&
+            'errors' in err &&
+            Array.isArray((err as { errors: Array<{ code: string }> }).errors)
+        ) {
+            const errorResponse = err as { errors: Array<{ code: string }> }
+            if (
+                errorResponse.errors.find(
+                    (e) => e.code === 'PROMO_VOUCHER_ONLY_NOT_ALLOWED'
+                ) !== undefined
+            ) {
+                console.log(
+                    '❌ Voucher create failed - promo voucher only not allowed'
+                )
+                onError('promoVoucherOnlyNotAllowed')
+                return
+            }
+        }
+
         onError('voucherCreatedFailed')
         console.error('🔍 DEBUG: Error in onBuyVoucher:', err)
         console.log('🔍 DEBUG: voucherData after error:')

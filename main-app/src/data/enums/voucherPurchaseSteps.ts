@@ -6,6 +6,7 @@ export enum VoucherPurchaseStep {
     CARD_PAYMENT = 'card-payment',
     PROCESS_PAYMENT = 'process-payment',
     VOUCHER_ERROR = 'voucher_error',
+    PROMO_VOUCHER_ERROR = 'promo-voucher-error',
     PRINT_VOUCHER = 'print-voucher',
     VOUCHER_CONFIRMATION = 'voucher-confirmation',
     COMPLETE = 'complete'
@@ -21,6 +22,7 @@ export const VOUCHER_PURCHASE_STEPS_ORDER: VoucherPurchaseStep[] = [
     VoucherPurchaseStep.PROCESS_PAYMENT,
     VoucherPurchaseStep.PRINT_VOUCHER,
     VoucherPurchaseStep.VOUCHER_ERROR,
+    VoucherPurchaseStep.PROMO_VOUCHER_ERROR,
     VoucherPurchaseStep.VOUCHER_CONFIRMATION,
     VoucherPurchaseStep.COMPLETE
 ]
