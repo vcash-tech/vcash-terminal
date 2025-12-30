@@ -1,0 +1,29 @@
+.bet-warning-banner {
+    position: fixed;
+    bottom: 320px;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: linear-gradient(135deg, #fef2f2 0%, #fce7e7 100%);
+    border-top: 3px solid #dc2626;
+    border-bottom: 3px solid #dc2626;
+    padding: 16px 24px;
+    text-align: center;
+    box-sizing: border-box;
+
+    &.insert-cash-position {
+        bottom: 590px;
+    }
+
+    p {
+        margin: 0;
+        font-size: 24px;
+        line-height: 1.5;
+        color: #991b1b;
+
+        strong {
+            font-weight: 700;
+        }
+    }
+}
+

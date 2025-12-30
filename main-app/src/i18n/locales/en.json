@@ -1,4 +1,8 @@
 {
+  "betWarningBanner": {
+    "title": "Purchase of Bet vouchers and top-ups for betting shops will be temporarily unavailable from 1.1.2026.",
+    "message": "Please use the vouchers by the specified date."
+  },
   "acceptedBills": {
     "title": "Accepted Bills",
     "noChangeWarning": "Insert the exact amount - <b>the terminal does not give change</b>. Refund after payment is not possible."
