@@ -5,15 +5,15 @@ import { ageDisclaimer } from '@/assets/icons'
 import {
     betting_balkanBet,
     //betting_maxBetComingSoon,
-    betting_maxBet,
+    // betting_maxBet,
     betting_meridian,
     betting_merkurXtip,
     //betting_meridianBetComingSoon,
     //betting_meridianBetUskoro,
     //betting_merkurXtipComingSoon,
     //betting_merkurXtipUskoro,
-    betting_soccerBet,
-    betting_Volcano
+    betting_soccerBet
+    // betting_Volcano
 } from '@/assets/images'
 // import BetWarningBanner from '@/components/atoms/betWarningBanner/betWarningBanner'
 import Container from '@/components/atoms/container/container'
@@ -35,15 +35,15 @@ export default function BettingVoucher({ navigate }: BettingVoucherProps) {
         betting_balkanBet,
         betting_soccerBet,
         betting_merkurXtip,
-        betting_maxBet,
+        // betting_maxBet,
         betting_meridian,
-        betting_Volcano,
+        // betting_Volcano,
         betting_balkanBet,
         betting_soccerBet,
         betting_merkurXtip,
-        betting_maxBet,
-        betting_meridian,
-        betting_Volcano
+        // betting_maxBet,
+        betting_meridian
+        // betting_Volcano
     ]
 
     // if (i18n.language === 'en') {

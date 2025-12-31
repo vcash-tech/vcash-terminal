@@ -6,11 +6,11 @@ import { NavigateFunction } from 'react-router-dom'
 import {
     logoBlue,
     welcome_betting_balkanBet,
-    welcome_betting_maxBet,
+    // welcome_betting_maxBet,
     welcome_betting_meridianBet,
     welcome_betting_merkurXtip,
     welcome_betting_soccerBet,
-    welcome_betting_volcano,
+    // welcome_betting_volcano,
     welcome_gaming_playStation,
     welcome_gaming_roblox,
     welcome_gaming_steam,
@@ -195,18 +195,18 @@ export default function WelcomeWithServices({
                                 src: welcome_betting_merkurXtip,
                                 isComingSoon: false
                             },
-                            {
-                                src: welcome_betting_maxBet,
-                                isComingSoon: false
-                            },
+                            // {
+                            //     src: welcome_betting_maxBet,
+                            //     isComingSoon: false
+                            // },
                             {
                                 src: welcome_betting_meridianBet,
                                 isComingSoon: false
                             },
-                            {
-                                src: welcome_betting_volcano,
-                                isComingSoon: false
-                            },
+                            // {
+                            //     src: welcome_betting_volcano,
+                            //     isComingSoon: false
+                            // },
                             {
                                 src: welcome_betting_soccerBet,
                                 isComingSoon: false
@@ -219,18 +219,18 @@ export default function WelcomeWithServices({
                                 src: welcome_betting_merkurXtip,
                                 isComingSoon: false
                             },
-                            {
-                                src: welcome_betting_maxBet,
-                                isComingSoon: false
-                            },
+                            // {
+                            //     src: welcome_betting_maxBet,
+                            //     isComingSoon: false
+                            // },
                             {
                                 src: welcome_betting_meridianBet,
                                 isComingSoon: false
-                            },
-                            {
-                                src: welcome_betting_volcano,
-                                isComingSoon: false
                             }
+                            // {
+                            //     src: welcome_betting_volcano,
+                            //     isComingSoon: false
+                            // }
                         ]}
                         onClick={() => {
                             setVoucherType('betting')
