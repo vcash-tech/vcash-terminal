@@ -15,7 +15,7 @@ import {
     betting_soccerBet,
     betting_Volcano
 } from '@/assets/images'
-import BetWarningBanner from '@/components/atoms/betWarningBanner/betWarningBanner'
+// import BetWarningBanner from '@/components/atoms/betWarningBanner/betWarningBanner'
 import Container from '@/components/atoms/container/container'
 import PrimaryButton from '@/components/atoms/primaryButton/primaryButton'
 import AvailableServices from '@/components/molecules/availableServices/availableServices'
@@ -58,7 +58,7 @@ export default function BettingVoucher({ navigate }: BettingVoucherProps) {
                 navigateBackUrl={'/welcome'}
                 navigationBackText={' '} //t('digitalServices.backToServices')}
             />
-            <BetWarningBanner />
+            {/* <BetWarningBanner /> */}
             <div className={`betting-voucher`}>
                 <h1>
                     {t('bettingVouchers.title')}{' '}

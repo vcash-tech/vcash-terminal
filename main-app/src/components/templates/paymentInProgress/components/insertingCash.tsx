@@ -1,5 +1,5 @@
 import { insertCashImg } from '@/assets/images'
-import BetWarningBanner from '@/components/atoms/betWarningBanner/betWarningBanner'
+// import BetWarningBanner from '@/components/atoms/betWarningBanner/betWarningBanner'
 import PrimaryButton from '@/components/atoms/primaryButton/primaryButton'
 import AcceptedBills from '@/components/molecules/acceptedBills/acceptedBills'
 import { useTranslate } from '@/i18n/useTranslate'
@@ -33,7 +33,7 @@ export default function InsertingCash({
 
     return (
         <div className="insert-cash">
-            {!isGaming && <BetWarningBanner className="insert-cash-position" />}
+            {/* {!isGaming && <BetWarningBanner className="insert-cash-position" />} */}
             <h1>{t('insertCash.title')}</h1>
             <h3>
                 {t('insertCash.subtitle1')}{' '}
