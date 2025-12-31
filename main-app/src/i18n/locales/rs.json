@@ -1,7 +1,7 @@
 {
   "betWarningBanner": {
-    "title": "Kupovina Bet vaučera i dopuna za kladionice biće privremeno nedostupna od 1.1.2026.",
-    "message": "Molimo Vas da vaučere iskoristite do navedenog datuma."
+    "title": "Od 1.1.2026. godine moguće je da dopuna kod pojedinih kladionica neće biti dostupna.",
+    "message": "Dostupne kladionice biće jasno označene na terminalu."
   },
   "acceptedBills": {
     "title": "Prihvaćeni apoeni",
