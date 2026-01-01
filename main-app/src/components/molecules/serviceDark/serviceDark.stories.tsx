@@ -47,11 +47,11 @@ export const Betting: Story = {
             { src: welcome_betting_soccerBet, isComingSoon: false },
             { src: welcome_betting_balkanBet, isComingSoon: false },
             { src: welcome_betting_merkurXtip, isComingSoon: false },
-            // { src: welcome_betting_maxBet, isComingSoon: true },
+            { src: welcome_betting_maxBet, isComingSoon: true },
             { src: welcome_betting_soccerBet, isComingSoon: false },
             { src: welcome_betting_balkanBet, isComingSoon: false },
             { src: welcome_betting_merkurXtip, isComingSoon: false }
-            // { src: welcome_betting_maxBet, isComingSoon: true }
+            { src: welcome_betting_maxBet, isComingSoon: true }
         ]
     } as serviceDarkProps
 }

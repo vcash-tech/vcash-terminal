@@ -6,7 +6,7 @@ import { NavigateFunction } from 'react-router-dom'
 import {
     logoBlue,
     welcome_betting_balkanBet,
-    // welcome_betting_maxBet,
+    welcome_betting_maxBet,
     welcome_betting_meridianBet,
     welcome_betting_merkurXtip,
     welcome_betting_soccerBet,
@@ -195,10 +195,10 @@ export default function WelcomeWithServices({
                                 src: welcome_betting_merkurXtip,
                                 isComingSoon: false
                             },
-                            // {
-                            //     src: welcome_betting_maxBet,
-                            //     isComingSoon: false
-                            // },
+                            {
+                                src: welcome_betting_maxBet,
+                                isComingSoon: false
+                            },
                             {
                                 src: welcome_betting_meridianBet,
                                 isComingSoon: false
@@ -219,10 +219,10 @@ export default function WelcomeWithServices({
                                 src: welcome_betting_merkurXtip,
                                 isComingSoon: false
                             },
-                            // {
-                            //     src: welcome_betting_maxBet,
-                            //     isComingSoon: false
-                            // },
+                            {
+                                src: welcome_betting_maxBet,
+                                isComingSoon: false
+                            },
                             {
                                 src: welcome_betting_meridianBet,
                                 isComingSoon: false

@@ -5,7 +5,7 @@ import { ageDisclaimer } from '@/assets/icons'
 import {
     betting_balkanBet,
     //betting_maxBetComingSoon,
-    // betting_maxBet,
+    betting_maxBet,
     betting_meridian,
     betting_merkurXtip,
     //betting_meridianBetComingSoon,
@@ -35,13 +35,13 @@ export default function BettingVoucher({ navigate }: BettingVoucherProps) {
         betting_balkanBet,
         betting_soccerBet,
         betting_merkurXtip,
-        // betting_maxBet,
+        betting_maxBet,
         betting_meridian,
         // betting_Volcano,
         betting_balkanBet,
         betting_soccerBet,
         betting_merkurXtip,
-        // betting_maxBet,
+        betting_maxBet,
         betting_meridian
         // betting_Volcano
     ]
