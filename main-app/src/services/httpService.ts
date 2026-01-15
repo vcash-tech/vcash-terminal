@@ -108,11 +108,19 @@ export class HttpService {
                                 sessionError
                             )
                             // Throw error that components can catch and handle navigation
+                            // Check if device token exists - if so, this is a connectivity issue, not a registration issue
+                            const hasDeviceToken = AuthService.HasToken(
+                                Auth.POS
+                            )
                             throw {
                                 status: 401,
                                 statusText: 'Session Recreation Failed',
-                                text: 'Failed to recreate session, redirecting to registration',
-                                requiresNavigation: '/register'
+                                text: hasDeviceToken
+                                    ? 'Failed to recreate session, redirecting to connectivity issues'
+                                    : 'Failed to recreate session, redirecting to registration',
+                                requiresNavigation: hasDeviceToken
+                                    ? '/connectivity-issues'
+                                    : '/register'
                             }
                         }
                     }
